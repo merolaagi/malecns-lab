@@ -1,0 +1,726 @@
+{
+  "created": "2026-09-21T01:55:25.963814+00:00",
+  "dataset": "male-cns:v1.0",
+  "source_files": {
+    "annotations": {
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-annotations-male-cns-v1.0-minconf-0.5.feather",
+      "sha256": "2177e246113e4cfbf1e7772ec37c6da1955ff22e8063d0b1f833101f99a9a3b2"
+    },
+    "weights": {
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/connectome-weights-male-cns-v1.0-minconf-0.5.feather",
+      "sha256": "e35da783d1c686b2b58b3b87cd6a403ae43bfcfba8bff28e08ef752c1a56afc1"
+    },
+    "neurotransmitters": {
+      "url": "https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/body-neurotransmitters-male-cns-v1.0.feather",
+      "sha256": "95c9289220663abeb3409f3ad9e5a7f8a53f8093f5139d15502cd08da8879621"
+    }
+  },
+  "defaults": {
+    "duration": 8,
+    "drive": 2.0,
+    "bias": 0.0,
+    "gain": 10.0,
+    "feedback": 2.0,
+    "condition": "intact",
+    "seed": 7,
+    "mode": "tonic"
+  },
+  "caveat": "Exploratory synthetic model outputs. Parameters have not been fitted to biological recordings. Gain 10 was chosen after inspecting gains 7,10,14,18,20 for non-saturated motor activity, not for agreement with biology. Feedback 2 was selected to activate the engineered sensory loop after lower gains had no effect. No scientific novelty or biological validation is established.",
+  "runs": [
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 1,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 10.082576438065557,
+        "displacement_mm": 8.410454480916979,
+        "turn_deg": -116.88685660033134,
+        "spikes": 115556,
+        "active_neurons": 279,
+        "motor_mean_hz": 10.476997405585873,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 2,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 10.123997511412178,
+        "displacement_mm": 8.46026837296276,
+        "turn_deg": -117.82396861419883,
+        "spikes": 116172,
+        "active_neurons": 284,
+        "motor_mean_hz": 10.523781582277207,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 3,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 10.146759906968354,
+        "displacement_mm": 8.50428500558039,
+        "turn_deg": -115.57815839605888,
+        "spikes": 116069,
+        "active_neurons": 276,
+        "motor_mean_hz": 10.546332818097314,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 4,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 10.231643507782056,
+        "displacement_mm": 8.555893862618515,
+        "turn_deg": -116.40082881111574,
+        "spikes": 116702,
+        "active_neurons": 286,
+        "motor_mean_hz": 10.619530266763425,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 5,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 10.186531783400518,
+        "displacement_mm": 8.559527803277392,
+        "turn_deg": -115.92905209364442,
+        "spikes": 116192,
+        "active_neurons": 284,
+        "motor_mean_hz": 10.582575837953211,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_vnc",
+        "seed": 1,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.22273511571985138,
+        "displacement_mm": 0.22233385916576265,
+        "turn_deg": 11.95501100284204,
+        "spikes": 4218,
+        "active_neurons": 9,
+        "motor_mean_hz": 0.23127654204956838,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_vnc",
+        "seed": 2,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.22293414311087872,
+        "displacement_mm": 0.2225330054913715,
+        "turn_deg": 11.990742570804779,
+        "spikes": 4219,
+        "active_neurons": 9,
+        "motor_mean_hz": 0.2312830687830688,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_vnc",
+        "seed": 3,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.22269066787466565,
+        "displacement_mm": 0.22228108422137244,
+        "turn_deg": 11.991968343726962,
+        "spikes": 4217,
+        "active_neurons": 9,
+        "motor_mean_hz": 0.23091104497354498,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_vnc",
+        "seed": 4,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.22467965893357042,
+        "displacement_mm": 0.22428333770991427,
+        "turn_deg": 11.790635079958491,
+        "spikes": 4225,
+        "active_neurons": 9,
+        "motor_mean_hz": 0.23346299777220827,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_vnc",
+        "seed": 5,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.22411545654609336,
+        "displacement_mm": 0.2237051087732186,
+        "turn_deg": 11.940896991591178,
+        "spikes": 4220,
+        "active_neurons": 9,
+        "motor_mean_hz": 0.23200753620161518,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_left_dn",
+        "seed": 1,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 7.313096708503326,
+        "displacement_mm": 5.8584723837023525,
+        "turn_deg": -128.25958049969915,
+        "spikes": 89805,
+        "active_neurons": 198,
+        "motor_mean_hz": 7.59037482272959,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_left_dn",
+        "seed": 2,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 7.3391255231285735,
+        "displacement_mm": 5.872244857593558,
+        "turn_deg": -129.40419452787341,
+        "spikes": 90038,
+        "active_neurons": 196,
+        "motor_mean_hz": 7.6212315354333455,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_left_dn",
+        "seed": 3,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 7.322289723868051,
+        "displacement_mm": 5.844637622640102,
+        "turn_deg": -130.1060474597239,
+        "spikes": 89968,
+        "active_neurons": 183,
+        "motor_mean_hz": 7.602300488677777,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_left_dn",
+        "seed": 4,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 7.42803376175536,
+        "displacement_mm": 5.895567206420532,
+        "turn_deg": -131.45214107108058,
+        "spikes": 90735,
+        "active_neurons": 199,
+        "motor_mean_hz": 7.72129916580704,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "silence_left_dn",
+        "seed": 5,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 7.326593921675663,
+        "displacement_mm": 5.837407780252132,
+        "turn_deg": -130.3793388685043,
+        "spikes": 89917,
+        "active_neurons": 193,
+        "motor_mean_hz": 7.605425867460983,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_feedback",
+        "seed": 1,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 9.913485416425242,
+        "displacement_mm": 8.425931565203651,
+        "turn_deg": -109.93707318718172,
+        "spikes": 113766,
+        "active_neurons": 261,
+        "motor_mean_hz": 10.30200188287281,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_feedback",
+        "seed": 2,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 9.830273520459295,
+        "displacement_mm": 8.309618869106561,
+        "turn_deg": -114.29272059183614,
+        "spikes": 113535,
+        "active_neurons": 262,
+        "motor_mean_hz": 10.205169242244498,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_feedback",
+        "seed": 3,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 9.910209954406476,
+        "displacement_mm": 8.453135151814584,
+        "turn_deg": -109.01667397405913,
+        "spikes": 113794,
+        "active_neurons": 259,
+        "motor_mean_hz": 10.293620484699103,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_feedback",
+        "seed": 4,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 9.93346088450992,
+        "displacement_mm": 8.51405817540539,
+        "turn_deg": -109.56364981924597,
+        "spikes": 114079,
+        "active_neurons": 260,
+        "motor_mean_hz": 10.31631019986924,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_feedback",
+        "seed": 5,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 9.880228110142093,
+        "displacement_mm": 8.416605224572903,
+        "turn_deg": -110.63386913493348,
+        "spikes": 113677,
+        "active_neurons": 258,
+        "motor_mean_hz": 10.262036243808607,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_stimulus",
+        "seed": 1,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
+        "spikes": 0,
+        "active_neurons": 0,
+        "motor_mean_hz": 0.0,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_stimulus",
+        "seed": 2,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
+        "spikes": 0,
+        "active_neurons": 0,
+        "motor_mean_hz": 0.0,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_stimulus",
+        "seed": 3,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
+        "spikes": 0,
+        "active_neurons": 0,
+        "motor_mean_hz": 0.0,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_stimulus",
+        "seed": 4,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
+        "spikes": 0,
+        "active_neurons": 0,
+        "motor_mean_hz": 0.0,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "no_stimulus",
+        "seed": 5,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
+        "spikes": 0,
+        "active_neurons": 0,
+        "motor_mean_hz": 0.0,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "shuffled",
+        "seed": 1,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 7.265486854799347,
+        "displacement_mm": 7.172228509403179,
+        "turn_deg": -32.23905419259681,
+        "spikes": 51221,
+        "active_neurons": 293,
+        "motor_mean_hz": 7.550656994684604,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "shuffled",
+        "seed": 2,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 44.5091493484055,
+        "displacement_mm": 44.50913103942509,
+        "turn_deg": -1.371876969858533,
+        "spikes": 466799,
+        "active_neurons": 555,
+        "motor_mean_hz": 72.90770531726758,
+        "clipped_motor_fraction": 0.925
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "shuffled",
+        "seed": 3,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 44.47021908049491,
+        "displacement_mm": 44.47021665381078,
+        "turn_deg": -0.044282289571215175,
+        "spikes": 603802,
+        "active_neurons": 625,
+        "motor_mean_hz": 93.39263225566907,
+        "clipped_motor_fraction": 0.92375
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "shuffled",
+        "seed": 4,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 44.49366137392816,
+        "displacement_mm": 44.493657220201236,
+        "turn_deg": 0.4499435198910027,
+        "spikes": 403006,
+        "active_neurons": 626,
+        "motor_mean_hz": 65.21749703389354,
+        "clipped_motor_fraction": 0.925
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "shuffled",
+        "seed": 5,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 44.495294407045876,
+        "displacement_mm": 44.4952930609912,
+        "turn_deg": 0.5994443768153775,
+        "spikes": 499443,
+        "active_neurons": 625,
+        "motor_mean_hz": 71.57076778167567,
+        "clipped_motor_fraction": 0.9225
+      }
+    }
+  ],
+  "gain_sensitivity": [
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 7.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 7,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 0.15518813918964974,
+        "displacement_mm": 0.1550324153313612,
+        "turn_deg": 8.891625406055702,
+        "spikes": 26198,
+        "active_neurons": 69,
+        "motor_mean_hz": 0.16203703703703703,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 10.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 7,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 10.10364722846681,
+        "displacement_mm": 8.506426663170988,
+        "turn_deg": -115.15908078049178,
+        "spikes": 115641,
+        "active_neurons": 282,
+        "motor_mean_hz": 10.49303815154943,
+        "clipped_motor_fraction": 0.0
+      }
+    },
+    {
+      "parameters": {
+        "duration": 8.0,
+        "drive": 2.0,
+        "bias": 0.0,
+        "gain": 14.0,
+        "feedback": 2.0,
+        "condition": "intact",
+        "seed": 7,
+        "mode": "tonic"
+      },
+      "metrics": {
+        "path_mm": 44.290673500179714,
+        "displacement_mm": 44.290653358480014,
+        "turn_deg": -0.2593245591336899,
+        "spikes": 920257,
+        "active_neurons": 604,
+        "motor_mean_hz": 120.93539440516263,
+        "clipped_motor_fraction": 0.9175
+      }
+    }
+  ]
+}

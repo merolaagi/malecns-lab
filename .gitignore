@@ -1,0 +1,7 @@
+.venv/
+.runtime.json
+__pycache__/
+*.partial
+.DS_Store
+raw-data/
+*.feather

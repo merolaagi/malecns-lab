@@ -1,0 +1,2804 @@
+{
+  "runs": [
+    {
+      "parameters": {
+        "seed": 7,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "intact",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.9875,
+          "mean_probability": 0.9660829770440484,
+          "ci95": [
+            0.9325356757603457,
+            0.9977900813816939
+          ],
+          "reward_count": 79.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9853005191519817,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.925,
+          "mean_probability": 0.9738682934380094,
+          "ci95": [
+            0.8013546984090248,
+            0.9741644432281419
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.8875,
+          "mean_probability": 0.8742043154443536,
+          "ci95": [
+            0.7998158913432244,
+            0.9396738130517298
+          ],
+          "reward_count": 71.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9782466188791844,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_plasticity",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3692454986165162,
+            0.5830454881967124
+          ],
+          "reward_count": 38.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.6125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.5029345562232477,
+            0.711756003117223
+          ],
+          "reward_count": 49.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "silence_kc",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3692454986165162,
+            0.5830454881967124
+          ],
+          "reward_count": 38.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.6125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.5029345562232477,
+            0.711756003117223
+          ],
+          "reward_count": 49.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_reward",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3692454986165162,
+            0.5830454881967124
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.6125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.5029345562232477,
+            0.711756003117223
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_dopamine",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3692454986165162,
+            0.5830454881967124
+          ],
+          "reward_count": 38.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.6125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.5029345562232477,
+            0.711756003117223
+          ],
+          "reward_count": 49.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "shuffled",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.9875,
+          "mean_probability": 0.9715385275345481,
+          "ci95": [
+            0.9325356757603457,
+            0.9977900813816939
+          ],
+          "reward_count": 79.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9898786924720924,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.925,
+          "mean_probability": 0.9809808541045039,
+          "ci95": [
+            0.8013546984090248,
+            0.9741644432281419
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.8875,
+          "mean_probability": 0.8770965083960671,
+          "ci95": [
+            0.7998158913432244,
+            0.9396738130517298
+          ],
+          "reward_count": 71.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9827882960788564,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "intact",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.35,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2213433317104915,
+            0.5049440300646263
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.9875,
+          "mean_probability": 0.9746644591093379,
+          "ci95": [
+            0.9325356757603457,
+            0.9977900813816939
+          ],
+          "reward_count": 79.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9896555337718876,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9806240571624762,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.9125,
+          "mean_probability": 0.8867960768474464,
+          "ci95": [
+            0.8302301722291654,
+            0.95696854535256
+          ],
+          "reward_count": 73.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.976727906660618,
+          "ci95": [
+            0.8711834051199223,
+            0.9955732825922052
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_plasticity",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.35,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2213433317104915,
+            0.5049440300646263
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 43.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.525,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.37497106853929735,
+            0.6706477044981831
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.30705075280944694,
+            0.6017117011155924
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.4875,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.38107693944368337,
+            0.5950685539629311
+          ],
+          "reward_count": 39.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "silence_kc",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.35,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2213433317104915,
+            0.5049440300646263
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 43.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.525,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.37497106853929735,
+            0.6706477044981831
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.30705075280944694,
+            0.6017117011155924
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.4875,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.38107693944368337,
+            0.5950685539629311
+          ],
+          "reward_count": 39.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_reward",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.35,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2213433317104915,
+            0.5049440300646263
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.525,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.37497106853929735,
+            0.6706477044981831
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.30705075280944694,
+            0.6017117011155924
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.4875,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.38107693944368337,
+            0.5950685539629311
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_dopamine",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.35,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2213433317104915,
+            0.5049440300646263
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 43.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.525,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.37497106853929735,
+            0.6706477044981831
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.30705075280944694,
+            0.6017117011155924
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.4875,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.38107693944368337,
+            0.5950685539629311
+          ],
+          "reward_count": 39.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "shuffled",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.35,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2213433317104915,
+            0.5049440300646263
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9722727854279596,
+          "ci95": [
+            0.9133539994467789,
+            0.9931172511018748
+          ],
+          "reward_count": 78.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9883389150183737,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9785408647592106,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.9,
+          "mean_probability": 0.8793453464191593,
+          "ci95": [
+            0.8148912101660255,
+            0.9484530008223144
+          ],
+          "reward_count": 72.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9772775126178818,
+          "ci95": [
+            0.8711834051199223,
+            0.9955732825922052
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "intact",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9661451869274258,
+          "ci95": [
+            0.9133539994467789,
+            0.9931172511018748
+          ],
+          "reward_count": 78.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9925784897179479,
+          "ci95": [
+            0.8711834051199223,
+            0.9955732825922052
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9854058399848487,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.8875,
+          "mean_probability": 0.8790145068793416,
+          "ci95": [
+            0.7998158913432244,
+            0.9396738130517298
+          ],
+          "reward_count": 71.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9877324480628197,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_plasticity",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 43.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3341368457196415,
+            0.5465906213134304
+          ],
+          "reward_count": 35.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "silence_kc",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 43.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3341368457196415,
+            0.5465906213134304
+          ],
+          "reward_count": 35.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_reward",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3341368457196415,
+            0.5465906213134304
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_dopamine",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4290416436680269,
+            0.6425218761121299
+          ],
+          "reward_count": 43.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.425,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.28509168524815875,
+            0.5780519956394001
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4375,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3341368457196415,
+            0.5465906213134304
+          ],
+          "reward_count": 35.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.4,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.2634811061240136,
+            0.5540438017260649
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "shuffled",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9654681215295551,
+          "ci95": [
+            0.9133539994467789,
+            0.9931172511018748
+          ],
+          "reward_count": 78.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9919923259054816,
+          "ci95": [
+            0.8711834051199223,
+            0.9955732825922052
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9844264901974926,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.8875,
+          "mean_probability": 0.8781245461121069,
+          "ci95": [
+            0.7998158913432244,
+            0.9396738130517298
+          ],
+          "reward_count": 71.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.986506080143676,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 10,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "intact",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9743122693940356,
+          "ci95": [
+            0.954180263735425,
+            1.0
+          ],
+          "reward_count": 80.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9881574326262765,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9782592098004395,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.9,
+          "mean_probability": 0.878922209749855,
+          "ci95": [
+            0.8148912101660255,
+            0.9484530008223144
+          ],
+          "reward_count": 72.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.97915088997322,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 10,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_plasticity",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.31105686511513087,
+            0.5219615887311697
+          ],
+          "reward_count": 33.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.392972274311075,
+            0.607027725688925
+          ],
+          "reward_count": 40.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 10,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "silence_kc",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.31105686511513087,
+            0.5219615887311697
+          ],
+          "reward_count": 33.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.392972274311075,
+            0.607027725688925
+          ],
+          "reward_count": 40.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 10,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_reward",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.31105686511513087,
+            0.5219615887311697
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.392972274311075,
+            0.607027725688925
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 10,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_dopamine",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.4125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.31105686511513087,
+            0.5219615887311697
+          ],
+          "reward_count": 33.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.55,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.39828829888440775,
+            0.6929492471905531
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.392972274311075,
+            0.607027725688925
+          ],
+          "reward_count": 40.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.6,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.445956198273935,
+            0.7365188938759863
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 10,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "shuffled",
+        "rewarded_odor": "B"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.475,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.32935229550181694,
+            0.6250289314607027
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9749029878403979,
+          "ci95": [
+            0.954180263735425,
+            1.0
+          ],
+          "reward_count": 80.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9899924272793765,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.981163285069373,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.9,
+          "mean_probability": 0.879710914722839,
+          "ci95": [
+            0.8148912101660255,
+            0.9484530008223144
+          ],
+          "reward_count": 72.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9805663812198558,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 11,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "intact",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.675,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.52017458088898,
+            0.7991568303733828
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9690883794955081,
+          "ci95": [
+            0.9133539994467789,
+            0.9931172511018748
+          ],
+          "reward_count": 78.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9870621431155777,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9765578697218033,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.8875,
+          "mean_probability": 0.8841573726855984,
+          "ci95": [
+            0.7998158913432244,
+            0.9396738130517298
+          ],
+          "reward_count": 71.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9824016978304371,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 11,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_plasticity",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.675,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.52017458088898,
+            0.7991568303733828
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3457751037437976,
+            0.5588068698826599
+          ],
+          "reward_count": 36.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.625,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.47032160054531913,
+            0.7577722646420829
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4049314460370689,
+            0.6189230605563166
+          ],
+          "reward_count": 41.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.575,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.42194800436059987,
+            0.7149083147518411
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 11,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "silence_kc",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.675,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.52017458088898,
+            0.7991568303733828
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3457751037437976,
+            0.5588068698826599
+          ],
+          "reward_count": 36.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.625,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.47032160054531913,
+            0.7577722646420829
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4049314460370689,
+            0.6189230605563166
+          ],
+          "reward_count": 41.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.575,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.42194800436059987,
+            0.7149083147518411
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 11,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_reward",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.675,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.52017458088898,
+            0.7991568303733828
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3457751037437976,
+            0.5588068698826599
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.625,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.47032160054531913,
+            0.7577722646420829
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4049314460370689,
+            0.6189230605563166
+          ],
+          "reward_count": 0.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.575,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.42194800436059987,
+            0.7149083147518411
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 11,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "no_dopamine",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.675,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.52017458088898,
+            0.7991568303733828
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.45,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.3457751037437976,
+            0.5588068698826599
+          ],
+          "reward_count": 36.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.5,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.35199278797099753,
+            0.6480072120290025
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.625,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.47032160054531913,
+            0.7577722646420829
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.5125,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.4049314460370689,
+            0.6189230605563166
+          ],
+          "reward_count": 41.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 0.575,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.42194800436059987,
+            0.7149083147518411
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    },
+    {
+      "parameters": {
+        "seed": 11,
+        "train_trials": 80,
+        "probe_trials": 40,
+        "learning_rate": 0.2,
+        "temperature": 0.2,
+        "retention": 0.995,
+        "delay": 30,
+        "condition": "shuffled",
+        "rewarded_odor": "A"
+      },
+      "summary": [
+        {
+          "phase": "Baseline",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 0.675,
+          "mean_probability": 0.5,
+          "ci95": [
+            0.52017458088898,
+            0.7991568303733828
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Acquisition",
+          "trials": 80,
+          "target_odor": "A",
+          "choice_fraction": 0.975,
+          "mean_probability": 0.9676774786475273,
+          "ci95": [
+            0.9133539994467789,
+            0.9931172511018748
+          ],
+          "reward_count": 78.0,
+          "training": true
+        },
+        {
+          "phase": "Unrewarded probe",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9860836865201739,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Delayed memory",
+          "trials": 40,
+          "target_odor": "A",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9750578627499754,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        },
+        {
+          "phase": "Reversal",
+          "trials": 80,
+          "target_odor": "B",
+          "choice_fraction": 0.8875,
+          "mean_probability": 0.8844761944164464,
+          "ci95": [
+            0.7998158913432244,
+            0.9396738130517298
+          ],
+          "reward_count": 71.0,
+          "training": true
+        },
+        {
+          "phase": "Reversal probe",
+          "trials": 40,
+          "target_odor": "B",
+          "choice_fraction": 1.0,
+          "mean_probability": 0.9814114322998106,
+          "ci95": [
+            0.9123754607496077,
+            1.0
+          ],
+          "reward_count": 0.0,
+          "training": false
+        }
+      ]
+    }
+  ],
+  "seeds": 5,
+  "conditions": [
+    "intact",
+    "no_plasticity",
+    "silence_kc",
+    "no_reward",
+    "no_dopamine",
+    "shuffled"
+  ],
+  "interpretation": "Five initialization/stimulus seeds; original reward A/B counterbalanced across seeds. These are model trials, not biological replicates. Defaults only; no claims of connectome superiority."
+}
