@@ -16,8 +16,10 @@ class NeuronInputTests(unittest.TestCase):
         d = NEURONS.describe('learning', 57729)
         self.assertEqual([x['synapses'] for x in d['inputs']], [38, 25, 22, 20, 17, 13, 1])
         rule = {'acetylcholine': 1, 'gaba': -1, 'glutamate': -1}
-        for x in d['inputs']:   # +1 by assumption, or the per-synapse dominant transmitter once quality.json exists
-            self.assertEqual(x['sign'], rule.get(x['synapse_nt']['dominant'], 0) if x['synapse_nt'] else 1)
+        for x in d['inputs']:   # +1 by assumption, or the consensus transmitter once quality.json has it
+            q = NEURONS.quality.get(str(x['bodyId'])) or {}
+            c = q.get('consensus_nt')
+            self.assertEqual(x['sign'], rule.get(c, 0) if c not in (None, 'unclear', 'unknown') else 1)
         self.assertGreater(len(d['modulatory']), 0)
         self.assertEqual(len(d['number_codes']['codes']['scalar']), 9)
 

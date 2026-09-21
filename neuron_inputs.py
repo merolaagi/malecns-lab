@@ -44,10 +44,10 @@ class NeuronIndex:
             if circuit == 'learning':
                 if p['role'] == 'PAM':
                     modulatory.append({'bodyId': pre, 'name': p['instance'], 'synapses': w}); continue
-                q = (self.quality.get(str(pre)) or {}).get('nt')
-                if q:   # per-synapse predictions (build_quality.py) replace the excitatory assumption
-                    nt = q['dominant']; sign = SIGN.get(nt, 0)
-                    note = f"Sign from per-synapse predictions: {q['dominant_share']:.0%} of {q['tbars']} synapses look {nt}."
+                qual = self.quality.get(str(pre)) or {}
+                if qual.get('consensus_nt') not in (None, 'unclear', 'unknown'):   # per-body consensus from build_quality.py
+                    nt = qual['consensus_nt']; sign = SIGN.get(nt, 0)
+                    note = f'Sign from the MaleCNS consensus transmitter ({nt}).'
                 else:   # the learning dataset has no transmitter field
                     sign, nt, note = 1, None, 'Transmitter not in the learning dataset; assumed excitatory.'
             else:

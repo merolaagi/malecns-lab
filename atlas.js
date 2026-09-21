@@ -309,8 +309,10 @@ function qualityHtml(bodyId, aggregateNt) {
   }
   h += '</table>';
   if (q.coverage_in !== null && q.coverage_in < 0.25) h += '<p class="flag">The subset contains under a quarter of this cell’s input, so its simulated activity leaves out most of what drives it.</p>';
-  if (q.nt && ['unclear', 'unknown', null].includes(aggregateNt ?? null) && q.nt.dominant_share > 0.6) h += '<p class="flag">The aggregate transmitter is unclear, but ' + Math.round(q.nt.dominant_share * 100) + '% of its synapses look ' + esc(q.nt.dominant) + '.</p>';
-  else if (q.nt && q.nt.dominant_share < 0.6) h += '<p class="flag">Mixed transmitter evidence across its synapses; its sign in the model is uncertain.</p>';
+  const cons = q.consensus_nt ?? aggregateNt;
+  if (q.nt && cons && !['unclear', 'unknown'].includes(cons) && q.nt.dominant !== cons)
+    h += '<p class="flag">Per-synapse predictions mostly say ' + esc(q.nt.dominant) + ', but the consensus transmitter is ' + esc(cons) + '. The model uses the consensus; raw per-synapse calls are unreliable for some classes, including motor neurons.</p>';
+  else if (q.nt && q.nt.dominant_share < 0.6) h += '<p class="flag">Mixed transmitter evidence across its synapses; treat its sign as uncertain.</p>';
   return h;
 }
 function partnerList(i, dir) {

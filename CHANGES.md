@@ -2,6 +2,14 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Keep consensus transmitters; flag per-synapse disagreements
+
+- Real data showed per-synapse transmitter predictions fail systematically for Kenyon cells (4,060 of 4,064 predicted dopamine) and motor neurons (mostly histamine or acetylcholine), while agreeing with the consensus for all other locomotion cells.
+- `build_quality.py` now also records each cell's per-body consensus and predicted transmitter and whether its synapses agree. The consensus stays the model's transmitter.
+- The workbench takes learning-circuit input signs from the consensus. Using per-synapse calls would have zeroed Kenyon cell input to MBONs.
+- Atlas flags now describe disagreements instead of suggesting that unclear motor neurons were resolved.
+- README records the first coverage and transmitter results.
+
 ## Add data quality layer: coverage and per-synapse transmitters
 
 - `build_quality.py` streams the official body-statistics and per-synapse transmitter tables for the lab's cells only and writes `data/quality.json`: input and output coverage of each cell by the lab's subset, and per-synapse transmitter shares and sign probabilities.

@@ -34,6 +34,9 @@ class QualityTests(unittest.TestCase):
         table = pa.table({'point_id': list(range(len(rows['body']))), 'body': rows['body'], 'x': rows['x'],
                           **{f'nt_{k}_prob': v for k, v in probs.items()}})
         feather.write_feather(table, d / 'tbar-neurotransmitters.feather')
+        feather.write_feather(pa.table({'body': [1, 2, 3, 4], 'consensus_nt': ['glutamate', 'gaba', 'acetylcholine', 'acetylcholine'],
+                                        'predicted_nt': ['glutamate', 'gaba', 'acetylcholine', 'dopamine'],
+                                        'predicted_nt_confidence': [.5, .9, .9, .6]}), d / 'neurotransmitters.feather')
         cls.r = build_quality.build(d, d / 'q.json', {'locomotion': d / 'loco.json', 'learning': d / 'learn.json'})
 
     @classmethod
@@ -54,6 +57,14 @@ class QualityTests(unittest.TestCase):
         self.assertAlmostEqual(n['p_negative'], (8 * .9 + 2 * .4) / 10)
         self.assertEqual(self.r['cells']['3']['nt']['dominant'], 'acetylcholine')
 
+    def test_consensus_is_kept_and_disagreement_flagged(self):
+        c = self.r['cells']
+        self.assertEqual(c['1']['consensus_nt'], 'glutamate')
+        self.assertTrue(c['1']['synapse_agrees_with_consensus'])     # 80% of synapses look glutamate
+        self.assertTrue(c['3']['synapse_agrees_with_consensus'])
+        self.assertIsNone(c['4']['synapse_agrees_with_consensus'])   # no T-bars
+        self.assertEqual(self.r['summary']['learning']['PN']['synapse_agrees_with_consensus'], '1/1')
+
     def test_cells_without_tbars_have_no_nt(self):
         self.assertIsNone(self.r['cells']['4']['nt'])
 
@@ -62,7 +73,8 @@ class QualityTests(unittest.TestCase):
 
     def test_summary_counts_resolved_unclear_cells(self):
         s = self.r['summary']['locomotion']['vnc_motor']
-        self.assertEqual((s['aggregate_unclear'], s['unclear_with_dominant_share_over_0.6']), (1, 1))
+        self.assertEqual(s['consensus_unclear'], 0)
+        self.assertEqual(s['consensus'], {'glutamate': 1})
         self.assertEqual(self.r['transmitters'], ['acetylcholine', 'gaba', 'glutamate', 'dopamine'])
 
 

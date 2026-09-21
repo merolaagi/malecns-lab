@@ -3,6 +3,12 @@
 Inputs (official MaleCNS v1.0 tables, see README):
   body-stats.feather                synapse totals for every body: pre, post, downstream
   tbar-neurotransmitters.feather    transmitter probabilities for every pre-synapse (T-bar)
+  neurotransmitters.feather         per-body consensus transmitter (already used by build_dataset.py)
+
+Per-synapse predictions are raw classifier output. In this dataset they are systematically wrong for
+some classes (Kenyon cells come out "dopamine", most motor neurons "histamine" or "acetylcholine"),
+while the per-body consensus transmitter matches published physiology. The consensus therefore stays
+the model's transmitter; per-synapse evidence is reported alongside, and disagreements are flagged.
 
 For each cell in data/circuit.json and data/learning-circuit.json this computes:
   coverage   fraction of the cell's input (and output) connections that the lab's subset contains
@@ -30,7 +36,8 @@ import pyarrow.dataset as ds
 BASE = Path(__file__).resolve().parent
 SOURCE = 'https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome/'
 FILES = {'body-stats': 'body-stats-male-cns-v1.0-minconf-0.5.feather',
-         'tbar-neurotransmitters': 'tbar-neurotransmitters-male-cns-v1.0.feather'}
+         'tbar-neurotransmitters': 'tbar-neurotransmitters-male-cns-v1.0.feather',
+         'neurotransmitters': 'body-neurotransmitters-male-cns-v1.0.feather'}
 POSITIVE, NEGATIVE = {'acetylcholine'}, {'gaba', 'glutamate'}
 
 
@@ -98,6 +105,12 @@ def build(raw, out_path, circuits=None):
                             'dominant': names[int(top.argmax())], 'dominant_share': round(float(top.max()), 4),
                             'p_positive': round(float(mean[pos_idx].sum()), 4), 'p_negative': round(float(mean[neg_idx].sum()), 4)}
 
+    nschema = ds.dataset(raw / 'neurotransmitters.feather', format='ipc').schema.names
+    nbody = pick(nschema, 'body', 'bodyId')
+    ncols = [c for c in ['consensus_nt', 'predicted_nt', 'predicted_nt_confidence'] if c in nschema]
+    nt_tab = read_filtered(raw / 'neurotransmitters.feather', ids, [nbody, *ncols], nbody).to_pydict()
+    consensus = {int(b): {c: nt_tab[c][i] for c in ncols} for i, b in enumerate(nt_tab[nbody])}
+
     cells, summary = {}, {}
     for key, c in data.items():
         ins, outs = captured(c)
@@ -112,19 +125,25 @@ def build(raw, out_path, circuits=None):
                    'captured_in': ins[b], 'captured_out': outs[b],
                    'coverage_in': None if cov_in is None else round(min(cov_in, 1.0), 4),
                    'coverage_out': None if cov_out is None else round(min(cov_out, 1.0), 4),
-                   'aggregate_nt': n.get('nt'), 'nt': nt.get(b)}
+                   'aggregate_nt': n.get('nt'), 'consensus_nt': (consensus.get(b) or {}).get('consensus_nt'),
+                   'predicted_nt': (consensus.get(b) or {}).get('predicted_nt'), 'nt': nt.get(b)}
+            rec['synapse_agrees_with_consensus'] = (None if not rec['nt'] or not rec['consensus_nt'] or rec['consensus_nt'] in ('unclear', 'unknown')
+                                                   else rec['nt']['dominant'] == rec['consensus_nt'])
             cells[str(b)] = rec
             by_layer[rec['layer']].append(rec)
         summary[key] = {}
         for layer, recs in by_layer.items():
             cov = [r['coverage_in'] for r in recs if r['coverage_in'] is not None]
-            unclear = [r for r in recs if r['aggregate_nt'] in (None, 'unclear', 'unknown')]
+            unclear = [r for r in recs if r['consensus_nt'] in (None, 'unclear', 'unknown')]
+            judged = [r for r in recs if r['synapse_agrees_with_consensus'] is not None]
             summary[key][layer] = {
                 'cells': len(recs), 'median_coverage_in': None if not cov else round(float(np.median(cov)), 4),
                 'cells_with_synapse_nt': sum(r['nt'] is not None for r in recs),
-                'aggregate_unclear': len(unclear),
+                'consensus_unclear': len(unclear),
                 'unclear_with_dominant_share_over_0.6': sum(1 for r in unclear if r['nt'] and r['nt']['dominant_share'] > .6),
-                'mixed_cells': sum(1 for r in recs if r['nt'] and r['nt']['dominant_share'] < .6)}
+                'mixed_cells': sum(1 for r in recs if r['nt'] and r['nt']['dominant_share'] < .6),
+                'consensus': dict(sorted(((k, sum(1 for r in recs if r['consensus_nt'] == k)) for k in {r['consensus_nt'] for r in recs}), key=lambda x: -x[1])),
+                'synapse_agrees_with_consensus': f"{sum(r['synapse_agrees_with_consensus'] for r in judged)}/{len(judged)}"}
     result = {'dataset': 'male-cns:v1.0', 'license': 'CC-BY-4.0', 'built_at': datetime.now(timezone.utc).isoformat(),
               'files': {k: {'url': SOURCE + v, 'sha256': sha256(raw / (k + '.feather'))} for k, v in FILES.items()},
               'transmitters': names, 'method': __doc__.strip(), 'summary': summary, 'cells': cells}
