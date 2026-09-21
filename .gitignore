@@ -2,7 +2,3 @@
 .runtime.json
 __pycache__/
 *.partial
-.DS_Store
-# Official raw tables are ~1.1 GB; rebuild them with fetch_data.py instead of committing.
-raw-data/
-*.feather
