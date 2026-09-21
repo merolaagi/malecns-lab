@@ -134,6 +134,24 @@ node --test neuron-core.test.js
 
 The next planned step is a successor ("counting") test with an HTM-style sequence memory on Kenyon cells, labeled as an added assumption because the fly mushroom body has no established equivalent of distal-segment sequence memory.
 
+## Vision to walking (in progress)
+
+Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.
+
+Milestones:
+
+1. **Bridge (this iteration).** `build_vision.py` finds, in the full MaleCNS tables, how each flyvis output cell type (T4, T5, Tm, TmY and others) can reach DNa01, DNa02 and DNg13 in up to three hops. It works on (cell type, side) groups because flyvis models types, not cells. Influence along a path is the product of input fractions (synapses from the previous group / all synapses onto the next, including untyped inputs). It ranks anatomical routes; it does not predict activity. Output: `data/vision-bridge.json`.
+2. **Eye responses.** Run a pretrained flyvis ensemble on standard stimuli (rotating gratings, translating patterns, looming discs) for each eye, and save per-type, per-column responses. Runs locally; flyvis downloads its pretrained models on first use.
+3. **Open loop.** Map eye responses through the bridge into left/right descending drive for the locomotion model, and test whether rotation to one side produces turning in the compensating direction and looming produces a stopping or avoidance response. Controls: blinded eye, bridge with shuffled type identities, sign-flipped bridge.
+4. **Closed loop.** Render the scene from the simulated fly's position every step, so its own walking changes what it sees.
+
+Caveats known in advance: flyvis was built from optic-lobe connectomes of other flies (FIB25/FIB19), while the bridge uses MaleCNS; the bridge's signs come from majority transmitter predictions; tangential and looming pathways are summarized at the type level; and the locomotion body is still the engineered readout.
+
+```sh
+.venv/bin/python build_vision.py /path/to/raw-data
+.venv/bin/python -m unittest -v test_vision.py
+```
+
 ## Odor-learning lab (new)
 
 Open `/learning` on the same local server. The movement page links to it. This is a **separate trial-based rate model**, not a learning module already controlling the walking simulator. Its Y-maze replay illustrates discrete decisions, not a physics trajectory. It uses an additional measured MaleCNS subset: 314 antennal-lobe projection neurons (PNs), 4,064 Kenyon cells (KCs), 97 mushroom-body output neurons (MBONs), and 316 PAM dopamine neurons. The 194,246 retained edges are exactly the observed PN→KC, KC→MBON and PAM→KC connections among selected Traced annotations. Recurrent connections and other cell classes are omitted.

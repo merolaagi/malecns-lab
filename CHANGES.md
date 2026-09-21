@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add vision-to-steering bridge extraction
+
+- `build_vision.py` extracts, from the full MaleCNS raw tables, the anatomical routes from the 34 flyvis output cell types to the steering descending neurons DNa01, DNa02 and DNg13, at the (cell type, side) level, with up to three hops. Influence is the product of input fractions and ranks routes; it does not predict activity. Output goes to `data/vision-bridge.json`.
+- `test_vision.py` checks the path arithmetic, denominators that include untyped inputs, intermediate ranking and provenance on synthetic tables.
+- README: "Vision to walking" plan with four milestones and known caveats.
+
 ## Guard sync against backup zips
 
 - `tools/sync.sh` and `tools/autosync.sh` now only pick up `malecns-lab.zip` and browser-renamed `malecns-lab (N).zip`, not any file starting with `malecns-lab`. A backup named `malecns-lab_v1.zip` had matched and replaced the project.
