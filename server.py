@@ -6,10 +6,15 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from model import Circuit
 from learning import LearningCircuit
+from numerosity import Numerosity
+from neuron_inputs import NeuronIndex
+from urllib.parse import urlparse, parse_qs
 
 BASE = Path(__file__).resolve().parent
 CIRCUIT = Circuit()
 LEARNING = LearningCircuit()
+NUMEROSITY = Numerosity(LEARNING)
+NEURONS = NeuronIndex(CIRCUIT, LEARNING)
 LOCK = threading.Lock()
 
 class Handler(BaseHTTPRequestHandler):
@@ -23,12 +28,26 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(payload)
 
     def do_GET(self):
-        path = self.path.split('?')[0]
+        url = urlparse(self.path); path = url.path
+        if path == '/api/neuron':
+            q = {k: v[0] for k, v in parse_qs(url.query).items()}
+            try:
+                circuit = q.get('circuit', 'learning')
+                cell = NEURONS.random_kc(q.get('seed', 0)) if q.get('id') == 'random' and circuit == 'learning' else q.get('id')
+                return self.send(200, NEURONS.describe(circuit, cell))
+            except ValueError as e: return self.send(400, {'error': str(e)})
         if path == '/api/learning-circuit':
             return self.send(200, LEARNING.data)
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
-        files = {'/atlas': ('atlas.html', 'text/html; charset=utf-8'),
+        files = {'/neuron': ('neuron.html', 'text/html; charset=utf-8'),
+                 '/neuron.js': ('neuron.js', 'text/javascript; charset=utf-8'),
+                 '/neuron-core.js': ('neuron-core.js', 'text/javascript; charset=utf-8'),
+                 '/workbench.css': ('workbench.css', 'text/css; charset=utf-8'),
+                 '/numerosity': ('numerosity.html', 'text/html; charset=utf-8'),
+                 '/numerosity.js': ('numerosity.js', 'text/javascript; charset=utf-8'),
+                 '/api/numerosity-benchmark': ('data/numerosity-benchmark.json', 'application/json; charset=utf-8'),
+                 '/atlas': ('atlas.html', 'text/html; charset=utf-8'),
                  '/atlas.js': ('atlas.js', 'text/javascript; charset=utf-8'),
                  '/atlas-core.js': ('atlas-core.js', 'text/javascript; charset=utf-8'),
                  '/atlas.css': ('atlas.css', 'text/css; charset=utf-8'),
@@ -47,7 +66,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send(200, file.read_bytes(), mime)
 
     def do_POST(self):
-        if self.path not in ['/api/run', '/api/learn']: return self.send(404, {'error': 'Not found'})
+        if self.path not in ['/api/run', '/api/learn', '/api/numerosity']: return self.send(404, {'error': 'Not found'})
         # The app is same-origin. Reject browser requests originating elsewhere.
         origin = self.headers.get('Origin')
         expected = 'http://' + self.headers.get('Host', '')
@@ -57,13 +76,15 @@ class Handler(BaseHTTPRequestHandler):
             if not 0 < size <= 8192: raise ValueError('Invalid request size')
             options = json.loads(self.rfile.read(size))
             if not isinstance(options, dict): raise ValueError('Expected JSON object')
-            allowed = ({'duration','drive','bias','gain','feedback','condition','seed','mode'} if self.path == '/api/run'
-                       else {'seed','train_trials','probe_trials','learning_rate','temperature','retention','delay','condition','rewarded_odor'})
+            allowed = {'/api/run': {'duration','drive','bias','gain','feedback','condition','seed','mode'},
+                       '/api/learn': {'seed','train_trials','probe_trials','learning_rate','temperature','retention','delay','condition','rewarded_odor'},
+                       '/api/numerosity': {'seed','numbers','width','step','held_out','train_trials','learning_rate','temperature','noise','test_exemplars','condition'}}[self.path]
             if set(options) - allowed: raise ValueError('Unknown parameter')
         except (ValueError, TypeError) as e: return self.send(400, {'error': str(e)})
         if not LOCK.acquire(blocking=False): return self.send(409, {'error': 'An experiment is already running'})
         try:
-            result = CIRCUIT.simulate(**options) if self.path == '/api/run' else LEARNING.run(**options)
+            run = {'/api/run': CIRCUIT.simulate, '/api/learn': LEARNING.run, '/api/numerosity': NUMEROSITY.run}[self.path]
+            result = run(**options)
             self.send(200, result)
         except (ValueError, TypeError, OverflowError) as e:
             self.send(400, {'error': str(e)})
