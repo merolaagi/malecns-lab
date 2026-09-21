@@ -107,6 +107,11 @@ else
   echo "No GitHub remote yet; committed locally. Run tools/setup_repo.sh to publish."
 fi
 mkdir -p "$APPLIED" && mv "$ZIP" "$APPLIED/$(date +%Y%m%d-%H%M%S)-$(basename "$ZIP")"
+# Restart the lab server so the new iteration is live (set MALECNS_NO_RESTART=1 to skip).
+if [ "${MALECNS_NO_RESTART:-}" != 1 ] && [ -x tools/lab.sh ]; then
+  MALECNS_PROJECT="$PROJECT" tools/lab.sh restart || echo "Couldn't restart the lab server; see tools/lab.sh logs" >&2
+fi
+
 # Any other lab zips still in Downloads predate this one; archive them so they're never applied later.
 for old in "$DOWNLOADS"/malecns-lab.zip "$DOWNLOADS"/malecns-lab\ \(*\).zip; do
   [ -f "$old" ] || continue

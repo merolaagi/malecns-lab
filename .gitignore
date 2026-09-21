@@ -8,3 +8,5 @@ raw-data/
 *.feather
 # flyvis pretrained models and caches (downloaded by vision_eye.py)
 flyvis-data/
+.server.pid
+.server.log

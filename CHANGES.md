@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Restart the lab server after every sync
+
+- `tools/lab.sh start|stop|restart|status|open|logs` runs the lab server in the background, logging to `.server.log` and tracking its PID in `.server.pid` (both git-ignored). It only ever stops the server it started.
+- `tools/sync.sh` restarts the server after each successful sync, so every iteration goes live with its commit. Set `MALECNS_NO_RESTART=1` to skip.
+- Autosync's launchd agent now keeps the restarted server alive after the sync job exits (`AbandonProcessGroup`), and its notification includes the lab URL. Rerun `tools/autosync.sh install` once to pick this up.
+
 ## Add eye-response runner (vision milestone 2)
 
 - `vision_eye.py` runs pretrained flyvis eye models on gratings in eight directions, a looming disc and flashes, and saves compact responses of the 34 output cell types to `data/eye-responses.json`, with motion tuning per T4/T5 subtype and anatomical-consistency checks against T4a. Downloads pretrained models into git-ignored `flyvis-data/` on first run.

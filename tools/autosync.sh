@@ -32,7 +32,8 @@ run_once() {
   echo "$OUT"
   case $CODE in
     0) MSG=$(echo "$OUT" | grep -m1 '^Committed:' | sed 's/^Committed: //' || true)
-       if echo "$OUT" | grep -q '^Pushed'; then notify "Pushed to GitHub" "${MSG:-Iteration applied}. Restart the lab server to load it."
+       URL=$(echo "$OUT" | grep -o 'http://127.0.0.1:[0-9]*' | tail -n 1 || true)
+       if echo "$OUT" | grep -q '^Pushed'; then notify "Pushed to GitHub" "${MSG:-Iteration applied}.${URL:+ Lab running at $URL}"
        else notify "Up to date" "That download matched the last commit."; fi ;;
     4) notify "Refused a download" "$(basename "$ZIP") isn't a normal lab iteration. See $LOG." ;;
     3) notify "Skipped an older download" "$(basename "$ZIP") predates the committed version." ;;
@@ -58,6 +59,7 @@ case "${1:-}" in
   <key>ProgramArguments</key><array><string>/bin/bash</string><string>$PROJECT/tools/autosync.sh</string><string>run</string></array>
   <key>WatchPaths</key><array><string>$DOWNLOADS</string></array>
   <key>ThrottleInterval</key><integer>10</integer>
+  <key>AbandonProcessGroup</key><true/>
   <key>EnvironmentVariables</key><dict>
     <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     <key>MALECNS_PROJECT</key><string>$PROJECT</string>
