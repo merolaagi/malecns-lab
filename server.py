@@ -29,6 +29,12 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         url = urlparse(self.path); path = url.path
+        if path == '/api/quality':
+            q = BASE / 'data/quality.json'
+            if not q.exists(): return self.send(404, {'error': 'No data/quality.json yet. Run build_quality.py (see README).'})
+            body = q.read_bytes()
+            self.send_response(200); self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Content-Length', str(len(body))); self.end_headers(); self.wfile.write(body); return
         if path == '/api/neuron':
             q = {k: v[0] for k, v in parse_qs(url.query).items()}
             try:

@@ -134,6 +134,20 @@ node --test neuron-core.test.js
 
 The next planned step is a successor ("counting") test with an HTM-style sequence memory on Kenyon cells, labeled as an added assumption because the fly mushroom body has no established equivalent of distal-segment sequence memory.
 
+## Data quality layer (new)
+
+`build_quality.py` folds two more official MaleCNS tables into the lab: body statistics (synapse totals for every body, 780 MB) and per-synapse transmitter predictions (one row per pre-synapse, 2.7 GB). It streams only the rows for the lab's cells and writes `data/quality.json` with, for every cell in both circuits:
+
+- **Coverage:** the share of the cell's input and output connections that the lab's subset contains. A cell with low input coverage is simulated from a small slice of what drives it.
+- **Per-synapse transmitter evidence:** mean probability per transmitter, the share of the cell's synapses whose most likely transmitter is each one, and sign probabilities under the models' rule (acetylcholine +, GABA and glutamate −, others 0).
+
+The atlas and neuron workbench show both for every cell and flag low coverage, mixed evidence and cells whose aggregate transmitter is "unclear" but whose synapses mostly agree. In the workbench, PN inputs to Kenyon cells take their sign from the per-synapse dominant transmitter instead of being assumed excitatory. The network models themselves are unchanged in this step; transmitter predictions come from EM appearance, and receptor identity, including glutamate's real sign, is still not measured.
+
+```sh
+cd raw-data && B=https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome && curl -fL -o body-stats.feather $B/body-stats-male-cns-v1.0-minconf-0.5.feather && curl -fL -o tbar-neurotransmitters.feather $B/tbar-neurotransmitters-male-cns-v1.0.feather && cd .. && .venv/bin/python build_quality.py raw-data
+.venv/bin/python -m unittest -v test_quality.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

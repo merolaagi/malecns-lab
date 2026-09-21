@@ -69,8 +69,16 @@ case "${1:-}" in
   <key>StandardErrorPath</key><string>$LOG</string>
 </dict></plist>
 PL
+    plutil -lint "$PLIST" >/dev/null || { echo "Generated agent file is invalid: $PLIST" >&2; exit 1; }
+    # Unloading is asynchronous; loading again too soon fails with "Bootstrap failed: 5".
     launchctl bootout "gui/$(id -u)/$LABEL" >/dev/null 2>&1 || true
-    launchctl bootstrap "gui/$(id -u)" "$PLIST"
+    for _ in $(seq 1 20); do launchctl print "gui/$(id -u)/$LABEL" >/dev/null 2>&1 || break; sleep 0.5; done
+    ok=0
+    for attempt in 1 2 3; do
+      if launchctl bootstrap "gui/$(id -u)" "$PLIST" 2>/dev/null; then ok=1; break; fi
+      sleep 2
+    done
+    [ $ok = 1 ] || { echo "launchctl couldn't load the agent. Try: tools/autosync.sh uninstall && tools/autosync.sh install" >&2; echo "Or run the same job in a Terminal tab: tools/autosync.sh watch" >&2; exit 1; }
     echo "Autosync is on. New malecns-lab*.zip downloads are applied, tested, committed and pushed."
     echo "Log: $LOG"
     echo "If the log shows 'Operation not permitted', macOS is blocking background access to Downloads:"

@@ -14,7 +14,8 @@ const LAYER_TEXT = {
         w: 'Their somata sit in the legs, so positions are estimated from partners. Front legs have 11 cells against 40 each for middle and hind.' },
 };
 
-let A = null;
+let A = null, Q = null;
+fetch('/api/quality').then(r => r.ok ? r.json() : null).then(q => { Q = q ? q.cells : null; if (A && S.sel?.kind === 'cell') renderPanel(); }).catch(() => {});
 const S = { view: 'circuit', layer: null, group: null, sel: null, hover: null, cam: { s: 1, x: 0, y: 0 },
             regionMode: false, threshold: 0, drag: null, rect: null };
 const cv = document.getElementById('map'), ctx = cv.getContext('2d');
@@ -293,6 +294,25 @@ function panelGroup(layer, key) {
     + '<div class="actions">' + (S.view === 'anatomy' ? '' : '<button data-act="anatomyGroup">Show in anatomy</button>') + '<button class="secondary" data-act="openLayer" data-layer="' + layer + '">Open layer wiring</button></div>'
     + summaryHtml(s, false) + '<h3>Cells</h3>' + chips(g.members);
 }
+function qualityHtml(bodyId, aggregateNt) {
+  if (!Q) return '<h3>Data quality</h3><p class="sub">Not built yet. Run build_quality.py to see input coverage and per-synapse transmitters.</p>';
+  const q = Q[String(bodyId)];
+  if (!q) return '';
+  const pct = v => v === null || v === undefined ? 'unknown' : Math.round(v * 100) + '%';
+  let h = '<h3>Data quality</h3><table class="kv">'
+    + '<tr><td>Input in this subset</td><td>' + pct(q.coverage_in) + (q.post_total ? ' of ' + fmt(q.post_total) + ' synapses' : '') + '</td></tr>'
+    + '<tr><td>Output in this subset</td><td>' + pct(q.coverage_out) + (q.downstream_total ? ' of ' + fmt(q.downstream_total) : '') + '</td></tr>';
+  if (q.nt) {
+    const shares = Object.entries(q.nt.top_share).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, v]) => k + ' ' + Math.round(v * 100) + '%').join(', ');
+    h += '<tr><td>Per-synapse transmitter</td><td>' + esc(shares) + ' of ' + fmt(q.nt.tbars) + ' synapses</td></tr>'
+      + '<tr><td>Sign probability</td><td>+ ' + Math.round(q.nt.p_positive * 100) + '%, − ' + Math.round(q.nt.p_negative * 100) + '%</td></tr>';
+  }
+  h += '</table>';
+  if (q.coverage_in !== null && q.coverage_in < 0.25) h += '<p class="flag">The subset contains under a quarter of this cell’s input, so its simulated activity leaves out most of what drives it.</p>';
+  if (q.nt && ['unclear', 'unknown', null].includes(aggregateNt ?? null) && q.nt.dominant_share > 0.6) h += '<p class="flag">The aggregate transmitter is unclear, but ' + Math.round(q.nt.dominant_share * 100) + '% of its synapses look ' + esc(q.nt.dominant) + '.</p>';
+  else if (q.nt && q.nt.dominant_share < 0.6) h += '<p class="flag">Mixed transmitter evidence across its synapses; its sign in the model is uncertain.</p>';
+  return h;
+}
 function partnerList(i, dir) {
   const p = C.partners(A, i, dir, 12);
   return '<p class="sub">' + fmt(p.total) + ' partners, ' + fmt(p.synapses) + ' synapses. Strongest:</p><ul class="list">'
@@ -308,6 +328,7 @@ function panelCell(i) {
     + row('Model leg pool', n.layer === 'mn' || n.layer === 'sn' ? C.legText(n.leg) : null) + row('Status', r.status) + '</table>'
     + '<div class="actions"><button data-act="anatomyCell">' + (S.view === 'anatomy' ? 'Center on cell' : 'Show in anatomy') + '</button><button class="secondary" data-group="' + esc(n.group) + '" data-glayer="' + n.layer + '">Open group</button><a class="wb-link" href="/neuron?circuit=locomotion&id=' + r.bodyId + '">Open in neuron workbench</a></div>'
     + '<h3>In the model</h3><div class="model">' + t.lines.join('<br>') + '</div>' + t.flags.map(f => '<p class="flag">' + esc(f) + '</p>').join('')
+    + qualityHtml(r.bodyId, r.nt)
     + '<h3><span class="sw" style="background:' + IN_EDGE + '"></span>Inputs</h3>' + partnerList(i, 'in')
     + '<h3><span class="sw" style="background:' + OUT_EDGE + '"></span>Outputs</h3>' + partnerList(i, 'out');
 }

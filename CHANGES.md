@@ -2,6 +2,17 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add data quality layer: coverage and per-synapse transmitters
+
+- `build_quality.py` streams the official body-statistics and per-synapse transmitter tables for the lab's cells only and writes `data/quality.json`: input and output coverage of each cell by the lab's subset, and per-synapse transmitter shares and sign probabilities.
+- Atlas cell panels and the neuron workbench show coverage and transmitter evidence, flagging low coverage, mixed evidence and "unclear" cells whose synapses mostly agree. `/api/quality` serves the file.
+- Workbench PN inputs take their sign from per-synapse predictions when available, replacing the all-excitatory assumption.
+- `test_quality.py` checks coverage arithmetic, transmitter aggregation, filtering to lab cells and summary counts on synthetic tables.
+
+## Make autosync install reliable
+
+- `tools/autosync.sh install` validates the agent file, waits until launchd has fully unloaded the previous agent, and retries loading up to three times. Reinstalling immediately after an unload previously failed with "Bootstrap failed: 5: Input/output error".
+
 ## Restart the lab server after every sync
 
 - `tools/lab.sh start|stop|restart|status|open|logs` runs the lab server in the background, logging to `.server.log` and tracking its PID in `.server.pid` (both git-ignored). It only ever stops the server it started.

@@ -4,7 +4,9 @@ Returns only anatomy plus the sign rule the network models already use. The work
 biophysics (Hodgkin-Huxley kinetics, two compartments, input firing) is assumed and lives in
 neuron-core.js.
 """
+import json
 from collections import defaultdict
+from model import BASE
 from model import Circuit
 from learning import LearningCircuit
 from numerosity import DEFAULT as NUM_DEFAULT, Numerosity
@@ -13,7 +15,9 @@ SIGN = {'acetylcholine': 1, 'gaba': -1, 'glutamate': -1}
 
 
 class NeuronIndex:
-    def __init__(self, locomotion=None, learning=None):
+    def __init__(self, locomotion=None, learning=None, quality_path=None):
+        qp = quality_path or BASE / 'data/quality.json'
+        self.quality = json.loads(qp.read_text())['cells'] if qp.exists() else {}
         self.loco = locomotion or Circuit()
         self.learn = learning or LearningCircuit()
         self.nodes = {'locomotion': {n['bodyId']: n for n in self.loco.nodes},
@@ -40,15 +44,20 @@ class NeuronIndex:
             if circuit == 'learning':
                 if p['role'] == 'PAM':
                     modulatory.append({'bodyId': pre, 'name': p['instance'], 'synapses': w}); continue
-                # The learning dataset has no transmitter field; PN inputs are treated as excitatory.
-                sign, nt, note = 1, None, 'Transmitter not in the learning dataset; assumed excitatory.'
+                q = (self.quality.get(str(pre)) or {}).get('nt')
+                if q:   # per-synapse predictions (build_quality.py) replace the excitatory assumption
+                    nt = q['dominant']; sign = SIGN.get(nt, 0)
+                    note = f"Sign from per-synapse predictions: {q['dominant_share']:.0%} of {q['tbars']} synapses look {nt}."
+                else:   # the learning dataset has no transmitter field
+                    sign, nt, note = 1, None, 'Transmitter not in the learning dataset; assumed excitatory.'
             else:
                 nt = p.get('nt'); sign = SIGN.get(nt, 0)
                 note = None if sign else 'Unclear transmitter: carries zero weight in the network model.'
-            channels.append({'bodyId': pre, 'name': p.get('instance') or p.get('type'), 'type': p.get('type'),
+            qual = self.quality.get(str(pre)) or {}
+            channels.append({'synapse_nt': qual.get('nt'), 'coverage_in': qual.get('coverage_in'), 'bodyId': pre, 'name': p.get('instance') or p.get('type'), 'type': p.get('type'),
                              'class': p.get('superclass') or p.get('role'), 'synapses': w, 'sign': sign, 'nt': nt, 'note': note})
         out = {'circuit': circuit, 'cell': node, 'inputs': channels, 'modulatory': modulatory,
-               'output_partners': self.outputs[circuit][body_id]}
+               'output_partners': self.outputs[circuit][body_id], 'quality': self.quality.get(str(body_id))}
         if circuit == 'learning' and node.get('role') == 'KC':
             out['number_codes'] = self.number_codes(channels)
         return out

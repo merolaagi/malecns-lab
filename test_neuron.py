@@ -15,7 +15,9 @@ class NeuronInputTests(unittest.TestCase):
     def test_kenyon_cell_inputs_match_measured_edges(self):
         d = NEURONS.describe('learning', 57729)
         self.assertEqual([x['synapses'] for x in d['inputs']], [38, 25, 22, 20, 17, 13, 1])
-        self.assertTrue(all(x['sign'] == 1 for x in d['inputs']))
+        rule = {'acetylcholine': 1, 'gaba': -1, 'glutamate': -1}
+        for x in d['inputs']:   # +1 by assumption, or the per-synapse dominant transmitter once quality.json exists
+            self.assertEqual(x['sign'], rule.get(x['synapse_nt']['dominant'], 0) if x['synapse_nt'] else 1)
         self.assertGreater(len(d['modulatory']), 0)
         self.assertEqual(len(d['number_codes']['codes']['scalar']), 9)
 

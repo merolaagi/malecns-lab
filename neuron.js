@@ -37,11 +37,15 @@ function renderInfo() {
   const row = (k, v) => v === undefined || v === null || v === '' ? '' : '<tr><td>' + k + '</td><td>' + esc(v) + '</td></tr>';
   $('info').innerHTML = '<h2>This cell</h2><table class="kv">' + row('Body ID', c.bodyId) + row('Type', c.type) + row('Class', c.superclass || c.class)
     + row('Side', c.rootSide || c.somaSide) + row('Transmitter', c.nt) + row('Inputs', D.inputs.length + ' (' + exc + ' excitatory, ' + inh + ' inhibitory' + (zero ? ', ' + zero + ' zero' : '') + ')')
-    + row('Output partners', D.output_partners) + '</table>'
+    + row('Output partners', D.output_partners)
+    + (D.quality ? row('Input in this subset', D.quality.coverage_in === null ? 'unknown' : Math.round(D.quality.coverage_in * 100) + '% of ' + D.quality.post_total + ' synapses') : '')
+    + (D.quality && D.quality.nt ? row('Per-synapse transmitter', Object.entries(D.quality.nt.top_share).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k, v]) => k + ' ' + Math.round(v * 100) + '%').join(', ')) : '')
+    + '</table>'
+    + (D.quality && D.quality.coverage_in !== null && D.quality.coverage_in < 0.25 ? '<p class="warn">Only ' + Math.round(D.quality.coverage_in * 100) + '% of this cell’s input is in the lab’s subset. The simulation below is driven by a small slice of its real input.</p>' : '')
     + (D.circuit === 'locomotion' ? '<p><a href="/atlas#cell=' + c.bodyId + '&view=anatomy" style="color:var(--accent);font-size:12px">Show in circuit atlas</a></p>' : '')
     + '<h2 style="margin-top:18px">Measured inputs</h2><p class="hint">Click to switch an input on or off. Sorted by synapse count.</p><ul class="inlist" id="inlist"></ul>'
     + (D.modulatory.length ? '<p class="note">' + D.modulatory.length + ' PAM dopamine inputs (' + D.modulatory.reduce((a, b) => a + b.synapses, 0) + ' synapses) are listed in the data but not simulated here. In the network model they only gate plasticity.</p>' : '')
-    + (D.circuit === 'learning' ? '<p class="warn">The learning dataset has no transmitter predictions, so every PN input is treated as excitatory. Some PN classes are GABAergic in reality.</p>' : '')
+    + (D.circuit === 'learning' ? (D.inputs.some(x => x.synapse_nt) ? '<p class="note">PN input signs come from per-synapse transmitter predictions.</p>' : '<p class="warn">The learning dataset has no transmitter predictions, so every PN input is treated as excitatory. Some PN classes are GABAergic in reality. Build data/quality.json to replace this assumption.</p>') : '')
     + (zero ? '<p class="warn">' + zero + ' inputs have unclear transmitter and carry zero weight, matching the network model.</p>' : '')
     + (isKC ? '<p class="note">Kenyon cells receive PN input on claws in the calyx. As far as published recordings show, several claws must be active together to fire a Kenyon cell.</p>' : '');
   renderList();
