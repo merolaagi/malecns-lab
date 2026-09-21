@@ -145,11 +145,20 @@ Milestones:
 3. **Open loop.** Map eye responses through the bridge into left/right descending drive for the locomotion model, and test whether rotation to one side produces turning in the compensating direction and looming produces a stopping or avoidance response. Controls: blinded eye, bridge with shuffled type identities, sign-flipped bridge.
 4. **Closed loop.** Render the scene from the simulated fly's position every step, so its own walking changes what it sees.
 
+**Bridge result (MaleCNS, `data/vision-bridge.json`).** Horizontal motion subtypes (T4a/T5a, then T4b/T5b) reach DNa02 on the same side far more strongly than vertical ones (c, d). Direct eye-to-DN connections are essentially absent; about 83% of the summed influence runs over three hops, mostly through visual projection neurons (LLPC1, LPC1, LT51, LC10, LPLC4, HS) into central steering regions. DNa02 receives about four times more visual influence from its own side, with a GABAergic route from the opposite side, a push-pull arrangement to test in simulation. Summed visual influence is a few percent of DNa02's input by this measure.
+
+**Eye responses (milestone 2).** `vision_eye.py` runs pretrained flyvis models (ensemble `flow/0000`, first five by default) on gratings drifting in eight directions, a dark looming disc and full-field flashes, one stimulus at a time, and saves per-type mean and central-column responses to `data/eye-responses.json`. flyvis simulates one eye; the other eye's response to direction θ is taken from the mirrored direction. Direction angles are in the model's hex plane, and front-to-back is defined by T4a's preferred direction in the trained model. The script checks that T4b and T5b prefer the opposite direction, T5a the same, and T4c/T4d the orthogonal directions, opposite to each other. An untrained network fails these checks, so they discriminate. Install and run (downloads PyTorch and, on first run, the pretrained models into git-ignored `flyvis-data/`):
+
+```sh
+.venv/bin/pip install -r requirements-vision.txt && .venv/bin/python vision_eye.py
+```
+
 Caveats known in advance: flyvis was built from optic-lobe connectomes of other flies (FIB25/FIB19), while the bridge uses MaleCNS; the bridge's signs come from majority transmitter predictions; tangential and looming pathways are summarized at the type level; and the locomotion body is still the engineered readout.
 
 ```sh
 .venv/bin/python build_vision.py /path/to/raw-data
-.venv/bin/python -m unittest -v test_vision.py
+.venv/bin/python -m unittest -v test_vision.py test_vision_eye.py
+MALECNS_TEST_FLYVIS=1 .venv/bin/python -m unittest test_vision_eye.FlyvisSmokeTest   # slow, needs flyvis
 ```
 
 ## Odor-learning lab (new)

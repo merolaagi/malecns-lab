@@ -6,3 +6,5 @@ __pycache__/
 # Official raw tables are ~1.1 GB; rebuild them with fetch_data.py instead of committing.
 raw-data/
 *.feather
+# flyvis pretrained models and caches (downloaded by vision_eye.py)
+flyvis-data/

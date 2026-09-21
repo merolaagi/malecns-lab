@@ -1,0 +1,2 @@
+# Optional: only for vision_eye.py (milestone 2 of vision-to-walking). Installs PyTorch.
+flyvis==1.2.0

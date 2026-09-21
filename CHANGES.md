@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add eye-response runner (vision milestone 2)
+
+- `vision_eye.py` runs pretrained flyvis eye models on gratings in eight directions, a looming disc and flashes, and saves compact responses of the 34 output cell types to `data/eye-responses.json`, with motion tuning per T4/T5 subtype and anatomical-consistency checks against T4a. Downloads pretrained models into git-ignored `flyvis-data/` on first run.
+- Optional `requirements-vision.txt` (flyvis 1.2.0, PyTorch) keeps the core lab install unchanged.
+- `test_vision_eye.py` checks stimulus geometry and drift direction, tuning math, and an optional end-to-end smoke test with an untrained network.
+- `data/vision-bridge.json` (built from MaleCNS on the user's machine) now ships with the project, and the README summarizes the bridge result.
+
 ## Add vision-to-steering bridge extraction
 
 - `build_vision.py` extracts, from the full MaleCNS raw tables, the anatomical routes from the 34 flyvis output cell types to the steering descending neurons DNa01, DNa02 and DNg13, at the (cell type, side) level, with up to three hops. Influence is the product of input fractions and ranks routes; it does not predict activity. Output goes to `data/vision-bridge.json`.
