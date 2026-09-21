@@ -74,9 +74,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         if self.path not in ['/api/run', '/api/learn', '/api/numerosity']: return self.send(404, {'error': 'Not found'})
         # The app is same-origin. Reject browser requests originating elsewhere.
+        # Behind an HTTPS proxy such as a Cloudflare tunnel the page origin is https://<host>,
+        # so both schemes are accepted for the same Host; other sites are still refused.
         origin = self.headers.get('Origin')
-        expected = 'http://' + self.headers.get('Host', '')
-        if origin and origin != expected: return self.send(403, {'error': 'Origin not allowed'})
+        host = self.headers.get('Host', '')
+        if origin and origin not in ('http://' + host, 'https://' + host): return self.send(403, {'error': 'Origin not allowed'})
         try:
             size = int(self.headers.get('Content-Length', 0))
             if not 0 < size <= 8192: raise ValueError('Invalid request size')

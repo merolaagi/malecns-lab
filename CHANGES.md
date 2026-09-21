@@ -2,6 +2,11 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Fix simulations behind the HTTPS tunnel
+
+- The server's same-origin check only accepted `http://<host>`, so behind the Cloudflare tunnel (`https://malecns.fueldeskpro.com`) every simulation request was refused with "Origin not allowed" and the motion lab had nothing to animate. It now accepts `http://` and `https://` for the request's own host and still refuses other sites.
+- Route tests cover the local origin, the HTTPS proxy origin, and cross-site requests.
+
 ## Keep consensus transmitters; flag per-synapse disagreements
 
 - Real data showed per-synapse transmitter predictions fail systematically for Kenyon cells (4,060 of 4,064 predicted dopamine) and motor neurons (mostly histamine or acetylcholine), while agreeing with the consensus for all other locomotion cells.

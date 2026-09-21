@@ -54,6 +54,21 @@ class RouteTests(unittest.TestCase):
                                      headers={'Content-Type': 'application/json'})
         with urllib.request.urlopen(req) as r: self.assertIn('accuracy', json.loads(r.read()))
 
+    def post_with(self, origin, host=None):
+        headers = {'Content-Type': 'application/json', 'Origin': origin}
+        if host: headers['Host'] = host
+        req = urllib.request.Request(self.url + '/api/numerosity', data=json.dumps({'train_trials': 10}).encode(), headers=headers)
+        try:
+            with urllib.request.urlopen(req) as r: return r.status
+        except urllib.error.HTTPError as e: return e.code
+
+    def test_origin_check_allows_https_proxy_and_blocks_other_sites(self):
+        local = self.url.split('//')[1]
+        self.assertEqual(self.post_with('http://' + local), 200)
+        self.assertEqual(self.post_with('https://malecns.fueldeskpro.com', host='malecns.fueldeskpro.com'), 200)
+        self.assertEqual(self.post_with('https://evil.example', host='malecns.fueldeskpro.com'), 403)
+        self.assertEqual(self.post_with('http://evil.example'), 403)
+
     def test_unknown_numerosity_parameter_rejected(self):
         req = urllib.request.Request(self.url + '/api/numerosity', data=b'{"evil": 1}', headers={'Content-Type': 'application/json'})
         with self.assertRaises(urllib.error.HTTPError) as e: urllib.request.urlopen(req)
