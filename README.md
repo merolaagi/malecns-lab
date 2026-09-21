@@ -26,6 +26,10 @@ The UI starts an 8-second experiment. Adjust the descending input, left/right bi
 
 Exports include the exact parameters, anatomical source hashes, neuron IDs in firing-rate order, trajectory and sampled raster. The raster is deliberately capped and subsampled for export size; `neuron_hz` and total spike counts use all steps. The visual fly and plot replay saved results; dragging playback does not rerun the model.
 
+## Repository and iterations
+
+The project is versioned with git and published with `tools/setup_repo.sh` (default `merolaagi/malecns-lab`, private; set `MALECNS_VISIBILITY=public` to change). Each new iteration arrives as a `malecns-lab*.zip` in `~/Downloads`. `tools/sync.sh` applies the newest one to `~/Sites/malecns-lab`, removes files the iteration dropped, leaves untracked local files such as `raw-data/` and `.venv` alone, runs the full test suite, commits with the top entry of `CHANGES.md` as the message, pushes, and moves the zip to `~/Downloads/malecns-lab-applied/`. It refuses to run over uncommitted local edits and commits nothing if tests fail. It also skips a zip older than the committed version and archives leftover older downloads. `tools/autosync.sh install` runs all of this automatically whenever a new zip lands in Downloads (macOS launchd agent, log in `~/Library/Logs/malecns-lab-autosync.log`); `tools/autosync.sh watch` does the same in a Terminal tab if macOS blocks background access to Downloads. Paths can be overridden with `MALECNS_PROJECT` and `MALECNS_DOWNLOADS`.
+
 ## What is measured
 
 Source: [MaleCNS v1.0 downloads](https://male-cns.janelia.org/download/). Original tables: neuron annotations, connection counts, and neurotransmitter predictions. Each source URL and SHA-256 is in `data/circuit.json`. The anatomical data is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Attribution: FlyEM / HHMI Janelia, University of Cambridge, MRC Laboratory of Molecular Biology, and Google Research; see the [MaleCNS project and linked publication](https://male-cns.janelia.org/).
@@ -98,6 +102,37 @@ Positions are measured soma locations except for the 91 leg sensory neurons (som
 .venv/bin/python -m unittest -v test_atlas.py
 node --test atlas-core.test.js
 ```
+
+## Neuron workbench (new)
+
+Open `/neuron`, or use "Open in neuron workbench" on any cell in the atlas. Any cell in either circuit can be opened by body ID; "Random Kenyon cell" picks one from the learning circuit. The workbench loads the cell's measured presynaptic partners and synapse counts from `/api/neuron`, then simulates the membrane in the browser (`neuron-core.js`).
+
+- **Measured:** input partners, synapse counts, output partner count, and for locomotion cells the predicted transmitter that sets each input's sign (ACh +1, GABA and glutamate −1, unclear 0, as in the network model). PAM inputs to Kenyon cells are listed but not simulated.
+- **Assumed:** two compartments (a passive dendrite that receives all synapses, coupled to an active spike initiation zone, with the soma off the path as in unipolar insect neurons); squid Hodgkin–Huxley kinetics as a placeholder for Drosophila channels; inputs firing at a set rate with random timing; conductance per spike scaled by log(1 + synapses). The learning dataset has no transmitter predictions, so every PN input is treated as excitatory.
+
+The default strength (0.065) was chosen so a single claw of Kenyon cell 57729 rarely fires the cell and all seven usually do, matching the qualitative observation that Kenyon cells need several coincident claws. It is not fitted to recordings. For Kenyon cells, the workbench can feed the exact scalar and one-hot number codes used by the numerosity experiment.
+
+## Numerosity experiment (new)
+
+Open `/numerosity`. The task is choosing the larger of two numbers, 1 to 9, with some numbers never shown in training. Numbers are encoded on the 314 measured PNs: every number switches on exactly 30 PNs, so total activity carries no size cue. The **scalar code** (an HTM-style scalar encoder over PNs in a random order) gives neighboring numbers overlapping PNs; the **one-hot code** gives each number disjoint PNs. The measured PN→KC wiring and 95th-percentile threshold form the Kenyon cell code, and a plastic pooled readout over the measured KC→MBON edges, gated by PAM→KC synapse totals, learns a value per stimulus. Each trial both options receive feedback: +1 for the larger, −1 for the smaller. With chosen-only feedback, values drift toward "good whenever I picked it" and no ordering forms.
+
+Saved benchmark (`data/numerosity-benchmark.json`, five seeds, P(choose the larger), chance 50%), for pairs where both numbers were held out:
+
+| Held out | Scalar code | One-hot code | Scalar, shuffled PN→KC |
+|---|---|---|---|
+| 2, 5, 8 (interpolate) | 100% ± 0 | 48% ± 2 | 100% ± 0 |
+| 4, 5, 6 (middle block) | 61% ± 22 | 49% ± 3 | 63% ± 18 |
+| 8, 9 (extrapolate) | 10% ± 5 | 53% ± 2 | 12% ± 9 |
+
+**Findings.** Overlapping codes let the readout interpolate between trained numbers; without overlap, held-out numbers stay at chance. Wide gaps weaken interpolation. Extrapolation fails systematically and is reversed: 9 shares fewer PNs with trained large numbers than 8 does, so it looks smaller. This is similarity-based generalization, not a learned rule of order. Shuffled PN→KC wiring performs as well as the measured wiring, so these results show nothing specific to the measured connectome. "One held-out number" accuracy is partly an artifact when held-out numbers are mid-range, because untrained values sit near 0, the midpoint of the ±1 outcomes.
+
+```sh
+.venv/bin/python numerosity.py --benchmark
+.venv/bin/python -m unittest -v test_numerosity.py test_neuron.py
+node --test neuron-core.test.js
+```
+
+The next planned step is a successor ("counting") test with an HTM-style sequence memory on Kenyon cells, labeled as an added assumption because the fly mushroom body has no established equivalent of distal-segment sequence memory.
 
 ## Odor-learning lab (new)
 
