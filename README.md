@@ -166,6 +166,21 @@ export NEUPRINT_APPLICATION_CREDENTIALS='<token from your neuPrint account page>
 .venv/bin/python -m unittest -v test_regions.py
 ```
 
+## 3D view and Neuroglancer links (new)
+
+Open `/3d`. It draws neurons as official MaleCNS meshes and brain regions as translucent official region shapes, inside faint brain and VNC outlines. When a neuron's mesh cannot be loaded, it is drawn from its official skeleton instead and marked "skeleton". Presets cover the steering descending neurons, Kenyon cell 57729 and the regions where the descending neurons take their input. The page state is in the URL (`/3d?cells=10360,523769&regions=LAL(R),VES(R)`).
+
+Data comes from the public bucket `gs://flyem-male-cns`, the same source as the Neuroglancer view, through a whitelisted, cached proxy in the lab server (`gcs.py`, `/api/gcs/...`): only mesh, skeleton and region layers are allowed, paths are validated, files are capped at 25 MB and cached in git-ignored `data/gcs-cache/`. three.js r128 is bundled in `vendor/` (MIT licence included), so the page does not depend on a CDN.
+
+Every atlas cell, workbench cell and region panel also has **View in 3D** and **Neuroglancer ↗** links. The Neuroglancer link opens the official viewer with the cell selected and centred on its soma, together with brain and VNC outlines; region links filter the viewer's region list by name.
+
+The mesh decoder handles Neuroglancer's legacy precomputed format. Run the one-time probe on a machine with internet access to confirm the formats of the layers the viewer uses:
+
+```sh
+.venv/bin/python tools/probe_ng.py
+node --test ng.test.js && .venv/bin/python -m unittest -v test_gcs.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

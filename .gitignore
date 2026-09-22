@@ -13,3 +13,5 @@ flyvis-data/
 # Skeletons the explorer downloads on demand are a local cache; only the bundled one is tracked.
 data/skeletons/*
 !data/skeletons/10360.swc
+# Meshes and region data fetched by the 3D viewer
+data/gcs-cache/

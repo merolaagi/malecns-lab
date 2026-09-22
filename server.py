@@ -14,6 +14,7 @@ from sdr_math import SDRArithmetic
 from vision import run as run_vision
 from neuron_inputs import NeuronIndex
 from urllib.parse import urlparse, parse_qs
+import gcs
 
 BASE = Path(__file__).resolve().parent
 CIRCUIT = Circuit()
@@ -36,6 +37,12 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         url = urlparse(self.path); path = url.path
+        if path.startswith('/api/gcs/'):
+            try: body = gcs.fetch(path[len('/api/gcs/'):])
+            except gcs.GCSError as e: return self.send(e.status, {'error': str(e)})
+            self.send_response(200); self.send_header('Content-Type', 'application/octet-stream')
+            self.send_header('Cache-Control', 'public, max-age=86400'); self.send_header('Content-Length', str(len(body)))
+            self.end_headers(); self.wfile.write(body); return
         if path == '/api/explorer': return self.send(200, EXPLORER.graph())
         if path == '/api/skeleton':
             try:
@@ -59,7 +66,11 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, LEARNING.data)
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
-        files = {'/regions': ('regions.html', 'text/html; charset=utf-8'),
+        files = {'/3d': ('viewer3d.html', 'text/html; charset=utf-8'),
+                 '/vendor/three.min.js': ('vendor/three.min.js', 'text/javascript; charset=utf-8'),
+                 '/viewer3d.js': ('viewer3d.js', 'text/javascript; charset=utf-8'),
+                 '/ng.js': ('ng.js', 'text/javascript; charset=utf-8'),
+                 '/regions': ('regions.html', 'text/html; charset=utf-8'),
                  '/regions.js': ('regions.js', 'text/javascript; charset=utf-8'),
                  '/vision': ('vision.html', 'text/html; charset=utf-8'),
                  '/vision.js': ('vision.js', 'text/javascript; charset=utf-8'),

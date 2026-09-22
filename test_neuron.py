@@ -79,6 +79,16 @@ class RouteTests(unittest.TestCase):
         with self.assertRaises(urllib.error.HTTPError) as e: urllib.request.urlopen(req)
         self.assertEqual(e.exception.code, 400)
 
+    def test_bucket_proxy_refuses_other_paths(self):
+        for path in ['/api/gcs/em/em-clahe-jpeg/info', '/api/gcs/rois/fullbrain-roi-v5/../x']:
+            with self.assertRaises(urllib.error.HTTPError) as e: urllib.request.urlopen(self.url + path)
+            self.assertIn(e.exception.code, (400, 403))
+
+    @unittest.skipUnless(shutil.which('node'), 'node not installed')
+    def test_ng_core_logic(self):
+        r = subprocess.run(['node', '--test', 'ng.test.js'], cwd=BASE, capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+
     @unittest.skipUnless(shutil.which('node'), 'node not installed')
     def test_neuron_core_logic(self):
         r = subprocess.run(['node', '--test', 'neuron-core.test.js'], cwd=BASE, capture_output=True, text=True)

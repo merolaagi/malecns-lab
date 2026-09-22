@@ -334,7 +334,7 @@ function panelCell(i) {
     + row('Side', r.rootSide || r.somaSide) + row('Transmitter', r.nt ? r.nt + (r.nt_confidence ? ' (' + Math.round(r.nt_confidence * 100) + '% confidence)' : '') : null)
     + row('Entry nerve', r.entryNerve) + row('Exit nerve', r.exitNerve) + row('Soma (voxels)', r.somaLocation ? r.somaLocation.join(', ') : 'Not annotated')
     + row('Model leg pool', n.layer === 'mn' || n.layer === 'sn' ? C.legText(n.leg) : null) + row('Status', r.status) + '</table>'
-    + '<div class="actions"><button data-act="anatomyCell">' + (S.view === 'anatomy' ? 'Center on cell' : 'Show in anatomy') + '</button><button class="secondary" data-group="' + esc(n.group) + '" data-glayer="' + n.layer + '">Open group</button><a class="wb-link" href="/neuron?circuit=locomotion&id=' + r.bodyId + '">Open in neuron workbench</a></div>'
+    + '<div class="actions"><button data-act="anatomyCell">' + (S.view === 'anatomy' ? 'Center on cell' : 'Show in anatomy') + '</button><button class="secondary" data-group="' + esc(n.group) + '" data-glayer="' + n.layer + '">Open group</button><a class="wb-link" href="/neuron?circuit=locomotion&id=' + r.bodyId + '">Open in neuron workbench</a><a class="wb-link" href="/3d?cells=' + r.bodyId + '">View in 3D</a><a class="wb-link" target="_blank" rel="noopener" href="' + esc(NG.url({ cells: [r.bodyId], position: r.somaLocation || null, title: cellName(i) })) + '">Neuroglancer ↗</a></div>'
     + '<h3>In the model</h3><div class="model">' + t.lines.join('<br>') + '</div>' + t.flags.map(f => '<p class="flag">' + esc(f) + '</p>').join('')
     + qualityHtml(r.bodyId, r.nt)
     + '<h3><span class="sw" style="background:' + IN_EDGE + '"></span>Inputs</h3>' + partnerList(i, 'in')

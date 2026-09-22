@@ -2,6 +2,14 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add 3D view and Neuroglancer links
+
+- New `/3d` page: official neuron meshes (skeleton fallback) and brain-region shapes from the public MaleCNS bucket, with brain and VNC outlines, presets for the steering descending neurons and their input regions, and URL-encoded state. three.js r128 is bundled locally.
+- `gcs.py` and `/api/gcs/...`: whitelisted, validated, size-capped, cached read-only proxy to `gs://flyem-male-cns`, handling gzip-encoded objects.
+- "View in 3D" and "Neuroglancer ↗" links on atlas cells, workbench cells and region panels; `ng.js` builds official-viewer links and decodes legacy precomputed meshes.
+- `tools/probe_ng.py` records the formats of the layers the viewer uses in `data/ng-probe.json`.
+- Tests: `test_gcs.py` (path rules, gzip, caching, errors), `ng.test.js` (mesh decoding, unit conversion, region labels, link round-trip), and a route test that the proxy refuses other paths.
+
 ## neuPrint-style region matrix with hover details
 
 - `/regions` hover box for every cell: "A → B", flow, neuron count, what share of A-driven output lands in B, what share of B's output is driven from A, and the reverse direction. The hovered row and column are highlighted.
