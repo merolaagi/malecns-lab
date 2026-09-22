@@ -6,11 +6,15 @@
 <h1>Which regions drive which</h1>
 <p class="sub" id="sub">Loading region data…</p>
 <div class="notice"><strong>Routed through neurons, not synapses between regions.</strong> Synapses sit inside one region. Flow from A to B adds up, over every traced neuron, the share of its input it receives in A times its output connections in B. It shows where regions send their influence, not a measured region-to-region wiring diagram.</div>
-<div class="wb-grid" style="margin-top:22px">
+<div style="display:grid;gap:22px;margin-top:22px">
   <section class="wb-card"><h2>Flow between primary regions</h2>
-    <div class="wb-row"><span class="lab">Show</span><select id="scope" style="max-width:260px"><option value="60">60 busiest regions</option><option value="120">120 busiest regions</option><option value="all">All regions</option></select><label style="margin:0;min-width:0;display:flex;align-items:center;gap:6px"><input type="checkbox" id="nodiag" checked style="width:auto"> Hide within-region flow</label></div>
-    <div style="overflow:auto"><canvas id="matrix" class="trace" style="height:auto;background:#121914"></canvas></div>
-    <p class="hint">Rows: where neurons receive input. Columns: where they send output. Colour is log-scaled. Click a row or column label or any cell to inspect a region.</p>
+    <div class="wb-row"><span class="lab">Show</span><select id="scope" style="max-width:220px"><option value="all">All regions</option><option value="120">120 busiest</option><option value="60">60 busiest</option></select>
+      <select id="order" style="max-width:220px"><option value="hierarchy">Order by brain hierarchy</option><option value="name">Order by name</option><option value="busy">Order by activity</option></select>
+      <select id="scale" style="max-width:160px"><option value="log">Log colour</option><option value="linear">Linear colour</option></select>
+      <label style="margin:0;min-width:0;display:flex;align-items:center;gap:6px"><input type="checkbox" id="nodiag" checked style="width:auto"> Hide within-region flow</label></div>
+    <div id="wrap" style="overflow:auto;position:relative"><canvas id="matrix" class="trace" style="height:auto;background:#121914"></canvas>
+      <div id="tip" role="tooltip" hidden style="position:absolute;pointer-events:none;background:var(--panel);border:1px solid var(--line);padding:9px 12px;font-size:12px;line-height:1.6;min-width:220px;box-shadow:0 6px 20px rgba(0,0,0,.35);z-index:3"></div></div>
+    <p class="hint">Rows: where neurons receive input. Columns: where they send output. Hover any cell for the connection; click to pin a region in the side panel. Lines separate the top-level parts of the nervous system.</p>
   </section>
   <aside class="wb-card" id="panel"><h2>Region</h2><p class="hint">Click the matrix to inspect a region.</p></aside>
 </div>

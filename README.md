@@ -152,7 +152,9 @@ cd raw-data && B=https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-d
 
 ## Brain regions (new)
 
-`build_regions.py` asks neuPrint (dataset `male-cns:v1.0`) for the region profile (`roiInfo`) of every traced neuron: how many of its input connections (post) and output connections (downstream) fall in each primary region. It writes `data/regions.json` with per-region totals, a region-to-region flow matrix and a region profile for every lab cell. Open `/regions` for the matrix; atlas cell panels and the neuron workbench show each cell's top input and output regions.
+`build_regions.py` asks neuPrint (dataset `male-cns:v1.0`) for the region profile (`roiInfo`) of every traced neuron: how many of its input connections (post) and output connections (downstream) fall in each primary region. It writes `data/regions.json` with per-region totals, a region-to-region flow matrix and a region profile for every lab cell. Open `/regions` for the matrix: hover any cell for the connection (flow, neuron count, shares in both directions and the reverse flow), click a region to pin it in the panel. Regions are ordered by neuPrint's region hierarchy by default. Atlas cell panels and the neuron workbench show each cell's top input and output regions.
+
+**First result.** All six lab descending neurons receive their input mainly in the premotor regions LAL, VES, IPS and SPS and in GNG: DNa02 34% LAL and 20% VES; DNa01 36–40% VES and 26–28% GNG. DNg13 sends its output to the legs on the opposite side. These regions are what a brain input to the locomotion model would need to represent.
 
 Flow from region A to region B sums, over all traced neurons, the fraction of each neuron's input received in A times its output connections in B. Synapses sit inside one region, so this routes influence through neurons; it is not a count of synapses between regions. Only primary regions are used, since super- and sub-regions overlap and would double count.
 

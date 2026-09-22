@@ -50,6 +50,13 @@ class RegionTests(unittest.TestCase):
         self.assertAlmostEqual(self.F('C', 'C'), 6)             # neuron 4
         self.assertAlmostEqual(self.F('B', 'B'), 0)
 
+    def test_neuron_counts(self):
+        r = self.r['rois']; N = lambda a, b: self.r['neurons'][r.index(a)][r.index(b)]
+        self.assertEqual(N('A', 'B'), 1)     # neuron 1
+        self.assertEqual(N('A', 'C'), 1)     # neuron 2
+        self.assertEqual(N('C', 'C'), 1)     # neuron 4
+        self.assertEqual(N('B', 'A'), 0)     # neuron 3 has no outputs
+
     def test_super_regions_and_empty_regions_excluded(self):
         self.assertNotIn('SUPER', self.r['rois'])               # would double count
         self.assertNotIn('EMPTY', self.r['rois'])

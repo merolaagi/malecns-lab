@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## neuPrint-style region matrix with hover details
+
+- `/regions` hover box for every cell: "A → B", flow, neuron count, what share of A-driven output lands in B, what share of B's output is driven from A, and the reverse direction. The hovered row and column are highlighted.
+- Regions ordered by neuPrint's region hierarchy by default, with dividers between top-level divisions (central brain, optic lobes, ventral nerve cord); name and activity orders and a linear/log colour switch are available. Every region is labelled, and the matrix uses the full page width.
+- `build_regions.py` now also counts, for each region pair, the traced neurons with input in A and output in B, the second number neuPrint shows. Rebuild to add it; the page works without it.
+
 ## Fix silent sync exit; let local caches coexist with syncs
 
 - `tools/sync.sh` silently stopped whenever an iteration removed no files: an `[ -n "$f" ] && ...` test in the deletion loop returned failure on the empty list, and `set -e` ended the script. Since the data-protection change, every such sync, including autosync's, stopped before applying anything. Fixed, with the same pattern removed elsewhere.

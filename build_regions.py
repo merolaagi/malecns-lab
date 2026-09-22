@@ -7,6 +7,9 @@ Needs your neuPrint token in the environment (never commit it; the repo is publi
 Measured (from neuPrint's per-neuron roiInfo): for every traced neuron, how many of its input
 connections (post) and output connections (downstream) fall in each primary region.
 
+Also counted: for each region pair, how many traced neurons receive input in A and send output in B
+(the second number neuPrint shows in its region connectivity view).
+
 Derived, not measured: region-to-region flow. A neuron that receives a fraction f of its input in
 region A and makes D output connections in region B contributes f*D to flow A -> B. Summed over all
 traced neurons, this says how much output in B is driven by neurons that listen in A. It routes
@@ -62,6 +65,7 @@ def build(backend, out_path, circuits=None):
     idx = {r: i for i, r in enumerate(rois)}
     R = len(rois)
     flow = np.zeros((R, R))
+    neurons = np.zeros((R, R), dtype=np.int64)   # neurons with input in A and output in B
     post_tot, down_tot, neurons_in = np.zeros(R), np.zeros(R), np.zeros(R, int)
     profiles, n_traced = {}, 0
     for body, info in traced_roi_info(backend['query']):
@@ -75,6 +79,7 @@ def build(backend, out_path, circuits=None):
         post_tot += post; down_tot += down; neurons_in += post > 0
         if post.sum() > 0 and down.sum() > 0:
             flow += np.outer(post / post.sum(), down)
+            neurons += np.outer(post > 0, down > 0)
         if body in wanted:
             def top(v):
                 s = v.sum()
@@ -91,6 +96,7 @@ def build(backend, out_path, circuits=None):
         'roi_totals': [{'roi': rois[i], 'input_connections': int(post_tot[i]), 'output_connections': int(down_tot[i]),
                         'neurons_with_input': int(neurons_in[i])} for i in keep],
         'flow': np.round(sub, 2).tolist(),
+        'neurons': neurons[np.ix_(keep, keep)].tolist(),
         'lab_cells_found': len(profiles), 'lab_cells_total': len(wanted), 'profiles': profiles}
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(result, separators=(',', ':')))
