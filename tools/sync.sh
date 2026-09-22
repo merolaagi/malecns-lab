@@ -60,7 +60,12 @@ rm -rf "$SRC/.git" "$SRC/.venv" "$SRC/.runtime.json"
 find "$SRC" -name __pycache__ -prune -exec rm -rf {} +
 
 # Iterations add and change files; they rarely remove any. Stop if this one would delete many.
-DROP=$(comm -23 <(git ls-files | sort) <(cd "$SRC" && find . -type f | sed 's|^\./||' | sort))
+DROP_ALL=$(comm -23 <(git ls-files | sort) <(cd "$SRC" && find . -type f | sed 's|^\./||' | sort))
+# Files under data/ are often generated on this machine (bridge, eye responses, quality) and pushed
+# after the iteration zip was built. Never delete them just because a zip lacks them.
+KEEP=$(printf '%s\n' "$DROP_ALL" | grep '^data/' || true)
+DROP=$(printf '%s\n' "$DROP_ALL" | grep -v '^data/' | grep . || true)
+[ -n "$KEEP" ] && printf 'Keeping generated data not in this zip: %s\n' "$(echo $KEEP)"
 NDROP=$(printf '%s' "$DROP" | grep -c . || true)
 if [ "$NDROP" -gt 3 ] && [ "${MALECNS_FORCE:-}" != 1 ]; then
   echo "Refusing $(basename "$ZIP"): it would delete $NDROP tracked files:" >&2
@@ -70,8 +75,8 @@ if [ "$NDROP" -gt 3 ] && [ "${MALECNS_FORCE:-}" != 1 ]; then
 fi
 
 # Remove tracked files that the new iteration dropped. Untracked local files (raw data, .venv) are left alone.
-comm -23 <(git ls-files | sort) <(cd "$SRC" && find . -type f | sed 's|^\./||' | sort) | while IFS= read -r f; do
-  git rm -q -- "$f"
+printf '%s\n' "$DROP" | while IFS= read -r f; do
+  [ -n "$f" ] && git rm -q -- "$f"
 done
 (cd "$SRC" && tar cf - .) | tar xf -
 

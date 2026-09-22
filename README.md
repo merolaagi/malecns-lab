@@ -28,7 +28,7 @@ Exports include the exact parameters, anatomical source hashes, neuron IDs in fi
 
 ## Repository and iterations
 
-The project is versioned with git and published with `tools/setup_repo.sh` (default `merolaagi/malecns-lab`, private; set `MALECNS_VISIBILITY=public` to change). Each new iteration arrives as a `malecns-lab*.zip` in `~/Downloads`. `tools/sync.sh` applies the newest one to `~/Sites/malecns-lab`, removes files the iteration dropped, leaves untracked local files such as `raw-data/` and `.venv` alone, runs the full test suite, commits with the top entry of `CHANGES.md` as the message, pushes, and moves the zip to `~/Downloads/malecns-lab-applied/`. It refuses to run over uncommitted local edits and commits nothing if tests fail. It also skips a zip older than the committed version and archives leftover older downloads. After each successful sync the lab server is restarted in the background (`tools/lab.sh start|stop|restart|status|open|logs`; set `MALECNS_NO_RESTART=1` to skip). `tools/autosync.sh install` runs all of this automatically whenever a new zip lands in Downloads (macOS launchd agent, log in `~/Library/Logs/malecns-lab-autosync.log`); `tools/autosync.sh watch` does the same in a Terminal tab if macOS blocks background access to Downloads. Paths can be overridden with `MALECNS_PROJECT` and `MALECNS_DOWNLOADS`.
+The project is versioned with git and published with `tools/setup_repo.sh` (default `merolaagi/malecns-lab`, private; set `MALECNS_VISIBILITY=public` to change). Each new iteration arrives as a `malecns-lab*.zip` in `~/Downloads`. `tools/sync.sh` applies the newest one to `~/Sites/malecns-lab`, removes files the iteration dropped, leaves untracked local files such as `raw-data/` and `.venv` alone, runs the full test suite, commits with the top entry of `CHANGES.md` as the message, pushes, and moves the zip to `~/Downloads/malecns-lab-applied/`. It refuses to run over uncommitted local edits and commits nothing if tests fail. It also skips a zip older than the committed version and archives leftover older downloads. Files under `data/` are never deleted by a sync, because results generated on this machine (bridge, eye responses, quality) can be pushed after an iteration zip was built. After each successful sync the lab server is restarted in the background (`tools/lab.sh start|stop|restart|status|open|logs`; set `MALECNS_NO_RESTART=1` to skip). `tools/autosync.sh install` runs all of this automatically whenever a new zip lands in Downloads (macOS launchd agent, log in `~/Library/Logs/malecns-lab-autosync.log`); `tools/autosync.sh watch` does the same in a Terminal tab if macOS blocks background access to Downloads. Paths can be overridden with `MALECNS_PROJECT` and `MALECNS_DOWNLOADS`.
 
 ## What is measured
 
@@ -169,6 +169,8 @@ Milestones:
 .venv/bin/pip install -r requirements-vision.txt && .venv/bin/python vision_eye.py
 ```
 
+**Eye result (pretrained flyvis, five models, `data/eye-responses.json`).** Six of eight direction checks pass. The horizontal motion detectors that dominate the route to DNa02 behave as anatomy predicts: T4b and T5b prefer roughly the opposite direction to T4a (149° and 176° away) and T5a nearly the same (24°). The vertical pair is less clean: T4c and T4d are 129° apart instead of about 180°, and T5c is barely direction selective (index 0.15), so its preferred angle is not meaningful. Eight test directions 45° apart and responses averaged over all 721 columns make these angles coarse.
+
 Caveats known in advance: flyvis was built from optic-lobe connectomes of other flies (FIB25/FIB19), while the bridge uses MaleCNS; the bridge's signs come from majority transmitter predictions; tangential and looming pathways are summarized at the type level; and the locomotion body is still the engineered readout.
 
 ```sh
@@ -215,3 +217,112 @@ Biological motivation (these sources do not validate this implementation):
 - [Dopamine-mediated interactions between short- and long-term memory dynamics](https://www.nature.com/articles/s41586-024-07819-w), Nature (2024).
 
 Next integration step: connect the learned odor-value output to explicit odor sampling and a downstream steering interface, while keeping measured pathways, assumed readouts, and actual locomotor physics distinguishable. Biological validation still requires held-out neural/behavioral recordings, calibrated receptor/compartment dynamics and stronger null models.
+
+## Math classroom: addition versus memorization
+
+Open `/math` on the same server (linked from the odor lab). This module asks whether a **constructed supervised classifier** on measured pathway support can learn addition examples. It is not a test of a biological fruit fly and is not connected to the walking or odor-choice controller.
+
+Task: operands 0–9, with 19 answer classes (0–18). All 100 ordered operand pairs are enumerated. Ten unordered off-diagonal pairs, including both orders, are withheld: 20 test questions and 80 training questions. Diagonal pairs and the edge pairs (0,1)/(8,9) are protected from withholding so all answer classes have training examples. This is a constrained interpolation split, not a test of arbitrary numbers. A different seed changes the split and artificial encodings.
+
+Each operand slot uses its own half of the actual PN population. Each digit selects a random 20% of that half, with no magnitude, sum, or arithmetic feature. Measured PN→KC weights and the top-5% sparsification produce input features. Actual MBON cells are randomly assigned to 19 answer pools. Initial KC→MBON edge magnitudes are aggregated per KC and answer pool. Plastic gain offsets are shared across existing edges from a KC to members of an answer pool; absent edge support remains absent. This grouping and all answer labels are artificial.
+
+For a problem, feature `F[k,c] = KC_activity[k] * sum(log(1+count[k,MBON]))` over MBONs assigned to class c. Each output column is L2-normalized per example without using labels. Logits are `sum_k gain_offset[k,c] * F[k,c]`. Softmax produces answer probabilities. Zero offsets initially produce uniform probabilities; a fixed independent tiny tie-breaker picks top-1 answers for reporting. It is not a learned bias.
+
+During teaching, supervised cross-entropy errors update gains with `learning_rate * F * (one_hot_teacher - probability) * PAM_gate`. Gains are clipped to [-0.95,8]. These bounds and learning parameters are engineering choices, not fitted physiological measurements. Teacher labels are computed by the experiment harness; the sum is never passed into the encoder or predictor. Every fifth epoch the frozen model is evaluated on training and test questions. **Do not select settings against this visible test curve and then call it an untouched validation set.** Subsequent model development requires a new independent test set.
+
+Controls: no learning, fixed shuffled training labels, shuffled PN→KC destinations, and silenced KCs. Shuffled labels preserve the training label histogram. The interface distinguishes true addition accuracy from agreement with the supplied teacher labels. All comparisons use the same operand split and independent random streams for structure/encoding and teaching order. No-learning predictions are unchanged; test evaluation never updates weights. The test-weight hashes and supported-gain audit are included in exports.
+
+**Initial fixed-default result (100 epochs, learning rate 0.15):** for seeds 7, 8 and 9, the measured pathway answers all 80 taught questions correctly and none of the 20 withheld questions correctly. The shuffled pathway has the same top-1 accuracies. Shuffled-label training closely fits the arbitrary taught labels. This is evidence of memorization by this supplied classifier and encoding, not acquisition of a general addition rule, a limitation of the biological fly, or superiority of the real connectome. We did not tune parameters to improve test performance after seeing these results.
+
+The uniform-random expected accuracy is 1/19 (5.3%); the most-frequent-training-answer baseline is also shown for each test split. Twenty questions and three synthetic seeds are a small exploratory evaluation, not a biological or statistical proof.
+
+```sh
+.venv/bin/python arithmetic.py             # save one default lesson
+.venv/bin/python arithmetic.py --benchmark # 5 conditions × 3 seeds
+.venv/bin/python -m unittest discover -p 'test_*.py' -v
+```
+
+Saved results: `data/math-example.json`, `data/math-benchmark.json`. Browser exports include all 100 predictions and answer probabilities, split assignments, teacher labels for taught questions, learning curves, exact settings, anatomical source provenance, output-pool assignments, and audits. A quiz in the UI looks up that frozen model's prediction for the selected pair; it does not retrain or secretly compute the correct answer as a prediction.
+
+## Inside the circuit: anatomy, membrane and sparse representations
+
+Open `/explore`. Search actual body IDs or cell types, zoom/pan the directed graph, click a partner to follow its connections, and inspect incoming/outgoing synapse counts. The loaded graph contains **5,598 neurons and 215,407 directed edges**, the union of the existing motor and learning subsets. It is not the complete CNS: omitted cells and their connections are outside this viewer. Graph positions and moving dots are schematic; animation does not infer spike times, conduction delays or excitatory/inhibitory effects from anatomy.
+
+The shape panel fetches the selected neuron's official coarse SWC centerline from the [MaleCNS v1.0 public release](https://male-cns.janelia.org/download/). Body 10360 is bundled for offline viewing; others download on selection and cache locally. The API returns the source URL and SHA-256. Original 8-nm coordinate units are converted to micrometers. Drag rotates the 3D projection; scroll zooms it. Centerlines do not supply synapse locations, branch identity, membrane properties or validated electrical compartments.
+
+The membrane tab illustrates why a neuron can be more than a weighted sum: nonlinear voltage-dependent sodium activation/inactivation and potassium activation generate action potentials, recovery and temporal effects. `membrane.py` integrates classical Hodgkin–Huxley equations for a single membrane patch (Cm=1 µF/cm², gNa=120, gK=36, gLeak=0.3 mS/cm²; reversal potentials +50, −77, −54.387 mV). Input is applied from 10 to 40 ms. These are **generic squid-axon parameters, not measured fly physiology**; selecting another cell only changes the contextual identity. No morphology-based cable model or subcellular molecular reconstruction is claimed. See [NEURON's HH mechanism documentation](https://www.neuron.yale.edu/neuron/static/new_doc/modelspec/programmatic/mechanisms/mech.html).
+
+A separate illustrative dendritic coincidence gate adds 4 µA/cm² if at least four of eight context bits are present. It is a supplied threshold rule, not measured computation of the selected neuron and not coupled to the math model. Blocking sodium channels eliminates the default model's spikes; opposing current can suppress them. Playback shows modeled voltage, ionic currents and channel gates, with schematic particles.
+
+### SDR mathematics experiment
+
+The third tab implements overlapping binary scalar codes, sparse KC winners and overlap visualization. It is **SDR-inspired, not Monty or a complete HTM implementation**. [Monty](https://github.com/thousandbrainsproject/tbp.monty) is a sensorimotor framework; no Monty runtime is installed. [Fergal Byrne's 2015 paCLA paper](https://arxiv.org/html/1509.08255v2) motivates sparse winners and contextual coincidence; temporal memory, learned dendritic segments and cortical columns are not implemented here. [Sean Pedersen's SDR discussion](https://seanpedersen.github.io/posts/sparse-distributed-representations/) provides further context. Neighboring display pixels are not necessarily neighboring biological cells.
+
+Each operand uses its own half of the 314 actual PN cells, with eight active bits. Scalar windows shift by two positions per digit, so neighboring numbers overlap by six bits. Random SDRs match activity count; permuted scalar codes scramble digit order. Measured normalized PN→KC connectivity produces scores; the top 2% of 4,064 KCs with positive scores become binary winners. The same 80/20 mirrored-pair split as `/math` is used, with fresh seeds 101–103. The original plastic classifier uses the same measured KC→MBON support and artificial answer pools, now with these sparse features.
+
+Two explicitly engineered numerical readouts accompany that classifier. The KC ridge decoder sums each KC's normalized answer-pool-supported features, normalizes the resulting KC vector, and fits a linear numerical target. The direct-input ridge baseline instead uses normalized operand SDRs, bypassing the connectome entirely. Both center features and targets using training rows only and solve ridge regression with fixed lambda=0.1. Predictions are rounded to the nearest integer and clipped to 0–18 for accuracy; raw predictions and test MAE are exported. These are single closed-form supervised fits, independent of teaching epoch count except epochs=0, which disables them. They do not use the classifier's local plasticity rule. Labels of unseen pairs never enter fitting.
+
+**Exploratory fixed-setting results:** the scalar-SDR plastic classifier scores 0% on unseen pairs. The alternative KC ridge decoder scores 90%, 75%, and 90% (mean 85%); random SDR KC decoders score 20%, 25%, and 35%. Scalar SDRs with shuffled wiring score 75%, 70%, and 75%. Direct-input scalar and random-SDR baselines both score 100%. Therefore, success depends strongly on supplied encoding/readout assumptions, and this task does not establish that the biological connectome is necessary or superior. The direct numerical readout has an additive inductive bias suited to this task. These are small-digit interpolation tests, not general mathematical reasoning or evidence of fly arithmetic. Decoder comparisons were added during exploratory development; results are not a preregistered or independently replicated study.
+
+Run `python sdr_math.py` to reproduce the 15 saved experiments (five representation/control combinations × three seeds). Each benchmark also stores both decoder baselines. `data/sdr-example.json` stores a full default run; the UI exports settings, all predictions, input codebooks, example active KC body IDs, split and weight audits. The membrane, math, odor-learning and movement models remain separate demonstrations. Integrating them into a physiological embodied agent would require additional measured dynamics and validation.
+
+Verification: 34 unit tests cover existing behavior plus anatomy integrity, skeleton units, membrane responses and channel blocking, sparse-code overlap, deterministic controls and test-label isolation from decoder fitting.
+
+## A connectome as a trainable visual network
+
+Open `/vision`. This experiment trains the recurrent network itself, including weights on allowed anatomical edges and small computations inside each node. It is separate from the earlier arithmetic readouts and does not drive the embodied fly.
+
+`build_vision_patch.py` extracts 209 traced right-side visual neurons across 19 assigned optic-lobe columns from the official MaleCNS annotations. The patch is centered at assigned hex coordinate (19,20), using radius 2 under `max(abs(dq),abs(dr),abs(dq-dr))`. Included types are L1/L2/L3, Mi1/Mi4/Mi9, C2/C3 and Tm1/Tm2/Tm9. All 1,421 measured directed edges between selected cells are retained, with original synapse counts and table provenance. The raw weights file is streamed batch by batch. T4/T5 and exterior cells/connections are omitted; this is not a complete biological motion pathway. Assigned columns provide an anatomical spatial index; their projection onto a planar hexagonal sensor grid is an engineering approximation, not calibrated eye optics.
+
+Inputs are sampled intensities from 10-frame synthetic sequences of a translating, textured Gaussian disk, sometimes expanding. Each sequence independently draws position, velocity, initial radius, growth, texture phase/frequency and sensor noise. Nineteen scalar samples are scaled to [-1,1] and injected into corresponding L1/L2/L3 cells, bypassing photoreceptor dynamics. The targets are two image-plane velocity components (scaled by 0.075 for training) and a binary synthetic looming-hazard flag. The flag is 1 when growth >0.025 and the disk's extrapolated Gaussian radius four frames after the observed sequence exceeds its distance to the central sensor plus 0.45 field units. This is a defined image-space proxy, not collision physics, metric depth or 3D perception. The encoder receives no target labels, simulator velocity or growth parameters.
+
+For node i with one or two state components, the supplied update is:
+
+`h_i(t) = 0.5 h_i(t-1) + 0.5 tanh(sum_j W_ij h_j(t-1) + h_i(t-1) U_i + G_i x_column(i)(t) + b_i)`
+
+The shared scalar weight W_ij transmits each state component along an allowed directed edge. U_i is a learned 1×1 or 2×2 local matrix; G_i and b_i are learned gains and biases. G_i is constrained to zero outside L1/L2/L3. Local state retention/mixing is an added dynamical assumption, including at cells without measured anatomical self-edges. A learned linear readout pools the final Tm1/Tm2/Tm9 states into two velocities and a hazard logit. Biological transmitter signs, synaptic dynamics, dendrites, spiking and ion channels are not reconstructed. Synapse counts are displayed as anatomy but deliberately do not initialize electrical strengths.
+
+Four models see identical data and minibatch orders:
+
+- Measured graph, one state per cell: 2,070 trainable parameters.
+- Measured graph, two states per cell: 3,134 parameters.
+- Rewired graph, two states per cell: 3,134 parameters. Directed double-edge swaps preserve each cell's incoming/outgoing degree and actual self-loops. Local parameters and input/output assignments match the real graph. Initial incoming-weight norms are matched node by node. The null does not preserve spatial or cell-type connectivity, and no mixing-time guarantee is claimed.
+- Conventional dense recurrent network: 45 hidden units and 3,108 parameters. Learned mixing of all 19 input samples, dense recurrence, scalar local memory and the same activation/leak rule. This is a parameter-matched baseline for the two-state graph, not a match in state count, computation, input/readout geometry or wall time.
+
+Training uses explicit NumPy backpropagation through all 10 frames and Adam (learning rate 0.004, beta1 0.9, beta2 0.999, epsilon 1e-8, global gradient norm capped at 2). Loss is mean squared error over the two normalized velocities plus 0.5 binary cross-entropy for hazard. Each run uses 256 training, 64 validation and 128 test sequences from independent RNG streams; the same three partitions are shared across its four models. Defaults use 35 epochs and batches of 32. Validation curves are displayed every five epochs but do not choose checkpoints. Test metrics are evaluated before and after training, not used by the optimizer. Epochs=0 is available as a no-training control.
+
+The interface replays the first 12 test clips without selecting favorable examples. Predictions are final full-sequence outputs and remain fixed during replay; only sensory input and node states change frame by frame. Click a neuron, choose it from the selector, or follow an incoming source to inspect the actual saved state trajectory and its numerical update terms. Rewired edges are explicitly synthetic and have no displayed anatomical synapse count. Dense hidden units have no biological body ID. All graph animations display recurrent state variables, not electrical recordings.
+
+**Fixed-default results across seeds 401–403:** average velocity RMSE is 0.0175 for measured scalar nodes, 0.0172 for measured two-state nodes, 0.0185 for rewired two-state nodes and 0.0157 for the dense recurrent baseline, in field units/frame. The training-mean baseline is about 0.0429. Hazard accuracy is 91.4%, 90.9%, 91.4% and 92.2%, respectively. Hazard is uncommon in these test samples (10–15% prevalence); always predicting no hazard already achieves 85–90% accuracy, so raw accuracy must be interpreted alongside the displayed probability Brier score and baseline. These small exploratory runs establish learnability of the supplied architecture on this synthetic task, not a statistically demonstrated advantage of the connectome or richer per-neuron models.
+
+Removing all intercellular weights after training raises measured-graph motion RMSE to about 0.043, near the constant baseline. This shows the constructed graph models use their communication pathways; it does not show the particular biological topology is necessary. We restore the weights afterward and verify their hash. Tests also verify analytical gradients against finite differences, degree preservation, absent-edge constraints, evaluation without mutation, saved-checkpoint prediction reproduction and the displayed per-node state equation.
+
+Reproduce:
+
+```sh
+OPENBLAS_NUM_THREADS=1 .venv/bin/python build_vision_patch.py /path/to/raw-data
+OPENBLAS_NUM_THREADS=1 .venv/bin/python vision.py --benchmark
+OPENBLAS_NUM_THREADS=1 .venv/bin/python -m unittest discover -p 'test_*.py' -q
+```
+
+The saved default full run is `data/vision-example.json`; summary comparisons are in `data/vision-benchmark.json`. Model weights for all three seeds and four architectures are stored as `data/vision-<seed>-<kind>.npz`. Browser retraining returns a new experiment without replacing the saved benchmark; use Export to keep it. JSON exports include all test targets/predictions, anatomical circuit/provenance, graph learned-edge weights, node-local parameters, displayed activity, validation curves, settings and audit hashes. The NPZ files also contain full input and output readout weights. Deterministic recomputation is supported within the same numerical environment; NumPy/BLAS version changes may cause small differences.
+
+Related research: [Connectome-constrained networks predict neural activity across the fly visual system](https://www.nature.com/articles/s41586-024-07939-3). This prototype is independently implemented, does not use FlyVis weights, and has not been validated against biological recordings. Future steps would be a larger complete motion pathway, receptor/cell-type constraints, stronger matched nulls, unseen scene families and an embodied navigation task.
+
+Current verification: **41 unit tests pass**, including all earlier modules and the visual-network checks.
+
+### Trainable compound-eye layer
+
+Two further architectures put a trainable eye in front of the measured two-state graph. Each column first passes through a photoreceptor stage with shared adaptation, `y_t = a·y_(t−1) + (1−a)·x_t` and output `g·(x_t − k·y_t)`, then a learned column-to-column projection into L1/L2/L3. **Retinotopic** (`eye_graph`) lets each column mix only with its six hex neighbours, like neural superposition; **unrestricted** (`eye_dense`) lets any column mix with any other. Both are created after all other random draws and start as an exact identity, so untrained they equal the measured graph, and all their other parameters match it. Gradients of the eye parameters are checked against finite differences in `test_vision_patch.py`. “Eye reset” re-evaluates each trained model with the eye returned to identity.
+
+Three seeds, 35 epochs (means; lower is better except accuracy):
+
+| Architecture | Parameters | Motion RMSE | Direction error | Hazard accuracy | Hazard Brier |
+|---|---|---|---|---|---|
+| Measured graph · 2 states | 3,134 | 0.0172 | 16.5° | 90.9% | 0.064 |
+| + trainable eye, retinotopic | 3,240 | 0.0172 | 16.4° | 92.4% | 0.057 |
+| + trainable eye, unrestricted | 3,498 | 0.0156 | 13.7° | 92.4% | 0.061 |
+| Rewired graph · 2 states | 3,134 | 0.0185 | 18.8° | 91.4% | 0.070 |
+| Dense recurrent baseline | 3,108 | 0.0157 | 14.5° | 92.2% | 0.067 |
+
+Always predicting "no hazard" scores 86.7% accuracy (Brier 0.115). The retinotopic eye gives the best hazard calibration with 106 extra parameters and no motion benefit; the unrestricted eye gives the best motion, matching the dense network. In both, the learned photoreceptor adaptation stays near zero (`k` between −0.09 and 0.14) while gain rises to about 1.3 and each column mixes roughly 0.09 of each allowed neighbour, so the benefit comes from spatial pooling, not temporal adaptation. Resetting the eye after training hurts both (retinotopic motion RMSE 0.029, unrestricted hazard Brier 0.34), showing the downstream network adapts to the eye it trained with. Three seeds are too few to call any of these differences reliable.

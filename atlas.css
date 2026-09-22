@@ -1,6 +1,6 @@
 :root{--coral:#e8907a;--in-edge:#8ab4f8;--out-edge:#f28b82}
 .atlas-page{height:100vh;display:flex;flex-direction:column;overflow:hidden}
-.toplinks{display:flex;gap:20px}.toplinks a{color:var(--accent);text-decoration:none;font-size:13px}
+
 .atlas-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:10px 4vw;border-bottom:1px solid var(--line);min-height:56px}
 #crumbs{display:flex;align-items:center;gap:8px;font-size:13px;flex:1;min-width:200px}
 #crumbs button{background:none;border:0;padding:4px 2px;color:var(--accent);font:inherit;cursor:pointer}

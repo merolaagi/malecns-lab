@@ -1,0 +1,6317 @@
+{
+  "runs": [
+    {
+      "parameters": {
+        "seed": 7,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "intact"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 1.0,
+        "teacher_accuracy": 1.0,
+        "test_accuracy": 0.0,
+        "test_true_probability": 0.006134382932732332
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 9,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "e386c8393fa4e78929616d90e2a61347eba9bec5435e392f23d907c802213b64",
+        "test_weights_after": "e386c8393fa4e78929616d90e2a61347eba9bec5435e392f23d907c802213b64",
+        "updated_supported_gains": 26315,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 14
+          },
+          {
+            "bodyId": 10079,
+            "answer": 14
+          },
+          {
+            "bodyId": 10267,
+            "answer": 7
+          },
+          {
+            "bodyId": 10495,
+            "answer": 17
+          },
+          {
+            "bodyId": 10599,
+            "answer": 6
+          },
+          {
+            "bodyId": 10704,
+            "answer": 13
+          },
+          {
+            "bodyId": 10804,
+            "answer": 12
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 0
+          },
+          {
+            "bodyId": 11145,
+            "answer": 14
+          },
+          {
+            "bodyId": 11176,
+            "answer": 2
+          },
+          {
+            "bodyId": 11402,
+            "answer": 0
+          },
+          {
+            "bodyId": 11455,
+            "answer": 16
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 1
+          },
+          {
+            "bodyId": 11805,
+            "answer": 11
+          },
+          {
+            "bodyId": 11873,
+            "answer": 15
+          },
+          {
+            "bodyId": 11990,
+            "answer": 14
+          },
+          {
+            "bodyId": 12690,
+            "answer": 18
+          },
+          {
+            "bodyId": 12726,
+            "answer": 3
+          },
+          {
+            "bodyId": 12859,
+            "answer": 12
+          },
+          {
+            "bodyId": 12918,
+            "answer": 6
+          },
+          {
+            "bodyId": 13728,
+            "answer": 18
+          },
+          {
+            "bodyId": 13768,
+            "answer": 1
+          },
+          {
+            "bodyId": 14221,
+            "answer": 9
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 8
+          },
+          {
+            "bodyId": 17946,
+            "answer": 9
+          },
+          {
+            "bodyId": 18406,
+            "answer": 15
+          },
+          {
+            "bodyId": 18603,
+            "answer": 16
+          },
+          {
+            "bodyId": 18713,
+            "answer": 12
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 5
+          },
+          {
+            "bodyId": 21242,
+            "answer": 10
+          },
+          {
+            "bodyId": 26485,
+            "answer": 15
+          },
+          {
+            "bodyId": 26853,
+            "answer": 6
+          },
+          {
+            "bodyId": 28622,
+            "answer": 8
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 16
+          },
+          {
+            "bodyId": 33617,
+            "answer": 7
+          },
+          {
+            "bodyId": 36094,
+            "answer": 3
+          },
+          {
+            "bodyId": 38853,
+            "answer": 4
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 18
+          },
+          {
+            "bodyId": 41692,
+            "answer": 1
+          },
+          {
+            "bodyId": 44619,
+            "answer": 11
+          },
+          {
+            "bodyId": 47551,
+            "answer": 3
+          },
+          {
+            "bodyId": 49262,
+            "answer": 5
+          },
+          {
+            "bodyId": 58401,
+            "answer": 2
+          },
+          {
+            "bodyId": 70924,
+            "answer": 15
+          },
+          {
+            "bodyId": 76585,
+            "answer": 16
+          },
+          {
+            "bodyId": 87077,
+            "answer": 4
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 0
+          },
+          {
+            "bodyId": 133427,
+            "answer": 11
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 13
+          },
+          {
+            "bodyId": 208566,
+            "answer": 17
+          },
+          {
+            "bodyId": 394860,
+            "answer": 2
+          },
+          {
+            "bodyId": 508595,
+            "answer": 5
+          },
+          {
+            "bodyId": 512788,
+            "answer": 13
+          },
+          {
+            "bodyId": 512789,
+            "answer": 1
+          },
+          {
+            "bodyId": 513174,
+            "answer": 8
+          },
+          {
+            "bodyId": 513387,
+            "answer": 8
+          },
+          {
+            "bodyId": 513391,
+            "answer": 2
+          },
+          {
+            "bodyId": 514853,
+            "answer": 8
+          },
+          {
+            "bodyId": 515015,
+            "answer": 10
+          },
+          {
+            "bodyId": 515034,
+            "answer": 1
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 9
+          },
+          {
+            "bodyId": 519131,
+            "answer": 7
+          },
+          {
+            "bodyId": 519368,
+            "answer": 5
+          },
+          {
+            "bodyId": 519371,
+            "answer": 14
+          },
+          {
+            "bodyId": 519373,
+            "answer": 10
+          },
+          {
+            "bodyId": 519619,
+            "answer": 17
+          },
+          {
+            "bodyId": 520151,
+            "answer": 7
+          },
+          {
+            "bodyId": 520186,
+            "answer": 9
+          },
+          {
+            "bodyId": 520395,
+            "answer": 3
+          },
+          {
+            "bodyId": 521086,
+            "answer": 13
+          },
+          {
+            "bodyId": 521526,
+            "answer": 4
+          },
+          {
+            "bodyId": 522444,
+            "answer": 15
+          },
+          {
+            "bodyId": 522749,
+            "answer": 10
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 4
+          },
+          {
+            "bodyId": 523987,
+            "answer": 7
+          },
+          {
+            "bodyId": 524733,
+            "answer": 4
+          },
+          {
+            "bodyId": 524893,
+            "answer": 0
+          },
+          {
+            "bodyId": 525780,
+            "answer": 5
+          },
+          {
+            "bodyId": 530875,
+            "answer": 12
+          },
+          {
+            "bodyId": 531829,
+            "answer": 17
+          },
+          {
+            "bodyId": 540383,
+            "answer": 6
+          },
+          {
+            "bodyId": 556300,
+            "answer": 18
+          },
+          {
+            "bodyId": 558665,
+            "answer": 3
+          },
+          {
+            "bodyId": 562782,
+            "answer": 6
+          },
+          {
+            "bodyId": 579919,
+            "answer": 1
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "no_learning"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.05,
+        "teacher_accuracy": 0.05,
+        "test_accuracy": 0.05,
+        "test_true_probability": 0.052631578947368404
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 9,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "test_weights_after": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "updated_supported_gains": 0,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 14
+          },
+          {
+            "bodyId": 10079,
+            "answer": 14
+          },
+          {
+            "bodyId": 10267,
+            "answer": 7
+          },
+          {
+            "bodyId": 10495,
+            "answer": 17
+          },
+          {
+            "bodyId": 10599,
+            "answer": 6
+          },
+          {
+            "bodyId": 10704,
+            "answer": 13
+          },
+          {
+            "bodyId": 10804,
+            "answer": 12
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 0
+          },
+          {
+            "bodyId": 11145,
+            "answer": 14
+          },
+          {
+            "bodyId": 11176,
+            "answer": 2
+          },
+          {
+            "bodyId": 11402,
+            "answer": 0
+          },
+          {
+            "bodyId": 11455,
+            "answer": 16
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 1
+          },
+          {
+            "bodyId": 11805,
+            "answer": 11
+          },
+          {
+            "bodyId": 11873,
+            "answer": 15
+          },
+          {
+            "bodyId": 11990,
+            "answer": 14
+          },
+          {
+            "bodyId": 12690,
+            "answer": 18
+          },
+          {
+            "bodyId": 12726,
+            "answer": 3
+          },
+          {
+            "bodyId": 12859,
+            "answer": 12
+          },
+          {
+            "bodyId": 12918,
+            "answer": 6
+          },
+          {
+            "bodyId": 13728,
+            "answer": 18
+          },
+          {
+            "bodyId": 13768,
+            "answer": 1
+          },
+          {
+            "bodyId": 14221,
+            "answer": 9
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 8
+          },
+          {
+            "bodyId": 17946,
+            "answer": 9
+          },
+          {
+            "bodyId": 18406,
+            "answer": 15
+          },
+          {
+            "bodyId": 18603,
+            "answer": 16
+          },
+          {
+            "bodyId": 18713,
+            "answer": 12
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 5
+          },
+          {
+            "bodyId": 21242,
+            "answer": 10
+          },
+          {
+            "bodyId": 26485,
+            "answer": 15
+          },
+          {
+            "bodyId": 26853,
+            "answer": 6
+          },
+          {
+            "bodyId": 28622,
+            "answer": 8
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 16
+          },
+          {
+            "bodyId": 33617,
+            "answer": 7
+          },
+          {
+            "bodyId": 36094,
+            "answer": 3
+          },
+          {
+            "bodyId": 38853,
+            "answer": 4
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 18
+          },
+          {
+            "bodyId": 41692,
+            "answer": 1
+          },
+          {
+            "bodyId": 44619,
+            "answer": 11
+          },
+          {
+            "bodyId": 47551,
+            "answer": 3
+          },
+          {
+            "bodyId": 49262,
+            "answer": 5
+          },
+          {
+            "bodyId": 58401,
+            "answer": 2
+          },
+          {
+            "bodyId": 70924,
+            "answer": 15
+          },
+          {
+            "bodyId": 76585,
+            "answer": 16
+          },
+          {
+            "bodyId": 87077,
+            "answer": 4
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 0
+          },
+          {
+            "bodyId": 133427,
+            "answer": 11
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 13
+          },
+          {
+            "bodyId": 208566,
+            "answer": 17
+          },
+          {
+            "bodyId": 394860,
+            "answer": 2
+          },
+          {
+            "bodyId": 508595,
+            "answer": 5
+          },
+          {
+            "bodyId": 512788,
+            "answer": 13
+          },
+          {
+            "bodyId": 512789,
+            "answer": 1
+          },
+          {
+            "bodyId": 513174,
+            "answer": 8
+          },
+          {
+            "bodyId": 513387,
+            "answer": 8
+          },
+          {
+            "bodyId": 513391,
+            "answer": 2
+          },
+          {
+            "bodyId": 514853,
+            "answer": 8
+          },
+          {
+            "bodyId": 515015,
+            "answer": 10
+          },
+          {
+            "bodyId": 515034,
+            "answer": 1
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 9
+          },
+          {
+            "bodyId": 519131,
+            "answer": 7
+          },
+          {
+            "bodyId": 519368,
+            "answer": 5
+          },
+          {
+            "bodyId": 519371,
+            "answer": 14
+          },
+          {
+            "bodyId": 519373,
+            "answer": 10
+          },
+          {
+            "bodyId": 519619,
+            "answer": 17
+          },
+          {
+            "bodyId": 520151,
+            "answer": 7
+          },
+          {
+            "bodyId": 520186,
+            "answer": 9
+          },
+          {
+            "bodyId": 520395,
+            "answer": 3
+          },
+          {
+            "bodyId": 521086,
+            "answer": 13
+          },
+          {
+            "bodyId": 521526,
+            "answer": 4
+          },
+          {
+            "bodyId": 522444,
+            "answer": 15
+          },
+          {
+            "bodyId": 522749,
+            "answer": 10
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 4
+          },
+          {
+            "bodyId": 523987,
+            "answer": 7
+          },
+          {
+            "bodyId": 524733,
+            "answer": 4
+          },
+          {
+            "bodyId": 524893,
+            "answer": 0
+          },
+          {
+            "bodyId": 525780,
+            "answer": 5
+          },
+          {
+            "bodyId": 530875,
+            "answer": 12
+          },
+          {
+            "bodyId": 531829,
+            "answer": 17
+          },
+          {
+            "bodyId": 540383,
+            "answer": 6
+          },
+          {
+            "bodyId": 556300,
+            "answer": 18
+          },
+          {
+            "bodyId": 558665,
+            "answer": 3
+          },
+          {
+            "bodyId": 562782,
+            "answer": 6
+          },
+          {
+            "bodyId": 579919,
+            "answer": 1
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "shuffled_labels"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.15,
+        "teacher_accuracy": 0.9875,
+        "test_accuracy": 0.0,
+        "test_true_probability": 0.04157306316538063
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 9,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "f1a35fa80a027bf67a23f36657550912adda6ad8a30dfda46d566854f5e6ac3f",
+        "test_weights_after": "f1a35fa80a027bf67a23f36657550912adda6ad8a30dfda46d566854f5e6ac3f",
+        "updated_supported_gains": 26315,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 14
+          },
+          {
+            "bodyId": 10079,
+            "answer": 14
+          },
+          {
+            "bodyId": 10267,
+            "answer": 7
+          },
+          {
+            "bodyId": 10495,
+            "answer": 17
+          },
+          {
+            "bodyId": 10599,
+            "answer": 6
+          },
+          {
+            "bodyId": 10704,
+            "answer": 13
+          },
+          {
+            "bodyId": 10804,
+            "answer": 12
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 0
+          },
+          {
+            "bodyId": 11145,
+            "answer": 14
+          },
+          {
+            "bodyId": 11176,
+            "answer": 2
+          },
+          {
+            "bodyId": 11402,
+            "answer": 0
+          },
+          {
+            "bodyId": 11455,
+            "answer": 16
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 1
+          },
+          {
+            "bodyId": 11805,
+            "answer": 11
+          },
+          {
+            "bodyId": 11873,
+            "answer": 15
+          },
+          {
+            "bodyId": 11990,
+            "answer": 14
+          },
+          {
+            "bodyId": 12690,
+            "answer": 18
+          },
+          {
+            "bodyId": 12726,
+            "answer": 3
+          },
+          {
+            "bodyId": 12859,
+            "answer": 12
+          },
+          {
+            "bodyId": 12918,
+            "answer": 6
+          },
+          {
+            "bodyId": 13728,
+            "answer": 18
+          },
+          {
+            "bodyId": 13768,
+            "answer": 1
+          },
+          {
+            "bodyId": 14221,
+            "answer": 9
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 8
+          },
+          {
+            "bodyId": 17946,
+            "answer": 9
+          },
+          {
+            "bodyId": 18406,
+            "answer": 15
+          },
+          {
+            "bodyId": 18603,
+            "answer": 16
+          },
+          {
+            "bodyId": 18713,
+            "answer": 12
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 5
+          },
+          {
+            "bodyId": 21242,
+            "answer": 10
+          },
+          {
+            "bodyId": 26485,
+            "answer": 15
+          },
+          {
+            "bodyId": 26853,
+            "answer": 6
+          },
+          {
+            "bodyId": 28622,
+            "answer": 8
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 16
+          },
+          {
+            "bodyId": 33617,
+            "answer": 7
+          },
+          {
+            "bodyId": 36094,
+            "answer": 3
+          },
+          {
+            "bodyId": 38853,
+            "answer": 4
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 18
+          },
+          {
+            "bodyId": 41692,
+            "answer": 1
+          },
+          {
+            "bodyId": 44619,
+            "answer": 11
+          },
+          {
+            "bodyId": 47551,
+            "answer": 3
+          },
+          {
+            "bodyId": 49262,
+            "answer": 5
+          },
+          {
+            "bodyId": 58401,
+            "answer": 2
+          },
+          {
+            "bodyId": 70924,
+            "answer": 15
+          },
+          {
+            "bodyId": 76585,
+            "answer": 16
+          },
+          {
+            "bodyId": 87077,
+            "answer": 4
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 0
+          },
+          {
+            "bodyId": 133427,
+            "answer": 11
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 13
+          },
+          {
+            "bodyId": 208566,
+            "answer": 17
+          },
+          {
+            "bodyId": 394860,
+            "answer": 2
+          },
+          {
+            "bodyId": 508595,
+            "answer": 5
+          },
+          {
+            "bodyId": 512788,
+            "answer": 13
+          },
+          {
+            "bodyId": 512789,
+            "answer": 1
+          },
+          {
+            "bodyId": 513174,
+            "answer": 8
+          },
+          {
+            "bodyId": 513387,
+            "answer": 8
+          },
+          {
+            "bodyId": 513391,
+            "answer": 2
+          },
+          {
+            "bodyId": 514853,
+            "answer": 8
+          },
+          {
+            "bodyId": 515015,
+            "answer": 10
+          },
+          {
+            "bodyId": 515034,
+            "answer": 1
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 9
+          },
+          {
+            "bodyId": 519131,
+            "answer": 7
+          },
+          {
+            "bodyId": 519368,
+            "answer": 5
+          },
+          {
+            "bodyId": 519371,
+            "answer": 14
+          },
+          {
+            "bodyId": 519373,
+            "answer": 10
+          },
+          {
+            "bodyId": 519619,
+            "answer": 17
+          },
+          {
+            "bodyId": 520151,
+            "answer": 7
+          },
+          {
+            "bodyId": 520186,
+            "answer": 9
+          },
+          {
+            "bodyId": 520395,
+            "answer": 3
+          },
+          {
+            "bodyId": 521086,
+            "answer": 13
+          },
+          {
+            "bodyId": 521526,
+            "answer": 4
+          },
+          {
+            "bodyId": 522444,
+            "answer": 15
+          },
+          {
+            "bodyId": 522749,
+            "answer": 10
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 4
+          },
+          {
+            "bodyId": 523987,
+            "answer": 7
+          },
+          {
+            "bodyId": 524733,
+            "answer": 4
+          },
+          {
+            "bodyId": 524893,
+            "answer": 0
+          },
+          {
+            "bodyId": 525780,
+            "answer": 5
+          },
+          {
+            "bodyId": 530875,
+            "answer": 12
+          },
+          {
+            "bodyId": 531829,
+            "answer": 17
+          },
+          {
+            "bodyId": 540383,
+            "answer": 6
+          },
+          {
+            "bodyId": 556300,
+            "answer": 18
+          },
+          {
+            "bodyId": 558665,
+            "answer": 3
+          },
+          {
+            "bodyId": 562782,
+            "answer": 6
+          },
+          {
+            "bodyId": 579919,
+            "answer": 1
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "shuffled_wiring"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 1.0,
+        "teacher_accuracy": 1.0,
+        "test_accuracy": 0.0,
+        "test_true_probability": 0.006021054579979899
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 9,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "03b0b7949dd61b317c7a3f667e7f23065995bb16599afe273d270877a6e603b2",
+        "test_weights_after": "03b0b7949dd61b317c7a3f667e7f23065995bb16599afe273d270877a6e603b2",
+        "updated_supported_gains": 26463,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 14
+          },
+          {
+            "bodyId": 10079,
+            "answer": 14
+          },
+          {
+            "bodyId": 10267,
+            "answer": 7
+          },
+          {
+            "bodyId": 10495,
+            "answer": 17
+          },
+          {
+            "bodyId": 10599,
+            "answer": 6
+          },
+          {
+            "bodyId": 10704,
+            "answer": 13
+          },
+          {
+            "bodyId": 10804,
+            "answer": 12
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 0
+          },
+          {
+            "bodyId": 11145,
+            "answer": 14
+          },
+          {
+            "bodyId": 11176,
+            "answer": 2
+          },
+          {
+            "bodyId": 11402,
+            "answer": 0
+          },
+          {
+            "bodyId": 11455,
+            "answer": 16
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 1
+          },
+          {
+            "bodyId": 11805,
+            "answer": 11
+          },
+          {
+            "bodyId": 11873,
+            "answer": 15
+          },
+          {
+            "bodyId": 11990,
+            "answer": 14
+          },
+          {
+            "bodyId": 12690,
+            "answer": 18
+          },
+          {
+            "bodyId": 12726,
+            "answer": 3
+          },
+          {
+            "bodyId": 12859,
+            "answer": 12
+          },
+          {
+            "bodyId": 12918,
+            "answer": 6
+          },
+          {
+            "bodyId": 13728,
+            "answer": 18
+          },
+          {
+            "bodyId": 13768,
+            "answer": 1
+          },
+          {
+            "bodyId": 14221,
+            "answer": 9
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 8
+          },
+          {
+            "bodyId": 17946,
+            "answer": 9
+          },
+          {
+            "bodyId": 18406,
+            "answer": 15
+          },
+          {
+            "bodyId": 18603,
+            "answer": 16
+          },
+          {
+            "bodyId": 18713,
+            "answer": 12
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 5
+          },
+          {
+            "bodyId": 21242,
+            "answer": 10
+          },
+          {
+            "bodyId": 26485,
+            "answer": 15
+          },
+          {
+            "bodyId": 26853,
+            "answer": 6
+          },
+          {
+            "bodyId": 28622,
+            "answer": 8
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 16
+          },
+          {
+            "bodyId": 33617,
+            "answer": 7
+          },
+          {
+            "bodyId": 36094,
+            "answer": 3
+          },
+          {
+            "bodyId": 38853,
+            "answer": 4
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 18
+          },
+          {
+            "bodyId": 41692,
+            "answer": 1
+          },
+          {
+            "bodyId": 44619,
+            "answer": 11
+          },
+          {
+            "bodyId": 47551,
+            "answer": 3
+          },
+          {
+            "bodyId": 49262,
+            "answer": 5
+          },
+          {
+            "bodyId": 58401,
+            "answer": 2
+          },
+          {
+            "bodyId": 70924,
+            "answer": 15
+          },
+          {
+            "bodyId": 76585,
+            "answer": 16
+          },
+          {
+            "bodyId": 87077,
+            "answer": 4
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 0
+          },
+          {
+            "bodyId": 133427,
+            "answer": 11
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 13
+          },
+          {
+            "bodyId": 208566,
+            "answer": 17
+          },
+          {
+            "bodyId": 394860,
+            "answer": 2
+          },
+          {
+            "bodyId": 508595,
+            "answer": 5
+          },
+          {
+            "bodyId": 512788,
+            "answer": 13
+          },
+          {
+            "bodyId": 512789,
+            "answer": 1
+          },
+          {
+            "bodyId": 513174,
+            "answer": 8
+          },
+          {
+            "bodyId": 513387,
+            "answer": 8
+          },
+          {
+            "bodyId": 513391,
+            "answer": 2
+          },
+          {
+            "bodyId": 514853,
+            "answer": 8
+          },
+          {
+            "bodyId": 515015,
+            "answer": 10
+          },
+          {
+            "bodyId": 515034,
+            "answer": 1
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 9
+          },
+          {
+            "bodyId": 519131,
+            "answer": 7
+          },
+          {
+            "bodyId": 519368,
+            "answer": 5
+          },
+          {
+            "bodyId": 519371,
+            "answer": 14
+          },
+          {
+            "bodyId": 519373,
+            "answer": 10
+          },
+          {
+            "bodyId": 519619,
+            "answer": 17
+          },
+          {
+            "bodyId": 520151,
+            "answer": 7
+          },
+          {
+            "bodyId": 520186,
+            "answer": 9
+          },
+          {
+            "bodyId": 520395,
+            "answer": 3
+          },
+          {
+            "bodyId": 521086,
+            "answer": 13
+          },
+          {
+            "bodyId": 521526,
+            "answer": 4
+          },
+          {
+            "bodyId": 522444,
+            "answer": 15
+          },
+          {
+            "bodyId": 522749,
+            "answer": 10
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 4
+          },
+          {
+            "bodyId": 523987,
+            "answer": 7
+          },
+          {
+            "bodyId": 524733,
+            "answer": 4
+          },
+          {
+            "bodyId": 524893,
+            "answer": 0
+          },
+          {
+            "bodyId": 525780,
+            "answer": 5
+          },
+          {
+            "bodyId": 530875,
+            "answer": 12
+          },
+          {
+            "bodyId": 531829,
+            "answer": 17
+          },
+          {
+            "bodyId": 540383,
+            "answer": 6
+          },
+          {
+            "bodyId": 556300,
+            "answer": 18
+          },
+          {
+            "bodyId": 558665,
+            "answer": 3
+          },
+          {
+            "bodyId": 562782,
+            "answer": 6
+          },
+          {
+            "bodyId": 579919,
+            "answer": 1
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 7,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "silence_kc"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.05,
+        "teacher_accuracy": 0.05,
+        "test_accuracy": 0.05,
+        "test_true_probability": 0.052631578947368404
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 9,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "test_weights_after": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "updated_supported_gains": 0,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 14
+          },
+          {
+            "bodyId": 10079,
+            "answer": 14
+          },
+          {
+            "bodyId": 10267,
+            "answer": 7
+          },
+          {
+            "bodyId": 10495,
+            "answer": 17
+          },
+          {
+            "bodyId": 10599,
+            "answer": 6
+          },
+          {
+            "bodyId": 10704,
+            "answer": 13
+          },
+          {
+            "bodyId": 10804,
+            "answer": 12
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 0
+          },
+          {
+            "bodyId": 11145,
+            "answer": 14
+          },
+          {
+            "bodyId": 11176,
+            "answer": 2
+          },
+          {
+            "bodyId": 11402,
+            "answer": 0
+          },
+          {
+            "bodyId": 11455,
+            "answer": 16
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 1
+          },
+          {
+            "bodyId": 11805,
+            "answer": 11
+          },
+          {
+            "bodyId": 11873,
+            "answer": 15
+          },
+          {
+            "bodyId": 11990,
+            "answer": 14
+          },
+          {
+            "bodyId": 12690,
+            "answer": 18
+          },
+          {
+            "bodyId": 12726,
+            "answer": 3
+          },
+          {
+            "bodyId": 12859,
+            "answer": 12
+          },
+          {
+            "bodyId": 12918,
+            "answer": 6
+          },
+          {
+            "bodyId": 13728,
+            "answer": 18
+          },
+          {
+            "bodyId": 13768,
+            "answer": 1
+          },
+          {
+            "bodyId": 14221,
+            "answer": 9
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 8
+          },
+          {
+            "bodyId": 17946,
+            "answer": 9
+          },
+          {
+            "bodyId": 18406,
+            "answer": 15
+          },
+          {
+            "bodyId": 18603,
+            "answer": 16
+          },
+          {
+            "bodyId": 18713,
+            "answer": 12
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 5
+          },
+          {
+            "bodyId": 21242,
+            "answer": 10
+          },
+          {
+            "bodyId": 26485,
+            "answer": 15
+          },
+          {
+            "bodyId": 26853,
+            "answer": 6
+          },
+          {
+            "bodyId": 28622,
+            "answer": 8
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 16
+          },
+          {
+            "bodyId": 33617,
+            "answer": 7
+          },
+          {
+            "bodyId": 36094,
+            "answer": 3
+          },
+          {
+            "bodyId": 38853,
+            "answer": 4
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 18
+          },
+          {
+            "bodyId": 41692,
+            "answer": 1
+          },
+          {
+            "bodyId": 44619,
+            "answer": 11
+          },
+          {
+            "bodyId": 47551,
+            "answer": 3
+          },
+          {
+            "bodyId": 49262,
+            "answer": 5
+          },
+          {
+            "bodyId": 58401,
+            "answer": 2
+          },
+          {
+            "bodyId": 70924,
+            "answer": 15
+          },
+          {
+            "bodyId": 76585,
+            "answer": 16
+          },
+          {
+            "bodyId": 87077,
+            "answer": 4
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 0
+          },
+          {
+            "bodyId": 133427,
+            "answer": 11
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 13
+          },
+          {
+            "bodyId": 208566,
+            "answer": 17
+          },
+          {
+            "bodyId": 394860,
+            "answer": 2
+          },
+          {
+            "bodyId": 508595,
+            "answer": 5
+          },
+          {
+            "bodyId": 512788,
+            "answer": 13
+          },
+          {
+            "bodyId": 512789,
+            "answer": 1
+          },
+          {
+            "bodyId": 513174,
+            "answer": 8
+          },
+          {
+            "bodyId": 513387,
+            "answer": 8
+          },
+          {
+            "bodyId": 513391,
+            "answer": 2
+          },
+          {
+            "bodyId": 514853,
+            "answer": 8
+          },
+          {
+            "bodyId": 515015,
+            "answer": 10
+          },
+          {
+            "bodyId": 515034,
+            "answer": 1
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 9
+          },
+          {
+            "bodyId": 519131,
+            "answer": 7
+          },
+          {
+            "bodyId": 519368,
+            "answer": 5
+          },
+          {
+            "bodyId": 519371,
+            "answer": 14
+          },
+          {
+            "bodyId": 519373,
+            "answer": 10
+          },
+          {
+            "bodyId": 519619,
+            "answer": 17
+          },
+          {
+            "bodyId": 520151,
+            "answer": 7
+          },
+          {
+            "bodyId": 520186,
+            "answer": 9
+          },
+          {
+            "bodyId": 520395,
+            "answer": 3
+          },
+          {
+            "bodyId": 521086,
+            "answer": 13
+          },
+          {
+            "bodyId": 521526,
+            "answer": 4
+          },
+          {
+            "bodyId": 522444,
+            "answer": 15
+          },
+          {
+            "bodyId": 522749,
+            "answer": 10
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 4
+          },
+          {
+            "bodyId": 523987,
+            "answer": 7
+          },
+          {
+            "bodyId": 524733,
+            "answer": 4
+          },
+          {
+            "bodyId": 524893,
+            "answer": 0
+          },
+          {
+            "bodyId": 525780,
+            "answer": 5
+          },
+          {
+            "bodyId": 530875,
+            "answer": 12
+          },
+          {
+            "bodyId": 531829,
+            "answer": 17
+          },
+          {
+            "bodyId": 540383,
+            "answer": 6
+          },
+          {
+            "bodyId": 556300,
+            "answer": 18
+          },
+          {
+            "bodyId": 558665,
+            "answer": 3
+          },
+          {
+            "bodyId": 562782,
+            "answer": 6
+          },
+          {
+            "bodyId": 579919,
+            "answer": 1
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "intact"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 1.0,
+        "teacher_accuracy": 1.0,
+        "test_accuracy": 0.0,
+        "test_true_probability": 0.006901426635625945
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 8,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "3de27433d6fdf6d1025dcad39cd2b122cfa41f9c7b1a61991c40e07dea1eba4b",
+        "test_weights_after": "3de27433d6fdf6d1025dcad39cd2b122cfa41f9c7b1a61991c40e07dea1eba4b",
+        "updated_supported_gains": 25805,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 7
+          },
+          {
+            "bodyId": 10079,
+            "answer": 8
+          },
+          {
+            "bodyId": 10267,
+            "answer": 9
+          },
+          {
+            "bodyId": 10495,
+            "answer": 14
+          },
+          {
+            "bodyId": 10599,
+            "answer": 0
+          },
+          {
+            "bodyId": 10704,
+            "answer": 8
+          },
+          {
+            "bodyId": 10804,
+            "answer": 9
+          },
+          {
+            "bodyId": 10816,
+            "answer": 4
+          },
+          {
+            "bodyId": 10826,
+            "answer": 14
+          },
+          {
+            "bodyId": 11145,
+            "answer": 8
+          },
+          {
+            "bodyId": 11176,
+            "answer": 16
+          },
+          {
+            "bodyId": 11402,
+            "answer": 13
+          },
+          {
+            "bodyId": 11455,
+            "answer": 3
+          },
+          {
+            "bodyId": 11777,
+            "answer": 15
+          },
+          {
+            "bodyId": 11785,
+            "answer": 2
+          },
+          {
+            "bodyId": 11805,
+            "answer": 0
+          },
+          {
+            "bodyId": 11873,
+            "answer": 11
+          },
+          {
+            "bodyId": 11990,
+            "answer": 3
+          },
+          {
+            "bodyId": 12690,
+            "answer": 5
+          },
+          {
+            "bodyId": 12726,
+            "answer": 0
+          },
+          {
+            "bodyId": 12859,
+            "answer": 13
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 8
+          },
+          {
+            "bodyId": 13768,
+            "answer": 8
+          },
+          {
+            "bodyId": 14221,
+            "answer": 2
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 15
+          },
+          {
+            "bodyId": 17946,
+            "answer": 17
+          },
+          {
+            "bodyId": 18406,
+            "answer": 3
+          },
+          {
+            "bodyId": 18603,
+            "answer": 13
+          },
+          {
+            "bodyId": 18713,
+            "answer": 7
+          },
+          {
+            "bodyId": 19267,
+            "answer": 16
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 13
+          },
+          {
+            "bodyId": 21242,
+            "answer": 0
+          },
+          {
+            "bodyId": 26485,
+            "answer": 16
+          },
+          {
+            "bodyId": 26853,
+            "answer": 5
+          },
+          {
+            "bodyId": 28622,
+            "answer": 7
+          },
+          {
+            "bodyId": 31016,
+            "answer": 5
+          },
+          {
+            "bodyId": 31083,
+            "answer": 12
+          },
+          {
+            "bodyId": 33617,
+            "answer": 14
+          },
+          {
+            "bodyId": 36094,
+            "answer": 13
+          },
+          {
+            "bodyId": 38853,
+            "answer": 10
+          },
+          {
+            "bodyId": 38859,
+            "answer": 10
+          },
+          {
+            "bodyId": 39608,
+            "answer": 14
+          },
+          {
+            "bodyId": 41692,
+            "answer": 15
+          },
+          {
+            "bodyId": 44619,
+            "answer": 14
+          },
+          {
+            "bodyId": 47551,
+            "answer": 11
+          },
+          {
+            "bodyId": 49262,
+            "answer": 12
+          },
+          {
+            "bodyId": 58401,
+            "answer": 6
+          },
+          {
+            "bodyId": 70924,
+            "answer": 6
+          },
+          {
+            "bodyId": 76585,
+            "answer": 18
+          },
+          {
+            "bodyId": 87077,
+            "answer": 2
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 7
+          },
+          {
+            "bodyId": 133427,
+            "answer": 4
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 17
+          },
+          {
+            "bodyId": 208566,
+            "answer": 11
+          },
+          {
+            "bodyId": 394860,
+            "answer": 0
+          },
+          {
+            "bodyId": 508595,
+            "answer": 1
+          },
+          {
+            "bodyId": 512788,
+            "answer": 5
+          },
+          {
+            "bodyId": 512789,
+            "answer": 6
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 9
+          },
+          {
+            "bodyId": 513391,
+            "answer": 5
+          },
+          {
+            "bodyId": 514853,
+            "answer": 17
+          },
+          {
+            "bodyId": 515015,
+            "answer": 3
+          },
+          {
+            "bodyId": 515034,
+            "answer": 15
+          },
+          {
+            "bodyId": 515338,
+            "answer": 1
+          },
+          {
+            "bodyId": 519128,
+            "answer": 2
+          },
+          {
+            "bodyId": 519131,
+            "answer": 3
+          },
+          {
+            "bodyId": 519368,
+            "answer": 15
+          },
+          {
+            "bodyId": 519371,
+            "answer": 1
+          },
+          {
+            "bodyId": 519373,
+            "answer": 6
+          },
+          {
+            "bodyId": 519619,
+            "answer": 6
+          },
+          {
+            "bodyId": 520151,
+            "answer": 18
+          },
+          {
+            "bodyId": 520186,
+            "answer": 10
+          },
+          {
+            "bodyId": 520395,
+            "answer": 18
+          },
+          {
+            "bodyId": 521086,
+            "answer": 9
+          },
+          {
+            "bodyId": 521526,
+            "answer": 12
+          },
+          {
+            "bodyId": 522444,
+            "answer": 4
+          },
+          {
+            "bodyId": 522749,
+            "answer": 16
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 1
+          },
+          {
+            "bodyId": 523628,
+            "answer": 1
+          },
+          {
+            "bodyId": 523987,
+            "answer": 4
+          },
+          {
+            "bodyId": 524733,
+            "answer": 11
+          },
+          {
+            "bodyId": 524893,
+            "answer": 17
+          },
+          {
+            "bodyId": 525780,
+            "answer": 7
+          },
+          {
+            "bodyId": 530875,
+            "answer": 16
+          },
+          {
+            "bodyId": 531829,
+            "answer": 10
+          },
+          {
+            "bodyId": 540383,
+            "answer": 18
+          },
+          {
+            "bodyId": 556300,
+            "answer": 9
+          },
+          {
+            "bodyId": 558665,
+            "answer": 17
+          },
+          {
+            "bodyId": 562782,
+            "answer": 1
+          },
+          {
+            "bodyId": 579919,
+            "answer": 12
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "no_learning"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.075,
+        "teacher_accuracy": 0.075,
+        "test_accuracy": 0.15,
+        "test_true_probability": 0.052631578947368404
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 8,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "test_weights_after": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "updated_supported_gains": 0,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 7
+          },
+          {
+            "bodyId": 10079,
+            "answer": 8
+          },
+          {
+            "bodyId": 10267,
+            "answer": 9
+          },
+          {
+            "bodyId": 10495,
+            "answer": 14
+          },
+          {
+            "bodyId": 10599,
+            "answer": 0
+          },
+          {
+            "bodyId": 10704,
+            "answer": 8
+          },
+          {
+            "bodyId": 10804,
+            "answer": 9
+          },
+          {
+            "bodyId": 10816,
+            "answer": 4
+          },
+          {
+            "bodyId": 10826,
+            "answer": 14
+          },
+          {
+            "bodyId": 11145,
+            "answer": 8
+          },
+          {
+            "bodyId": 11176,
+            "answer": 16
+          },
+          {
+            "bodyId": 11402,
+            "answer": 13
+          },
+          {
+            "bodyId": 11455,
+            "answer": 3
+          },
+          {
+            "bodyId": 11777,
+            "answer": 15
+          },
+          {
+            "bodyId": 11785,
+            "answer": 2
+          },
+          {
+            "bodyId": 11805,
+            "answer": 0
+          },
+          {
+            "bodyId": 11873,
+            "answer": 11
+          },
+          {
+            "bodyId": 11990,
+            "answer": 3
+          },
+          {
+            "bodyId": 12690,
+            "answer": 5
+          },
+          {
+            "bodyId": 12726,
+            "answer": 0
+          },
+          {
+            "bodyId": 12859,
+            "answer": 13
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 8
+          },
+          {
+            "bodyId": 13768,
+            "answer": 8
+          },
+          {
+            "bodyId": 14221,
+            "answer": 2
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 15
+          },
+          {
+            "bodyId": 17946,
+            "answer": 17
+          },
+          {
+            "bodyId": 18406,
+            "answer": 3
+          },
+          {
+            "bodyId": 18603,
+            "answer": 13
+          },
+          {
+            "bodyId": 18713,
+            "answer": 7
+          },
+          {
+            "bodyId": 19267,
+            "answer": 16
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 13
+          },
+          {
+            "bodyId": 21242,
+            "answer": 0
+          },
+          {
+            "bodyId": 26485,
+            "answer": 16
+          },
+          {
+            "bodyId": 26853,
+            "answer": 5
+          },
+          {
+            "bodyId": 28622,
+            "answer": 7
+          },
+          {
+            "bodyId": 31016,
+            "answer": 5
+          },
+          {
+            "bodyId": 31083,
+            "answer": 12
+          },
+          {
+            "bodyId": 33617,
+            "answer": 14
+          },
+          {
+            "bodyId": 36094,
+            "answer": 13
+          },
+          {
+            "bodyId": 38853,
+            "answer": 10
+          },
+          {
+            "bodyId": 38859,
+            "answer": 10
+          },
+          {
+            "bodyId": 39608,
+            "answer": 14
+          },
+          {
+            "bodyId": 41692,
+            "answer": 15
+          },
+          {
+            "bodyId": 44619,
+            "answer": 14
+          },
+          {
+            "bodyId": 47551,
+            "answer": 11
+          },
+          {
+            "bodyId": 49262,
+            "answer": 12
+          },
+          {
+            "bodyId": 58401,
+            "answer": 6
+          },
+          {
+            "bodyId": 70924,
+            "answer": 6
+          },
+          {
+            "bodyId": 76585,
+            "answer": 18
+          },
+          {
+            "bodyId": 87077,
+            "answer": 2
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 7
+          },
+          {
+            "bodyId": 133427,
+            "answer": 4
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 17
+          },
+          {
+            "bodyId": 208566,
+            "answer": 11
+          },
+          {
+            "bodyId": 394860,
+            "answer": 0
+          },
+          {
+            "bodyId": 508595,
+            "answer": 1
+          },
+          {
+            "bodyId": 512788,
+            "answer": 5
+          },
+          {
+            "bodyId": 512789,
+            "answer": 6
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 9
+          },
+          {
+            "bodyId": 513391,
+            "answer": 5
+          },
+          {
+            "bodyId": 514853,
+            "answer": 17
+          },
+          {
+            "bodyId": 515015,
+            "answer": 3
+          },
+          {
+            "bodyId": 515034,
+            "answer": 15
+          },
+          {
+            "bodyId": 515338,
+            "answer": 1
+          },
+          {
+            "bodyId": 519128,
+            "answer": 2
+          },
+          {
+            "bodyId": 519131,
+            "answer": 3
+          },
+          {
+            "bodyId": 519368,
+            "answer": 15
+          },
+          {
+            "bodyId": 519371,
+            "answer": 1
+          },
+          {
+            "bodyId": 519373,
+            "answer": 6
+          },
+          {
+            "bodyId": 519619,
+            "answer": 6
+          },
+          {
+            "bodyId": 520151,
+            "answer": 18
+          },
+          {
+            "bodyId": 520186,
+            "answer": 10
+          },
+          {
+            "bodyId": 520395,
+            "answer": 18
+          },
+          {
+            "bodyId": 521086,
+            "answer": 9
+          },
+          {
+            "bodyId": 521526,
+            "answer": 12
+          },
+          {
+            "bodyId": 522444,
+            "answer": 4
+          },
+          {
+            "bodyId": 522749,
+            "answer": 16
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 1
+          },
+          {
+            "bodyId": 523628,
+            "answer": 1
+          },
+          {
+            "bodyId": 523987,
+            "answer": 4
+          },
+          {
+            "bodyId": 524733,
+            "answer": 11
+          },
+          {
+            "bodyId": 524893,
+            "answer": 17
+          },
+          {
+            "bodyId": 525780,
+            "answer": 7
+          },
+          {
+            "bodyId": 530875,
+            "answer": 16
+          },
+          {
+            "bodyId": 531829,
+            "answer": 10
+          },
+          {
+            "bodyId": 540383,
+            "answer": 18
+          },
+          {
+            "bodyId": 556300,
+            "answer": 9
+          },
+          {
+            "bodyId": 558665,
+            "answer": 17
+          },
+          {
+            "bodyId": 562782,
+            "answer": 1
+          },
+          {
+            "bodyId": 579919,
+            "answer": 12
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "shuffled_labels"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.075,
+        "teacher_accuracy": 0.9875,
+        "test_accuracy": 0.05,
+        "test_true_probability": 0.06361981253475762
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 8,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "4f10935ee0ac39be54fd83702e12bef4fd21dcf48e43028928aeb05d4653f1e7",
+        "test_weights_after": "4f10935ee0ac39be54fd83702e12bef4fd21dcf48e43028928aeb05d4653f1e7",
+        "updated_supported_gains": 25805,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 7
+          },
+          {
+            "bodyId": 10079,
+            "answer": 8
+          },
+          {
+            "bodyId": 10267,
+            "answer": 9
+          },
+          {
+            "bodyId": 10495,
+            "answer": 14
+          },
+          {
+            "bodyId": 10599,
+            "answer": 0
+          },
+          {
+            "bodyId": 10704,
+            "answer": 8
+          },
+          {
+            "bodyId": 10804,
+            "answer": 9
+          },
+          {
+            "bodyId": 10816,
+            "answer": 4
+          },
+          {
+            "bodyId": 10826,
+            "answer": 14
+          },
+          {
+            "bodyId": 11145,
+            "answer": 8
+          },
+          {
+            "bodyId": 11176,
+            "answer": 16
+          },
+          {
+            "bodyId": 11402,
+            "answer": 13
+          },
+          {
+            "bodyId": 11455,
+            "answer": 3
+          },
+          {
+            "bodyId": 11777,
+            "answer": 15
+          },
+          {
+            "bodyId": 11785,
+            "answer": 2
+          },
+          {
+            "bodyId": 11805,
+            "answer": 0
+          },
+          {
+            "bodyId": 11873,
+            "answer": 11
+          },
+          {
+            "bodyId": 11990,
+            "answer": 3
+          },
+          {
+            "bodyId": 12690,
+            "answer": 5
+          },
+          {
+            "bodyId": 12726,
+            "answer": 0
+          },
+          {
+            "bodyId": 12859,
+            "answer": 13
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 8
+          },
+          {
+            "bodyId": 13768,
+            "answer": 8
+          },
+          {
+            "bodyId": 14221,
+            "answer": 2
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 15
+          },
+          {
+            "bodyId": 17946,
+            "answer": 17
+          },
+          {
+            "bodyId": 18406,
+            "answer": 3
+          },
+          {
+            "bodyId": 18603,
+            "answer": 13
+          },
+          {
+            "bodyId": 18713,
+            "answer": 7
+          },
+          {
+            "bodyId": 19267,
+            "answer": 16
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 13
+          },
+          {
+            "bodyId": 21242,
+            "answer": 0
+          },
+          {
+            "bodyId": 26485,
+            "answer": 16
+          },
+          {
+            "bodyId": 26853,
+            "answer": 5
+          },
+          {
+            "bodyId": 28622,
+            "answer": 7
+          },
+          {
+            "bodyId": 31016,
+            "answer": 5
+          },
+          {
+            "bodyId": 31083,
+            "answer": 12
+          },
+          {
+            "bodyId": 33617,
+            "answer": 14
+          },
+          {
+            "bodyId": 36094,
+            "answer": 13
+          },
+          {
+            "bodyId": 38853,
+            "answer": 10
+          },
+          {
+            "bodyId": 38859,
+            "answer": 10
+          },
+          {
+            "bodyId": 39608,
+            "answer": 14
+          },
+          {
+            "bodyId": 41692,
+            "answer": 15
+          },
+          {
+            "bodyId": 44619,
+            "answer": 14
+          },
+          {
+            "bodyId": 47551,
+            "answer": 11
+          },
+          {
+            "bodyId": 49262,
+            "answer": 12
+          },
+          {
+            "bodyId": 58401,
+            "answer": 6
+          },
+          {
+            "bodyId": 70924,
+            "answer": 6
+          },
+          {
+            "bodyId": 76585,
+            "answer": 18
+          },
+          {
+            "bodyId": 87077,
+            "answer": 2
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 7
+          },
+          {
+            "bodyId": 133427,
+            "answer": 4
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 17
+          },
+          {
+            "bodyId": 208566,
+            "answer": 11
+          },
+          {
+            "bodyId": 394860,
+            "answer": 0
+          },
+          {
+            "bodyId": 508595,
+            "answer": 1
+          },
+          {
+            "bodyId": 512788,
+            "answer": 5
+          },
+          {
+            "bodyId": 512789,
+            "answer": 6
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 9
+          },
+          {
+            "bodyId": 513391,
+            "answer": 5
+          },
+          {
+            "bodyId": 514853,
+            "answer": 17
+          },
+          {
+            "bodyId": 515015,
+            "answer": 3
+          },
+          {
+            "bodyId": 515034,
+            "answer": 15
+          },
+          {
+            "bodyId": 515338,
+            "answer": 1
+          },
+          {
+            "bodyId": 519128,
+            "answer": 2
+          },
+          {
+            "bodyId": 519131,
+            "answer": 3
+          },
+          {
+            "bodyId": 519368,
+            "answer": 15
+          },
+          {
+            "bodyId": 519371,
+            "answer": 1
+          },
+          {
+            "bodyId": 519373,
+            "answer": 6
+          },
+          {
+            "bodyId": 519619,
+            "answer": 6
+          },
+          {
+            "bodyId": 520151,
+            "answer": 18
+          },
+          {
+            "bodyId": 520186,
+            "answer": 10
+          },
+          {
+            "bodyId": 520395,
+            "answer": 18
+          },
+          {
+            "bodyId": 521086,
+            "answer": 9
+          },
+          {
+            "bodyId": 521526,
+            "answer": 12
+          },
+          {
+            "bodyId": 522444,
+            "answer": 4
+          },
+          {
+            "bodyId": 522749,
+            "answer": 16
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 1
+          },
+          {
+            "bodyId": 523628,
+            "answer": 1
+          },
+          {
+            "bodyId": 523987,
+            "answer": 4
+          },
+          {
+            "bodyId": 524733,
+            "answer": 11
+          },
+          {
+            "bodyId": 524893,
+            "answer": 17
+          },
+          {
+            "bodyId": 525780,
+            "answer": 7
+          },
+          {
+            "bodyId": 530875,
+            "answer": 16
+          },
+          {
+            "bodyId": 531829,
+            "answer": 10
+          },
+          {
+            "bodyId": 540383,
+            "answer": 18
+          },
+          {
+            "bodyId": 556300,
+            "answer": 9
+          },
+          {
+            "bodyId": 558665,
+            "answer": 17
+          },
+          {
+            "bodyId": 562782,
+            "answer": 1
+          },
+          {
+            "bodyId": 579919,
+            "answer": 12
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "shuffled_wiring"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 1.0,
+        "teacher_accuracy": 1.0,
+        "test_accuracy": 0.0,
+        "test_true_probability": 0.008876324760715112
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 8,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "c50e0b511bbdecfcbcac58601bcac8424f2b6fd1cee2e84bc5286b4426de4be3",
+        "test_weights_after": "c50e0b511bbdecfcbcac58601bcac8424f2b6fd1cee2e84bc5286b4426de4be3",
+        "updated_supported_gains": 26077,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 7
+          },
+          {
+            "bodyId": 10079,
+            "answer": 8
+          },
+          {
+            "bodyId": 10267,
+            "answer": 9
+          },
+          {
+            "bodyId": 10495,
+            "answer": 14
+          },
+          {
+            "bodyId": 10599,
+            "answer": 0
+          },
+          {
+            "bodyId": 10704,
+            "answer": 8
+          },
+          {
+            "bodyId": 10804,
+            "answer": 9
+          },
+          {
+            "bodyId": 10816,
+            "answer": 4
+          },
+          {
+            "bodyId": 10826,
+            "answer": 14
+          },
+          {
+            "bodyId": 11145,
+            "answer": 8
+          },
+          {
+            "bodyId": 11176,
+            "answer": 16
+          },
+          {
+            "bodyId": 11402,
+            "answer": 13
+          },
+          {
+            "bodyId": 11455,
+            "answer": 3
+          },
+          {
+            "bodyId": 11777,
+            "answer": 15
+          },
+          {
+            "bodyId": 11785,
+            "answer": 2
+          },
+          {
+            "bodyId": 11805,
+            "answer": 0
+          },
+          {
+            "bodyId": 11873,
+            "answer": 11
+          },
+          {
+            "bodyId": 11990,
+            "answer": 3
+          },
+          {
+            "bodyId": 12690,
+            "answer": 5
+          },
+          {
+            "bodyId": 12726,
+            "answer": 0
+          },
+          {
+            "bodyId": 12859,
+            "answer": 13
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 8
+          },
+          {
+            "bodyId": 13768,
+            "answer": 8
+          },
+          {
+            "bodyId": 14221,
+            "answer": 2
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 15
+          },
+          {
+            "bodyId": 17946,
+            "answer": 17
+          },
+          {
+            "bodyId": 18406,
+            "answer": 3
+          },
+          {
+            "bodyId": 18603,
+            "answer": 13
+          },
+          {
+            "bodyId": 18713,
+            "answer": 7
+          },
+          {
+            "bodyId": 19267,
+            "answer": 16
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 13
+          },
+          {
+            "bodyId": 21242,
+            "answer": 0
+          },
+          {
+            "bodyId": 26485,
+            "answer": 16
+          },
+          {
+            "bodyId": 26853,
+            "answer": 5
+          },
+          {
+            "bodyId": 28622,
+            "answer": 7
+          },
+          {
+            "bodyId": 31016,
+            "answer": 5
+          },
+          {
+            "bodyId": 31083,
+            "answer": 12
+          },
+          {
+            "bodyId": 33617,
+            "answer": 14
+          },
+          {
+            "bodyId": 36094,
+            "answer": 13
+          },
+          {
+            "bodyId": 38853,
+            "answer": 10
+          },
+          {
+            "bodyId": 38859,
+            "answer": 10
+          },
+          {
+            "bodyId": 39608,
+            "answer": 14
+          },
+          {
+            "bodyId": 41692,
+            "answer": 15
+          },
+          {
+            "bodyId": 44619,
+            "answer": 14
+          },
+          {
+            "bodyId": 47551,
+            "answer": 11
+          },
+          {
+            "bodyId": 49262,
+            "answer": 12
+          },
+          {
+            "bodyId": 58401,
+            "answer": 6
+          },
+          {
+            "bodyId": 70924,
+            "answer": 6
+          },
+          {
+            "bodyId": 76585,
+            "answer": 18
+          },
+          {
+            "bodyId": 87077,
+            "answer": 2
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 7
+          },
+          {
+            "bodyId": 133427,
+            "answer": 4
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 17
+          },
+          {
+            "bodyId": 208566,
+            "answer": 11
+          },
+          {
+            "bodyId": 394860,
+            "answer": 0
+          },
+          {
+            "bodyId": 508595,
+            "answer": 1
+          },
+          {
+            "bodyId": 512788,
+            "answer": 5
+          },
+          {
+            "bodyId": 512789,
+            "answer": 6
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 9
+          },
+          {
+            "bodyId": 513391,
+            "answer": 5
+          },
+          {
+            "bodyId": 514853,
+            "answer": 17
+          },
+          {
+            "bodyId": 515015,
+            "answer": 3
+          },
+          {
+            "bodyId": 515034,
+            "answer": 15
+          },
+          {
+            "bodyId": 515338,
+            "answer": 1
+          },
+          {
+            "bodyId": 519128,
+            "answer": 2
+          },
+          {
+            "bodyId": 519131,
+            "answer": 3
+          },
+          {
+            "bodyId": 519368,
+            "answer": 15
+          },
+          {
+            "bodyId": 519371,
+            "answer": 1
+          },
+          {
+            "bodyId": 519373,
+            "answer": 6
+          },
+          {
+            "bodyId": 519619,
+            "answer": 6
+          },
+          {
+            "bodyId": 520151,
+            "answer": 18
+          },
+          {
+            "bodyId": 520186,
+            "answer": 10
+          },
+          {
+            "bodyId": 520395,
+            "answer": 18
+          },
+          {
+            "bodyId": 521086,
+            "answer": 9
+          },
+          {
+            "bodyId": 521526,
+            "answer": 12
+          },
+          {
+            "bodyId": 522444,
+            "answer": 4
+          },
+          {
+            "bodyId": 522749,
+            "answer": 16
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 1
+          },
+          {
+            "bodyId": 523628,
+            "answer": 1
+          },
+          {
+            "bodyId": 523987,
+            "answer": 4
+          },
+          {
+            "bodyId": 524733,
+            "answer": 11
+          },
+          {
+            "bodyId": 524893,
+            "answer": 17
+          },
+          {
+            "bodyId": 525780,
+            "answer": 7
+          },
+          {
+            "bodyId": 530875,
+            "answer": 16
+          },
+          {
+            "bodyId": 531829,
+            "answer": 10
+          },
+          {
+            "bodyId": 540383,
+            "answer": 18
+          },
+          {
+            "bodyId": 556300,
+            "answer": 9
+          },
+          {
+            "bodyId": 558665,
+            "answer": 17
+          },
+          {
+            "bodyId": 562782,
+            "answer": 1
+          },
+          {
+            "bodyId": 579919,
+            "answer": 12
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 8,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "silence_kc"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.075,
+        "teacher_accuracy": 0.075,
+        "test_accuracy": 0.15,
+        "test_true_probability": 0.052631578947368404
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 8,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "test_weights_after": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "updated_supported_gains": 0,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 7
+          },
+          {
+            "bodyId": 10079,
+            "answer": 8
+          },
+          {
+            "bodyId": 10267,
+            "answer": 9
+          },
+          {
+            "bodyId": 10495,
+            "answer": 14
+          },
+          {
+            "bodyId": 10599,
+            "answer": 0
+          },
+          {
+            "bodyId": 10704,
+            "answer": 8
+          },
+          {
+            "bodyId": 10804,
+            "answer": 9
+          },
+          {
+            "bodyId": 10816,
+            "answer": 4
+          },
+          {
+            "bodyId": 10826,
+            "answer": 14
+          },
+          {
+            "bodyId": 11145,
+            "answer": 8
+          },
+          {
+            "bodyId": 11176,
+            "answer": 16
+          },
+          {
+            "bodyId": 11402,
+            "answer": 13
+          },
+          {
+            "bodyId": 11455,
+            "answer": 3
+          },
+          {
+            "bodyId": 11777,
+            "answer": 15
+          },
+          {
+            "bodyId": 11785,
+            "answer": 2
+          },
+          {
+            "bodyId": 11805,
+            "answer": 0
+          },
+          {
+            "bodyId": 11873,
+            "answer": 11
+          },
+          {
+            "bodyId": 11990,
+            "answer": 3
+          },
+          {
+            "bodyId": 12690,
+            "answer": 5
+          },
+          {
+            "bodyId": 12726,
+            "answer": 0
+          },
+          {
+            "bodyId": 12859,
+            "answer": 13
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 8
+          },
+          {
+            "bodyId": 13768,
+            "answer": 8
+          },
+          {
+            "bodyId": 14221,
+            "answer": 2
+          },
+          {
+            "bodyId": 15626,
+            "answer": 0
+          },
+          {
+            "bodyId": 15708,
+            "answer": 15
+          },
+          {
+            "bodyId": 17946,
+            "answer": 17
+          },
+          {
+            "bodyId": 18406,
+            "answer": 3
+          },
+          {
+            "bodyId": 18603,
+            "answer": 13
+          },
+          {
+            "bodyId": 18713,
+            "answer": 7
+          },
+          {
+            "bodyId": 19267,
+            "answer": 16
+          },
+          {
+            "bodyId": 19366,
+            "answer": 18
+          },
+          {
+            "bodyId": 20835,
+            "answer": 13
+          },
+          {
+            "bodyId": 21242,
+            "answer": 0
+          },
+          {
+            "bodyId": 26485,
+            "answer": 16
+          },
+          {
+            "bodyId": 26853,
+            "answer": 5
+          },
+          {
+            "bodyId": 28622,
+            "answer": 7
+          },
+          {
+            "bodyId": 31016,
+            "answer": 5
+          },
+          {
+            "bodyId": 31083,
+            "answer": 12
+          },
+          {
+            "bodyId": 33617,
+            "answer": 14
+          },
+          {
+            "bodyId": 36094,
+            "answer": 13
+          },
+          {
+            "bodyId": 38853,
+            "answer": 10
+          },
+          {
+            "bodyId": 38859,
+            "answer": 10
+          },
+          {
+            "bodyId": 39608,
+            "answer": 14
+          },
+          {
+            "bodyId": 41692,
+            "answer": 15
+          },
+          {
+            "bodyId": 44619,
+            "answer": 14
+          },
+          {
+            "bodyId": 47551,
+            "answer": 11
+          },
+          {
+            "bodyId": 49262,
+            "answer": 12
+          },
+          {
+            "bodyId": 58401,
+            "answer": 6
+          },
+          {
+            "bodyId": 70924,
+            "answer": 6
+          },
+          {
+            "bodyId": 76585,
+            "answer": 18
+          },
+          {
+            "bodyId": 87077,
+            "answer": 2
+          },
+          {
+            "bodyId": 92112,
+            "answer": 10
+          },
+          {
+            "bodyId": 110448,
+            "answer": 7
+          },
+          {
+            "bodyId": 133427,
+            "answer": 4
+          },
+          {
+            "bodyId": 160320,
+            "answer": 11
+          },
+          {
+            "bodyId": 187741,
+            "answer": 17
+          },
+          {
+            "bodyId": 208566,
+            "answer": 11
+          },
+          {
+            "bodyId": 394860,
+            "answer": 0
+          },
+          {
+            "bodyId": 508595,
+            "answer": 1
+          },
+          {
+            "bodyId": 512788,
+            "answer": 5
+          },
+          {
+            "bodyId": 512789,
+            "answer": 6
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 9
+          },
+          {
+            "bodyId": 513391,
+            "answer": 5
+          },
+          {
+            "bodyId": 514853,
+            "answer": 17
+          },
+          {
+            "bodyId": 515015,
+            "answer": 3
+          },
+          {
+            "bodyId": 515034,
+            "answer": 15
+          },
+          {
+            "bodyId": 515338,
+            "answer": 1
+          },
+          {
+            "bodyId": 519128,
+            "answer": 2
+          },
+          {
+            "bodyId": 519131,
+            "answer": 3
+          },
+          {
+            "bodyId": 519368,
+            "answer": 15
+          },
+          {
+            "bodyId": 519371,
+            "answer": 1
+          },
+          {
+            "bodyId": 519373,
+            "answer": 6
+          },
+          {
+            "bodyId": 519619,
+            "answer": 6
+          },
+          {
+            "bodyId": 520151,
+            "answer": 18
+          },
+          {
+            "bodyId": 520186,
+            "answer": 10
+          },
+          {
+            "bodyId": 520395,
+            "answer": 18
+          },
+          {
+            "bodyId": 521086,
+            "answer": 9
+          },
+          {
+            "bodyId": 521526,
+            "answer": 12
+          },
+          {
+            "bodyId": 522444,
+            "answer": 4
+          },
+          {
+            "bodyId": 522749,
+            "answer": 16
+          },
+          {
+            "bodyId": 523043,
+            "answer": 2
+          },
+          {
+            "bodyId": 523060,
+            "answer": 1
+          },
+          {
+            "bodyId": 523628,
+            "answer": 1
+          },
+          {
+            "bodyId": 523987,
+            "answer": 4
+          },
+          {
+            "bodyId": 524733,
+            "answer": 11
+          },
+          {
+            "bodyId": 524893,
+            "answer": 17
+          },
+          {
+            "bodyId": 525780,
+            "answer": 7
+          },
+          {
+            "bodyId": 530875,
+            "answer": 16
+          },
+          {
+            "bodyId": 531829,
+            "answer": 10
+          },
+          {
+            "bodyId": 540383,
+            "answer": 18
+          },
+          {
+            "bodyId": 556300,
+            "answer": 9
+          },
+          {
+            "bodyId": 558665,
+            "answer": 17
+          },
+          {
+            "bodyId": 562782,
+            "answer": 1
+          },
+          {
+            "bodyId": 579919,
+            "answer": 12
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "intact"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 1.0,
+        "teacher_accuracy": 1.0,
+        "test_accuracy": 0.0,
+        "test_true_probability": 0.011200716318456391
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 10,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "624f6827bcc7810496d5e91b702c71658f3d462d6405e72b5420624ec8f48621",
+        "test_weights_after": "624f6827bcc7810496d5e91b702c71658f3d462d6405e72b5420624ec8f48621",
+        "updated_supported_gains": 26118,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 1
+          },
+          {
+            "bodyId": 10079,
+            "answer": 10
+          },
+          {
+            "bodyId": 10267,
+            "answer": 15
+          },
+          {
+            "bodyId": 10495,
+            "answer": 1
+          },
+          {
+            "bodyId": 10599,
+            "answer": 7
+          },
+          {
+            "bodyId": 10704,
+            "answer": 2
+          },
+          {
+            "bodyId": 10804,
+            "answer": 14
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 12
+          },
+          {
+            "bodyId": 11145,
+            "answer": 4
+          },
+          {
+            "bodyId": 11176,
+            "answer": 8
+          },
+          {
+            "bodyId": 11402,
+            "answer": 7
+          },
+          {
+            "bodyId": 11455,
+            "answer": 12
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 13
+          },
+          {
+            "bodyId": 11805,
+            "answer": 3
+          },
+          {
+            "bodyId": 11873,
+            "answer": 18
+          },
+          {
+            "bodyId": 11990,
+            "answer": 18
+          },
+          {
+            "bodyId": 12690,
+            "answer": 8
+          },
+          {
+            "bodyId": 12726,
+            "answer": 11
+          },
+          {
+            "bodyId": 12859,
+            "answer": 14
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 13
+          },
+          {
+            "bodyId": 13768,
+            "answer": 13
+          },
+          {
+            "bodyId": 14221,
+            "answer": 8
+          },
+          {
+            "bodyId": 15626,
+            "answer": 7
+          },
+          {
+            "bodyId": 15708,
+            "answer": 6
+          },
+          {
+            "bodyId": 17946,
+            "answer": 0
+          },
+          {
+            "bodyId": 18406,
+            "answer": 6
+          },
+          {
+            "bodyId": 18603,
+            "answer": 2
+          },
+          {
+            "bodyId": 18713,
+            "answer": 0
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 15
+          },
+          {
+            "bodyId": 20835,
+            "answer": 9
+          },
+          {
+            "bodyId": 21242,
+            "answer": 18
+          },
+          {
+            "bodyId": 26485,
+            "answer": 5
+          },
+          {
+            "bodyId": 26853,
+            "answer": 7
+          },
+          {
+            "bodyId": 28622,
+            "answer": 3
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 10
+          },
+          {
+            "bodyId": 33617,
+            "answer": 11
+          },
+          {
+            "bodyId": 36094,
+            "answer": 14
+          },
+          {
+            "bodyId": 38853,
+            "answer": 6
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 7
+          },
+          {
+            "bodyId": 41692,
+            "answer": 16
+          },
+          {
+            "bodyId": 44619,
+            "answer": 16
+          },
+          {
+            "bodyId": 47551,
+            "answer": 6
+          },
+          {
+            "bodyId": 49262,
+            "answer": 2
+          },
+          {
+            "bodyId": 58401,
+            "answer": 0
+          },
+          {
+            "bodyId": 70924,
+            "answer": 10
+          },
+          {
+            "bodyId": 76585,
+            "answer": 4
+          },
+          {
+            "bodyId": 87077,
+            "answer": 15
+          },
+          {
+            "bodyId": 92112,
+            "answer": 4
+          },
+          {
+            "bodyId": 110448,
+            "answer": 3
+          },
+          {
+            "bodyId": 133427,
+            "answer": 5
+          },
+          {
+            "bodyId": 160320,
+            "answer": 0
+          },
+          {
+            "bodyId": 187741,
+            "answer": 0
+          },
+          {
+            "bodyId": 208566,
+            "answer": 3
+          },
+          {
+            "bodyId": 394860,
+            "answer": 15
+          },
+          {
+            "bodyId": 508595,
+            "answer": 4
+          },
+          {
+            "bodyId": 512788,
+            "answer": 2
+          },
+          {
+            "bodyId": 512789,
+            "answer": 18
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 6
+          },
+          {
+            "bodyId": 513391,
+            "answer": 17
+          },
+          {
+            "bodyId": 514853,
+            "answer": 11
+          },
+          {
+            "bodyId": 515015,
+            "answer": 8
+          },
+          {
+            "bodyId": 515034,
+            "answer": 14
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 1
+          },
+          {
+            "bodyId": 519131,
+            "answer": 5
+          },
+          {
+            "bodyId": 519368,
+            "answer": 1
+          },
+          {
+            "bodyId": 519371,
+            "answer": 15
+          },
+          {
+            "bodyId": 519373,
+            "answer": 9
+          },
+          {
+            "bodyId": 519619,
+            "answer": 14
+          },
+          {
+            "bodyId": 520151,
+            "answer": 1
+          },
+          {
+            "bodyId": 520186,
+            "answer": 18
+          },
+          {
+            "bodyId": 520395,
+            "answer": 10
+          },
+          {
+            "bodyId": 521086,
+            "answer": 1
+          },
+          {
+            "bodyId": 521526,
+            "answer": 3
+          },
+          {
+            "bodyId": 522444,
+            "answer": 17
+          },
+          {
+            "bodyId": 522749,
+            "answer": 13
+          },
+          {
+            "bodyId": 523043,
+            "answer": 17
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 16
+          },
+          {
+            "bodyId": 523987,
+            "answer": 10
+          },
+          {
+            "bodyId": 524733,
+            "answer": 5
+          },
+          {
+            "bodyId": 524893,
+            "answer": 9
+          },
+          {
+            "bodyId": 525780,
+            "answer": 2
+          },
+          {
+            "bodyId": 530875,
+            "answer": 17
+          },
+          {
+            "bodyId": 531829,
+            "answer": 11
+          },
+          {
+            "bodyId": 540383,
+            "answer": 8
+          },
+          {
+            "bodyId": 556300,
+            "answer": 12
+          },
+          {
+            "bodyId": 558665,
+            "answer": 9
+          },
+          {
+            "bodyId": 562782,
+            "answer": 5
+          },
+          {
+            "bodyId": 579919,
+            "answer": 16
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "no_learning"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.0,
+        "teacher_accuracy": 0.0,
+        "test_accuracy": 0.05,
+        "test_true_probability": 0.052631578947368404
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 10,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "test_weights_after": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "updated_supported_gains": 0,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 1
+          },
+          {
+            "bodyId": 10079,
+            "answer": 10
+          },
+          {
+            "bodyId": 10267,
+            "answer": 15
+          },
+          {
+            "bodyId": 10495,
+            "answer": 1
+          },
+          {
+            "bodyId": 10599,
+            "answer": 7
+          },
+          {
+            "bodyId": 10704,
+            "answer": 2
+          },
+          {
+            "bodyId": 10804,
+            "answer": 14
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 12
+          },
+          {
+            "bodyId": 11145,
+            "answer": 4
+          },
+          {
+            "bodyId": 11176,
+            "answer": 8
+          },
+          {
+            "bodyId": 11402,
+            "answer": 7
+          },
+          {
+            "bodyId": 11455,
+            "answer": 12
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 13
+          },
+          {
+            "bodyId": 11805,
+            "answer": 3
+          },
+          {
+            "bodyId": 11873,
+            "answer": 18
+          },
+          {
+            "bodyId": 11990,
+            "answer": 18
+          },
+          {
+            "bodyId": 12690,
+            "answer": 8
+          },
+          {
+            "bodyId": 12726,
+            "answer": 11
+          },
+          {
+            "bodyId": 12859,
+            "answer": 14
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 13
+          },
+          {
+            "bodyId": 13768,
+            "answer": 13
+          },
+          {
+            "bodyId": 14221,
+            "answer": 8
+          },
+          {
+            "bodyId": 15626,
+            "answer": 7
+          },
+          {
+            "bodyId": 15708,
+            "answer": 6
+          },
+          {
+            "bodyId": 17946,
+            "answer": 0
+          },
+          {
+            "bodyId": 18406,
+            "answer": 6
+          },
+          {
+            "bodyId": 18603,
+            "answer": 2
+          },
+          {
+            "bodyId": 18713,
+            "answer": 0
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 15
+          },
+          {
+            "bodyId": 20835,
+            "answer": 9
+          },
+          {
+            "bodyId": 21242,
+            "answer": 18
+          },
+          {
+            "bodyId": 26485,
+            "answer": 5
+          },
+          {
+            "bodyId": 26853,
+            "answer": 7
+          },
+          {
+            "bodyId": 28622,
+            "answer": 3
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 10
+          },
+          {
+            "bodyId": 33617,
+            "answer": 11
+          },
+          {
+            "bodyId": 36094,
+            "answer": 14
+          },
+          {
+            "bodyId": 38853,
+            "answer": 6
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 7
+          },
+          {
+            "bodyId": 41692,
+            "answer": 16
+          },
+          {
+            "bodyId": 44619,
+            "answer": 16
+          },
+          {
+            "bodyId": 47551,
+            "answer": 6
+          },
+          {
+            "bodyId": 49262,
+            "answer": 2
+          },
+          {
+            "bodyId": 58401,
+            "answer": 0
+          },
+          {
+            "bodyId": 70924,
+            "answer": 10
+          },
+          {
+            "bodyId": 76585,
+            "answer": 4
+          },
+          {
+            "bodyId": 87077,
+            "answer": 15
+          },
+          {
+            "bodyId": 92112,
+            "answer": 4
+          },
+          {
+            "bodyId": 110448,
+            "answer": 3
+          },
+          {
+            "bodyId": 133427,
+            "answer": 5
+          },
+          {
+            "bodyId": 160320,
+            "answer": 0
+          },
+          {
+            "bodyId": 187741,
+            "answer": 0
+          },
+          {
+            "bodyId": 208566,
+            "answer": 3
+          },
+          {
+            "bodyId": 394860,
+            "answer": 15
+          },
+          {
+            "bodyId": 508595,
+            "answer": 4
+          },
+          {
+            "bodyId": 512788,
+            "answer": 2
+          },
+          {
+            "bodyId": 512789,
+            "answer": 18
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 6
+          },
+          {
+            "bodyId": 513391,
+            "answer": 17
+          },
+          {
+            "bodyId": 514853,
+            "answer": 11
+          },
+          {
+            "bodyId": 515015,
+            "answer": 8
+          },
+          {
+            "bodyId": 515034,
+            "answer": 14
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 1
+          },
+          {
+            "bodyId": 519131,
+            "answer": 5
+          },
+          {
+            "bodyId": 519368,
+            "answer": 1
+          },
+          {
+            "bodyId": 519371,
+            "answer": 15
+          },
+          {
+            "bodyId": 519373,
+            "answer": 9
+          },
+          {
+            "bodyId": 519619,
+            "answer": 14
+          },
+          {
+            "bodyId": 520151,
+            "answer": 1
+          },
+          {
+            "bodyId": 520186,
+            "answer": 18
+          },
+          {
+            "bodyId": 520395,
+            "answer": 10
+          },
+          {
+            "bodyId": 521086,
+            "answer": 1
+          },
+          {
+            "bodyId": 521526,
+            "answer": 3
+          },
+          {
+            "bodyId": 522444,
+            "answer": 17
+          },
+          {
+            "bodyId": 522749,
+            "answer": 13
+          },
+          {
+            "bodyId": 523043,
+            "answer": 17
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 16
+          },
+          {
+            "bodyId": 523987,
+            "answer": 10
+          },
+          {
+            "bodyId": 524733,
+            "answer": 5
+          },
+          {
+            "bodyId": 524893,
+            "answer": 9
+          },
+          {
+            "bodyId": 525780,
+            "answer": 2
+          },
+          {
+            "bodyId": 530875,
+            "answer": 17
+          },
+          {
+            "bodyId": 531829,
+            "answer": 11
+          },
+          {
+            "bodyId": 540383,
+            "answer": 8
+          },
+          {
+            "bodyId": 556300,
+            "answer": 12
+          },
+          {
+            "bodyId": 558665,
+            "answer": 9
+          },
+          {
+            "bodyId": 562782,
+            "answer": 5
+          },
+          {
+            "bodyId": 579919,
+            "answer": 16
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "shuffled_labels"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.0625,
+        "teacher_accuracy": 1.0,
+        "test_accuracy": 0.05,
+        "test_true_probability": 0.06509973586718684
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 10,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "83395ab80f02ccf753d1677681435b18a7e86ed614ff0449a13a0eb747a6c79a",
+        "test_weights_after": "83395ab80f02ccf753d1677681435b18a7e86ed614ff0449a13a0eb747a6c79a",
+        "updated_supported_gains": 26118,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 1
+          },
+          {
+            "bodyId": 10079,
+            "answer": 10
+          },
+          {
+            "bodyId": 10267,
+            "answer": 15
+          },
+          {
+            "bodyId": 10495,
+            "answer": 1
+          },
+          {
+            "bodyId": 10599,
+            "answer": 7
+          },
+          {
+            "bodyId": 10704,
+            "answer": 2
+          },
+          {
+            "bodyId": 10804,
+            "answer": 14
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 12
+          },
+          {
+            "bodyId": 11145,
+            "answer": 4
+          },
+          {
+            "bodyId": 11176,
+            "answer": 8
+          },
+          {
+            "bodyId": 11402,
+            "answer": 7
+          },
+          {
+            "bodyId": 11455,
+            "answer": 12
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 13
+          },
+          {
+            "bodyId": 11805,
+            "answer": 3
+          },
+          {
+            "bodyId": 11873,
+            "answer": 18
+          },
+          {
+            "bodyId": 11990,
+            "answer": 18
+          },
+          {
+            "bodyId": 12690,
+            "answer": 8
+          },
+          {
+            "bodyId": 12726,
+            "answer": 11
+          },
+          {
+            "bodyId": 12859,
+            "answer": 14
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 13
+          },
+          {
+            "bodyId": 13768,
+            "answer": 13
+          },
+          {
+            "bodyId": 14221,
+            "answer": 8
+          },
+          {
+            "bodyId": 15626,
+            "answer": 7
+          },
+          {
+            "bodyId": 15708,
+            "answer": 6
+          },
+          {
+            "bodyId": 17946,
+            "answer": 0
+          },
+          {
+            "bodyId": 18406,
+            "answer": 6
+          },
+          {
+            "bodyId": 18603,
+            "answer": 2
+          },
+          {
+            "bodyId": 18713,
+            "answer": 0
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 15
+          },
+          {
+            "bodyId": 20835,
+            "answer": 9
+          },
+          {
+            "bodyId": 21242,
+            "answer": 18
+          },
+          {
+            "bodyId": 26485,
+            "answer": 5
+          },
+          {
+            "bodyId": 26853,
+            "answer": 7
+          },
+          {
+            "bodyId": 28622,
+            "answer": 3
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 10
+          },
+          {
+            "bodyId": 33617,
+            "answer": 11
+          },
+          {
+            "bodyId": 36094,
+            "answer": 14
+          },
+          {
+            "bodyId": 38853,
+            "answer": 6
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 7
+          },
+          {
+            "bodyId": 41692,
+            "answer": 16
+          },
+          {
+            "bodyId": 44619,
+            "answer": 16
+          },
+          {
+            "bodyId": 47551,
+            "answer": 6
+          },
+          {
+            "bodyId": 49262,
+            "answer": 2
+          },
+          {
+            "bodyId": 58401,
+            "answer": 0
+          },
+          {
+            "bodyId": 70924,
+            "answer": 10
+          },
+          {
+            "bodyId": 76585,
+            "answer": 4
+          },
+          {
+            "bodyId": 87077,
+            "answer": 15
+          },
+          {
+            "bodyId": 92112,
+            "answer": 4
+          },
+          {
+            "bodyId": 110448,
+            "answer": 3
+          },
+          {
+            "bodyId": 133427,
+            "answer": 5
+          },
+          {
+            "bodyId": 160320,
+            "answer": 0
+          },
+          {
+            "bodyId": 187741,
+            "answer": 0
+          },
+          {
+            "bodyId": 208566,
+            "answer": 3
+          },
+          {
+            "bodyId": 394860,
+            "answer": 15
+          },
+          {
+            "bodyId": 508595,
+            "answer": 4
+          },
+          {
+            "bodyId": 512788,
+            "answer": 2
+          },
+          {
+            "bodyId": 512789,
+            "answer": 18
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 6
+          },
+          {
+            "bodyId": 513391,
+            "answer": 17
+          },
+          {
+            "bodyId": 514853,
+            "answer": 11
+          },
+          {
+            "bodyId": 515015,
+            "answer": 8
+          },
+          {
+            "bodyId": 515034,
+            "answer": 14
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 1
+          },
+          {
+            "bodyId": 519131,
+            "answer": 5
+          },
+          {
+            "bodyId": 519368,
+            "answer": 1
+          },
+          {
+            "bodyId": 519371,
+            "answer": 15
+          },
+          {
+            "bodyId": 519373,
+            "answer": 9
+          },
+          {
+            "bodyId": 519619,
+            "answer": 14
+          },
+          {
+            "bodyId": 520151,
+            "answer": 1
+          },
+          {
+            "bodyId": 520186,
+            "answer": 18
+          },
+          {
+            "bodyId": 520395,
+            "answer": 10
+          },
+          {
+            "bodyId": 521086,
+            "answer": 1
+          },
+          {
+            "bodyId": 521526,
+            "answer": 3
+          },
+          {
+            "bodyId": 522444,
+            "answer": 17
+          },
+          {
+            "bodyId": 522749,
+            "answer": 13
+          },
+          {
+            "bodyId": 523043,
+            "answer": 17
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 16
+          },
+          {
+            "bodyId": 523987,
+            "answer": 10
+          },
+          {
+            "bodyId": 524733,
+            "answer": 5
+          },
+          {
+            "bodyId": 524893,
+            "answer": 9
+          },
+          {
+            "bodyId": 525780,
+            "answer": 2
+          },
+          {
+            "bodyId": 530875,
+            "answer": 17
+          },
+          {
+            "bodyId": 531829,
+            "answer": 11
+          },
+          {
+            "bodyId": 540383,
+            "answer": 8
+          },
+          {
+            "bodyId": 556300,
+            "answer": 12
+          },
+          {
+            "bodyId": 558665,
+            "answer": 9
+          },
+          {
+            "bodyId": 562782,
+            "answer": 5
+          },
+          {
+            "bodyId": 579919,
+            "answer": 16
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "shuffled_wiring"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 1.0,
+        "teacher_accuracy": 1.0,
+        "test_accuracy": 0.0,
+        "test_true_probability": 0.008217311063521405
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 10,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "4225d484ad40c5538c49de3bdf49f67f9560a0286571af25066a84d2fd985974",
+        "test_weights_after": "4225d484ad40c5538c49de3bdf49f67f9560a0286571af25066a84d2fd985974",
+        "updated_supported_gains": 26098,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 1
+          },
+          {
+            "bodyId": 10079,
+            "answer": 10
+          },
+          {
+            "bodyId": 10267,
+            "answer": 15
+          },
+          {
+            "bodyId": 10495,
+            "answer": 1
+          },
+          {
+            "bodyId": 10599,
+            "answer": 7
+          },
+          {
+            "bodyId": 10704,
+            "answer": 2
+          },
+          {
+            "bodyId": 10804,
+            "answer": 14
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 12
+          },
+          {
+            "bodyId": 11145,
+            "answer": 4
+          },
+          {
+            "bodyId": 11176,
+            "answer": 8
+          },
+          {
+            "bodyId": 11402,
+            "answer": 7
+          },
+          {
+            "bodyId": 11455,
+            "answer": 12
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 13
+          },
+          {
+            "bodyId": 11805,
+            "answer": 3
+          },
+          {
+            "bodyId": 11873,
+            "answer": 18
+          },
+          {
+            "bodyId": 11990,
+            "answer": 18
+          },
+          {
+            "bodyId": 12690,
+            "answer": 8
+          },
+          {
+            "bodyId": 12726,
+            "answer": 11
+          },
+          {
+            "bodyId": 12859,
+            "answer": 14
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 13
+          },
+          {
+            "bodyId": 13768,
+            "answer": 13
+          },
+          {
+            "bodyId": 14221,
+            "answer": 8
+          },
+          {
+            "bodyId": 15626,
+            "answer": 7
+          },
+          {
+            "bodyId": 15708,
+            "answer": 6
+          },
+          {
+            "bodyId": 17946,
+            "answer": 0
+          },
+          {
+            "bodyId": 18406,
+            "answer": 6
+          },
+          {
+            "bodyId": 18603,
+            "answer": 2
+          },
+          {
+            "bodyId": 18713,
+            "answer": 0
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 15
+          },
+          {
+            "bodyId": 20835,
+            "answer": 9
+          },
+          {
+            "bodyId": 21242,
+            "answer": 18
+          },
+          {
+            "bodyId": 26485,
+            "answer": 5
+          },
+          {
+            "bodyId": 26853,
+            "answer": 7
+          },
+          {
+            "bodyId": 28622,
+            "answer": 3
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 10
+          },
+          {
+            "bodyId": 33617,
+            "answer": 11
+          },
+          {
+            "bodyId": 36094,
+            "answer": 14
+          },
+          {
+            "bodyId": 38853,
+            "answer": 6
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 7
+          },
+          {
+            "bodyId": 41692,
+            "answer": 16
+          },
+          {
+            "bodyId": 44619,
+            "answer": 16
+          },
+          {
+            "bodyId": 47551,
+            "answer": 6
+          },
+          {
+            "bodyId": 49262,
+            "answer": 2
+          },
+          {
+            "bodyId": 58401,
+            "answer": 0
+          },
+          {
+            "bodyId": 70924,
+            "answer": 10
+          },
+          {
+            "bodyId": 76585,
+            "answer": 4
+          },
+          {
+            "bodyId": 87077,
+            "answer": 15
+          },
+          {
+            "bodyId": 92112,
+            "answer": 4
+          },
+          {
+            "bodyId": 110448,
+            "answer": 3
+          },
+          {
+            "bodyId": 133427,
+            "answer": 5
+          },
+          {
+            "bodyId": 160320,
+            "answer": 0
+          },
+          {
+            "bodyId": 187741,
+            "answer": 0
+          },
+          {
+            "bodyId": 208566,
+            "answer": 3
+          },
+          {
+            "bodyId": 394860,
+            "answer": 15
+          },
+          {
+            "bodyId": 508595,
+            "answer": 4
+          },
+          {
+            "bodyId": 512788,
+            "answer": 2
+          },
+          {
+            "bodyId": 512789,
+            "answer": 18
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 6
+          },
+          {
+            "bodyId": 513391,
+            "answer": 17
+          },
+          {
+            "bodyId": 514853,
+            "answer": 11
+          },
+          {
+            "bodyId": 515015,
+            "answer": 8
+          },
+          {
+            "bodyId": 515034,
+            "answer": 14
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 1
+          },
+          {
+            "bodyId": 519131,
+            "answer": 5
+          },
+          {
+            "bodyId": 519368,
+            "answer": 1
+          },
+          {
+            "bodyId": 519371,
+            "answer": 15
+          },
+          {
+            "bodyId": 519373,
+            "answer": 9
+          },
+          {
+            "bodyId": 519619,
+            "answer": 14
+          },
+          {
+            "bodyId": 520151,
+            "answer": 1
+          },
+          {
+            "bodyId": 520186,
+            "answer": 18
+          },
+          {
+            "bodyId": 520395,
+            "answer": 10
+          },
+          {
+            "bodyId": 521086,
+            "answer": 1
+          },
+          {
+            "bodyId": 521526,
+            "answer": 3
+          },
+          {
+            "bodyId": 522444,
+            "answer": 17
+          },
+          {
+            "bodyId": 522749,
+            "answer": 13
+          },
+          {
+            "bodyId": 523043,
+            "answer": 17
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 16
+          },
+          {
+            "bodyId": 523987,
+            "answer": 10
+          },
+          {
+            "bodyId": 524733,
+            "answer": 5
+          },
+          {
+            "bodyId": 524893,
+            "answer": 9
+          },
+          {
+            "bodyId": 525780,
+            "answer": 2
+          },
+          {
+            "bodyId": 530875,
+            "answer": 17
+          },
+          {
+            "bodyId": 531829,
+            "answer": 11
+          },
+          {
+            "bodyId": 540383,
+            "answer": 8
+          },
+          {
+            "bodyId": 556300,
+            "answer": 12
+          },
+          {
+            "bodyId": 558665,
+            "answer": 9
+          },
+          {
+            "bodyId": 562782,
+            "answer": 5
+          },
+          {
+            "bodyId": 579919,
+            "answer": 16
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "seed": 9,
+        "epochs": 100,
+        "learning_rate": 0.15,
+        "condition": "silence_kc"
+      },
+      "summary": {
+        "epoch": 100,
+        "train_accuracy": 0.0,
+        "teacher_accuracy": 0.0,
+        "test_accuracy": 0.05,
+        "test_true_probability": 0.052631578947368404
+      },
+      "baseline": {
+        "uniform_random_accuracy": 0.05263157894736842,
+        "majority_answer": 10,
+        "majority_test_accuracy": 0.0
+      },
+      "audit": {
+        "training_pairs": 80,
+        "unseen_pairs": 20,
+        "test_weights_before": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "test_weights_after": "7edf1127b3aee3e486d9feb655abde388076dcf60bca58945c3e8bf398e49694",
+        "updated_supported_gains": 0,
+        "unsupported_nonzero": 0,
+        "reverse_pairs_held_out_together": true,
+        "test_feedback_used": false,
+        "answer_pool_assignments": [
+          {
+            "bodyId": 10013,
+            "answer": 1
+          },
+          {
+            "bodyId": 10079,
+            "answer": 10
+          },
+          {
+            "bodyId": 10267,
+            "answer": 15
+          },
+          {
+            "bodyId": 10495,
+            "answer": 1
+          },
+          {
+            "bodyId": 10599,
+            "answer": 7
+          },
+          {
+            "bodyId": 10704,
+            "answer": 2
+          },
+          {
+            "bodyId": 10804,
+            "answer": 14
+          },
+          {
+            "bodyId": 10816,
+            "answer": 16
+          },
+          {
+            "bodyId": 10826,
+            "answer": 12
+          },
+          {
+            "bodyId": 11145,
+            "answer": 4
+          },
+          {
+            "bodyId": 11176,
+            "answer": 8
+          },
+          {
+            "bodyId": 11402,
+            "answer": 7
+          },
+          {
+            "bodyId": 11455,
+            "answer": 12
+          },
+          {
+            "bodyId": 11777,
+            "answer": 0
+          },
+          {
+            "bodyId": 11785,
+            "answer": 13
+          },
+          {
+            "bodyId": 11805,
+            "answer": 3
+          },
+          {
+            "bodyId": 11873,
+            "answer": 18
+          },
+          {
+            "bodyId": 11990,
+            "answer": 18
+          },
+          {
+            "bodyId": 12690,
+            "answer": 8
+          },
+          {
+            "bodyId": 12726,
+            "answer": 11
+          },
+          {
+            "bodyId": 12859,
+            "answer": 14
+          },
+          {
+            "bodyId": 12918,
+            "answer": 12
+          },
+          {
+            "bodyId": 13728,
+            "answer": 13
+          },
+          {
+            "bodyId": 13768,
+            "answer": 13
+          },
+          {
+            "bodyId": 14221,
+            "answer": 8
+          },
+          {
+            "bodyId": 15626,
+            "answer": 7
+          },
+          {
+            "bodyId": 15708,
+            "answer": 6
+          },
+          {
+            "bodyId": 17946,
+            "answer": 0
+          },
+          {
+            "bodyId": 18406,
+            "answer": 6
+          },
+          {
+            "bodyId": 18603,
+            "answer": 2
+          },
+          {
+            "bodyId": 18713,
+            "answer": 0
+          },
+          {
+            "bodyId": 19267,
+            "answer": 11
+          },
+          {
+            "bodyId": 19366,
+            "answer": 15
+          },
+          {
+            "bodyId": 20835,
+            "answer": 9
+          },
+          {
+            "bodyId": 21242,
+            "answer": 18
+          },
+          {
+            "bodyId": 26485,
+            "answer": 5
+          },
+          {
+            "bodyId": 26853,
+            "answer": 7
+          },
+          {
+            "bodyId": 28622,
+            "answer": 3
+          },
+          {
+            "bodyId": 31016,
+            "answer": 13
+          },
+          {
+            "bodyId": 31083,
+            "answer": 10
+          },
+          {
+            "bodyId": 33617,
+            "answer": 11
+          },
+          {
+            "bodyId": 36094,
+            "answer": 14
+          },
+          {
+            "bodyId": 38853,
+            "answer": 6
+          },
+          {
+            "bodyId": 38859,
+            "answer": 9
+          },
+          {
+            "bodyId": 39608,
+            "answer": 7
+          },
+          {
+            "bodyId": 41692,
+            "answer": 16
+          },
+          {
+            "bodyId": 44619,
+            "answer": 16
+          },
+          {
+            "bodyId": 47551,
+            "answer": 6
+          },
+          {
+            "bodyId": 49262,
+            "answer": 2
+          },
+          {
+            "bodyId": 58401,
+            "answer": 0
+          },
+          {
+            "bodyId": 70924,
+            "answer": 10
+          },
+          {
+            "bodyId": 76585,
+            "answer": 4
+          },
+          {
+            "bodyId": 87077,
+            "answer": 15
+          },
+          {
+            "bodyId": 92112,
+            "answer": 4
+          },
+          {
+            "bodyId": 110448,
+            "answer": 3
+          },
+          {
+            "bodyId": 133427,
+            "answer": 5
+          },
+          {
+            "bodyId": 160320,
+            "answer": 0
+          },
+          {
+            "bodyId": 187741,
+            "answer": 0
+          },
+          {
+            "bodyId": 208566,
+            "answer": 3
+          },
+          {
+            "bodyId": 394860,
+            "answer": 15
+          },
+          {
+            "bodyId": 508595,
+            "answer": 4
+          },
+          {
+            "bodyId": 512788,
+            "answer": 2
+          },
+          {
+            "bodyId": 512789,
+            "answer": 18
+          },
+          {
+            "bodyId": 513174,
+            "answer": 4
+          },
+          {
+            "bodyId": 513387,
+            "answer": 6
+          },
+          {
+            "bodyId": 513391,
+            "answer": 17
+          },
+          {
+            "bodyId": 514853,
+            "answer": 11
+          },
+          {
+            "bodyId": 515015,
+            "answer": 8
+          },
+          {
+            "bodyId": 515034,
+            "answer": 14
+          },
+          {
+            "bodyId": 515338,
+            "answer": 12
+          },
+          {
+            "bodyId": 519128,
+            "answer": 1
+          },
+          {
+            "bodyId": 519131,
+            "answer": 5
+          },
+          {
+            "bodyId": 519368,
+            "answer": 1
+          },
+          {
+            "bodyId": 519371,
+            "answer": 15
+          },
+          {
+            "bodyId": 519373,
+            "answer": 9
+          },
+          {
+            "bodyId": 519619,
+            "answer": 14
+          },
+          {
+            "bodyId": 520151,
+            "answer": 1
+          },
+          {
+            "bodyId": 520186,
+            "answer": 18
+          },
+          {
+            "bodyId": 520395,
+            "answer": 10
+          },
+          {
+            "bodyId": 521086,
+            "answer": 1
+          },
+          {
+            "bodyId": 521526,
+            "answer": 3
+          },
+          {
+            "bodyId": 522444,
+            "answer": 17
+          },
+          {
+            "bodyId": 522749,
+            "answer": 13
+          },
+          {
+            "bodyId": 523043,
+            "answer": 17
+          },
+          {
+            "bodyId": 523060,
+            "answer": 17
+          },
+          {
+            "bodyId": 523628,
+            "answer": 16
+          },
+          {
+            "bodyId": 523987,
+            "answer": 10
+          },
+          {
+            "bodyId": 524733,
+            "answer": 5
+          },
+          {
+            "bodyId": 524893,
+            "answer": 9
+          },
+          {
+            "bodyId": 525780,
+            "answer": 2
+          },
+          {
+            "bodyId": 530875,
+            "answer": 17
+          },
+          {
+            "bodyId": 531829,
+            "answer": 11
+          },
+          {
+            "bodyId": 540383,
+            "answer": 8
+          },
+          {
+            "bodyId": 556300,
+            "answer": 12
+          },
+          {
+            "bodyId": 558665,
+            "answer": 9
+          },
+          {
+            "bodyId": 562782,
+            "answer": 5
+          },
+          {
+            "bodyId": 579919,
+            "answer": 16
+          }
+        ]
+      }
+    }
+  ],
+  "seeds": [
+    7,
+    8,
+    9
+  ],
+  "conditions": [
+    "intact",
+    "no_learning",
+    "shuffled_labels",
+    "shuffled_wiring",
+    "silence_kc"
+  ],
+  "note": "Default 100 epochs; no hyperparameter selection using held-out results. Three synthetic seeds, not biological replicates."
+}

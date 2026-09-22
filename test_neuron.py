@@ -1,4 +1,5 @@
 import json
+import time
 import shutil
 import subprocess
 import threading
@@ -57,10 +58,14 @@ class RouteTests(unittest.TestCase):
     def post_with(self, origin, host=None):
         headers = {'Content-Type': 'application/json', 'Origin': origin}
         if host: headers['Host'] = host
-        req = urllib.request.Request(self.url + '/api/numerosity', data=json.dumps({'train_trials': 10}).encode(), headers=headers)
-        try:
-            with urllib.request.urlopen(req) as r: return r.status
-        except urllib.error.HTTPError as e: return e.code
+        for _ in range(40):   # the server releases its one-experiment lock just after replying; retry a 409 briefly
+            req = urllib.request.Request(self.url + '/api/numerosity', data=json.dumps({'train_trials': 10}).encode(), headers=headers)
+            try:
+                with urllib.request.urlopen(req) as r: return r.status
+            except urllib.error.HTTPError as e:
+                if e.code != 409: return e.code
+            time.sleep(0.05)
+        return 409
 
     def test_origin_check_allows_https_proxy_and_blocks_other_sites(self):
         local = self.url.split('//')[1]

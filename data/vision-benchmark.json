@@ -1,0 +1,2235 @@
+{
+  "epochs": 35,
+  "runs": [
+    {
+      "seed": 401,
+      "models": [
+        {
+          "kind": "graph_scalar",
+          "name": "Measured graph \u00b7 1 state/node",
+          "parameters": 2070,
+          "nodes": 209,
+          "state_size": 1,
+          "initial_test": {
+            "motion_rmse": 0.04264669120311737,
+            "direction_error_deg": 101.10612487792969,
+            "hazard_accuracy": 0.1640625,
+            "hazard_brier": 0.2530630826950073
+          },
+          "train": {
+            "motion_rmse": 0.014497626572847366,
+            "direction_error_deg": 14.124992370605469,
+            "hazard_accuracy": 0.97265625,
+            "hazard_brier": 0.02102087065577507
+          },
+          "test": {
+            "motion_rmse": 0.019183140248060226,
+            "direction_error_deg": 16.644405364990234,
+            "hazard_accuracy": 0.890625,
+            "hazard_brier": 0.09898849576711655
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.647172823548317,
+              "validation": {
+                "motion_rmse": 0.039622966200113297,
+                "direction_error_deg": 73.15789031982422,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.18506857752799988
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.4390227235853672,
+              "validation": {
+                "motion_rmse": 0.03718620538711548,
+                "direction_error_deg": 61.18246841430664,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.07577306032180786
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.3426024466753006,
+              "validation": {
+                "motion_rmse": 0.032588064670562744,
+                "direction_error_deg": 49.191680908203125,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.06383109092712402
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.1958433799445629,
+              "validation": {
+                "motion_rmse": 0.02375924400985241,
+                "direction_error_deg": 29.25749397277832,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.055137813091278076
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.13768589589744806,
+              "validation": {
+                "motion_rmse": 0.02012648805975914,
+                "direction_error_deg": 22.54168128967285,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.049259722232818604
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.11656104028224945,
+              "validation": {
+                "motion_rmse": 0.01849713735282421,
+                "direction_error_deg": 19.358869552612305,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04130295291543007
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.09673137683421373,
+              "validation": {
+                "motion_rmse": 0.017162272706627846,
+                "direction_error_deg": 17.79125213623047,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.034868739545345306
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.08806570991873741,
+              "validation": {
+                "motion_rmse": 0.016543768346309662,
+                "direction_error_deg": 17.59515380859375,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.029110137373209
+              }
+            }
+          ],
+          "test_weight_hash_before": "669b139bd7fb21ab5fac77890cf9904d7578991b6a6d85bd14ef22ec771b2d1a",
+          "test_weight_hash_after": "669b139bd7fb21ab5fac77890cf9904d7578991b6a6d85bd14ef22ec771b2d1a",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.0426572784781456,
+            "direction_error_deg": 91.17031860351562,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.2642679810523987
+          },
+          "ablation_restored_hash": "669b139bd7fb21ab5fac77890cf9904d7578991b6a6d85bd14ef22ec771b2d1a"
+        },
+        {
+          "kind": "graph_vector",
+          "name": "Measured graph \u00b7 2 states/node",
+          "parameters": 3134,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04267494007945061,
+            "direction_error_deg": 90.25408172607422,
+            "hazard_accuracy": 0.8125,
+            "hazard_brier": 0.24752552807331085
+          },
+          "train": {
+            "motion_rmse": 0.015446041710674763,
+            "direction_error_deg": 15.235894203186035,
+            "hazard_accuracy": 0.97265625,
+            "hazard_brier": 0.01960870251059532
+          },
+          "test": {
+            "motion_rmse": 0.018871497362852097,
+            "direction_error_deg": 18.268394470214844,
+            "hazard_accuracy": 0.875,
+            "hazard_brier": 0.0964680165052414
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6173954755067825,
+              "validation": {
+                "motion_rmse": 0.03854920715093613,
+                "direction_error_deg": 66.12893676757812,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.1282205879688263
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.4071199335157871,
+              "validation": {
+                "motion_rmse": 0.0366235189139843,
+                "direction_error_deg": 57.82865524291992,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.0726594552397728
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.29815499670803547,
+              "validation": {
+                "motion_rmse": 0.028937408700585365,
+                "direction_error_deg": 37.494930267333984,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.06386961042881012
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.1681887162849307,
+              "validation": {
+                "motion_rmse": 0.020571844652295113,
+                "direction_error_deg": 23.14937400817871,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.05078674480319023
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.13242383114993572,
+              "validation": {
+                "motion_rmse": 0.020123176276683807,
+                "direction_error_deg": 23.51757049560547,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04127274453639984
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.10936036240309477,
+              "validation": {
+                "motion_rmse": 0.018445923924446106,
+                "direction_error_deg": 20.787809371948242,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.036164507269859314
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.09294383972883224,
+              "validation": {
+                "motion_rmse": 0.017772769555449486,
+                "direction_error_deg": 20.446842193603516,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03384595736861229
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.08665579883381724,
+              "validation": {
+                "motion_rmse": 0.01769779995083809,
+                "direction_error_deg": 19.3173828125,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.02986789494752884
+              }
+            }
+          ],
+          "test_weight_hash_before": "9d14226b142a53e3b868fba20d23e2a2f74d0ebe69894e753d25d70a919bbcc8",
+          "test_weight_hash_after": "9d14226b142a53e3b868fba20d23e2a2f74d0ebe69894e753d25d70a919bbcc8",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04374636709690094,
+            "direction_error_deg": 91.79991912841797,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.353659451007843
+          },
+          "ablation_restored_hash": "9d14226b142a53e3b868fba20d23e2a2f74d0ebe69894e753d25d70a919bbcc8"
+        },
+        {
+          "kind": "shuffled_vector",
+          "name": "Rewired graph \u00b7 2 states/node",
+          "parameters": 3134,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.042583078145980835,
+            "direction_error_deg": 90.75053405761719,
+            "hazard_accuracy": 0.484375,
+            "hazard_brier": 0.2501698136329651
+          },
+          "train": {
+            "motion_rmse": 0.01639486663043499,
+            "direction_error_deg": 15.074698448181152,
+            "hazard_accuracy": 0.95703125,
+            "hazard_brier": 0.030540499836206436
+          },
+          "test": {
+            "motion_rmse": 0.02025931142270565,
+            "direction_error_deg": 19.207218170166016,
+            "hazard_accuracy": 0.8828125,
+            "hazard_brier": 0.09802195429801941
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6215222403407097,
+              "validation": {
+                "motion_rmse": 0.03865017741918564,
+                "direction_error_deg": 68.0377197265625,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.14205467700958252
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.4028249941766262,
+              "validation": {
+                "motion_rmse": 0.037081602960824966,
+                "direction_error_deg": 58.46953201293945,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.0732041597366333
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.31206122040748596,
+              "validation": {
+                "motion_rmse": 0.0326223149895668,
+                "direction_error_deg": 48.032493591308594,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.06645788252353668
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.2154646124690771,
+              "validation": {
+                "motion_rmse": 0.025847865268588066,
+                "direction_error_deg": 34.31502151489258,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.051968127489089966
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.16120851039886475,
+              "validation": {
+                "motion_rmse": 0.01966828666627407,
+                "direction_error_deg": 19.996686935424805,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.047905683517456055
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.13609435874968767,
+              "validation": {
+                "motion_rmse": 0.018622426316142082,
+                "direction_error_deg": 18.64613914489746,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.043460361659526825
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.1192665258422494,
+              "validation": {
+                "motion_rmse": 0.018305448815226555,
+                "direction_error_deg": 18.67467498779297,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.038946717977523804
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.10883822105824947,
+              "validation": {
+                "motion_rmse": 0.01757749542593956,
+                "direction_error_deg": 16.869468688964844,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.03322570025920868
+              }
+            }
+          ],
+          "test_weight_hash_before": "660319400d923ec01137b8d85c0ea7bc35388b97b69880b436d0968f8db53ab3",
+          "test_weight_hash_after": "660319400d923ec01137b8d85c0ea7bc35388b97b69880b436d0968f8db53ab3",
+          "rewiring_swaps": 38652,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04323393478989601,
+            "direction_error_deg": 92.39725494384766,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.4212315082550049
+          },
+          "ablation_restored_hash": "660319400d923ec01137b8d85c0ea7bc35388b97b69880b436d0968f8db53ab3"
+        },
+        {
+          "kind": "dense_rnn",
+          "name": "Dense recurrent baseline",
+          "parameters": 3108,
+          "nodes": 45,
+          "state_size": 1,
+          "initial_test": {
+            "motion_rmse": 0.042940862476825714,
+            "direction_error_deg": 94.7387924194336,
+            "hazard_accuracy": 0.796875,
+            "hazard_brier": 0.2354157567024231
+          },
+          "train": {
+            "motion_rmse": 0.011859402060508728,
+            "direction_error_deg": 11.780486106872559,
+            "hazard_accuracy": 0.98046875,
+            "hazard_brier": 0.01152845285832882
+          },
+          "test": {
+            "motion_rmse": 0.015480993315577507,
+            "direction_error_deg": 15.955338478088379,
+            "hazard_accuracy": 0.8828125,
+            "hazard_brier": 0.10837540030479431
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.5469715520739555,
+              "validation": {
+                "motion_rmse": 0.03194199129939079,
+                "direction_error_deg": 44.60493469238281,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.10755255818367004
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.24297303147614002,
+              "validation": {
+                "motion_rmse": 0.027021564543247223,
+                "direction_error_deg": 35.404598236083984,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04402315616607666
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.12514581996947527,
+              "validation": {
+                "motion_rmse": 0.017397556453943253,
+                "direction_error_deg": 17.844589233398438,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03493659198284149
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.08555830223485827,
+              "validation": {
+                "motion_rmse": 0.015854336321353912,
+                "direction_error_deg": 15.126065254211426,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.02682807669043541
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.06734195118770003,
+              "validation": {
+                "motion_rmse": 0.015017220750451088,
+                "direction_error_deg": 14.798724174499512,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.025263965129852295
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.05279364995658398,
+              "validation": {
+                "motion_rmse": 0.01467518974095583,
+                "direction_error_deg": 12.835606575012207,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.02584070712327957
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.037465204019099474,
+              "validation": {
+                "motion_rmse": 0.013013073243200779,
+                "direction_error_deg": 12.148900032043457,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03451159968972206
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.042267847107723355,
+              "validation": {
+                "motion_rmse": 0.015550374053418636,
+                "direction_error_deg": 13.0975341796875,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.02885473519563675
+              }
+            }
+          ],
+          "test_weight_hash_before": "53bb4abb22b1e9483015a041d46c0c601cc107a0a968fe9e93dbcd644317d2c3",
+          "test_weight_hash_after": "53bb4abb22b1e9483015a041d46c0c601cc107a0a968fe9e93dbcd644317d2c3",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0
+        },
+        {
+          "kind": "eye_graph",
+          "name": "Measured graph + trainable eye (retinotopic)",
+          "parameters": 3240,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04267494007945061,
+            "direction_error_deg": 90.25408172607422,
+            "hazard_accuracy": 0.8125,
+            "hazard_brier": 0.24752552807331085
+          },
+          "train": {
+            "motion_rmse": 0.01507614180445671,
+            "direction_error_deg": 15.215739250183105,
+            "hazard_accuracy": 0.984375,
+            "hazard_brier": 0.014612533152103424
+          },
+          "test": {
+            "motion_rmse": 0.018687177449464798,
+            "direction_error_deg": 18.040143966674805,
+            "hazard_accuracy": 0.890625,
+            "hazard_brier": 0.09059680253267288
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6157151237130165,
+              "validation": {
+                "motion_rmse": 0.038497623056173325,
+                "direction_error_deg": 66.24331665039062,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.12381346523761749
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.40129781514406204,
+              "validation": {
+                "motion_rmse": 0.0365404337644577,
+                "direction_error_deg": 57.15704345703125,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.07140658795833588
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.2728201821446419,
+              "validation": {
+                "motion_rmse": 0.02715473063290119,
+                "direction_error_deg": 34.41929244995117,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.06001095101237297
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.1532018082216382,
+              "validation": {
+                "motion_rmse": 0.020492395386099815,
+                "direction_error_deg": 22.253414154052734,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.04649346321821213
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.12085440196096897,
+              "validation": {
+                "motion_rmse": 0.019849149510264397,
+                "direction_error_deg": 22.632732391357422,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03700346127152443
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.09897683933377266,
+              "validation": {
+                "motion_rmse": 0.018320776522159576,
+                "direction_error_deg": 19.85676383972168,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.031975582242012024
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.08382579125463963,
+              "validation": {
+                "motion_rmse": 0.01767626963555813,
+                "direction_error_deg": 18.971166610717773,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.030562076717615128
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.0755031080916524,
+              "validation": {
+                "motion_rmse": 0.01725885272026062,
+                "direction_error_deg": 19.32192039489746,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.025828048586845398
+              }
+            }
+          ],
+          "test_weight_hash_before": "f1d4fdab47fef2fa0916179658872d5be4e72b86740d73244dc138531b89a22b",
+          "test_weight_hash_after": "f1d4fdab47fef2fa0916179658872d5be4e72b86740d73244dc138531b89a22b",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04375956952571869,
+            "direction_error_deg": 91.9027099609375,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.4280777871608734
+          },
+          "ablation_restored_hash": "f1d4fdab47fef2fa0916179658872d5be4e72b86740d73244dc138531b89a22b",
+          "eye": {
+            "adaptation_a": 0.37985721307798476,
+            "adaptation_k": 0.002111346460878849,
+            "gain": 1.269765853881836,
+            "projection_self_mean": 1.1231542825698853,
+            "projection_other_mean_abs": 0.09358597178236648,
+            "projection_allowed_entries": 103
+          },
+          "eye_reset_test": {
+            "motion_rmse": 0.030623270198702812,
+            "direction_error_deg": 41.707733154296875,
+            "hazard_accuracy": 0.828125,
+            "hazard_brier": 0.12009251117706299
+          },
+          "eye_restored_hash": "f1d4fdab47fef2fa0916179658872d5be4e72b86740d73244dc138531b89a22b"
+        },
+        {
+          "kind": "eye_dense",
+          "name": "Measured graph + trainable eye (unrestricted)",
+          "parameters": 3498,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04267494007945061,
+            "direction_error_deg": 90.25408172607422,
+            "hazard_accuracy": 0.8125,
+            "hazard_brier": 0.24752552807331085
+          },
+          "train": {
+            "motion_rmse": 0.013349086977541447,
+            "direction_error_deg": 12.510087013244629,
+            "hazard_accuracy": 1.0,
+            "hazard_brier": 0.005457917228341103
+          },
+          "test": {
+            "motion_rmse": 0.01698252372443676,
+            "direction_error_deg": 15.539584159851074,
+            "hazard_accuracy": 0.875,
+            "hazard_brier": 0.09969209134578705
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6151387207210064,
+              "validation": {
+                "motion_rmse": 0.038624558597803116,
+                "direction_error_deg": 65.79853820800781,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.11957701295614243
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.3955160677433014,
+              "validation": {
+                "motion_rmse": 0.03605246543884277,
+                "direction_error_deg": 56.1219367980957,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.0708814188838005
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.23346925154328346,
+              "validation": {
+                "motion_rmse": 0.023133154958486557,
+                "direction_error_deg": 25.56634521484375,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.061513569205999374
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.1325086634606123,
+              "validation": {
+                "motion_rmse": 0.017883839085698128,
+                "direction_error_deg": 19.369136810302734,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.047194987535476685
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.10503017343580723,
+              "validation": {
+                "motion_rmse": 0.01706419512629509,
+                "direction_error_deg": 17.386323928833008,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.03783588856458664
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.08017083210870624,
+              "validation": {
+                "motion_rmse": 0.016077417880296707,
+                "direction_error_deg": 14.952858924865723,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.033661093562841415
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.06287923827767372,
+              "validation": {
+                "motion_rmse": 0.015034209936857224,
+                "direction_error_deg": 12.263277053833008,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03176143765449524
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.06090356782078743,
+              "validation": {
+                "motion_rmse": 0.0148262744769454,
+                "direction_error_deg": 12.692596435546875,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.024867461994290352
+              }
+            }
+          ],
+          "test_weight_hash_before": "9268d7b6e435f9607b405f0b83e3b11f98a7bae42ced1b4d288e1f5afa0dc97b",
+          "test_weight_hash_after": "9268d7b6e435f9607b405f0b83e3b11f98a7bae42ced1b4d288e1f5afa0dc97b",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04389915242791176,
+            "direction_error_deg": 92.2336654663086,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.3758414685726166
+          },
+          "ablation_restored_hash": "9268d7b6e435f9607b405f0b83e3b11f98a7bae42ced1b4d288e1f5afa0dc97b",
+          "eye": {
+            "adaptation_a": 0.3139817384502199,
+            "adaptation_k": -0.08229625970125198,
+            "gain": 1.3350919485092163,
+            "projection_self_mean": 1.0877907276153564,
+            "projection_other_mean_abs": 0.09269217604193264,
+            "projection_allowed_entries": 361
+          },
+          "eye_reset_test": {
+            "motion_rmse": 0.036158133298158646,
+            "direction_error_deg": 54.49604415893555,
+            "hazard_accuracy": 0.5234375,
+            "hazard_brier": 0.3973052501678467
+          },
+          "eye_restored_hash": "9268d7b6e435f9607b405f0b83e3b11f98a7bae42ced1b4d288e1f5afa0dc97b"
+        }
+      ],
+      "constant_baseline": {
+        "motion_rmse": 0.042493075132369995,
+        "direction_error_deg": 89.02682495117188,
+        "hazard_accuracy": 0.8515625,
+        "hazard_brier": 0.1265411376953125
+      },
+      "hazard_prevalence": 0.1484375
+    },
+    {
+      "seed": 402,
+      "models": [
+        {
+          "kind": "graph_scalar",
+          "name": "Measured graph \u00b7 1 state/node",
+          "parameters": 2070,
+          "nodes": 209,
+          "state_size": 1,
+          "initial_test": {
+            "motion_rmse": 0.041507624089717865,
+            "direction_error_deg": 95.00726318359375,
+            "hazard_accuracy": 0.15625,
+            "hazard_brier": 0.2523466646671295
+          },
+          "train": {
+            "motion_rmse": 0.015864018350839615,
+            "direction_error_deg": 15.237812042236328,
+            "hazard_accuracy": 0.9609375,
+            "hazard_brier": 0.03465390205383301
+          },
+          "test": {
+            "motion_rmse": 0.017079535871744156,
+            "direction_error_deg": 17.322031021118164,
+            "hazard_accuracy": 0.9140625,
+            "hazard_brier": 0.05154833197593689
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6463911309838295,
+              "validation": {
+                "motion_rmse": 0.042882710695266724,
+                "direction_error_deg": 68.38640594482422,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.18102215230464935
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.43920793384313583,
+              "validation": {
+                "motion_rmse": 0.03953355923295021,
+                "direction_error_deg": 63.27814483642578,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.09628207981586456
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.3591220900416374,
+              "validation": {
+                "motion_rmse": 0.03648184612393379,
+                "direction_error_deg": 54.88005065917969,
+                "hazard_accuracy": 0.890625,
+                "hazard_brier": 0.07290802896022797
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.2577252481132746,
+              "validation": {
+                "motion_rmse": 0.030052684247493744,
+                "direction_error_deg": 37.51090621948242,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.05714448541402817
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.16130138747394085,
+              "validation": {
+                "motion_rmse": 0.024705560877919197,
+                "direction_error_deg": 25.138002395629883,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.046959131956100464
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.13274496048688889,
+              "validation": {
+                "motion_rmse": 0.02279963530600071,
+                "direction_error_deg": 19.17117691040039,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.03774777799844742
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.1211163941770792,
+              "validation": {
+                "motion_rmse": 0.02146843820810318,
+                "direction_error_deg": 21.692838668823242,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03356464207172394
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.10528725758194923,
+              "validation": {
+                "motion_rmse": 0.020272009074687958,
+                "direction_error_deg": 19.8305721282959,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.033023349940776825
+              }
+            }
+          ],
+          "test_weight_hash_before": "2d21c4a5d9dad991de457de1b901f5548d69fc9b13c46c8fc1a9f94b4348126e",
+          "test_weight_hash_after": "2d21c4a5d9dad991de457de1b901f5548d69fc9b13c46c8fc1a9f94b4348126e",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.041566863656044006,
+            "direction_error_deg": 92.11808776855469,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.287417471408844
+          },
+          "ablation_restored_hash": "2d21c4a5d9dad991de457de1b901f5548d69fc9b13c46c8fc1a9f94b4348126e"
+        },
+        {
+          "kind": "graph_vector",
+          "name": "Measured graph \u00b7 2 states/node",
+          "parameters": 3134,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04150032252073288,
+            "direction_error_deg": 92.27674865722656,
+            "hazard_accuracy": 0.8515625,
+            "hazard_brier": 0.2447894811630249
+          },
+          "train": {
+            "motion_rmse": 0.01489952951669693,
+            "direction_error_deg": 13.8468599319458,
+            "hazard_accuracy": 0.9609375,
+            "hazard_brier": 0.030955174937844276
+          },
+          "test": {
+            "motion_rmse": 0.016653040423989296,
+            "direction_error_deg": 17.955873489379883,
+            "hazard_accuracy": 0.921875,
+            "hazard_brier": 0.052395034581422806
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6242678612470627,
+              "validation": {
+                "motion_rmse": 0.04247574880719185,
+                "direction_error_deg": 71.1531982421875,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.13651666045188904
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.41589879244565964,
+              "validation": {
+                "motion_rmse": 0.03877577558159828,
+                "direction_error_deg": 60.42953109741211,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.08887168765068054
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.32994139939546585,
+              "validation": {
+                "motion_rmse": 0.03545796126127243,
+                "direction_error_deg": 50.57134246826172,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.06611306965351105
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.19886982627213,
+              "validation": {
+                "motion_rmse": 0.02818080596625805,
+                "direction_error_deg": 30.49662208557129,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.052316464483737946
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.14274704921990633,
+              "validation": {
+                "motion_rmse": 0.023532412946224213,
+                "direction_error_deg": 23.089662551879883,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04202742129564285
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.11865632887929678,
+              "validation": {
+                "motion_rmse": 0.021651219576597214,
+                "direction_error_deg": 17.526025772094727,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.03480204939842224
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.11080707237124443,
+              "validation": {
+                "motion_rmse": 0.021552329882979393,
+                "direction_error_deg": 20.18608283996582,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.03282632678747177
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.09471430908888578,
+              "validation": {
+                "motion_rmse": 0.01978764683008194,
+                "direction_error_deg": 19.721426010131836,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.03343668580055237
+              }
+            }
+          ],
+          "test_weight_hash_before": "2dff2c6b2aa115dc3ee197215bfb68248fb2e527f070a3232dbbf249d1271a84",
+          "test_weight_hash_after": "2dff2c6b2aa115dc3ee197215bfb68248fb2e527f070a3232dbbf249d1271a84",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.041379790753126144,
+            "direction_error_deg": 85.36790466308594,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.3531697988510132
+          },
+          "ablation_restored_hash": "2dff2c6b2aa115dc3ee197215bfb68248fb2e527f070a3232dbbf249d1271a84"
+        },
+        {
+          "kind": "shuffled_vector",
+          "name": "Rewired graph \u00b7 2 states/node",
+          "parameters": 3134,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04117102921009064,
+            "direction_error_deg": 76.20217895507812,
+            "hazard_accuracy": 0.734375,
+            "hazard_brier": 0.247117817401886
+          },
+          "train": {
+            "motion_rmse": 0.01582450047135353,
+            "direction_error_deg": 15.24284553527832,
+            "hazard_accuracy": 0.93359375,
+            "hazard_brier": 0.04755018278956413
+          },
+          "test": {
+            "motion_rmse": 0.018127137795090675,
+            "direction_error_deg": 23.075178146362305,
+            "hazard_accuracy": 0.9296875,
+            "hazard_brier": 0.06295491755008698
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6232271865010262,
+              "validation": {
+                "motion_rmse": 0.04227417707443237,
+                "direction_error_deg": 72.35249328613281,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.14804387092590332
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.4190087728202343,
+              "validation": {
+                "motion_rmse": 0.03958845138549805,
+                "direction_error_deg": 61.852806091308594,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.08619096875190735
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.33830398321151733,
+              "validation": {
+                "motion_rmse": 0.0368262343108654,
+                "direction_error_deg": 53.07278060913086,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.06441621482372284
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.22847974300384521,
+              "validation": {
+                "motion_rmse": 0.03151710331439972,
+                "direction_error_deg": 34.127960205078125,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.054987456649541855
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.16698257718235254,
+              "validation": {
+                "motion_rmse": 0.025669259950518608,
+                "direction_error_deg": 27.24597930908203,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04690628871321678
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.1482176911085844,
+              "validation": {
+                "motion_rmse": 0.024611230939626694,
+                "direction_error_deg": 26.211444854736328,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.04162950813770294
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.13870479725301266,
+              "validation": {
+                "motion_rmse": 0.023789212107658386,
+                "direction_error_deg": 25.990737915039062,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.039075471460819244
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.12748457491397858,
+              "validation": {
+                "motion_rmse": 0.022314174100756645,
+                "direction_error_deg": 24.506013870239258,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.03823170065879822
+              }
+            }
+          ],
+          "test_weight_hash_before": "52c7c13dac72c840464cfdc1b563ab54741a5e960884cc41f1bb30064c73a679",
+          "test_weight_hash_after": "52c7c13dac72c840464cfdc1b563ab54741a5e960884cc41f1bb30064c73a679",
+          "rewiring_swaps": 38762,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04169771075248718,
+            "direction_error_deg": 90.76586151123047,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.2831481695175171
+          },
+          "ablation_restored_hash": "52c7c13dac72c840464cfdc1b563ab54741a5e960884cc41f1bb30064c73a679"
+        },
+        {
+          "kind": "dense_rnn",
+          "name": "Dense recurrent baseline",
+          "parameters": 3108,
+          "nodes": 45,
+          "state_size": 1,
+          "initial_test": {
+            "motion_rmse": 0.04061540588736534,
+            "direction_error_deg": 78.50801086425781,
+            "hazard_accuracy": 0.8125,
+            "hazard_brier": 0.2380896806716919
+          },
+          "train": {
+            "motion_rmse": 0.010085860267281532,
+            "direction_error_deg": 10.104735374450684,
+            "hazard_accuracy": 1.0,
+            "hazard_brier": 0.002258781809359789
+          },
+          "test": {
+            "motion_rmse": 0.016180647537112236,
+            "direction_error_deg": 15.737056732177734,
+            "hazard_accuracy": 0.9453125,
+            "hazard_brier": 0.040394581854343414
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.5479734130203724,
+              "validation": {
+                "motion_rmse": 0.03807465732097626,
+                "direction_error_deg": 53.27556228637695,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.11286449432373047
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.26836066506803036,
+              "validation": {
+                "motion_rmse": 0.029411129653453827,
+                "direction_error_deg": 35.4400749206543,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.05108097195625305
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.16187317296862602,
+              "validation": {
+                "motion_rmse": 0.023960674181580544,
+                "direction_error_deg": 26.174779891967773,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.034228771924972534
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.10739798657596111,
+              "validation": {
+                "motion_rmse": 0.02081134170293808,
+                "direction_error_deg": 19.479385375976562,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.030490875244140625
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.0707579581066966,
+              "validation": {
+                "motion_rmse": 0.01912297122180462,
+                "direction_error_deg": 22.893293380737305,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.0346204973757267
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.05603021616116166,
+              "validation": {
+                "motion_rmse": 0.017528295516967773,
+                "direction_error_deg": 16.45821189880371,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.036017220467329025
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.05059402296319604,
+              "validation": {
+                "motion_rmse": 0.01682661660015583,
+                "direction_error_deg": 14.846402168273926,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.030325204133987427
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.03182331449352205,
+              "validation": {
+                "motion_rmse": 0.0168476402759552,
+                "direction_error_deg": 16.293964385986328,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.036336857825517654
+              }
+            }
+          ],
+          "test_weight_hash_before": "ffed2c53f3d773c81c5065032551a8edb86a5804ae14a844091139367f47fd82",
+          "test_weight_hash_after": "ffed2c53f3d773c81c5065032551a8edb86a5804ae14a844091139367f47fd82",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0
+        },
+        {
+          "kind": "eye_graph",
+          "name": "Measured graph + trainable eye (retinotopic)",
+          "parameters": 3240,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04150032252073288,
+            "direction_error_deg": 92.27674865722656,
+            "hazard_accuracy": 0.8515625,
+            "hazard_brier": 0.2447894811630249
+          },
+          "train": {
+            "motion_rmse": 0.013595221564173698,
+            "direction_error_deg": 12.682571411132812,
+            "hazard_accuracy": 0.96484375,
+            "hazard_brier": 0.026860615238547325
+          },
+          "test": {
+            "motion_rmse": 0.01647237315773964,
+            "direction_error_deg": 16.986154556274414,
+            "hazard_accuracy": 0.9375,
+            "hazard_brier": 0.04102450609207153
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6237653344869614,
+              "validation": {
+                "motion_rmse": 0.04246416687965393,
+                "direction_error_deg": 71.1477279663086,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.13417330384254456
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.41322891786694527,
+              "validation": {
+                "motion_rmse": 0.03870900347828865,
+                "direction_error_deg": 60.188228607177734,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.08727788925170898
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.3155503682792187,
+              "validation": {
+                "motion_rmse": 0.0351581871509552,
+                "direction_error_deg": 49.36008834838867,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.061221327632665634
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.18807579204440117,
+              "validation": {
+                "motion_rmse": 0.02848117984831333,
+                "direction_error_deg": 33.011966705322266,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.04616473615169525
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.12853008788079023,
+              "validation": {
+                "motion_rmse": 0.023254379630088806,
+                "direction_error_deg": 24.291894912719727,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.035863716155290604
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.10681662987917662,
+              "validation": {
+                "motion_rmse": 0.02105177380144596,
+                "direction_error_deg": 17.095455169677734,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.030681928619742393
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.09663757355883718,
+              "validation": {
+                "motion_rmse": 0.02116202376782894,
+                "direction_error_deg": 19.595050811767578,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.02838996797800064
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.08252677042037249,
+              "validation": {
+                "motion_rmse": 0.019274473190307617,
+                "direction_error_deg": 17.269725799560547,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.029148170724511147
+              }
+            }
+          ],
+          "test_weight_hash_before": "6005a0adcd5633aa9aae4663a01fa756054284ceb38fd30f4fc1d731d7e6b5d3",
+          "test_weight_hash_after": "6005a0adcd5633aa9aae4663a01fa756054284ceb38fd30f4fc1d731d7e6b5d3",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04140358418226242,
+            "direction_error_deg": 85.7110824584961,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.41676971316337585
+          },
+          "ablation_restored_hash": "6005a0adcd5633aa9aae4663a01fa756054284ceb38fd30f4fc1d731d7e6b5d3",
+          "eye": {
+            "adaptation_a": 0.7191581067512375,
+            "adaptation_k": 0.13902269303798676,
+            "gain": 1.312618374824524,
+            "projection_self_mean": 1.1381627321243286,
+            "projection_other_mean_abs": 0.09816773755578435,
+            "projection_allowed_entries": 103
+          },
+          "eye_reset_test": {
+            "motion_rmse": 0.025255607441067696,
+            "direction_error_deg": 34.256813049316406,
+            "hazard_accuracy": 0.921875,
+            "hazard_brier": 0.057510942220687866
+          },
+          "eye_restored_hash": "6005a0adcd5633aa9aae4663a01fa756054284ceb38fd30f4fc1d731d7e6b5d3"
+        },
+        {
+          "kind": "eye_dense",
+          "name": "Measured graph + trainable eye (unrestricted)",
+          "parameters": 3498,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04150032252073288,
+            "direction_error_deg": 92.27674865722656,
+            "hazard_accuracy": 0.8515625,
+            "hazard_brier": 0.2447894811630249
+          },
+          "train": {
+            "motion_rmse": 0.01162178535014391,
+            "direction_error_deg": 11.251680374145508,
+            "hazard_accuracy": 0.9765625,
+            "hazard_brier": 0.02320627123117447
+          },
+          "test": {
+            "motion_rmse": 0.01519342977553606,
+            "direction_error_deg": 13.831684112548828,
+            "hazard_accuracy": 0.953125,
+            "hazard_brier": 0.03950834274291992
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6225904673337936,
+              "validation": {
+                "motion_rmse": 0.04267139360308647,
+                "direction_error_deg": 73.59127044677734,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.13013944029808044
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.40911971405148506,
+              "validation": {
+                "motion_rmse": 0.03802485764026642,
+                "direction_error_deg": 58.56757354736328,
+                "hazard_accuracy": 0.875,
+                "hazard_brier": 0.08689021319150925
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.27062778547406197,
+              "validation": {
+                "motion_rmse": 0.032032862305641174,
+                "direction_error_deg": 40.117916107177734,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.05971502140164375
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.15448091737926006,
+              "validation": {
+                "motion_rmse": 0.0230551827698946,
+                "direction_error_deg": 20.131309509277344,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.052142366766929626
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.11120059713721275,
+              "validation": {
+                "motion_rmse": 0.019428277388215065,
+                "direction_error_deg": 16.60059356689453,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.038424596190452576
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.09294404461979866,
+              "validation": {
+                "motion_rmse": 0.018151728436350822,
+                "direction_error_deg": 13.834775924682617,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03509682044386864
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.08271299442276359,
+              "validation": {
+                "motion_rmse": 0.01782504841685295,
+                "direction_error_deg": 15.88951587677002,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03349857032299042
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.07057374808937311,
+              "validation": {
+                "motion_rmse": 0.017077861353754997,
+                "direction_error_deg": 16.069293975830078,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03263989835977554
+              }
+            }
+          ],
+          "test_weight_hash_before": "7dcd81e5f81aad785b7a4d3fb68e4b21be15eb9e94c90e24a9337db617947d00",
+          "test_weight_hash_after": "7dcd81e5f81aad785b7a4d3fb68e4b21be15eb9e94c90e24a9337db617947d00",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04170965403318405,
+            "direction_error_deg": 92.28701782226562,
+            "hazard_accuracy": 0.1484375,
+            "hazard_brier": 0.2637122571468353
+          },
+          "ablation_restored_hash": "7dcd81e5f81aad785b7a4d3fb68e4b21be15eb9e94c90e24a9337db617947d00",
+          "eye": {
+            "adaptation_a": 0.3615645947494342,
+            "adaptation_k": -0.0415353961288929,
+            "gain": 1.3350671529769897,
+            "projection_self_mean": 1.104130744934082,
+            "projection_other_mean_abs": 0.08924541198343858,
+            "projection_allowed_entries": 361
+          },
+          "eye_reset_test": {
+            "motion_rmse": 0.033313117921352386,
+            "direction_error_deg": 56.1484260559082,
+            "hazard_accuracy": 0.875,
+            "hazard_brier": 0.08573898673057556
+          },
+          "eye_restored_hash": "7dcd81e5f81aad785b7a4d3fb68e4b21be15eb9e94c90e24a9337db617947d00"
+        }
+      ],
+      "constant_baseline": {
+        "motion_rmse": 0.04139505699276924,
+        "direction_error_deg": 85.84895324707031,
+        "hazard_accuracy": 0.8515625,
+        "hazard_brier": 0.1267852783203125
+      },
+      "hazard_prevalence": 0.1484375
+    },
+    {
+      "seed": 403,
+      "models": [
+        {
+          "kind": "graph_scalar",
+          "name": "Measured graph \u00b7 1 state/node",
+          "parameters": 2070,
+          "nodes": 209,
+          "state_size": 1,
+          "initial_test": {
+            "motion_rmse": 0.044839344918727875,
+            "direction_error_deg": 83.1705093383789,
+            "hazard_accuracy": 0.1015625,
+            "hazard_brier": 0.25398004055023193
+          },
+          "train": {
+            "motion_rmse": 0.015379908494651318,
+            "direction_error_deg": 14.190407752990723,
+            "hazard_accuracy": 0.97265625,
+            "hazard_brier": 0.02662915736436844
+          },
+          "test": {
+            "motion_rmse": 0.016335489228367805,
+            "direction_error_deg": 12.325237274169922,
+            "hazard_accuracy": 0.9375,
+            "hazard_brier": 0.04287821799516678
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6631719917058945,
+              "validation": {
+                "motion_rmse": 0.045455340296030045,
+                "direction_error_deg": 66.96229553222656,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.19081708788871765
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.4845774509012699,
+              "validation": {
+                "motion_rmse": 0.0422208309173584,
+                "direction_error_deg": 61.27742385864258,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.1084761694073677
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.37376267835497856,
+              "validation": {
+                "motion_rmse": 0.036631520837545395,
+                "direction_error_deg": 46.253421783447266,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.08457767963409424
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.20957570523023605,
+              "validation": {
+                "motion_rmse": 0.024751098826527596,
+                "direction_error_deg": 23.58170509338379,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.06592467427253723
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.16644803062081337,
+              "validation": {
+                "motion_rmse": 0.021824238821864128,
+                "direction_error_deg": 19.17221450805664,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.056168705224990845
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.13235907815396786,
+              "validation": {
+                "motion_rmse": 0.02014303207397461,
+                "direction_error_deg": 17.75423812866211,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.04907829314470291
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.10989503283053637,
+              "validation": {
+                "motion_rmse": 0.017966603860259056,
+                "direction_error_deg": 13.263564109802246,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.04756344109773636
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.09455178491771221,
+              "validation": {
+                "motion_rmse": 0.01769603043794632,
+                "direction_error_deg": 12.89235782623291,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.04939129576086998
+              }
+            }
+          ],
+          "test_weight_hash_before": "9f43be2e65a04f7bb3d2460c29fe330f9453d3c6578314b77c473e2819066b79",
+          "test_weight_hash_after": "9f43be2e65a04f7bb3d2460c29fe330f9453d3c6578314b77c473e2819066b79",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04504367709159851,
+            "direction_error_deg": 89.45985412597656,
+            "hazard_accuracy": 0.1015625,
+            "hazard_brier": 0.37264636158943176
+          },
+          "ablation_restored_hash": "9f43be2e65a04f7bb3d2460c29fe330f9453d3c6578314b77c473e2819066b79"
+        },
+        {
+          "kind": "graph_vector",
+          "name": "Measured graph \u00b7 2 states/node",
+          "parameters": 3134,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.045128557831048965,
+            "direction_error_deg": 92.83800506591797,
+            "hazard_accuracy": 0.8671875,
+            "hazard_brier": 0.24710670113563538
+          },
+          "train": {
+            "motion_rmse": 0.015114150010049343,
+            "direction_error_deg": 13.544988632202148,
+            "hazard_accuracy": 0.9765625,
+            "hazard_brier": 0.024194203317165375
+          },
+          "test": {
+            "motion_rmse": 0.016146071255207062,
+            "direction_error_deg": 13.136842727661133,
+            "hazard_accuracy": 0.9296875,
+            "hazard_brier": 0.04384442791342735
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6386880800127983,
+              "validation": {
+                "motion_rmse": 0.04473603516817093,
+                "direction_error_deg": 67.05479431152344,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.14850108325481415
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.44914259389042854,
+              "validation": {
+                "motion_rmse": 0.04065784066915512,
+                "direction_error_deg": 54.887123107910156,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.09948433935642242
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.29768645018339157,
+              "validation": {
+                "motion_rmse": 0.03299655020236969,
+                "direction_error_deg": 37.564414978027344,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.07535156607627869
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.17298533394932747,
+              "validation": {
+                "motion_rmse": 0.02423589490354061,
+                "direction_error_deg": 23.907245635986328,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.06134539097547531
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.13853585347533226,
+              "validation": {
+                "motion_rmse": 0.020760515704751015,
+                "direction_error_deg": 21.70742416381836,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.0528554692864418
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.11711504310369492,
+              "validation": {
+                "motion_rmse": 0.019821640104055405,
+                "direction_error_deg": 18.828893661499023,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.049125488847494125
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.1051565557718277,
+              "validation": {
+                "motion_rmse": 0.019002657383680344,
+                "direction_error_deg": 15.053864479064941,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04804769158363342
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.09160709381103516,
+              "validation": {
+                "motion_rmse": 0.018116742372512817,
+                "direction_error_deg": 15.542306900024414,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.04743335768580437
+              }
+            }
+          ],
+          "test_weight_hash_before": "15d45f837f98f0e956bee948b2033b80a264526aa34c48663b5ff07140a3214e",
+          "test_weight_hash_after": "15d45f837f98f0e956bee948b2033b80a264526aa34c48663b5ff07140a3214e",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04547370225191116,
+            "direction_error_deg": 95.03304290771484,
+            "hazard_accuracy": 0.1015625,
+            "hazard_brier": 0.5362726449966431
+          },
+          "ablation_restored_hash": "15d45f837f98f0e956bee948b2033b80a264526aa34c48663b5ff07140a3214e"
+        },
+        {
+          "kind": "shuffled_vector",
+          "name": "Rewired graph \u00b7 2 states/node",
+          "parameters": 3134,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.04456379637122154,
+            "direction_error_deg": 65.96669006347656,
+            "hazard_accuracy": 0.890625,
+            "hazard_brier": 0.24558979272842407
+          },
+          "train": {
+            "motion_rmse": 0.015985528007149696,
+            "direction_error_deg": 15.03492259979248,
+            "hazard_accuracy": 0.95703125,
+            "hazard_brier": 0.03255476430058479
+          },
+          "test": {
+            "motion_rmse": 0.01724739372730255,
+            "direction_error_deg": 14.047911643981934,
+            "hazard_accuracy": 0.9296875,
+            "hazard_brier": 0.049240246415138245
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6309492141008377,
+              "validation": {
+                "motion_rmse": 0.04419400542974472,
+                "direction_error_deg": 62.5384407043457,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.14673200249671936
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.45035815984010696,
+              "validation": {
+                "motion_rmse": 0.0406736321747303,
+                "direction_error_deg": 56.78313064575195,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.1020333468914032
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.33363184705376625,
+              "validation": {
+                "motion_rmse": 0.034985825419425964,
+                "direction_error_deg": 36.10062789916992,
+                "hazard_accuracy": 0.890625,
+                "hazard_brier": 0.07687456905841827
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.19348757900297642,
+              "validation": {
+                "motion_rmse": 0.024465175345540047,
+                "direction_error_deg": 25.54791831970215,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.06814480572938919
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.17309426330029964,
+              "validation": {
+                "motion_rmse": 0.02235347218811512,
+                "direction_error_deg": 22.250083923339844,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.06394468247890472
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.1474406225606799,
+              "validation": {
+                "motion_rmse": 0.022062797099351883,
+                "direction_error_deg": 21.7855167388916,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.05994449555873871
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.1307333093136549,
+              "validation": {
+                "motion_rmse": 0.020673489198088646,
+                "direction_error_deg": 18.322967529296875,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.055626656860113144
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.10925347730517387,
+              "validation": {
+                "motion_rmse": 0.01970595307648182,
+                "direction_error_deg": 18.187515258789062,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.05151962861418724
+              }
+            }
+          ],
+          "test_weight_hash_before": "0ec4363582924cdf7a1c37b4c7071d8e075f286346490fbb2aeeb1cbe6a1c98d",
+          "test_weight_hash_after": "0ec4363582924cdf7a1c37b4c7071d8e075f286346490fbb2aeeb1cbe6a1c98d",
+          "rewiring_swaps": 38708,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.046659450978040695,
+            "direction_error_deg": 94.33644104003906,
+            "hazard_accuracy": 0.1015625,
+            "hazard_brier": 0.5847129225730896
+          },
+          "ablation_restored_hash": "0ec4363582924cdf7a1c37b4c7071d8e075f286346490fbb2aeeb1cbe6a1c98d"
+        },
+        {
+          "kind": "dense_rnn",
+          "name": "Dense recurrent baseline",
+          "parameters": 3108,
+          "nodes": 45,
+          "state_size": 1,
+          "initial_test": {
+            "motion_rmse": 0.04515745863318443,
+            "direction_error_deg": 85.93328094482422,
+            "hazard_accuracy": 0.28125,
+            "hazard_brier": 0.25716570019721985
+          },
+          "train": {
+            "motion_rmse": 0.009643319994211197,
+            "direction_error_deg": 8.876729965209961,
+            "hazard_accuracy": 1.0,
+            "hazard_brier": 0.003604755736887455
+          },
+          "test": {
+            "motion_rmse": 0.015449592843651772,
+            "direction_error_deg": 11.875410079956055,
+            "hazard_accuracy": 0.9375,
+            "hazard_brier": 0.05151720345020294
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.5811691023409367,
+              "validation": {
+                "motion_rmse": 0.03823030740022659,
+                "direction_error_deg": 44.061302185058594,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.13321350514888763
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.2731650434434414,
+              "validation": {
+                "motion_rmse": 0.030357075855135918,
+                "direction_error_deg": 34.375404357910156,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.06470733880996704
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.16158664133399725,
+              "validation": {
+                "motion_rmse": 0.02063893899321556,
+                "direction_error_deg": 21.250967025756836,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.047635599970817566
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.10275580361485481,
+              "validation": {
+                "motion_rmse": 0.018842780962586403,
+                "direction_error_deg": 16.198335647583008,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.04064672440290451
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.08180218329653144,
+              "validation": {
+                "motion_rmse": 0.017976948991417885,
+                "direction_error_deg": 15.300944328308105,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.032640308141708374
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.0628469274379313,
+              "validation": {
+                "motion_rmse": 0.016781602054834366,
+                "direction_error_deg": 15.236823081970215,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.029552746564149857
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.05598678067326546,
+              "validation": {
+                "motion_rmse": 0.016199840232729912,
+                "direction_error_deg": 11.770201683044434,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.03168785944581032
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.032300254330039024,
+              "validation": {
+                "motion_rmse": 0.01580534689128399,
+                "direction_error_deg": 12.642723083496094,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.03408682346343994
+              }
+            }
+          ],
+          "test_weight_hash_before": "c3dcf19f32d246f590c606c4e20c43672adfac311740c09b314800a8846eb166",
+          "test_weight_hash_after": "c3dcf19f32d246f590c606c4e20c43672adfac311740c09b314800a8846eb166",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0
+        },
+        {
+          "kind": "eye_graph",
+          "name": "Measured graph + trainable eye (retinotopic)",
+          "parameters": 3240,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.045128557831048965,
+            "direction_error_deg": 92.83800506591797,
+            "hazard_accuracy": 0.8671875,
+            "hazard_brier": 0.24710670113563538
+          },
+          "train": {
+            "motion_rmse": 0.01473824493587017,
+            "direction_error_deg": 13.383124351501465,
+            "hazard_accuracy": 0.98828125,
+            "hazard_brier": 0.018005605787038803
+          },
+          "test": {
+            "motion_rmse": 0.016336817294359207,
+            "direction_error_deg": 14.113687515258789,
+            "hazard_accuracy": 0.9453125,
+            "hazard_brier": 0.03897672891616821
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.6369936317205429,
+              "validation": {
+                "motion_rmse": 0.044723398983478546,
+                "direction_error_deg": 66.96389770507812,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.14461539685726166
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.4416891969740391,
+              "validation": {
+                "motion_rmse": 0.04042905569076538,
+                "direction_error_deg": 53.84347915649414,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.09692618250846863
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.2701123580336571,
+              "validation": {
+                "motion_rmse": 0.030836166813969612,
+                "direction_error_deg": 34.31361770629883,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.06891810894012451
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.16010647173970938,
+              "validation": {
+                "motion_rmse": 0.024542074650526047,
+                "direction_error_deg": 24.788257598876953,
+                "hazard_accuracy": 0.921875,
+                "hazard_brier": 0.05439937859773636
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.12991760205477476,
+              "validation": {
+                "motion_rmse": 0.02069484442472458,
+                "direction_error_deg": 20.028118133544922,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04679182171821594
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.10790969524532557,
+              "validation": {
+                "motion_rmse": 0.01967061683535576,
+                "direction_error_deg": 17.848356246948242,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.04367745667695999
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.09552292339503765,
+              "validation": {
+                "motion_rmse": 0.01927400752902031,
+                "direction_error_deg": 15.278995513916016,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.041099920868873596
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.08020377019420266,
+              "validation": {
+                "motion_rmse": 0.018111927434802055,
+                "direction_error_deg": 15.476573944091797,
+                "hazard_accuracy": 0.953125,
+                "hazard_brier": 0.04101545363664627
+              }
+            }
+          ],
+          "test_weight_hash_before": "870975537ece2ed5a1bb5e5a3142983b8484e262db4b208ca6b6e96cccb21734",
+          "test_weight_hash_after": "870975537ece2ed5a1bb5e5a3142983b8484e262db4b208ca6b6e96cccb21734",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.04567094147205353,
+            "direction_error_deg": 96.40263366699219,
+            "hazard_accuracy": 0.1015625,
+            "hazard_brier": 0.6027504205703735
+          },
+          "ablation_restored_hash": "870975537ece2ed5a1bb5e5a3142983b8484e262db4b208ca6b6e96cccb21734",
+          "eye": {
+            "adaptation_a": 0.35408478556970285,
+            "adaptation_k": -0.015250657685101032,
+            "gain": 1.2863234281539917,
+            "projection_self_mean": 1.1108474731445312,
+            "projection_other_mean_abs": 0.09692873367679394,
+            "projection_allowed_entries": 103
+          },
+          "eye_reset_test": {
+            "motion_rmse": 0.030465509742498398,
+            "direction_error_deg": 38.65762710571289,
+            "hazard_accuracy": 0.953125,
+            "hazard_brier": 0.050910741090774536
+          },
+          "eye_restored_hash": "870975537ece2ed5a1bb5e5a3142983b8484e262db4b208ca6b6e96cccb21734"
+        },
+        {
+          "kind": "eye_dense",
+          "name": "Measured graph + trainable eye (unrestricted)",
+          "parameters": 3498,
+          "nodes": 209,
+          "state_size": 2,
+          "initial_test": {
+            "motion_rmse": 0.045128557831048965,
+            "direction_error_deg": 92.83800506591797,
+            "hazard_accuracy": 0.8671875,
+            "hazard_brier": 0.24710670113563538
+          },
+          "train": {
+            "motion_rmse": 0.01221978198736906,
+            "direction_error_deg": 12.071969032287598,
+            "hazard_accuracy": 0.98046875,
+            "hazard_brier": 0.015183486044406891
+          },
+          "test": {
+            "motion_rmse": 0.014665241353213787,
+            "direction_error_deg": 11.857889175415039,
+            "hazard_accuracy": 0.9453125,
+            "hazard_brier": 0.04405482858419418
+          },
+          "history": [
+            {
+              "epoch": 1,
+              "loss": 0.635353222489357,
+              "validation": {
+                "motion_rmse": 0.04498704522848129,
+                "direction_error_deg": 67.54290771484375,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.13931041955947876
+              }
+            },
+            {
+              "epoch": 5,
+              "loss": 0.4323418401181698,
+              "validation": {
+                "motion_rmse": 0.0394689179956913,
+                "direction_error_deg": 52.728424072265625,
+                "hazard_accuracy": 0.859375,
+                "hazard_brier": 0.09527402371168137
+              }
+            },
+            {
+              "epoch": 10,
+              "loss": 0.21844564378261566,
+              "validation": {
+                "motion_rmse": 0.02459792047739029,
+                "direction_error_deg": 27.202585220336914,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.07342126965522766
+              }
+            },
+            {
+              "epoch": 15,
+              "loss": 0.13807888515293598,
+              "validation": {
+                "motion_rmse": 0.02101091668009758,
+                "direction_error_deg": 18.2587890625,
+                "hazard_accuracy": 0.90625,
+                "hazard_brier": 0.06002156808972359
+              }
+            },
+            {
+              "epoch": 20,
+              "loss": 0.11517023108899593,
+              "validation": {
+                "motion_rmse": 0.017370404675602913,
+                "direction_error_deg": 15.53657341003418,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.048855382949113846
+              }
+            },
+            {
+              "epoch": 25,
+              "loss": 0.09438902325928211,
+              "validation": {
+                "motion_rmse": 0.017791135236620903,
+                "direction_error_deg": 15.895699501037598,
+                "hazard_accuracy": 0.9375,
+                "hazard_brier": 0.04372590035200119
+              }
+            },
+            {
+              "epoch": 30,
+              "loss": 0.08160529658198357,
+              "validation": {
+                "motion_rmse": 0.016420157626271248,
+                "direction_error_deg": 14.50435733795166,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.0337100625038147
+              }
+            },
+            {
+              "epoch": 35,
+              "loss": 0.06265843939036131,
+              "validation": {
+                "motion_rmse": 0.01607431471347809,
+                "direction_error_deg": 10.889819145202637,
+                "hazard_accuracy": 0.96875,
+                "hazard_brier": 0.02991010993719101
+              }
+            }
+          ],
+          "test_weight_hash_before": "219af653221404f5e9ab0c06a45374445bb960fbda3b5777cfafd7e35af4e688",
+          "test_weight_hash_after": "219af653221404f5e9ab0c06a45374445bb960fbda3b5777cfafd7e35af4e688",
+          "rewiring_swaps": 0,
+          "unsupported_nonzero": 0,
+          "edges_ablated_test": {
+            "motion_rmse": 0.045926690101623535,
+            "direction_error_deg": 96.57196807861328,
+            "hazard_accuracy": 0.1015625,
+            "hazard_brier": 0.5447415709495544
+          },
+          "ablation_restored_hash": "219af653221404f5e9ab0c06a45374445bb960fbda3b5777cfafd7e35af4e688",
+          "eye": {
+            "adaptation_a": 0.32470780645711916,
+            "adaptation_k": -0.08784934133291245,
+            "gain": 1.323410987854004,
+            "projection_self_mean": 1.0861587524414062,
+            "projection_other_mean_abs": 0.0908058287750464,
+            "projection_allowed_entries": 361
+          },
+          "eye_reset_test": {
+            "motion_rmse": 0.042226918041706085,
+            "direction_error_deg": 65.79158782958984,
+            "hazard_accuracy": 0.296875,
+            "hazard_brier": 0.5294365882873535
+          },
+          "eye_restored_hash": "219af653221404f5e9ab0c06a45374445bb960fbda3b5777cfafd7e35af4e688"
+        }
+      ],
+      "constant_baseline": {
+        "motion_rmse": 0.04483381286263466,
+        "direction_error_deg": 88.55440521240234,
+        "hazard_accuracy": 0.8984375,
+        "hazard_brier": 0.0930938720703125
+      },
+      "hazard_prevalence": 0.1015625
+    }
+  ],
+  "note": "Exploratory simulation, three seeds, fixed defaults. No biological validation or claim of connectome superiority."
+}

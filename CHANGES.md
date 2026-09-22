@@ -2,6 +2,20 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Merge vision, explorer and math modules; add trainable compound-eye layer
+
+- Merged the separate project copy into the repo: the trainable visual graph (`/vision`, 209 measured right-eye cells across 19 columns), the neuron explorer with skeleton and membrane models (`/explore`), and the math classroom and SDR arithmetic experiments (`/math`), with their data, saved weights and tests. Its `build_vision.py` and `test_vision.py` are renamed `build_vision_patch.py` and `test_vision_patch.py`, since the repo's vision bridge already uses those names.
+- New trainable eye in front of the measured graph: shared photoreceptor adaptation and gain, then a learned column projection that is either retinotopic (own column plus six hex neighbours) or unrestricted. It starts as an exact identity; eye gradients are checked against finite differences.
+- Vision benchmark regenerated for six architectures and three seeds. The four existing architectures reproduce the previous benchmark exactly. The retinotopic eye improves hazard calibration (Brier 0.057 vs 0.064), the unrestricted eye improves motion (13.7° vs 16.5° direction error); the learned adaptation stays near zero.
+- The saved-weights reproduction test now allows 1e-4 instead of 1e-6, since float32 results differ by about 4e-6 across machines and would otherwise fail on the Mac.
+- One navigation bar across all eight pages.
+
+## Protect generated data during sync; restore eye responses
+
+- A sync deleted `data/eye-responses.json` because the user pushed it after that iteration's zip was built. `tools/sync.sh` now never deletes files under `data/`; it lists the ones it keeps. Other files removed by an iteration are still deleted, and the safety limit on deletions still applies.
+- `data/eye-responses.json` (pretrained flyvis run, five models) restored from history.
+- README records the eye result: six of eight direction checks pass; the horizontal detectors match anatomy, the vertical pair is less clean.
+
 ## Fix simulations behind the HTTPS tunnel
 
 - The server's same-origin check only accepted `http://<host>`, so behind the Cloudflare tunnel (`https://malecns.fueldeskpro.com`) every simulation request was refused with "Origin not allowed" and the motion lab had nothing to animate. It now accepts `http://` and `https://` for the request's own host and still refuses other sites.
