@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Simplify large meshes on the server
+
+- The probe confirmed every viewer layer uses the legacy precomputed mesh format and that bucket region labels match the lab's names; the only failure was DNa02's full-resolution mesh, a single file over 25 MB.
+- `meshes.py` and `/api/mesh/<layer>/<id>`: fetch all fragments once (raw files up to 400 MB, not cached), merge, simplify by vertex clustering to per-layer triangle targets, and cache only the simplified mesh. One build per mesh even under concurrent requests.
+- The 3D page now loads all meshes, neurons, regions and outlines, through this endpoint and shows the simplification in each item's tooltip.
+- `test_meshes.py`: round-trip encoding, simplification to target with shape preserved and no broken triangles, fragment assembly and caching, input checks.
+
 ## Add 3D view and Neuroglancer links
 
 - New `/3d` page: official neuron meshes (skeleton fallback) and brain-region shapes from the public MaleCNS bucket, with brain and VNC outlines, presets for the steering descending neurons and their input regions, and URL-encoded state. three.js r128 is bundled locally.

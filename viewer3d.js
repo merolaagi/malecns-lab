@@ -1,8 +1,8 @@
 'use strict';
 const $ = id => document.getElementById(id);
-const NEURON_LAYER = 'v1.0/segmentation/meshes-malecns/single-res-meshes';
-const ROI_LAYERS = ['rois/fullbrain-roi-v5', 'rois/malecns-vnc-neuropil-roi-v0'];
-const SHELLS = [['rois/fullbrain-major-shells', [1, 2, 3]], ['rois/vnc-neuropil-shell-v2', [1]]];
+// Region names come from each layer's segment properties; meshes come simplified from /api/mesh/<key>/<id>.
+const ROI_LAYERS = [['rois/fullbrain-roi-v5', 'roi'], ['rois/malecns-vnc-neuropil-roi-v0', 'vnc-roi']];
+const SHELLS = [['brain-shell', [1, 2, 3]], ['vnc-shell', [1]]];
 const PALETTE = [0xc2e899, 0x6fc7bc, 0xe9be75, 0xf28b82, 0x8ab4f8, 0xd4a5f5, 0xf5c16c, 0x7fd1ae];
 const PRESETS = { dns: [10360, 523769, 10442, 10760, 11074, 512006], dna02: [10360, 523769], kc: [57729],
                   steerR: ['LAL(R)', 'VES(R)', 'IPS(R)', 'SPS(R)', 'GNG'], steerL: ['LAL(L)', 'VES(L)', 'IPS(L)', 'SPS(L)', 'GNG'] };
@@ -48,26 +48,16 @@ function fit() {
 async function bytes(path) { const r = await fetch('/api/gcs/' + path); if (!r.ok) { let m = r.status; try { m = (await r.json()).error; } catch (e) {} throw new Error(m); } return r.arrayBuffer(); }
 async function json(path) { return JSON.parse(new TextDecoder().decode(await bytes(path))); }
 async function info(layer) { return infoCache[layer] || (infoCache[layer] = json(layer + '/info')); }
-async function meshDir(layer) {
-  const i = await info(layer);
-  if (i['@type'] === 'neuroglancer_legacy_mesh') return layer;
-  if (typeof i.mesh === 'string') {
-    const mi = await info(layer + '/' + i.mesh).catch(() => ({}));
-    if (mi['@type'] && mi['@type'] !== 'neuroglancer_legacy_mesh') throw new Error('mesh format ' + mi['@type'] + ' not supported yet');
-    return layer + '/' + i.mesh;
-  }
-  throw new Error('layer has no mesh');
-}
-async function loadMesh(layer, id) {
-  const dir = await meshDir(layer), manifest = await json(`${dir}/${id}:0`);
-  const parts = await Promise.all((manifest.fragments || []).map(f => bytes(`${dir}/${f}`).then(NG.decodeLegacy)));
-  if (!parts.length) throw new Error('empty mesh');
-  let nv = 0, ni = 0; parts.forEach(p => { nv += p.vertices.length; ni += p.indices.length; });
-  const v = new Float32Array(nv), idx = new Uint32Array(ni); let ov = 0, oi = 0;
-  parts.forEach(p => { v.set(p.vertices, ov); for (let k = 0; k < p.indices.length; k++) idx[oi + k] = p.indices[k] + ov / 3; ov += p.vertices.length; oi += p.indices.length; });
-  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(NG.toMicrometres(v).vertices, 3)); g.setIndex(new THREE.BufferAttribute(idx, 1)); g.computeVertexNormals();
+async function loadMesh(key, id) {
+  const r = await fetch(`/api/mesh/${key}/${id}`);
+  if (!r.ok) { let m = r.status; try { m = (await r.json()).error; } catch (e) {} throw new Error(m); }
+  const meta = JSON.parse(r.headers.get('X-Mesh-Info') || '{}'), m = NG.decodeLegacy(await r.arrayBuffer());
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(NG.toMicrometres(m.vertices).vertices, 3));
+  g.setIndex(new THREE.BufferAttribute(m.indices, 1)); g.computeVertexNormals(); g.userData = meta;
   return g;
 }
+const meshNote = g => g.userData && g.userData.triangles ? (g.userData.triangles < g.userData.triangles_original
+  ? `Simplified from ${g.userData.triangles_original.toLocaleString()} to ${g.userData.triangles.toLocaleString()} triangles` : `${g.userData.triangles.toLocaleString()} triangles`) : '';
 async function loadSkeleton(id) {
   const r = await fetch('/api/skeleton?id=' + id), d = await r.json(); if (!r.ok) throw new Error(d.error || r.status);
   const byId = new Map(d.points.map(p => [p[0], p])), pos = [];
@@ -81,8 +71,8 @@ async function addCell(id) {
   const color = PALETTE[cells.size % PALETTE.length], item = { id, color, obj: null, state: 'loading', note: '' };
   cells.set(id, item); render();
   try {
-    const g = await loadMesh(NEURON_LAYER, id);
-    item.obj = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color })); item.state = 'mesh';
+    const g = await loadMesh('neuron', id);
+    item.obj = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color })); item.state = 'mesh'; item.note = meshNote(g);
   } catch (e) {
     try { item.obj = new THREE.LineSegments(await loadSkeleton(id), new THREE.LineBasicMaterial({ color })); item.state = 'skeleton'; item.note = 'Mesh unavailable (' + e.message + ')'; }
     catch (e2) { item.state = 'failed'; item.note = e.message + '; skeleton: ' + e2.message; }
@@ -92,11 +82,11 @@ async function addCell(id) {
 }
 /* ---------- regions ---------- */
 async function regionIndex() {
-  for (const layer of ROI_LAYERS) {
+  for (const [layer, key] of ROI_LAYERS) {
     try {
       const i = await info(layer); if (typeof i.segment_properties !== 'string') continue;
       const map = NG.labelsToIds(await json(layer + '/' + i.segment_properties + '/info'));
-      for (const [label, id] of Object.entries(map)) if (!(label in regionIds)) { regionIds[label] = id; regionLayerOf[label] = layer; }
+      for (const [label, id] of Object.entries(map)) if (!(label in regionIds)) { regionIds[label] = id; regionLayerOf[label] = key; }
     } catch (e) { status('Region names unavailable for ' + layer + ': ' + e.message); }
   }
 }
@@ -108,7 +98,7 @@ async function addRegion(name) {
     if (!(name in regionIds)) await regionIndex();
     if (!(name in regionIds)) throw new Error('no region shape named ' + name);
     const g = await loadMesh(regionLayerOf[name], regionIds[name]);
-    item.obj = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: item.color, transparent: true, opacity: 0.18, depthWrite: false })); item.state = 'mesh';
+    item.obj = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: item.color, transparent: true, opacity: 0.18, depthWrite: false })); item.state = 'mesh'; item.note = meshNote(g);
     world.add(item.obj); fit();
   } catch (e) { item.state = 'failed'; item.note = e.message; }
   render();
@@ -116,7 +106,7 @@ async function addRegion(name) {
 async function loadShells() {
   for (const [layer, ids] of SHELLS) for (const id of ids) {
     try { const g = await loadMesh(layer, id); const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0xffffff, transparent: true, opacity: 0.05, depthWrite: false })); m.visible = $('shells').checked; shells.push(m); world.add(m); }
-    catch (e) { status('Outline ' + layer + ' unavailable: ' + e.message); }
+    catch (e) { status('Outline ' + layer + ' ' + id + ' unavailable: ' + e.message); }
   }
   fit();
 }

@@ -35,23 +35,25 @@ def validate(path):
     return path
 
 
-def fetch(path, opener=urlopen):
-    """Return bytes for a bucket path, from cache when possible."""
+def fetch(path, opener=urlopen, max_bytes=None, cache=True):
+    """Return bytes for a bucket path, from cache when possible. Large raw files can skip the cache."""
     path = validate(path)
+    limit = max_bytes or MAX_BYTES
     local = CACHE / path
-    if local.is_file(): return local.read_bytes()
+    if cache and local.is_file(): return local.read_bytes()
     try:
         with opener(Request(ROOT + path, headers={'Accept-Encoding': 'gzip'}), timeout=20) as r:
-            data = r.read(MAX_BYTES + 1)
+            data = r.read(limit + 1)
             encoding = (r.headers.get('Content-Encoding') or '').lower() if getattr(r, 'headers', None) else ''
     except HTTPError as e:
         raise GCSError(f'Not found in the MaleCNS bucket: {path}' if e.code == 404 else f'Bucket error {e.code}', 404 if e.code == 404 else 502)
     except (URLError, TimeoutError) as e:
         raise GCSError(f'Bucket unreachable: {e}', 502)
-    if len(data) > MAX_BYTES: raise GCSError('File exceeds the 25 MB viewer limit', 413)
+    if len(data) > limit: raise GCSError(f'File exceeds the {limit // (1024 * 1024)} MB limit', 413)
     if encoding == 'gzip' or data[:2] == b'\x1f\x8b':
         try: data = gzip.decompress(data)
         except OSError: pass            # not actually gzip; keep raw bytes
-    local.parent.mkdir(parents=True, exist_ok=True)
-    tmp = local.with_suffix(local.suffix + '.part'); tmp.write_bytes(data); tmp.replace(local)
+    if cache:
+        local.parent.mkdir(parents=True, exist_ok=True)
+        tmp = local.with_suffix(local.suffix + '.part'); tmp.write_bytes(data); tmp.replace(local)
     return data

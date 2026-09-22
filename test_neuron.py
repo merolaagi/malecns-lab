@@ -80,7 +80,7 @@ class RouteTests(unittest.TestCase):
         self.assertEqual(e.exception.code, 400)
 
     def test_bucket_proxy_refuses_other_paths(self):
-        for path in ['/api/gcs/em/em-clahe-jpeg/info', '/api/gcs/rois/fullbrain-roi-v5/../x']:
+        for path in ['/api/gcs/em/em-clahe-jpeg/info', '/api/gcs/rois/fullbrain-roi-v5/../x', '/api/mesh/em/1', '/api/mesh/neuron/abc', '/api/mesh/neuron']:
             with self.assertRaises(urllib.error.HTTPError) as e: urllib.request.urlopen(self.url + path)
             self.assertIn(e.exception.code, (400, 403))
 

@@ -15,6 +15,7 @@ from vision import run as run_vision
 from neuron_inputs import NeuronIndex
 from urllib.parse import urlparse, parse_qs
 import gcs
+import meshes
 
 BASE = Path(__file__).resolve().parent
 CIRCUIT = Circuit()
@@ -37,6 +38,16 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         url = urlparse(self.path); path = url.path
+        if path.startswith('/api/mesh/'):
+            parts = path[len('/api/mesh/'):].split('/')
+            try:
+                if len(parts) != 2: raise gcs.GCSError('Use /api/mesh/<layer>/<id>')
+                body, info = meshes.get(parts[0], parts[1])
+            except gcs.GCSError as e: return self.send(e.status, {'error': str(e)})
+            except ValueError as e: return self.send(502, {'error': f'Mesh could not be decoded: {e}'})
+            self.send_response(200); self.send_header('Content-Type', 'application/octet-stream')
+            self.send_header('X-Mesh-Info', json.dumps(info)); self.send_header('Cache-Control', 'public, max-age=86400')
+            self.send_header('Content-Length', str(len(body))); self.end_headers(); self.wfile.write(body); return
         if path.startswith('/api/gcs/'):
             try: body = gcs.fetch(path[len('/api/gcs/'):])
             except gcs.GCSError as e: return self.send(e.status, {'error': str(e)})

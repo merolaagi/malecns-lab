@@ -174,7 +174,7 @@ Data comes from the public bucket `gs://flyem-male-cns`, the same source as the 
 
 Every atlas cell, workbench cell and region panel also has **View in 3D** and **Neuroglancer ↗** links. The Neuroglancer link opens the official viewer with the cell selected and centred on its soma, together with brain and VNC outlines; region links filter the viewer's region list by name.
 
-The mesh decoder handles Neuroglancer's legacy precomputed format. Run the one-time probe on a machine with internet access to confirm the formats of the layers the viewer uses:
+All layers the viewer uses are in Neuroglancer's legacy precomputed mesh format (confirmed by `tools/probe_ng.py`, results in `data/ng-probe.json`), and region labels in the bucket match the lab's region names. Full-resolution neuron meshes can be very large (DNa02's single fragment exceeds 25 MB), so `meshes.py` assembles each mesh once on the server, simplifies it by vertex clustering to at most 250,000 triangles for neurons and 60,000–80,000 for regions and outlines, and caches only the simplified version; `/api/mesh/<layer>/<id>` serves it. Clustering keeps the overall shape and branching but loses fine surface detail. The first view of a large neuron takes a while; later views are immediate. Hover a neuron's status to see how far it was simplified. Run the one-time probe on a machine with internet access to confirm the formats of the layers the viewer uses:
 
 ```sh
 .venv/bin/python tools/probe_ng.py
