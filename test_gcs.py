@@ -31,7 +31,11 @@ class GCSTests(unittest.TestCase):
     def test_path_rules(self):
         self.assertEqual(gcs.validate('rois/fullbrain-roi-v5/mesh/12:0'), 'rois/fullbrain-roi-v5/mesh/12:0')
         self.assertEqual(gcs.validate('v1.0/segmentation/meshes-malecns/single-res-meshes/10360%3A0'), 'v1.0/segmentation/meshes-malecns/single-res-meshes/10360:0')
-        for bad in ['rois/fullbrain-roi-v5/../../secret', 'em/em-clahe-jpeg/info', 'rois/fullbrain-roi-v5/', 'rois/fullbrain-roi-v5/a b', 'https://evil.example/x']:
+        # Fragment names from real manifests can hold brackets, spaces or '#'; they are allowed and URL-encoded.
+        odd = gcs.validate('rois/fullbrain-major-shells/mesh/3:0:OL(R) [x]#1')
+        self.assertTrue(gcs.url_for(odd).endswith('3%3A0%3AOL%28R%29%20%5Bx%5D%231'))
+        self.assertIn('%', gcs.cache_path(odd).name)
+        for bad in ['rois/fullbrain-roi-v5/../../secret', 'em/em-clahe-jpeg/info', 'rois/fullbrain-roi-v5/', 'rois/full brain/x', 'rois/fullbrain-roi-v5/mesh/..', 'rois/fullbrain-roi-v5/a\\b', 'https://evil.example/x']:
             with self.assertRaises(gcs.GCSError): gcs.validate(bad)
 
     def test_fetch_decompresses_gzip_and_caches(self):
@@ -52,7 +56,7 @@ class GCSTests(unittest.TestCase):
             with self.assertRaises(gcs.GCSError) as e: gcs.fetch('rois/fullbrain-roi-v5/mesh/big:0', opener=self.opener(b'123456'))
             self.assertEqual(e.exception.status, 413)
         finally: gcs.MAX_BYTES = old
-        self.assertFalse(any(gcs.CACHE.rglob('*:0')))   # failures are never cached
+        self.assertFalse(any(gcs.CACHE.rglob('*')))     # failures are never cached
 
 
 if __name__ == '__main__':

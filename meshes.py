@@ -73,7 +73,10 @@ def get(layer, seg_id):
     with lock:                      # one build per mesh even if several requests arrive together
         if out.is_file() and meta.is_file(): return out.read_bytes(), json.loads(meta.read_text())
         manifest = json.loads(gcs.fetch(f'{directory}/{seg_id}:0'))
-        parts = [decode(gcs.fetch(f'{directory}/{f}', max_bytes=RAW_MAX, cache=False)) for f in manifest.get('fragments', [])]
+        frags = manifest.get('fragments', [])
+        if not isinstance(frags, list) or not all(isinstance(f, str) for f in frags): raise gcs.GCSError('Malformed mesh manifest', 502)
+        # Fragment names are relative to the manifest; a name may itself contain subdirectories.
+        parts = [decode(gcs.fetch(f'{directory}/{f}', max_bytes=RAW_MAX, cache=False)) for f in frags]
         if not parts: raise gcs.GCSError('Mesh has no fragments', 404)
         offs = np.cumsum([0] + [len(p[0]) for p in parts[:-1]])
         v = np.concatenate([p[0] for p in parts]); t = np.concatenate([p[1] + o for p, o in zip(parts, offs)])

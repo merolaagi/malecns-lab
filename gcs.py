@@ -8,7 +8,7 @@ import gzip
 import re
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 from urllib.request import Request, urlopen
 
 BASE = Path(__file__).resolve().parent
@@ -18,7 +18,8 @@ MAX_BYTES = 25 * 1024 * 1024
 ALLOWED = ('v1.0/segmentation/meshes-malecns/', 'v1.0/segmentation/skeletons-malecns/',
            'rois/fullbrain-roi-v5/', 'rois/malecns-vnc-neuropil-roi-v0/', 'rois/fullbrain-major-shells/',
            'rois/vnc-neuropil-shell-v2/', 'rois/brain-shell-v2.2/')
-SAFE = re.compile(r'^[A-Za-z0-9_.:@%+\-/]+$')
+SAFE_DIR = re.compile(r'^[A-Za-z0-9_.@+\-]+$')          # directory components: strict
+BAD_NAME = re.compile(r'[\x00-\x1f\x7f/\\]')              # file names: anything printable except slashes
 
 
 class GCSError(ValueError):
@@ -27,22 +28,35 @@ class GCSError(ValueError):
 
 
 def validate(path):
+    """Directories must be plain; the final file name may hold any printable characters (mesh fragment
+    names from the bucket are not always plain), but never path separators or '..'."""
     path = unquote(path).lstrip('/')
-    if not SAFE.match(path) or '..' in path.split('/') or '//' in path or path.endswith('/'):
-        raise GCSError('Invalid path')
+    parts = path.split('/')
+    bad = (len(parts) < 2 or any(p in ('', '.', '..') for p in parts)
+           or not all(SAFE_DIR.match(p) for p in parts[:-1]) or BAD_NAME.search(parts[-1]))
+    if bad: raise GCSError(f'Invalid path: {path[:200]}')
     if not path.startswith(ALLOWED):
         raise GCSError('Path not in the allowed MaleCNS layers', 403)
     return path
+
+
+def url_for(path):
+    return ROOT + quote(path, safe='/')
+
+
+def cache_path(path):
+    head, name = path.rsplit('/', 1)
+    return CACHE / head / quote(name, safe='')
 
 
 def fetch(path, opener=urlopen, max_bytes=None, cache=True):
     """Return bytes for a bucket path, from cache when possible. Large raw files can skip the cache."""
     path = validate(path)
     limit = max_bytes or MAX_BYTES
-    local = CACHE / path
+    local = cache_path(path)
     if cache and local.is_file(): return local.read_bytes()
     try:
-        with opener(Request(ROOT + path, headers={'Accept-Encoding': 'gzip'}), timeout=20) as r:
+        with opener(Request(url_for(path), headers={'Accept-Encoding': 'gzip'}), timeout=60) as r:
             data = r.read(limit + 1)
             encoding = (r.headers.get('Content-Encoding') or '').lower() if getattr(r, 'headers', None) else ''
     except HTTPError as e:

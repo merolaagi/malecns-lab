@@ -10,7 +10,7 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 const status = t => { $('status').textContent = t; };
 
 let names = {}, regionIds = {}, regionLayerOf = {}, infoCache = {};
-const cells = new Map(), regions = new Map(), shells = [];
+const cells = new Map(), regions = new Map(), shells = [], shellErrors = [];
 
 /* ---------- three.js scene with a small orbit control ---------- */
 const stage = $('stage'), renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -106,7 +106,7 @@ async function addRegion(name) {
 async function loadShells() {
   for (const [layer, ids] of SHELLS) for (const id of ids) {
     try { const g = await loadMesh(layer, id); const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: 0xffffff, transparent: true, opacity: 0.05, depthWrite: false })); m.visible = $('shells').checked; shells.push(m); world.add(m); }
-    catch (e) { status('Outline ' + layer + ' ' + id + ' unavailable: ' + e.message); }
+    catch (e) { shellErrors.push(`Outline ${layer} ${id}: ${e.message}`); render(); }
   }
   fit();
 }
@@ -115,14 +115,15 @@ async function loadShells() {
 function render() {
   const row = (label, it, key) => `<li><span class="sw3" style="background:#${it.color.toString(16).padStart(6, '0')}"></span><b title="${esc(it.note)}">${esc(label)}</b>`
     + `<span class="st ${it.state === 'mesh' ? 'ok' : it.state === 'skeleton' ? 'fb' : it.state === 'failed' ? 'err' : ''}" title="${esc(it.note)}">${it.state}</span>`
-    + `<span><button data-toggle="${key}">${it.obj && !it.obj.visible ? 'show' : 'hide'}</button><button data-remove="${key}">×</button></span></li>`;
+    + `<span><button data-toggle="${key}">${it.obj && !it.obj.visible ? 'show' : 'hide'}</button><button data-remove="${key}">×</button></span>`
+    + (it.state === 'failed' || it.state === 'skeleton' ? `<small style="grid-column:2/5;color:${it.state === 'failed' ? '#f28b82' : 'var(--gold)'};white-space:normal">${esc(it.note)}</small>` : '') + '</li>';
   $('cellList').innerHTML = [...cells.values()].map(c => row((names[c.id] ? names[c.id] + ' · ' : '') + c.id, c, 'c:' + c.id)).join('');
   $('regionList').innerHTML = [...regions.values()].map(r => row(r.name, r, 'r:' + r.name)).join('');
   $('ngLink').href = NG.url({ cells: [...cells.keys()], regions: [...regions.keys()], regionIds });
   const q = new URLSearchParams(); if (cells.size) q.set('cells', [...cells.keys()].join(',')); if (regions.size) q.set('regions', [...regions.keys()].join(','));
   history.replaceState(null, '', '/3d' + (q.toString() ? '?' + q : ''));
-  const failed = [...cells.values(), ...regions.values()].filter(x => x.state === 'failed');
-  if (failed.length) status(failed.map(x => (x.id || x.name) + ': ' + x.note).join(' · '));
+  const loading = [...cells.values(), ...regions.values()].filter(x => x.state === 'loading').length;
+  status((loading ? `Loading ${loading}… The first view of a large neuron takes a while while the server simplifies its mesh.` : '') + (shellErrors.length ? ' ' + shellErrors.join(' · ') : ''));
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;

@@ -2,6 +2,11 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Fix region and outline meshes in the 3D view
+
+- Neuron meshes worked, but region shapes and one outline piece failed with "Invalid path": the proxy's character allow-list rejected fragment names listed in real mesh manifests. Directories stay strictly checked; file names may now hold any printable characters except slashes and `..`, and are URL-encoded when fetched and when cached.
+- Path errors now include the refused path, and the 3D page shows each item's failure or fallback reason under its row instead of only in a status line that later messages overwrote.
+
 ## Simplify large meshes on the server
 
 - The probe confirmed every viewer layer uses the legacy precomputed mesh format and that bucket region labels match the lab's names; the only failure was DNa02's full-resolution mesh, a single file over 25 MB.
