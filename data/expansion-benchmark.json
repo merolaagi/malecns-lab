@@ -1,0 +1,350 @@
+{
+ "defaults": {
+  "seed": 7,
+  "per_class": 0,
+  "epochs": 3,
+  "sparsity": 0.05,
+  "lr": 0.05,
+  "task": "digits"
+ },
+ "labels": {
+  "fly_measured": "Measured PN\u2192KC, 5% active, associative readout",
+  "fly_shuffled": "Shuffled PN\u2192KC, 5% active, associative readout",
+  "random_sparse": "Random sparse wiring, 5% active, associative readout",
+  "dense_topk": "Dense random projection, 5% active, associative readout",
+  "no_sparsity": "Measured PN\u2192KC, all units active, associative readout",
+  "fly_delta": "Measured PN\u2192KC, 5% active, error-driven readout",
+  "pixels_delta": "No expansion: softmax regression on pixels",
+  "pixels_associative": "No expansion: associative readout on pixels",
+  "mlp_backprop": "Dense MLP (64\u2192512\u219210), backpropagation"
+ },
+ "seeds": 5,
+ "conditions": {
+  "digits": {
+   "options": {},
+   "parameters": {
+    "fly_measured": 40640,
+    "fly_shuffled": 40640,
+    "random_sparse": 40640,
+    "dense_topk": 40640,
+    "no_sparsity": 40640,
+    "fly_delta": 40650,
+    "pixels_delta": 650,
+    "pixels_associative": 640,
+    "mlp_backprop": 38410
+   },
+   "joint_upper_bound": 0.977365491651206,
+   "summary": {
+    "fly_measured": {
+     "final_accuracy": {
+      "mean": 0.8883116883116884,
+      "sd": 0.007640541848598895
+     },
+     "forgetting": {
+      "mean": 0.04847944274549779,
+      "sd": 0.01023687966485693
+     }
+    },
+    "fly_shuffled": {
+     "final_accuracy": {
+      "mean": 0.8846011131725418,
+      "sd": 0.01781076066790352
+     },
+     "forgetting": {
+      "mean": 0.054463982330954806,
+      "sd": 0.011444589094353325
+     }
+    },
+    "random_sparse": {
+     "final_accuracy": {
+      "mean": 0.909090909090909,
+      "sd": 0.01547803607763579
+     },
+     "forgetting": {
+      "mean": 0.03922867821950389,
+      "sd": 0.00546709510305292
+     }
+    },
+    "dense_topk": {
+     "final_accuracy": {
+      "mean": 0.9113172541743971,
+      "sd": 0.015136236032928489
+     },
+     "forgetting": {
+      "mean": 0.04201070336391437,
+      "sd": 0.003989030324308985
+     }
+    },
+    "no_sparsity": {
+     "final_accuracy": {
+      "mean": 0.8886827458256029,
+      "sd": 0.005866934434449673
+     },
+     "forgetting": {
+      "mean": 0.05353380903839618,
+      "sd": 0.008823932546252229
+     }
+    },
+    "fly_delta": {
+     "final_accuracy": {
+      "mean": 0.31539888682745826,
+      "sd": 0.045807196621924944
+     },
+     "forgetting": {
+      "mean": 0.8409318722392116,
+      "sd": 0.05830076511790269
+     }
+    },
+    "pixels_delta": {
+     "final_accuracy": {
+      "mean": 0.1888682745825603,
+      "sd": 0.004751854721657032
+     },
+     "forgetting": {
+      "mean": 0.9958545701664967,
+      "sd": 0.0026885998531887465
+     }
+    },
+    "pixels_associative": {
+     "final_accuracy": {
+      "mean": 0.9046382189239331,
+      "sd": 0.008670368419701618
+     },
+     "forgetting": {
+      "mean": 0.04711179068977233,
+      "sd": 0.004779723799675521
+     }
+    },
+    "mlp_backprop": {
+     "final_accuracy": {
+      "mean": 0.18738404452690166,
+      "sd": 0.004390411712875413
+     },
+     "forgetting": {
+      "mean": 0.9958375806999659,
+      "sd": 0.00172544531940504
+     }
+    }
+   }
+  },
+  "digits_5_per_class": {
+   "options": {
+    "per_class": 5
+   },
+   "parameters": {
+    "fly_measured": 40640,
+    "fly_shuffled": 40640,
+    "random_sparse": 40640,
+    "dense_topk": 40640,
+    "no_sparsity": 40640,
+    "fly_delta": 40650,
+    "pixels_delta": 650,
+    "pixels_associative": 640,
+    "mlp_backprop": 38410
+   },
+   "joint_upper_bound": 0.8552875695732839,
+   "summary": {
+    "fly_measured": {
+     "final_accuracy": {
+      "mean": 0.8044526901669758,
+      "sd": 0.029184092174004733
+     },
+     "forgetting": {
+      "mean": 0.061905368671423724,
+      "sd": 0.008185723499913604
+     }
+    },
+    "fly_shuffled": {
+     "final_accuracy": {
+      "mean": 0.791465677179963,
+      "sd": 0.033612977655341804
+     },
+     "forgetting": {
+      "mean": 0.06836561331974177,
+      "sd": 0.015601239652699361
+     }
+    },
+    "random_sparse": {
+     "final_accuracy": {
+      "mean": 0.824860853432282,
+      "sd": 0.035135051766280734
+     },
+     "forgetting": {
+      "mean": 0.06278882093102275,
+      "sd": 0.02198753693466764
+     }
+    },
+    "dense_topk": {
+     "final_accuracy": {
+      "mean": 0.8448979591836734,
+      "sd": 0.025291863729798844
+     },
+     "forgetting": {
+      "mean": 0.060966700645599704,
+      "sd": 0.016997738387244565
+     }
+    },
+    "no_sparsity": {
+     "final_accuracy": {
+      "mean": 0.8103896103896104,
+      "sd": 0.03600214091754261
+     },
+     "forgetting": {
+      "mean": 0.066063540604825,
+      "sd": 0.013251602835132754
+     }
+    },
+    "fly_delta": {
+     "final_accuracy": {
+      "mean": 0.3343228200371058,
+      "sd": 0.060726597537599375
+     },
+     "forgetting": {
+      "mean": 0.765451919809718,
+      "sd": 0.07908386420340424
+     }
+    },
+    "pixels_delta": {
+     "final_accuracy": {
+      "mean": 0.1725417439703154,
+      "sd": 0.013327113169623721
+     },
+     "forgetting": {
+      "mean": 0.968569486918111,
+      "sd": 0.014745673950915042
+     }
+    },
+    "pixels_associative": {
+     "final_accuracy": {
+      "mean": 0.8385899814471243,
+      "sd": 0.0221394195030446
+     },
+     "forgetting": {
+      "mean": 0.06007050628610261,
+      "sd": 0.009354361932827796
+     }
+    },
+    "mlp_backprop": {
+     "final_accuracy": {
+      "mean": 0.19220779220779222,
+      "sd": 0.03799672425539686
+     },
+     "forgetting": {
+      "mean": 0.9273827726809378,
+      "sd": 0.05127589912759021
+     }
+    }
+   }
+  },
+  "two_shape": {
+   "options": {
+    "task": "two_shape"
+   },
+   "parameters": {
+    "fly_measured": 40640,
+    "fly_shuffled": 40640,
+    "random_sparse": 40640,
+    "dense_topk": 40640,
+    "no_sparsity": 40640,
+    "fly_delta": 40650,
+    "pixels_delta": 650,
+    "pixels_associative": 640,
+    "mlp_backprop": 38410
+   },
+   "joint_upper_bound": 0.9799628942486084,
+   "summary": {
+    "fly_measured": {
+     "final_accuracy": {
+      "mean": 0.7970315398886829,
+      "sd": 0.027955188425732632
+     },
+     "forgetting": {
+      "mean": 0.078470218355657,
+      "sd": 0.013041092687347886
+     }
+    },
+    "fly_shuffled": {
+     "final_accuracy": {
+      "mean": 0.7985157699443414,
+      "sd": 0.020878374614671912
+     },
+     "forgetting": {
+      "mean": 0.07477066195787932,
+      "sd": 0.014647902008483532
+     }
+    },
+    "random_sparse": {
+     "final_accuracy": {
+      "mean": 0.8178107606679035,
+      "sd": 0.014953203472808823
+     },
+     "forgetting": {
+      "mean": 0.06328222576338347,
+      "sd": 0.006654355989825058
+     }
+    },
+    "dense_topk": {
+     "final_accuracy": {
+      "mean": 0.8233766233766234,
+      "sd": 0.010052851342592978
+     },
+     "forgetting": {
+      "mean": 0.0734204746113097,
+      "sd": 0.01110625701059665
+     }
+    },
+    "no_sparsity": {
+     "final_accuracy": {
+      "mean": 0.7435992578849723,
+      "sd": 0.015181649384399813
+     },
+     "forgetting": {
+      "mean": 0.09139928506826304,
+      "sd": 0.011014591312693275
+     }
+    },
+    "fly_delta": {
+     "final_accuracy": {
+      "mean": 0.24415584415584418,
+      "sd": 0.02785651113784558
+     },
+     "forgetting": {
+      "mean": 0.9276734570825618,
+      "sd": 0.03414750626146534
+     }
+    },
+    "pixels_delta": {
+     "final_accuracy": {
+      "mean": 0.20037105751391465,
+      "sd": 0.0
+     },
+     "forgetting": {
+      "mean": 0.9627654076402946,
+      "sd": 0.0032816099736648193
+     }
+    },
+    "pixels_associative": {
+     "final_accuracy": {
+      "mean": 0.7602968460111317,
+      "sd": 0.008574560302999126
+     },
+     "forgetting": {
+      "mean": 0.08962056936129895,
+      "sd": 0.0069463195119168035
+     }
+    },
+    "mlp_backprop": {
+     "final_accuracy": {
+      "mean": 0.21818181818181817,
+      "sd": 0.002776740175713497
+     },
+     "forgetting": {
+      "mean": 0.9098841466040742,
+      "sd": 0.08646824185907791
+     }
+    }
+   }
+  }
+ },
+ "interpretation": "Five seeds per condition at default settings; seeds change the split, pixel-to-PN assignment, random wirings and presentation order. Model experiments on a toy dataset, not evidence about fly cognition."
+}

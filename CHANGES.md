@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add sparse-expansion continual-learning experiment
+
+- New `/expansion` page and `expansion.py`: class-incremental learning on bundled 8×8 digits, comparing the measured PN→KC expansion with 5% active cells and a reward-gated associative readout against shuffled, random sparse and dense random wiring, no sparsity, no expansion, an error-driven readout and a backpropagation MLP, plus an all-at-once upper bound. Two task variants (single-digit and two-shape classes) and a few-shot setting.
+- Benchmark (five seeds, three conditions) in `data/expansion-benchmark.json`. Findings: the associative rule prevents catastrophic forgetting (about 5% vs 84–100%) even on raw pixels; sparse expansion helps only for classes with several shapes (about +6 points); measured wiring performs like shuffled and random wiring.
+- `data/digits.npz` (UCI handwritten digits, 45 KB) bundled so the experiment runs offline.
+- `test_expansion.py`; route tests for the new page and the 3D assets.
+
 ## Fix region and outline meshes in the 3D view
 
 - Neuron meshes worked, but region shapes and one outline piece failed with "Invalid path": the proxy's character allow-list rejected fragment names listed in real mesh manifests. Directories stay strictly checked; file names may now hold any printable characters except slashes and `..`, and are URL-encoded when fetched and when cached.

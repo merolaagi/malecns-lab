@@ -47,7 +47,8 @@ class RouteTests(unittest.TestCase):
     def tearDownClass(cls): cls.s.shutdown(); cls.s.server_close()
 
     def test_pages_and_api(self):
-        for path in ['/neuron', '/neuron.js', '/neuron-core.js', '/workbench.css', '/numerosity', '/numerosity.js', '/api/numerosity-benchmark']:
+        for path in ['/neuron', '/neuron.js', '/neuron-core.js', '/workbench.css', '/numerosity', '/numerosity.js', '/api/numerosity-benchmark',
+                     '/expansion', '/expansion.js', '/api/expansion-benchmark', '/3d', '/viewer3d.js', '/ng.js', '/vendor/three.min.js']:
             with urllib.request.urlopen(self.url + path) as r: self.assertEqual(r.status, 200)
         with urllib.request.urlopen(self.url + '/api/neuron?circuit=learning&id=random&seed=5') as r:
             self.assertEqual(json.loads(r.read())['cell']['role'], 'KC')
@@ -73,6 +74,15 @@ class RouteTests(unittest.TestCase):
         self.assertEqual(self.post_with('https://malecns.fueldeskpro.com', host='malecns.fueldeskpro.com'), 200)
         self.assertEqual(self.post_with('https://evil.example', host='malecns.fueldeskpro.com'), 403)
         self.assertEqual(self.post_with('http://evil.example'), 403)
+
+    def test_expansion_endpoint(self):
+        for _ in range(40):
+            req = urllib.request.Request(self.url + '/api/expansion', data=json.dumps({'per_class': 5}).encode(), headers={'Content-Type': 'application/json'})
+            try:
+                with urllib.request.urlopen(req) as r: self.assertIn('fly_measured', json.loads(r.read())['models']); return
+            except urllib.error.HTTPError as e:
+                if e.code != 409: raise
+            time.sleep(0.05)
 
     def test_unknown_numerosity_parameter_rejected(self):
         req = urllib.request.Request(self.url + '/api/numerosity', data=b'{"evil": 1}', headers={'Content-Type': 'application/json'})

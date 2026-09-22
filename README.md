@@ -181,6 +181,30 @@ All layers the viewer uses are in Neuroglancer's legacy precomputed mesh format 
 node --test ng.test.js && .venv/bin/python -m unittest -v test_gcs.py
 ```
 
+## Sparse expansion for continual learning (new)
+
+Open `/expansion`. This tests the mushroom body's design as a machine-learning component. Handwritten 8×8 digits (UCI, bundled as `data/digits.npz`) arrive a few classes at a time, and each model is tested on all classes seen so far with no task label (class-incremental learning). The fly-inspired model expands pixels through the measured MaleCNS projection-neuron → Kenyon-cell wiring (pixels drive projection neurons through a fixed random assignment), keeps the 5% most driven Kenyon cells, and learns with an associative readout that strengthens only the correct class's connections from active cells. Controls: shuffled wiring, random sparse wiring with the same per-cell in-degree, dense random projection, expansion without sparsity, the associative readout on raw pixels, an error-driven readout on the sparse code, softmax regression on pixels, and a backpropagation MLP with a similar parameter count. An MLP trained on all classes at once gives the upper bound.
+
+Saved benchmark (`data/expansion-benchmark.json`, five seeds, final accuracy on all classes / forgetting):
+
+| Model | Digits | Digits, 5 per class | Two-shape classes |
+|---|---|---|---|
+| Measured PN→KC, 5% active, associative | 89% / 5% | 80% / 6% | 80% / 8% |
+| Shuffled PN→KC, 5% active, associative | 88% / 5% | 79% / 7% | 80% / 7% |
+| Dense random, 5% active, associative | 91% / 4% | 84% / 6% | 82% / 7% |
+| Measured PN→KC, all active, associative | 89% / 5% | 81% / 7% | 74% / 9% |
+| Associative readout on raw pixels | 90% / 5% | 84% / 6% | 76% / 9% |
+| Measured PN→KC, 5% active, error-driven | 32% / 84% | 33% / 77% | 24% / 93% |
+| MLP, backpropagation | 19% / 100% | 19% / 93% | 22% / 91% |
+| MLP trained on all classes at once | 98% | 86% | 98% |
+
+**Findings.** The associative learning rule is what prevents catastrophic forgetting (about 5% instead of 84–100%), and it works as well on raw pixels as on the expansion; with five examples per class it approaches the all-at-once upper bound. Sparse expansion helps only when classes have several shapes (two-shape classes: 80–82% versus 74–76% without sparsity or expansion). The measured wiring performs like shuffled and random wiring, slightly behind; about 6% of measured Kenyon cells receive no projection-neuron input and never fire. What transfers to machine learning is the learning rule and the sparse code, not the specific connectome.
+
+```sh
+.venv/bin/python expansion.py --benchmark
+.venv/bin/python -m unittest -v test_expansion.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

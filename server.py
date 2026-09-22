@@ -12,6 +12,7 @@ from explorer import Explorer
 from membrane import run_membrane
 from sdr_math import SDRArithmetic
 from vision import run as run_vision
+from expansion import Experiment as ExpansionExperiment
 from neuron_inputs import NeuronIndex
 from urllib.parse import urlparse, parse_qs
 import gcs
@@ -23,6 +24,7 @@ LEARNING = LearningCircuit()
 NUMEROSITY = Numerosity(LEARNING)
 MATH = Arithmetic(LEARNING)
 EXPLORER = Explorer()
+EXPANSION = ExpansionExperiment(LEARNING)
 NEURONS = NeuronIndex(CIRCUIT, LEARNING)
 LOCK = threading.Lock()
 
@@ -77,7 +79,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, LEARNING.data)
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
-        files = {'/3d': ('viewer3d.html', 'text/html; charset=utf-8'),
+        files = {'/expansion': ('expansion.html', 'text/html; charset=utf-8'),
+                 '/expansion.js': ('expansion.js', 'text/javascript; charset=utf-8'),
+                 '/api/expansion-benchmark': ('data/expansion-benchmark.json', 'application/json; charset=utf-8'),
+                 '/3d': ('viewer3d.html', 'text/html; charset=utf-8'),
                  '/vendor/three.min.js': ('vendor/three.min.js', 'text/javascript; charset=utf-8'),
                  '/viewer3d.js': ('viewer3d.js', 'text/javascript; charset=utf-8'),
                  '/ng.js': ('ng.js', 'text/javascript; charset=utf-8'),
@@ -122,7 +127,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send(200, file.read_bytes(), mime)
 
     def do_POST(self):
-        if self.path not in ['/api/run', '/api/learn', '/api/numerosity', '/api/math', '/api/membrane', '/api/sdr', '/api/vision']: return self.send(404, {'error': 'Not found'})
+        if self.path not in ['/api/run', '/api/learn', '/api/numerosity', '/api/math', '/api/membrane', '/api/sdr', '/api/vision', '/api/expansion']: return self.send(404, {'error': 'Not found'})
         # The app is same-origin. Reject browser requests originating elsewhere.
         # Behind an HTTPS proxy such as a Cloudflare tunnel the page origin is https://<host>,
         # so both schemes are accepted for the same Host; other sites are still refused.
@@ -140,7 +145,8 @@ class Handler(BaseHTTPRequestHandler):
                        '/api/math': {'seed','epochs','learning_rate','condition'},
                        '/api/membrane': {'current','inhibition','context','block_na','body_id'},
                        '/api/sdr': {'seed','epochs','learning_rate','condition','encoding'},
-                       '/api/vision': {'seed','epochs'}}[self.path]
+                       '/api/vision': {'seed','epochs'},
+                       '/api/expansion': {'seed','per_class','epochs','sparsity','lr','task'}}[self.path]
             if set(options) - allowed: raise ValueError('Unknown parameter')
         except (ValueError, TypeError) as e: return self.send(400, {'error': str(e)})
         if not LOCK.acquire(blocking=False): return self.send(409, {'error': 'An experiment is already running'})
@@ -152,7 +158,7 @@ class Handler(BaseHTTPRequestHandler):
                 result = SDRArithmetic(LEARNING, encoding).run(**options)
             else:
                 run = {'/api/run': CIRCUIT.simulate, '/api/learn': LEARNING.run, '/api/numerosity': NUMEROSITY.run,
-                       '/api/math': MATH.run, '/api/membrane': run_membrane, '/api/vision': run_vision}[self.path]
+                       '/api/math': MATH.run, '/api/membrane': run_membrane, '/api/vision': run_vision, '/api/expansion': EXPANSION.run}[self.path]
                 result = run(**options)
             self.send(200, result)
         except (ValueError, TypeError, OverflowError) as e:

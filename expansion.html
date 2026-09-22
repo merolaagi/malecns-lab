@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Sparse expansion</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css"></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ sparse expansion</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/atlas">Circuit atlas</a><a href="/neuron">Neuron workbench</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a></nav></header>
+<main class="wb">
+<h1>Learning new classes without forgetting old ones</h1>
+<p class="sub">A fly-inspired design tested as a machine-learning component: expand the input into thousands of units, keep only the 5% most driven, and let a reward signal strengthen only the correct class's connections. Classes arrive a few at a time, and there is no task label at test time.</p>
+<div class="notice"><strong>Borrowed, then tested against controls.</strong> The expansion uses the measured MaleCNS projection-neuron → Kenyon-cell wiring. Pixels drive projection neurons through a fixed random assignment, and the task is handwritten digits, which flies obviously don't read. Every fly-derived part is compared with shuffled wiring, random wiring, no expansion, and standard backpropagation.</div>
+<div class="wb-bar">
+  <label>Task<select id="task"><option value="digits">Digits: 10 classes, 5 tasks</option><option value="two_shape">Two-shape classes: 5 classes, 3 tasks</option></select></label>
+  <label>Training examples<select id="perClass"><option value="0">All (~125 per class)</option><option value="20">20 per class</option><option value="5">5 per class</option></select></label>
+  <label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label>
+  <button id="expRun">Run experiment</button><span class="wb-status" id="status" role="status"></span>
+</div>
+<div class="num-grid" style="margin-top:22px">
+  <div class="wb-card"><h2>Final accuracy on all classes</h2><canvas id="cAcc" style="height:300px"></canvas><p class="hint">Dashed line: an MLP trained on all classes at once (upper bound). Dotted line: chance.</p></div>
+  <div class="wb-card"><h2>Forgetting</h2><canvas id="cForget" style="height:300px"></canvas><p class="hint">Average drop from each earlier task's best accuracy to its final accuracy.</p></div>
+  <div class="wb-card"><h2>Accuracy on everything seen so far</h2><canvas id="cCurve" style="height:280px"></canvas><p class="hint">After each task. Error-driven learners collapse to the newest task.</p></div>
+  <div class="wb-card"><h2>How different the class codes are</h2><div class="wb-row"><select id="codeKind" style="max-width:320px"><option value="fly_measured">Measured wiring, 5% active</option><option value="no_sparsity">Measured wiring, all active</option><option value="dense_topk">Dense random, 5% active</option></select></div><canvas id="cCode" style="height:240px"></canvas><p class="hint">Overlap of each class's typical expansion code (Jaccard). Sparse codes keep classes apart.</p></div>
+</div>
+<div class="wb-card" style="margin-top:22px"><h2>Saved benchmark: five seeds per condition</h2><div id="bench" style="overflow:auto"><p class="hint">Loading…</p></div><p class="hint">Mean ± SD. Regenerate with <code>.venv/bin/python expansion.py --benchmark</code>.</p></div>
+<div class="wb-card" style="margin-top:22px"><h2>What the controls show</h2>
+<p class="note"><strong>The learning rule prevents forgetting.</strong> Strengthening only the correct class's connections cuts forgetting from about 99% (backpropagation, error-driven readouts) to about 5%, and it works as well on raw pixels as on the expansion.</p>
+<p class="note"><strong>Sparse coding helps when a class has several shapes.</strong> With two-shape classes, sparse expansion beats raw pixels and non-sparse expansion by about 5–7 points. With ordinary digits it adds nothing.</p>
+<p class="warn"><strong>The fly's specific wiring adds nothing measurable.</strong> Measured, shuffled, random sparse and dense random expansions perform within noise of each other, with measured wiring slightly behind. About 6% of the measured Kenyon cells receive no projection-neuron input at all and never fire.</p>
+<p class="hint">Assumed: pixel-to-PN assignment, the 5% threshold, both readout rules, learning rates, the digit tasks. Measured: the PN→KC edges and synapse counts.</p></div>
+</main>
+<script src="/expansion.js"></script>
+</body></html>
