@@ -1,0 +1,853 @@
+{
+ "v1.0/segmentation/meshes-malecns/single-res-meshes/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_legacy_mesh"
+  }
+ },
+ "rois/fullbrain-roi-v5/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_multiscale_volume",
+   "data_type": "uint64",
+   "num_channels": 1,
+   "scales": [
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "256_256_256",
+     "resolution": [
+      256.0,
+      256.0,
+      256.0
+     ],
+     "size": [
+      2932,
+      1714,
+      1624
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "512_512_512",
+     "resolution": [
+      512.0,
+      512.0,
+      512.0
+     ],
+     "size": [
+      1466,
+      857,
+      812
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "1024_1024_1024",
+     "resolution": [
+      1024.0,
+      1024.0,
+      1024.0
+     ],
+     "size": [
+      733,
+      428,
+      406
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "2048_2048_2048",
+     "resolution": [
+      2048.0,
+      2048.0,
+      2048.0
+     ],
+     "size": [
+      366,
+      214,
+      203
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "type": "segmentation",
+   "mesh": "mesh",
+   "segment_properties": "segment_properties"
+  }
+ },
+ "rois/fullbrain-roi-v5/mesh/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_legacy_mesh"
+  }
+ },
+ "rois/fullbrain-roi-v5/segment_properties/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_segment_properties",
+   "inline": {
+    "ids": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "7",
+     "8",
+     "9",
+     "10",
+     "11",
+     "12",
+     "13",
+     "14",
+     "15",
+     "16",
+     "17",
+     "18",
+     "19",
+     "20",
+     "21",
+     "22",
+     "23",
+     "24",
+     "25",
+     "26",
+     "29",
+     "30",
+     "31",
+     "32",
+     "33",
+     "34",
+     "35",
+     "36",
+     "37",
+     "38",
+     "39",
+     "40",
+     "41",
+     "42",
+     "43",
+     "44",
+     "45",
+     "46",
+     "47",
+     "48",
+     "49",
+     "50",
+     "51",
+     "52",
+     "53",
+     "54",
+     "55",
+     "56",
+     "57",
+     "62",
+     "63",
+     "64",
+     "65",
+     "66",
+     "67",
+     "68",
+     "69",
+     "70",
+     "71",
+     "72",
+     "73",
+     "74",
+     "75",
+     "76",
+     "77",
+     "78",
+     "79",
+     "80",
+     "81",
+     "82",
+     "83",
+     "84",
+     "85",
+     "86",
+     "93",
+     "94",
+     "95",
+     "96"
+    ],
+    "properties": [
+     {
+      "id": "source",
+      "type": "label",
+      "values": [
+       "AL(L)",
+       "AL(R)",
+       "AME(L)",
+       "AME(R)",
+       "AOTU(L)",
+       "AOTU(R)",
+       "ATL(L)",
+       "ATL(R)",
+       "AVLP(L)",
+       "AVLP(R)",
+       "BU(L)",
+       "BU(R)",
+       "CA(L)",
+       "CA(R)",
+       "CAN(L)",
+       "CAN(R)",
+       "CRE(L)",
+       "CRE(R)",
+       "EB",
+       "EPA(L)",
+       "EPA(R)",
+       "FB",
+       "FLA(L)",
+       "FLA(R)",
+       "GNG",
+       "GOR(L)",
+       "GOR(R)",
+       "IB",
+       "ICL(L)",
+       "ICL(R)",
+       "IPS(L)",
+       "IPS(R)",
+       "LA(L)",
+       "LA(R)",
+       "LAL(L)",
+       "LAL(R)",
+       "LH(L)",
+       "LH(R)",
+       "LO(L)",
+       "LO(R)",
+       "LOP(L)",
+       "LOP(R)",
+       "ME(L)",
+       "ME(R)",
+       "NO",
+       "PB",
+       "PED(L)",
+       "PED(R)",
+       "PLP(L)",
+       "PLP(R)",
+       "PRW",
+       "PVLP(L)",
+       "PVLP(R)",
+       "SAD",
+       "SCL(L)",
+       "SCL(R)",
+       "SIP(L)",
+       "SIP(R)",
+       "SLP(L)",
+       "SLP(R)",
+       "SMP(L)",
+       "SMP(R)",
+       "SPS(L)",
+       "SPS(R)",
+       "VES(L)",
+       "VES(R)",
+       "WED(L)",
+       "WED(R)",
+       "a'L(L)",
+       "a'L(R)",
+       "aL(L)",
+       "aL(R)",
+       "b'L(L)",
+       "b'L(R)",
+       "bL(L)",
+       "bL(R)",
+       "gL(L)",
+       "gL(R)",
+       "AB(R)",
+       "AB(L)",
+       "CV-anterior",
+       "CRN"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "rois/malecns-vnc-neuropil-roi-v0/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_multiscale_volume",
+   "data_type": "uint64",
+   "num_channels": 1,
+   "scales": [
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "256_256_256",
+     "resolution": [
+      256.0,
+      256.0,
+      256.0
+     ],
+     "size": [
+      2940,
+      2414,
+      4206
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "512_512_512",
+     "resolution": [
+      512.0,
+      512.0,
+      512.0
+     ],
+     "size": [
+      1470,
+      1207,
+      2103
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "1024_1024_1024",
+     "resolution": [
+      1024.0,
+      1024.0,
+      1024.0
+     ],
+     "size": [
+      735,
+      603,
+      1051
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "2048_2048_2048",
+     "resolution": [
+      2048.0,
+      2048.0,
+      2048.0
+     ],
+     "size": [
+      367,
+      301,
+      525
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "type": "segmentation",
+   "mesh": "mesh",
+   "segment_properties": "segment_properties"
+  }
+ },
+ "rois/malecns-vnc-neuropil-roi-v0/mesh/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_legacy_mesh"
+  }
+ },
+ "rois/malecns-vnc-neuropil-roi-v0/segment_properties/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_segment_properties",
+   "inline": {
+    "ids": [
+     "4",
+     "5",
+     "6",
+     "7",
+     "8",
+     "9",
+     "10",
+     "11",
+     "12",
+     "13",
+     "14",
+     "15",
+     "16",
+     "17",
+     "18",
+     "19",
+     "20",
+     "21",
+     "22",
+     "23",
+     "24",
+     "25",
+     "26",
+     "27"
+    ],
+    "properties": [
+     {
+      "id": "source",
+      "type": "label",
+      "values": [
+       "CV-posterior",
+       "LegNp(T1)(L)",
+       "LegNp(T1)(R)",
+       "LegNp(T2)(L)",
+       "LegNp(T2)(R)",
+       "LegNp(T3)(L)",
+       "LegNp(T3)(R)",
+       "Ov(L)",
+       "Ov(R)",
+       "IntTct",
+       "LTct",
+       "NTct(UTct-T1)(L)",
+       "NTct(UTct-T1)(R)",
+       "WTct(UTct-T2)(L)",
+       "WTct(UTct-T2)(R)",
+       "HTct(UTct-T3)(L)",
+       "HTct(UTct-T3)(R)",
+       "ANm",
+       "mVAC(T1)(L)",
+       "mVAC(T1)(R)",
+       "mVAC(T2)(L)",
+       "mVAC(T2)(R)",
+       "mVAC(T3)(L)",
+       "mVAC(T3)(R)"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "rois/fullbrain-major-shells/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_multiscale_volume",
+   "data_type": "uint64",
+   "num_channels": 1,
+   "scales": [
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "256_256_256",
+     "resolution": [
+      256.0,
+      256.0,
+      256.0
+     ],
+     "size": [
+      2898,
+      1678,
+      1332
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "512_512_512",
+     "resolution": [
+      512.0,
+      512.0,
+      512.0
+     ],
+     "size": [
+      1449,
+      839,
+      666
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "1024_1024_1024",
+     "resolution": [
+      1024.0,
+      1024.0,
+      1024.0
+     ],
+     "size": [
+      724,
+      419,
+      333
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "type": "segmentation",
+   "mesh": "mesh",
+   "segment_properties": "segment_properties"
+  }
+ },
+ "rois/fullbrain-major-shells/mesh/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_legacy_mesh"
+  }
+ },
+ "rois/fullbrain-major-shells/segment_properties/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_segment_properties",
+   "inline": {
+    "ids": [
+     "1",
+     "2",
+     "3"
+    ],
+    "properties": [
+     {
+      "id": "source",
+      "type": "label",
+      "values": [
+       "CB",
+       "OL(L)",
+       "OL(R)"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "rois/vnc-neuropil-shell-v2/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_multiscale_volume",
+   "data_type": "uint64",
+   "num_channels": 1,
+   "scales": [
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "256_256_256",
+     "resolution": [
+      256.0,
+      256.0,
+      256.0
+     ],
+     "size": [
+      2068,
+      2160,
+      4186
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "512_512_512",
+     "resolution": [
+      512.0,
+      512.0,
+      512.0
+     ],
+     "size": [
+      1034,
+      1080,
+      2093
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "1024_1024_1024",
+     "resolution": [
+      1024.0,
+      1024.0,
+      1024.0
+     ],
+     "size": [
+      517,
+      540,
+      1046
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "chunk_sizes": [
+      [
+       64,
+       64,
+       64
+      ]
+     ],
+     "compressed_segmentation_block_size": [
+      8,
+      8,
+      8
+     ],
+     "encoding": "compressed_segmentation",
+     "key": "2048_2048_2048",
+     "resolution": [
+      2048.0,
+      2048.0,
+      2048.0
+     ],
+     "size": [
+      258,
+      270,
+      523
+     ],
+     "voxel_offset": [
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "type": "segmentation",
+   "mesh": "mesh",
+   "segment_properties": "segment_properties"
+  }
+ },
+ "rois/vnc-neuropil-shell-v2/mesh/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_legacy_mesh"
+  }
+ },
+ "rois/vnc-neuropil-shell-v2/segment_properties/info": {
+  "ok": true,
+  "json": {
+   "@type": "neuroglancer_segment_properties",
+   "inline": {
+    "ids": [
+     "1"
+    ],
+    "properties": [
+     {
+      "id": "source",
+      "type": "label",
+      "values": [
+       "vnc-neuropil-shell"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "neuron 10360 manifest": {
+  "ok": true,
+  "json": {
+   "fragments": [
+    "10360.ngmesh"
+   ]
+  }
+ },
+ "neuron 10360 first fragment": {
+  "ok": false,
+  "error": "File exceeds the 25 MB viewer limit"
+ }
+}
