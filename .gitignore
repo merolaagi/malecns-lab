@@ -10,3 +10,6 @@ raw-data/
 flyvis-data/
 .server.pid
 .server.log
+# Skeletons the explorer downloads on demand are a local cache; only the bundled one is tracked.
+data/skeletons/*
+!data/skeletons/10360.swc

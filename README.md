@@ -150,6 +150,20 @@ cd raw-data && B=https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-d
 .venv/bin/python -m unittest -v test_quality.py
 ```
 
+## Brain regions (new)
+
+`build_regions.py` asks neuPrint (dataset `male-cns:v1.0`) for the region profile (`roiInfo`) of every traced neuron: how many of its input connections (post) and output connections (downstream) fall in each primary region. It writes `data/regions.json` with per-region totals, a region-to-region flow matrix and a region profile for every lab cell. Open `/regions` for the matrix; atlas cell panels and the neuron workbench show each cell's top input and output regions.
+
+Flow from region A to region B sums, over all traced neurons, the fraction of each neuron's input received in A times its output connections in B. Synapses sit inside one region, so this routes influence through neurons; it is not a count of synapses between regions. Only primary regions are used, since super- and sub-regions overlap and would double count.
+
+Requires a personal neuPrint token, kept in the environment and never committed (the repository is public):
+
+```sh
+export NEUPRINT_APPLICATION_CREDENTIALS='<token from your neuPrint account page>'
+.venv/bin/pip install -r requirements-regions.txt && .venv/bin/python build_regions.py
+.venv/bin/python -m unittest -v test_regions.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

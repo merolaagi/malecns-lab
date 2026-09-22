@@ -14,7 +14,8 @@ const LAYER_TEXT = {
         w: 'Their somata sit in the legs, so positions are estimated from partners. Front legs have 11 cells against 40 each for middle and hind.' },
 };
 
-let A = null, Q = null;
+let A = null, Q = null, RG = null;
+fetch('/api/regions').then(r => r.ok ? r.json() : null).then(d => { RG = d ? d.profiles : null; if (A && S.sel?.kind === 'cell') renderPanel(); }).catch(() => {});
 fetch('/api/quality').then(r => r.ok ? r.json() : null).then(q => { Q = q ? q.cells : null; if (A && S.sel?.kind === 'cell') renderPanel(); }).catch(() => {});
 const S = { view: 'circuit', layer: null, group: null, sel: null, hover: null, cam: { s: 1, x: 0, y: 0 },
             regionMode: false, threshold: 0, drag: null, rect: null };
@@ -306,6 +307,11 @@ function qualityHtml(bodyId, aggregateNt) {
     const shares = Object.entries(q.nt.top_share).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k, v]) => k + ' ' + Math.round(v * 100) + '%').join(', ');
     h += '<tr><td>Per-synapse transmitter</td><td>' + esc(shares) + ' of ' + fmt(q.nt.tbars) + ' synapses</td></tr>'
       + '<tr><td>Sign probability</td><td>+ ' + Math.round(q.nt.p_positive * 100) + '%, − ' + Math.round(q.nt.p_negative * 100) + '%</td></tr>';
+  }
+  const rg = RG && RG[String(bodyId)];
+  if (rg) {
+    const top = l => l.slice(0, 3).map(x => esc(x.roi) + ' ' + Math.round(x.fraction * 100) + '%').join(', ') || 'none';
+    h += '<tr><td>Input regions</td><td>' + top(rg.input) + '</td></tr><tr><td>Output regions</td><td>' + top(rg.output) + '</td></tr>';
   }
   h += '</table>';
   if (q.coverage_in !== null && q.coverage_in < 0.25) h += '<p class="flag">The subset contains under a quarter of this cell’s input, so its simulated activity leaves out most of what drives it.</p>';

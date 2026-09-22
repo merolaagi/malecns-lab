@@ -40,6 +40,7 @@ function renderInfo() {
     + row('Output partners', D.output_partners)
     + (D.quality ? row('Input in this subset', D.quality.coverage_in === null ? 'unknown' : Math.round(D.quality.coverage_in * 100) + '% of ' + D.quality.post_total + ' synapses') : '')
     + (D.quality && D.quality.nt ? row('Per-synapse transmitter', Object.entries(D.quality.nt.top_share).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k, v]) => k + ' ' + Math.round(v * 100) + '%').join(', ')) : '')
+    + (D.regions ? row('Input regions', D.regions.input.slice(0, 3).map(x => x.roi + ' ' + Math.round(x.fraction * 100) + '%').join(', ')) + row('Output regions', D.regions.output.slice(0, 3).map(x => x.roi + ' ' + Math.round(x.fraction * 100) + '%').join(', ')) : '')
     + '</table>'
     + (D.quality && D.quality.coverage_in !== null && D.quality.coverage_in < 0.25 ? '<p class="warn">Only ' + Math.round(D.quality.coverage_in * 100) + '% of this cell’s input is in the lab’s subset. The simulation below is driven by a small slice of its real input.</p>' : '')
     + (D.circuit === 'locomotion' ? '<p><a href="/atlas#cell=' + c.bodyId + '&view=anatomy" style="color:var(--accent);font-size:12px">Show in circuit atlas</a></p>' : '')

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Brain regions</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css"></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ brain regions</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/atlas">Circuit atlas</a><a href="/neuron">Neuron workbench</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a></nav></header>
+<main class="wb">
+<h1>Which regions drive which</h1>
+<p class="sub" id="sub">Loading region data…</p>
+<div class="notice"><strong>Routed through neurons, not synapses between regions.</strong> Synapses sit inside one region. Flow from A to B adds up, over every traced neuron, the share of its input it receives in A times its output connections in B. It shows where regions send their influence, not a measured region-to-region wiring diagram.</div>
+<div class="wb-grid" style="margin-top:22px">
+  <section class="wb-card"><h2>Flow between primary regions</h2>
+    <div class="wb-row"><span class="lab">Show</span><select id="scope" style="max-width:260px"><option value="60">60 busiest regions</option><option value="120">120 busiest regions</option><option value="all">All regions</option></select><label style="margin:0;min-width:0;display:flex;align-items:center;gap:6px"><input type="checkbox" id="nodiag" checked style="width:auto"> Hide within-region flow</label></div>
+    <div style="overflow:auto"><canvas id="matrix" class="trace" style="height:auto;background:#121914"></canvas></div>
+    <p class="hint">Rows: where neurons receive input. Columns: where they send output. Colour is log-scaled. Click a row or column label or any cell to inspect a region.</p>
+  </section>
+  <aside class="wb-card" id="panel"><h2>Region</h2><p class="hint">Click the matrix to inspect a region.</p></aside>
+</div>
+</main>
+<script src="/regions.js"></script>
+</body></html>

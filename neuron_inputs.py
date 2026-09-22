@@ -18,6 +18,8 @@ class NeuronIndex:
     def __init__(self, locomotion=None, learning=None, quality_path=None):
         qp = quality_path or BASE / 'data/quality.json'
         self.quality = json.loads(qp.read_text())['cells'] if qp.exists() else {}
+        rp = BASE / 'data/regions.json'
+        self.regions = json.loads(rp.read_text())['profiles'] if rp.exists() else {}
         self.loco = locomotion or Circuit()
         self.learn = learning or LearningCircuit()
         self.nodes = {'locomotion': {n['bodyId']: n for n in self.loco.nodes},
@@ -57,7 +59,7 @@ class NeuronIndex:
             channels.append({'synapse_nt': qual.get('nt'), 'coverage_in': qual.get('coverage_in'), 'bodyId': pre, 'name': p.get('instance') or p.get('type'), 'type': p.get('type'),
                              'class': p.get('superclass') or p.get('role'), 'synapses': w, 'sign': sign, 'nt': nt, 'note': note})
         out = {'circuit': circuit, 'cell': node, 'inputs': channels, 'modulatory': modulatory,
-               'output_partners': self.outputs[circuit][body_id], 'quality': self.quality.get(str(body_id))}
+               'output_partners': self.outputs[circuit][body_id], 'quality': self.quality.get(str(body_id)), 'regions': self.regions.get(str(body_id))}
         if circuit == 'learning' and node.get('role') == 'KC':
             out['number_codes'] = self.number_codes(channels)
         return out

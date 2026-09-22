@@ -42,9 +42,9 @@ class Handler(BaseHTTPRequestHandler):
                 body_id = int(parse_qs(url.query).get('id', ['10360'])[0])
                 return self.send(200, EXPLORER.skeleton(body_id))
             except (ValueError, OSError) as e: return self.send(400, {'error': str(e)})
-        if path == '/api/quality':
-            q = BASE / 'data/quality.json'
-            if not q.exists(): return self.send(404, {'error': 'No data/quality.json yet. Run build_quality.py (see README).'})
+        if path in ('/api/quality', '/api/regions'):
+            name = path.split('/')[-1]; q = BASE / f'data/{name}.json'
+            if not q.exists(): return self.send(404, {'error': f'No data/{name}.json yet. Run build_{name}.py (see README).'})
             body = q.read_bytes()
             self.send_response(200); self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Content-Length', str(len(body))); self.end_headers(); self.wfile.write(body); return
@@ -59,7 +59,9 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, LEARNING.data)
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
-        files = {'/vision': ('vision.html', 'text/html; charset=utf-8'),
+        files = {'/regions': ('regions.html', 'text/html; charset=utf-8'),
+                 '/regions.js': ('regions.js', 'text/javascript; charset=utf-8'),
+                 '/vision': ('vision.html', 'text/html; charset=utf-8'),
                  '/vision.js': ('vision.js', 'text/javascript; charset=utf-8'),
                  '/vision.css': ('vision.css', 'text/css; charset=utf-8'),
                  '/api/vision-example': ('data/vision-example.json', 'application/json; charset=utf-8'),

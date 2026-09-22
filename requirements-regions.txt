@@ -1,0 +1,2 @@
+# Optional: only for build_regions.py (brain-region connectivity from neuPrint).
+neuprint-python>=0.6

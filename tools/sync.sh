@@ -26,9 +26,9 @@ fi
 echo "Applying $ZIP"
 
 # Never overwrite local edits that aren't committed yet.
-if [ -n "$(git status --porcelain)" ]; then
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
   echo "You have uncommitted changes. Commit or stash them first, then re-run:" >&2
-  git status --short >&2; exit 1
+  git status --short --untracked-files=no >&2; exit 1
 fi
 
 if git remote get-url origin >/dev/null 2>&1; then git pull -q --ff-only; fi
@@ -57,6 +57,16 @@ if [ -f "$SRC/CHANGES.md" ] && [ -f CHANGES.md ]; then
   fi
 fi
 rm -rf "$SRC/.git" "$SRC/.venv" "$SRC/.runtime.json"
+
+# Untracked local files (for example skeletons the explorer cached) never block a sync, unless this
+# iteration would overwrite one of them.
+CLASH=$(comm -12 <(git ls-files --others --exclude-standard | sort) <(cd "$SRC" && find . -type f | sed 's|^\./||' | sort))
+if [ -n "$CLASH" ]; then
+  echo "Refusing $(basename "$ZIP"): it would overwrite these untracked local files:" >&2
+  printf '%s\n' "$CLASH" >&2
+  echo "Commit or move them, then re-run." >&2
+  exit 1
+fi
 find "$SRC" -name __pycache__ -prune -exec rm -rf {} +
 
 # Iterations add and change files; they rarely remove any. Stop if this one would delete many.
@@ -65,7 +75,7 @@ DROP_ALL=$(comm -23 <(git ls-files | sort) <(cd "$SRC" && find . -type f | sed '
 # after the iteration zip was built. Never delete them just because a zip lacks them.
 KEEP=$(printf '%s\n' "$DROP_ALL" | grep '^data/' || true)
 DROP=$(printf '%s\n' "$DROP_ALL" | grep -v '^data/' | grep . || true)
-[ -n "$KEEP" ] && printf 'Keeping generated data not in this zip: %s\n' "$(echo $KEEP)"
+if [ -n "$KEEP" ]; then printf 'Keeping generated data not in this zip: %s\n' "$(echo $KEEP)"; fi
 NDROP=$(printf '%s' "$DROP" | grep -c . || true)
 if [ "$NDROP" -gt 3 ] && [ "${MALECNS_FORCE:-}" != 1 ]; then
   echo "Refusing $(basename "$ZIP"): it would delete $NDROP tracked files:" >&2
@@ -75,9 +85,12 @@ if [ "$NDROP" -gt 3 ] && [ "${MALECNS_FORCE:-}" != 1 ]; then
 fi
 
 # Remove tracked files that the new iteration dropped. Untracked local files (raw data, .venv) are left alone.
-printf '%s\n' "$DROP" | while IFS= read -r f; do
-  [ -n "$f" ] && git rm -q -- "$f"
-done
+# (An `[ -n "$f" ] && ...` here made an empty list return failure and, under set -e, silently end the sync.)
+if [ -n "$DROP" ]; then
+  printf '%s\n' "$DROP" | while IFS= read -r f; do
+    if [ -n "$f" ]; then git rm -q -- "$f"; fi
+  done
+fi
 (cd "$SRC" && tar cf - .) | tar xf -
 
 if [ -z "$(git status --porcelain)" ]; then
@@ -99,7 +112,7 @@ echo "Tests passed."
 SUBJECT="Iteration $(date +%Y-%m-%d) from $(basename "$ZIP")"; BODY=""
 if [ -f CHANGES.md ]; then
   S=$(grep -m1 '^## ' CHANGES.md | sed 's/^## //' || true)
-  [ -n "$S" ] && SUBJECT="$S"
+  if [ -n "$S" ]; then SUBJECT="$S"; fi
   BODY=$(awk '/^## /{n++} n==1 && !/^## /' CHANGES.md)
 fi
 git add -A

@@ -2,6 +2,19 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Fix silent sync exit; let local caches coexist with syncs
+
+- `tools/sync.sh` silently stopped whenever an iteration removed no files: an `[ -n "$f" ] && ...` test in the deletion loop returned failure on the empty list, and `set -e` ended the script. Since the data-protection change, every such sync, including autosync's, stopped before applying anything. Fixed, with the same pattern removed elsewhere.
+- Sync now only refuses when tracked files have local edits. Untracked files, such as skeletons the neuron explorer caches, no longer block it unless the incoming zip would overwrite them.
+- Explorer-downloaded skeletons in `data/skeletons/` are git-ignored except the bundled one.
+
+## Add brain-region connectivity from neuPrint
+
+- `build_regions.py` reads every traced neuron's region profile from neuPrint (keyset-paginated custom query, token from `NEUPRINT_APPLICATION_CREDENTIALS`) and writes `data/regions.json`: per-region input and output totals, a neuron-routed region-to-region flow matrix over primary regions, and input/output region profiles for every lab cell.
+- New `/regions` page: interactive flow matrix with a panel for each region showing what it drives, what drives it, and which lab cells work there. Atlas cell panels and the neuron workbench show each cell's top input and output regions.
+- `test_regions.py` checks pagination, flow arithmetic, exclusion of overlapping super-regions and lab profiles against a fake neuPrint.
+- Optional `requirements-regions.txt` (neuprint-python). "Brain regions" added to every page's navigation.
+
 ## Merge vision, explorer and math modules; add trainable compound-eye layer
 
 - Merged the separate project copy into the repo: the trainable visual graph (`/vision`, 209 measured right-eye cells across 19 columns), the neuron explorer with skeleton and membrane models (`/explore`), and the math classroom and SDR arithmetic experiments (`/math`), with their data, saved weights and tests. Its `build_vision.py` and `test_vision.py` are renamed `build_vision_patch.py` and `test_vision_patch.py`, since the repo's vision bridge already uses those names.
