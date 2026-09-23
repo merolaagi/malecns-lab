@@ -205,6 +205,22 @@ Saved benchmark (`data/expansion-benchmark.json`, five seeds, final accuracy on 
 .venv/bin/python -m unittest -v test_expansion.py
 ```
 
+## Theory: does the maths predict the experiment? (new)
+
+Open `/theory`. `theory.py` states the sparse-expansion model formally and tests four predictions against simulation, with the "supported" thresholds fixed in the code before running.
+
+The model: a fixed expansion `z(x) = top-k indicator of Wx` with sparsity `f = k/N`; an associative readout `w_c = Σ z(x_i)` over class-c examples, predicting `argmax_c ⟨z, w_c⟩ / ‖w_c‖`. Expanding the score shows the classifier is a kernel sum, `⟨z(x), w_c⟩ = Σ_i K(x, x_i)` with `K` the overlap of two sparse codes, which is what the predictions rest on.
+
+- **P1 — why the error-driven rule forgets. Refuted as first stated, then replaced.** The original prediction was that forgetting grows with cross-task code overlap. Across 14 sparsity and wiring settings, r = 0.27. Comparing classes by normalised weights with no bias term at test time cuts forgetting by 0.17 on average and up to 0.29, so recency bias, not interference on shared units, dominates. The associative readout normalises by construction and forgets 0.05.
+- **P2 — an optimal sparsity for classes with several shapes. Supported.** Accuracy on two-shape classes peaks at f = 0.01 (dense random) and f = 0.02 (measured), both interior to the swept range, while single-digit classes are flat in f.
+- **P3 — overlap as a function of input angle. Supported.** For a Gaussian expansion the expected overlap is the joint upper-tail probability of a bivariate normal with correlation cos θ divided by f, which equals `f^tan²(θ/2)` to leading order and exactly at 90°. Simulated dense codes match the exact curve (RMSE 0.028). The measured wiring deviates (RMSE 0.098, bias −0.074): its weights are non-negative and its in-degrees uneven, so it is not the Gaussian the theory assumes.
+- **P4 — capacity. Supported for moderate sparsity, breaks when very sparse.** Score statistics measured with 10 synthetic classes predict accuracy out to 400 classes with mean error 0.017 at f = 0.2 and 0.049 at f = 0.05, but 0.102 at f = 0.01, always optimistic. The cause is visible in the data: wrong-class score skew is +0.71 at f = 0.01, +0.25 at 0.05 and −0.01 at 0.2, so the Gaussian assumption fails exactly where the prediction does.
+
+```sh
+.venv/bin/python theory.py            # rewrites data/theory-benchmark.json
+.venv/bin/python -m unittest -v test_theory.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

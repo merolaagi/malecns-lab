@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Theory</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block}.verdict{font-size:11px;padding:2px 8px;border-radius:var(--radius);border:1px solid var(--line)}.verdict.y{color:var(--accent);border-color:var(--accent)}.verdict.n{color:var(--gold);border-color:var(--gold)}</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ theory</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/atlas">Circuit atlas</a><a href="/neuron">Neuron workbench</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a></nav></header>
+<main class="wb">
+<h1>Does the maths predict the experiment?</h1>
+<p class="sub">The sparse-expansion model in one line: expand with a fixed matrix, keep the top fraction <em>f</em> of units, and score each class by the overlap of the input's code with the sum of that class's codes. Four predictions follow, and each is checked against simulation here. Thresholds for "supported" are fixed in <code>theory.py</code> before running.</p>
+<div class="wb-bar"><label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label><button id="thRun">Recompute (about 10 s)</button><span class="wb-status" id="status" role="status"></span></div>
+<div class="wb-card" style="margin-top:22px"><h2>P1 · Why the error-driven rule forgets <span class="verdict" id="vP1"></span></h2>
+  <p class="hint">Original prediction: forgetting grows with the overlap between old- and new-class codes. The simulation refuted it, so the test now compares two candidate causes: interference on shared units, and recency bias, where training only on new classes inflates their scores. Points are sparsity settings from 0.005 to 0.4.</p>
+  <canvas id="c1" style="height:300px"></canvas><p class="note" id="t1"></p></div>
+<div class="wb-card" style="margin-top:22px"><h2>P2 · An optimal sparsity for classes with several shapes <span class="verdict" id="vP2"></span></h2>
+  <p class="hint">Too dense and the code's similarity measure becomes nearly linear, so a class with two shapes is averaged into one blur; too sparse and each decision rests on a handful of stored examples.</p>
+  <canvas id="c2" style="height:300px"></canvas><p class="note" id="t2"></p></div>
+<div class="wb-card" style="margin-top:22px"><h2>P3 · Code overlap as a function of input angle <span class="verdict" id="vP3"></span></h2>
+  <p class="hint">For a Gaussian random expansion the expected overlap is the joint upper-tail probability of a bivariate normal with correlation cos θ, divided by f. To leading order in small f that equals f<sup>tan²(θ/2)</sup>, which is exact at 90°.</p>
+  <canvas id="c3" style="height:320px"></canvas><p class="note" id="t3"></p></div>
+<div class="wb-card" style="margin-top:22px"><h2>P4 · How many classes fit before they collide <span class="verdict" id="vP4"></span></h2>
+  <p class="hint">Score statistics are measured with 10 synthetic classes only, then the curve is extrapolated to 400 classes by asking how often the right class beats every wrong one.</p>
+  <canvas id="c4" style="height:300px"></canvas><p class="note" id="t4"></p></div>
+<div class="wb-card" style="margin-top:22px"><h2>Where the model stands</h2>
+<p class="note">Two predictions hold as stated (the overlap curve and the optimal sparsity). One was refuted and replaced by a better-supported mechanism (recency bias, not interference). One holds for moderate sparsity and breaks for very sparse codes, where wrong-class scores are right-skewed rather than Gaussian.</p>
+<p class="warn">All of this is a model of the algorithm, not of the fly. It says nothing about whether real Kenyon cells learn this way, and the tasks are handwritten digits and synthetic patterns.</p></div>
+</main>
+<script src="/theory.js"></script>
+</body></html>

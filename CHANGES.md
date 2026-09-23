@@ -2,6 +2,15 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add theory page: four predictions tested against simulation
+
+- `theory.py` and `/theory`: states the sparse-expansion model (fixed expansion, top-k code, associative readout as a kernel sum) and tests four predictions with thresholds fixed in advance.
+- P1 refuted as first stated and replaced: forgetting under the error-driven rule does not track code overlap (r = 0.27); normalising class weights at test time cuts it by up to 0.29, so recency bias dominates. New `DeltaNormalised` readout isolates the two mechanisms.
+- P2 supported: two-shape classes peak at an interior sparsity (0.01 dense, 0.02 measured).
+- P3 supported: dense random codes follow the exact bivariate-normal overlap curve (RMSE 0.028); measured wiring deviates (RMSE 0.098) because its weights are non-negative with uneven in-degrees.
+- P4 supported for f ≥ 0.05 and broken at f = 0.01, with the measured wrong-score skew (+0.71, +0.25, −0.01) explaining where and why.
+- `test_theory.py`: analytic endpoints and monotonicity, the normalised readout, strict-JSON results and regression checks on each conclusion.
+
 ## Add sparse-expansion continual-learning experiment
 
 - New `/expansion` page and `expansion.py`: class-incremental learning on bundled 8×8 digits, comparing the measured PN→KC expansion with 5% active cells and a reward-gated associative readout against shuffled, random sparse and dense random wiring, no sparsity, no expansion, an error-driven readout and a backpropagation MLP, plus an all-at-once upper bound. Two task variants (single-digit and two-shape classes) and a few-shot setting.
