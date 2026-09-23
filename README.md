@@ -221,6 +221,32 @@ The model: a fixed expansion `z(x) = top-k indicator of Wx` with sparsity `f = k
 .venv/bin/python -m unittest -v test_theory.py
 ```
 
+## Three flies in one arena (new)
+
+Open `/arena`. Two agents labelled male and one labelled female walk in a shared 2D space, each running the same measured 807-cell locomotion circuit with the dynamics of `model.py`, coupled by hand-designed senses.
+
+**What is measured:** each agent's circuit, its dynamics and its transmitter signs. **What is engineered:** odour falling off with distance, a two-antenna concentration comparison, seeing another fly as a bearing plus apparent size, who is attracted to whom, the courtship song rule, and the drive levels. There is no female connectome in this lab: MaleCNS is one male fly and the selected subset contains none of the sexually dimorphic courtship circuitry, so "female" labels engineered emissions and responses, not a different brain. There is no collision physics, so agents can overlap.
+
+Scenarios: **rivalry** (both males approach her odour; each raises his drive on hearing a rival sing), **courtship** (only one male is attracted), **food** (a patch emits odour), **threat** (a looming threat at 4 s that everyone flees). Sensory controls remove vision, odour or song, or make the agents ignore each other entirely.
+
+Saved benchmark (`data/arena-benchmark.json`, two seeds per scenario and condition):
+
+| | All senses | No vision | No odour | Ignoring each other |
+|---|---|---|---|---|
+| Rivalry, closest male–female approach | 0.2 mm | 0.4 mm | 5.6 mm | 12.6 mm |
+| Rivalry, total song | 10.6 s | 8.4 s | 0.1 s | 0 s |
+| Food, agents reaching the patch (of 3) | 3, first at 2.5 s | 3, first at 10.1 s | 0 | 0 |
+
+**Findings.** Odour is the channel that finds both the female and the food; removing vision barely changes the outcome. Rivalry produces the triadic pattern the scenario was built for: both males converge, each sings about 5 s, and both are near her at once for 5.7 s. In the food scenario, vision makes agents arrive sooner (2.5 s versus 10.1 s) because mutual avoidance raises drive in the engineered rule, an artifact of that rule rather than a claim about flies. Below about 0.7 of the default drive the circuit produces no motor output, so baseline exploration sits just above that threshold.
+
+**Bug found while building this.** The motion lab's target mode steered away from its target: a positive descending bias turns the body readout clockwise, but the bearing-to-bias mapping assumed the opposite. `model.steer()` now holds the correct sign, shared by the motion lab and the arena. Target mode reaches within 1.5 mm of its target over 20 s instead of wandering off; `test_arena.py` guards it.
+
+```sh
+.venv/bin/python arena.py --scenario rivalry
+.venv/bin/python arena.py --benchmark        # about 5 minutes
+.venv/bin/python -m unittest -v test_arena.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

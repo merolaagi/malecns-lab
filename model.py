@@ -16,6 +16,16 @@ DEFAULT = dict(duration=8, drive=2.0, bias=0., gain=10., feedback=2.,
                condition='intact', seed=7, mode='tonic')
 CONDITIONS = ['intact', 'silence_vnc', 'silence_left_dn', 'no_feedback', 'no_stimulus', 'shuffled']
 
+def steer(bearing):
+    """Descending bias that turns the body readout toward `bearing`.
+
+    The readout turns with omega = 3*(right stride - left stride), and a positive bias drives the
+    left-side descending neurons harder, which turns the fly clockwise. Steering toward a bearing
+    therefore needs the opposite sign; before this was fixed, target mode steered away from its target.
+    """
+    return -math.sin(bearing)
+
+
 def leg_for(n):
     side = n.get('rootSide') or n.get('somaSide')
     part = {'fl': 'F', 'ml': 'M', 'hl': 'H'}.get(n.get('subclass'))
@@ -90,7 +100,7 @@ class Circuit:
             if p['condition'] == 'no_stimulus': stimulus = False
             if p['mode'] == 'target':
                 bearing = math.atan2(target[1] - y, target[0] - x) - heading
-                bias = float(np.clip(math.sin(bearing), -1, 1))
+                bias = float(np.clip(steer(bearing), -1, 1))
                 target_drive = p['drive'] * min(1., float(np.linalg.norm(target - [x, y])) / 2)
             if stimulus:
                 external[self.dn] = target_drive * (1 + bias * self.side[self.dn])

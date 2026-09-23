@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Arena</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block}#arenaCv{height:56vh;min-height:380px;background:#0d130f;border:1px solid var(--line)}</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ arena</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/atlas">Circuit atlas</a><a href="/neuron">Neuron workbench</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
+<main class="wb">
+<h1>Three flies, one arena</h1>
+<p class="sub">Two agents labelled male and one labelled female, each running the same measured locomotion circuit, coupled by hand-designed senses: odour, sight of each other, and a courtship song signal.</p>
+<div class="notice"><strong>One connectome, three copies, engineered senses.</strong> MaleCNS is a single male fly, and the leg-circuit subset contains none of the sexually dimorphic courtship circuitry, so there is no female brain to run. Every agent here runs the identical measured circuit; "female" labels what an agent emits and how it responds, both of which are parameters chosen by us. Sensing, signalling and the drive rules are engineered, so this shows how three copies of one measured circuit behave when coupled by assumed senses, not how flies behave.</div>
+<div class="wb-bar">
+  <label>Scenario<select id="scenario"><option value="rivalry">Rivalry: two males, one female</option><option value="courtship">Courtship: one male approaches</option><option value="food">Food patch: all three approach</option><option value="threat">Threat: all three flee</option></select></label>
+  <label>Senses<select id="condition"><option value="intact">All senses and signals</option><option value="no_vision">No vision</option><option value="no_odour">No odour</option><option value="no_signals">No song</option><option value="isolated">Ignore each other</option><option value="shuffled">Shuffled connectome</option><option value="silence_vnc">VNC silenced</option></select></label>
+  <label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label>
+  <button id="arenaRun">Run (about 9 s)</button><span class="wb-status" id="status" role="status"></span>
+</div>
+<div class="wb-grid" style="margin-top:20px">
+  <section>
+    <div id="arenaCvWrap"><canvas id="arenaCv"></canvas></div>
+    <div class="wb-row"><button class="chip" id="play">Pause</button><input id="frame" type="range" min="0" max="0" value="0" style="flex:1"><span class="lab" id="clock">0.0 s</span></div>
+    <canvas id="distCv" style="height:180px"></canvas>
+    <p class="hint">Distance between each pair over time. Dotted line: the 5 mm "near" threshold used for the counts.</p>
+  </section>
+  <aside class="wb-card">
+    <h2>What happened</h2><div id="metrics"></div>
+    <h2 style="margin-top:18px">Measured and engineered</h2>
+    <p class="note">Measured: each agent's 807-cell locomotion circuit, its dynamics, and the transmitter signs.</p>
+    <p class="warn">Engineered: odour falling off with distance, two-antenna comparison, seeing another fly as a bearing and apparent size, who is attracted to whom, the song rule, and the drive levels. Below about 0.7 of the default drive the circuit produces no motor output, so baseline exploration sits just above that.</p>
+    <p class="hint">There is no collision physics, so agents can overlap.</p>
+  </aside>
+</div>
+<div class="wb-card" style="margin-top:22px"><h2>Saved benchmark: two seeds per scenario and sensory condition</h2><div id="bench" style="overflow:auto"><p class="hint">Loading…</p></div>
+<p class="hint">Regenerate with <code>.venv/bin/python arena.py --benchmark</code>.</p></div>
+</main>
+<script src="/arena.js"></script>
+</body></html>

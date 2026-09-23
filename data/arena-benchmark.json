@@ -1,0 +1,185 @@
+{
+ "defaults": {
+  "seed": 7,
+  "duration": 24.0,
+  "scenario": "rivalry",
+  "condition": "intact",
+  "drive": 2.0,
+  "gain": 10.0,
+  "feedback": 2.0,
+  "odour_gain": 1.0,
+  "vision_gain": 0.6,
+  "song_gain": 0.5
+ },
+ "scenarios": {
+  "rivalry": "Two males, one female. Both males approach her odour; each male raises his drive when he hears a rival sing.",
+  "courtship": "One male approaches the female; the other male starts far away and is not attracted.",
+  "food": "A food patch emits odour. All three approach it; the patch is small, so they crowd.",
+  "threat": "A looming threat appears above the arena centre at 4 s and all three flee it."
+ },
+ "conditions": {
+  "intact": "All senses and signals active",
+  "no_vision": "Agents cannot see each other",
+  "no_odour": "No odour sensing",
+  "no_signals": "No song signalling between agents",
+  "isolated": "No vision, odour or signals: the agents ignore each other",
+  "shuffled": "Shuffled connectome in every agent",
+  "silence_vnc": "VNC interneurons silenced in every agent"
+ },
+ "seeds": 2,
+ "summary": {
+  "rivalry": {
+   "intact": {
+    "male1_female_near_s": 6.069999999999915,
+    "male1_female_min_mm": 0.21912178654349238,
+    "both_males_near_female_s": 5.6850000000000005,
+    "song_s": 10.579999999999998,
+    "mean_path_mm": 19.69833333333333,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "no_vision": {
+    "male1_female_near_s": 4.614999999999946,
+    "male1_female_min_mm": 0.380359229721746,
+    "both_males_near_female_s": 3.71,
+    "song_s": 8.445,
+    "mean_path_mm": 21.975,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "no_odour": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 5.607902517032857,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.085,
+    "mean_path_mm": 20.32333333333333,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "isolated": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 12.639016364963798,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 23.96,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   }
+  },
+  "courtship": {
+   "intact": {
+    "male1_female_near_s": 5.969999999999917,
+    "male1_female_min_mm": 0.6230141226611693,
+    "both_males_near_female_s": 0.0,
+    "song_s": 3.55,
+    "mean_path_mm": 23.113333333333333,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "no_vision": {
+    "male1_female_near_s": 4.869999999999941,
+    "male1_female_min_mm": 0.5421448993127764,
+    "both_males_near_female_s": 0.0,
+    "song_s": 3.93,
+    "mean_path_mm": 23.958333333333336,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "no_odour": {
+    "male1_female_near_s": 1.954999999999993,
+    "male1_female_min_mm": 4.572116181109729,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.68,
+    "mean_path_mm": 22.158333333333335,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "isolated": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 12.639016364963798,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 23.96,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   }
+  },
+  "food": {
+   "intact": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 9.06846809060176,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 78.17833333333333,
+    "food_arrived": 3.0,
+    "food_first_arrival_s": 2.5300000000000002
+   },
+   "no_vision": {
+    "male1_female_near_s": 8.024999999999874,
+    "male1_female_min_mm": 3.2702006573089752,
+    "both_males_near_female_s": 5.135,
+    "song_s": 0.0,
+    "mean_path_mm": 21.468333333333334,
+    "food_arrived": 3.0,
+    "food_first_arrival_s": 10.13
+   },
+   "no_odour": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 5.608111697874924,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 20.326666666666668,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "isolated": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 12.639016364963798,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 23.96,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   }
+  },
+  "threat": {
+   "intact": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 12.639016364963798,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 25.861666666666665,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "no_vision": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 12.639016364963798,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 25.861666666666665,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "no_odour": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 12.639016364963798,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 25.861666666666665,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   },
+   "isolated": {
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 12.639016364963798,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 25.861666666666665,
+    "food_arrived": 0.0,
+    "food_first_arrival_s": null
+   }
+  }
+ },
+ "interpretation": "Three seeds per scenario and condition. Model experiments with engineered senses; the differences between conditions show what the assumed sensing does, not what flies do."
+}

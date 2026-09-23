@@ -2,6 +2,14 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add three-fly arena; fix inverted steering in target mode
+
+- New `/arena` page and `arena.py`: two agents labelled male and one labelled female, each running the same measured locomotion circuit, coupled by engineered odour, vision and courtship-song channels. Four scenarios (rivalry, courtship, food, threat) and sensory controls (no vision, no odour, no song, isolated, shuffled connectome, silenced VNC), with an animated replay, pairwise distance plot and saved two-seed benchmark.
+- Stated plainly in the module, the page and the README: MaleCNS is one male fly with no courtship circuitry in the subset, so all three agents share one connectome and "female" is a label on engineered emissions and responses.
+- Findings: odour is the channel that finds the female and the food (closest approach 0.2 mm with odour, 5.6 mm without; 3 of 3 reach food with odour, none without); vision changes little; rivalry yields 5.7 s with both males near her and about 5 s of song each. The faster food arrivals with vision are an artifact of the engineered drive rule and are labelled as such.
+- Bug fix: the motion lab's target mode steered away from its target because the bearing-to-bias sign was inverted relative to the body readout. `model.steer()` now holds the correct sign and is shared by the motion lab and the arena; target mode reaches within 1.5 mm over 20 s.
+- `test_arena.py`: steering sign, target-mode regression, reproducibility, scenario behaviour, sensory controls, silenced VNC and validation.
+
 ## Add theory page: four predictions tested against simulation
 
 - `theory.py` and `/theory`: states the sparse-expansion model (fixed expansion, top-k code, associative readout as a kernel sum) and tests four predictions with thresholds fixed in advance.
