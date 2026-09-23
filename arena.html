@@ -23,12 +23,15 @@
   </section>
   <aside class="wb-card">
     <h2>What happened</h2><div id="metrics"></div>
+    <h2 style="margin-top:18px">Gait</h2><div id="gait"></div>
+    <p class="hint">Measured from the simulation and compared with reported values for walking <em>Drosophila</em>. Duty factor is the share of time a leg is planted; the tripod index compares how much legs within a tripod (front-left, middle-right, hind-left) agree against legs across tripods, so about 0 means no tripod coordination.</p>
     <h2 style="margin-top:18px">Leg joints <select id="legAgent" style="max-width:110px"><option value="male_1">male 1</option><option value="male_2">male 2</option><option value="female">female</option></select></h2>
     <div id="legs"></div>
     <p class="hint">Each joint angle is the difference in firing rate between the motor neurons of its own muscles: coxa protractors against retractors, trochanter levator against depressors, tibia extensor against flexors, tarsus levator against depressors. Teal means agonist-dominant, gold antagonist-dominant, and ▪ marks a planted leg. Tarsus levator motor neurons exist only for the front legs, so the other four tarsi cannot be driven.</p>
     <h2 style="margin-top:18px">Measured and engineered</h2>
     <p class="note">Measured: each agent's 807-cell locomotion circuit, its dynamics, and the transmitter signs.</p>
-    <p class="warn">Engineered: odour falling off with distance, two-antenna comparison, seeing another fly as a bearing and apparent size, who is attracted to whom, the song rule, and the drive levels. Below about 0.7 of the default drive the circuit produces no motor output, so baseline exploration sits just above that.</p>
+    <p class="warn">Engineered: odour falling off with distance, two-antenna comparison, seeing another fly as a bearing and apparent size, who is attracted to whom, the song rule, the steering gain, and the gait calibration (step frequency up to 12 Hz, stride 1.1–2.0 mm, turning from the left/right leg speed difference across a 1 mm track).</p>
+    <p class="warn">The measured circuit has a narrow operating band: below about 2.1 of descending drive the motor pools are silent, above about 3.0 they saturate, which fits cells receiving only 10–15% of their real input. Behavioural commands are mapped into that band. At calibrated walking speed the simple proportional steering overshoots, so pursuit brings the males close (1.5–6 mm) rather than reliably into contact; before calibration they made contact only because everyone crawled at about 1 mm/s.</p>
     <p class="hint">There is no collision physics, so agents can overlap.</p>
   </aside>
 </div>

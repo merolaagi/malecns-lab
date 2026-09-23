@@ -106,6 +106,19 @@ function legPanel() {
   }
   $('legs').innerHTML = h + '</table>';
 }
+function gaitPanel() {
+  if (!run || !run.gait) return;
+  const id = $('legAgent').value, g = run.gait[id], R = run.reported_ranges;
+  const band = (v, [lo, hi]) => v >= lo && v <= hi ? 'var(--teal)' : 'var(--gold)';
+  const mean = a => a.reduce((x, y) => x + y, 0) / a.length;
+  const duty = mean(g.duty_factor_relative), steps = mean(g.steps_per_second);
+  $('gait').innerHTML = '<table class="kv">'
+    + `<tr><td>Speed</td><td style="color:${band(g.mean_speed_mm_s, R.speed_mm_s)}">${g.mean_speed_mm_s.toFixed(1)} mm/s</td><td style="color:var(--muted)">reported ${R.speed_mm_s.join('–')}</td></tr>`
+    + `<tr><td>Steps per leg</td><td style="color:${band(steps, R.step_hz)}">${steps.toFixed(1)} /s</td><td style="color:var(--muted)">reported ${R.step_hz.join('–')}</td></tr>`
+    + `<tr><td>Duty factor</td><td style="color:${band(duty, R.duty_factor)}">${duty.toFixed(2)}</td><td style="color:var(--muted)">reported ${R.duty_factor.join('–')}</td></tr>`
+    + `<tr><td>Tripod index</td><td style="color:var(--gold)">${g.tripod_index.toFixed(2)}</td><td style="color:var(--muted)">0 = no coordination</td></tr>`
+    + `<tr><td>Legs never lifted</td><td>${g.duty_factor_absolute.filter(v => v > 0.9).length} of 6</td><td style="color:var(--muted)">by the absolute rule</td></tr></table>`;
+}
 function metrics() {
   const p = run.pairs, row = (k, v) => `<tr><td>${k}</td><td>${v}</td></tr>`;
   const name = k => k.replace('male_1', 'male 1').replace('male_2', 'male 2').replace('|', ' ↔ ');
@@ -123,7 +136,7 @@ async function go() {
   try {
     const res = await fetch('/api/arena', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scenario: $('scenario').value, condition: $('condition').value, seed: +$('seed').value, body: $('bodyMode').value }) });
     const r = await res.json(); if (!res.ok) throw new Error(r.error || res.status);
-    run = r; frame = 0; $('frame').max = r.trace.length - 1; metrics(); drawArena(); drawDistances(); legPanel();
+    run = r; frame = 0; $('frame').max = r.trace.length - 1; metrics(); drawArena(); drawDistances(); legPanel(); gaitPanel();
     $('status').textContent = `${r.parameters.duration} s, seed ${r.parameters.seed}`;
   } catch (e) { $('status').textContent = e.message; $('status').className = 'wb-status err'; }
   finally { $('arenaRun').disabled = false; }
@@ -140,7 +153,7 @@ async function bench() {
 $('arenaRun').onclick = go;
 $('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'Pause' : 'Play'; };
 $('frame').oninput = e => { playing = false; $('play').textContent = 'Play'; frame = +e.target.value; drawArena(); drawDistances(); legPanel(); };
-$('legAgent').onchange = legPanel;
+$('legAgent').onchange = () => { legPanel(); gaitPanel(); };
 window.addEventListener('resize', () => { drawArena(); drawDistances(); });
 timer = setInterval(tick, 60);
 go(); bench();

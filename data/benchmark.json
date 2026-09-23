@@ -1,5 +1,5 @@
 {
-  "created": "2026-09-21T01:55:25.963814+00:00",
+  "created": "2026-09-23T05:46:16.049268+00:00",
   "dataset": "male-cns:v1.0",
   "source_files": {
     "annotations": {
@@ -39,13 +39,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 10.082576438065557,
-        "displacement_mm": 8.410454480916979,
-        "turn_deg": -116.88685660033134,
-        "spikes": 115556,
-        "active_neurons": 279,
-        "motor_mean_hz": 10.476997405585873,
-        "clipped_motor_fraction": 0.0
+        "path_mm": 26.0876436136663,
+        "displacement_mm": 0.9830622946549245,
+        "turn_deg": -687.6893519099364,
+        "spikes": 114898,
+        "active_neurons": 264,
+        "motor_mean_hz": 10.394569460619879,
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.258644656885142,
+        "mean_step_hz": 2.492953462569597,
+        "mean_stride_mm": 1.0238881763593866,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -60,13 +77,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 10.123997511412178,
-        "displacement_mm": 8.46026837296276,
-        "turn_deg": -117.82396861419883,
-        "spikes": 116172,
-        "active_neurons": 284,
-        "motor_mean_hz": 10.523781582277207,
-        "clipped_motor_fraction": 0.0
+        "path_mm": 25.937507650668643,
+        "displacement_mm": 1.6114059912318712,
+        "turn_deg": -691.7568837669185,
+        "spikes": 114680,
+        "active_neurons": 269,
+        "motor_mean_hz": 10.349428174263364,
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.2379310597502196,
+        "mean_step_hz": 2.479192389715127,
+        "mean_stride_mm": 1.0233144292286347,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -81,13 +115,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 10.146759906968354,
-        "displacement_mm": 8.50428500558039,
-        "turn_deg": -115.57815839605888,
-        "spikes": 116069,
-        "active_neurons": 276,
-        "motor_mean_hz": 10.546332818097314,
-        "clipped_motor_fraction": 0.0
+        "path_mm": 26.041730732803785,
+        "displacement_mm": 1.2823379136585549,
+        "turn_deg": -680.4686198072186,
+        "spikes": 114650,
+        "active_neurons": 267,
+        "motor_mean_hz": 10.384481696151907,
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.2537963571477917,
+        "mean_step_hz": 2.489340935332662,
+        "mean_stride_mm": 1.023158903483283,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -102,13 +153,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 10.231643507782056,
-        "displacement_mm": 8.555893862618515,
-        "turn_deg": -116.40082881111574,
-        "spikes": 116702,
-        "active_neurons": 286,
-        "motor_mean_hz": 10.619530266763425,
-        "clipped_motor_fraction": 0.0
+        "path_mm": 26.070493099718682,
+        "displacement_mm": 0.5349591090354302,
+        "turn_deg": -720.4298640446664,
+        "spikes": 115217,
+        "active_neurons": 267,
+        "motor_mean_hz": 10.393662857796938,
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.2569238101679114,
+        "mean_step_hz": 2.492835583115,
+        "mean_stride_mm": 1.0280043354002917,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -123,13 +191,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 10.186531783400518,
-        "displacement_mm": 8.559527803277392,
-        "turn_deg": -115.92905209364442,
-        "spikes": 116192,
-        "active_neurons": 284,
-        "motor_mean_hz": 10.582575837953211,
-        "clipped_motor_fraction": 0.0
+        "path_mm": 25.99288286471164,
+        "displacement_mm": 1.155810724135376,
+        "turn_deg": -688.7395026720889,
+        "spikes": 114488,
+        "active_neurons": 274,
+        "motor_mean_hz": 10.366613530031763,
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.2474141720528538,
+        "mean_step_hz": 2.485352046226834,
+        "mean_stride_mm": 1.0265264034670125,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -144,13 +229,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 0.22273511571985138,
-        "displacement_mm": 0.22233385916576265,
-        "turn_deg": 11.95501100284204,
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
         "spikes": 4218,
         "active_neurons": 9,
         "motor_mean_hz": 0.23127654204956838,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.027371146126972303,
+        "mean_stride_mm": 0.11113616929285626,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -165,13 +267,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 0.22293414311087872,
-        "displacement_mm": 0.2225330054913715,
-        "turn_deg": 11.990742570804779,
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
         "spikes": 4219,
         "active_neurons": 9,
         "motor_mean_hz": 0.2312830687830688,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.02848605232183,
+        "mean_stride_mm": 0.11534478725747059,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -186,13 +305,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 0.22269066787466565,
-        "displacement_mm": 0.22228108422137244,
-        "turn_deg": 11.991968343726962,
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
         "spikes": 4217,
         "active_neurons": 9,
         "motor_mean_hz": 0.23091104497354498,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.027070579919968574,
+        "mean_stride_mm": 0.11019696016066433,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -207,13 +343,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 0.22467965893357042,
-        "displacement_mm": 0.22428333770991427,
-        "turn_deg": 11.790635079958491,
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
         "spikes": 4225,
         "active_neurons": 9,
         "motor_mean_hz": 0.23346299777220827,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.027560893340096534,
+        "mean_stride_mm": 0.11206706700050724,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -228,13 +381,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 0.22411545654609336,
-        "displacement_mm": 0.2237051087732186,
-        "turn_deg": 11.940896991591178,
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
         "spikes": 4220,
         "active_neurons": 9,
         "motor_mean_hz": 0.23200753620161518,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.026743808638963137,
+        "mean_stride_mm": 0.10879745231458891,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -249,13 +419,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 7.313096708503326,
-        "displacement_mm": 5.8584723837023525,
-        "turn_deg": -128.25958049969915,
+        "path_mm": 18.25698929090203,
+        "displacement_mm": 0.06803088216864062,
+        "turn_deg": -717.3279531336698,
         "spikes": 89805,
         "active_neurons": 198,
         "motor_mean_hz": 7.59037482272959,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 2.282745034933523,
+        "mean_step_hz": 1.8206903698148762,
+        "mean_stride_mm": 0.8167184444027825,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -270,13 +457,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 7.3391255231285735,
-        "displacement_mm": 5.872244857593558,
-        "turn_deg": -129.40419452787341,
+        "path_mm": 18.33377687184586,
+        "displacement_mm": 0.17083070430255062,
+        "turn_deg": -724.7719595209512,
         "spikes": 90038,
         "active_neurons": 196,
         "motor_mean_hz": 7.6212315354333455,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 2.2903238635382093,
+        "mean_step_hz": 1.8254089804390845,
+        "mean_stride_mm": 0.818447340199598,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -291,13 +495,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 7.322289723868051,
-        "displacement_mm": 5.844637622640102,
-        "turn_deg": -130.1060474597239,
+        "path_mm": 18.284189115276966,
+        "displacement_mm": 0.3542911326483228,
+        "turn_deg": -727.9985900292892,
         "spikes": 89968,
         "active_neurons": 183,
         "motor_mean_hz": 7.602300488677777,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 2.284040536229534,
+        "mean_step_hz": 1.8210613920155874,
+        "mean_stride_mm": 0.8162879377345024,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -312,13 +533,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 7.42803376175536,
-        "displacement_mm": 5.895567206420532,
-        "turn_deg": -131.45214107108058,
+        "path_mm": 18.580483475610087,
+        "displacement_mm": 0.34035434247033747,
+        "turn_deg": -737.8808648890209,
         "spikes": 90735,
         "active_neurons": 199,
         "motor_mean_hz": 7.72129916580704,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 2.320710735157741,
+        "mean_step_hz": 1.8451753587676745,
+        "mean_stride_mm": 0.820846485240909,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -333,13 +571,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 7.326593921675663,
-        "displacement_mm": 5.837407780252132,
-        "turn_deg": -130.3793388685043,
+        "path_mm": 18.295938009747278,
+        "displacement_mm": 0.19828754373880877,
+        "turn_deg": -729.4532787161132,
         "spikes": 89917,
         "active_neurons": 193,
         "motor_mean_hz": 7.605425867460983,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 2.286807850820149,
+        "mean_step_hz": 1.8225046821031738,
+        "mean_stride_mm": 0.8191461844910713,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -354,13 +609,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 9.913485416425242,
-        "displacement_mm": 8.425931565203651,
-        "turn_deg": -109.93707318718172,
+        "path_mm": 25.797575522581138,
+        "displacement_mm": 2.218868191715957,
+        "turn_deg": -661.0389677937229,
         "spikes": 113766,
         "active_neurons": 261,
         "motor_mean_hz": 10.30200188287281,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.2225300613257213,
+        "mean_step_hz": 2.468881275469649,
+        "mean_stride_mm": 1.0197910956602236,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -375,13 +647,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 9.830273520459295,
-        "displacement_mm": 8.309618869106561,
-        "turn_deg": -114.29272059183614,
+        "path_mm": 25.550043709647543,
+        "displacement_mm": 1.332190507785934,
+        "turn_deg": -685.4767916728855,
         "spikes": 113535,
         "active_neurons": 262,
         "motor_mean_hz": 10.205169242244498,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.189636235411092,
+        "mean_step_hz": 2.4477144136529896,
+        "mean_stride_mm": 1.0163702476906409,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -396,13 +685,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 9.910209954406476,
-        "displacement_mm": 8.453135151814584,
-        "turn_deg": -109.01667397405913,
+        "path_mm": 25.790371936392933,
+        "displacement_mm": 2.390980504414265,
+        "turn_deg": -655.3689492356398,
         "spikes": 113794,
         "active_neurons": 259,
         "motor_mean_hz": 10.293620484699103,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.2209434732412183,
+        "mean_step_hz": 2.467088414918059,
+        "mean_stride_mm": 1.0214899644521878,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -417,13 +723,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 9.93346088450992,
-        "displacement_mm": 8.51405817540539,
-        "turn_deg": -109.56364981924597,
+        "path_mm": 25.859725437396666,
+        "displacement_mm": 2.3396885974496917,
+        "turn_deg": -658.8732173746972,
         "spikes": 114079,
         "active_neurons": 260,
         "motor_mean_hz": 10.31631019986924,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.2283269044622602,
+        "mean_step_hz": 2.471222016649353,
+        "mean_stride_mm": 1.0185916512487014,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -438,13 +761,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 9.880228110142093,
-        "displacement_mm": 8.416605224572903,
-        "turn_deg": -110.63386913493348,
+        "path_mm": 25.698210959935555,
+        "displacement_mm": 2.3512622757035233,
+        "turn_deg": -664.5622629674635,
         "spikes": 113677,
         "active_neurons": 258,
         "motor_mean_hz": 10.262036243808607,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.210491469422351,
+        "mean_step_hz": 2.4613904128588064,
+        "mean_stride_mm": 1.0196876142977438,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -465,7 +805,24 @@
         "spikes": 0,
         "active_neurons": 0,
         "motor_mean_hz": 0.0,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.0,
+        "mean_stride_mm": 0.0,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -486,7 +843,24 @@
         "spikes": 0,
         "active_neurons": 0,
         "motor_mean_hz": 0.0,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.0,
+        "mean_stride_mm": 0.0,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -507,7 +881,24 @@
         "spikes": 0,
         "active_neurons": 0,
         "motor_mean_hz": 0.0,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.0,
+        "mean_stride_mm": 0.0,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -528,7 +919,24 @@
         "spikes": 0,
         "active_neurons": 0,
         "motor_mean_hz": 0.0,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.0,
+        "mean_stride_mm": 0.0,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -549,7 +957,24 @@
         "spikes": 0,
         "active_neurons": 0,
         "motor_mean_hz": 0.0,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.0,
+        "mean_stride_mm": 0.0,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -564,13 +989,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 7.265486854799347,
-        "displacement_mm": 7.172228509403179,
-        "turn_deg": -32.23905419259681,
-        "spikes": 51221,
-        "active_neurons": 293,
-        "motor_mean_hz": 7.550656994684604,
-        "clipped_motor_fraction": 0.0
+        "path_mm": 18.417880385049656,
+        "displacement_mm": 11.587752523304344,
+        "turn_deg": -177.33628625800284,
+        "spikes": 51854,
+        "active_neurons": 289,
+        "motor_mean_hz": 7.649498182505176,
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 2.2926060949213247,
+        "mean_step_hz": 1.83557381619171,
+        "mean_stride_mm": 1.1629597028810452,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -585,13 +1027,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 44.5091493484055,
-        "displacement_mm": 44.50913103942509,
-        "turn_deg": -1.371876969858533,
-        "spikes": 466799,
-        "active_neurons": 555,
-        "motor_mean_hz": 72.90770531726758,
-        "clipped_motor_fraction": 0.925
+        "path_mm": 177.87396740823743,
+        "displacement_mm": 177.86923794719493,
+        "turn_deg": -11.669294728048921,
+        "spikes": 466393,
+        "active_neurons": 551,
+        "motor_mean_hz": 72.8348849331838,
+        "clipped_motor_fraction": 0.925,
+        "mean_speed_mm_s": 22.220442731126273,
+        "mean_step_hz": 11.120556256862237,
+        "mean_stride_mm": 1.8597917192646678,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -606,13 +1065,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 44.47021908049491,
-        "displacement_mm": 44.47021665381078,
-        "turn_deg": -0.044282289571215175,
-        "spikes": 603802,
-        "active_neurons": 625,
-        "motor_mean_hz": 93.39263225566907,
-        "clipped_motor_fraction": 0.92375
+        "path_mm": 177.6934457526604,
+        "displacement_mm": 177.69174618456276,
+        "turn_deg": -2.798335236302201,
+        "spikes": 600372,
+        "active_neurons": 622,
+        "motor_mean_hz": 92.89401596600452,
+        "clipped_motor_fraction": 0.92375,
+        "mean_speed_mm_s": 22.196792213384427,
+        "mean_step_hz": 11.10790249566282,
+        "mean_stride_mm": 1.8583843538413782,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -627,13 +1103,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 44.49366137392816,
-        "displacement_mm": 44.493657220201236,
-        "turn_deg": 0.4499435198910027,
-        "spikes": 403006,
-        "active_neurons": 626,
-        "motor_mean_hz": 65.21749703389354,
-        "clipped_motor_fraction": 0.925
+        "path_mm": 177.81452501682267,
+        "displacement_mm": 177.8137605557643,
+        "turn_deg": 3.2919097457735234,
+        "spikes": 393866,
+        "active_neurons": 616,
+        "motor_mean_hz": 63.84831118405918,
+        "clipped_motor_fraction": 0.925,
+        "mean_speed_mm_s": 22.213280903936585,
+        "mean_step_hz": 11.116588032644,
+        "mean_stride_mm": 1.8594941024483,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -648,13 +1141,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 44.495294407045876,
-        "displacement_mm": 44.4952930609912,
-        "turn_deg": 0.5994443768153775,
-        "spikes": 499443,
-        "active_neurons": 625,
-        "motor_mean_hz": 71.57076778167567,
-        "clipped_motor_fraction": 0.9225
+        "path_mm": 177.84263140959223,
+        "displacement_mm": 177.8422406610899,
+        "turn_deg": 5.045109743943934,
+        "spikes": 501350,
+        "active_neurons": 623,
+        "motor_mean_hz": 71.85579150501097,
+        "clipped_motor_fraction": 0.92375,
+        "mean_speed_mm_s": 22.21503721061158,
+        "mean_step_hz": 11.116472765297315,
+        "mean_stride_mm": 1.859027124063965,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     }
   ],
@@ -671,13 +1181,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 0.15518813918964974,
-        "displacement_mm": 0.1550324153313612,
-        "turn_deg": 8.891625406055702,
+        "path_mm": 0.0,
+        "displacement_mm": 0.0,
+        "turn_deg": 0.0,
         "spikes": 26198,
         "active_neurons": 69,
         "motor_mean_hz": 0.16203703703703703,
-        "clipped_motor_fraction": 0.0
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 0.0,
+        "mean_step_hz": 0.026321663255169492,
+        "mean_stride_mm": 0.10234912474413772,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -692,13 +1219,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 10.10364722846681,
-        "displacement_mm": 8.506426663170988,
-        "turn_deg": -115.15908078049178,
-        "spikes": 115641,
-        "active_neurons": 282,
-        "motor_mean_hz": 10.49303815154943,
-        "clipped_motor_fraction": 0.0
+        "path_mm": 26.15878793292872,
+        "displacement_mm": 0.529625536158279,
+        "turn_deg": -713.8551190817842,
+        "spikes": 115315,
+        "active_neurons": 275,
+        "motor_mean_hz": 10.416319395413225,
+        "clipped_motor_fraction": 0.0,
+        "mean_speed_mm_s": 3.268313962326465,
+        "mean_step_hz": 2.4997665661483386,
+        "mean_stride_mm": 1.0257741591277922,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     },
     {
@@ -713,13 +1257,30 @@
         "mode": "tonic"
       },
       "metrics": {
-        "path_mm": 44.290673500179714,
-        "displacement_mm": 44.290653358480014,
-        "turn_deg": -0.2593245591336899,
-        "spikes": 920257,
-        "active_neurons": 604,
-        "motor_mean_hz": 120.93539440516263,
-        "clipped_motor_fraction": 0.9175
+        "path_mm": 176.91467068154947,
+        "displacement_mm": 176.911290308655,
+        "turn_deg": -2.8758528680212736,
+        "spikes": 918767,
+        "active_neurons": 601,
+        "motor_mean_hz": 120.89442717695344,
+        "clipped_motor_fraction": 0.9175,
+        "mean_speed_mm_s": 22.09987185190631,
+        "mean_step_hz": 11.066277183866212,
+        "mean_stride_mm": 1.853429122123299,
+        "reported_ranges": {
+          "speed_mm_s": [
+            5,
+            25
+          ],
+          "step_hz": [
+            5,
+            15
+          ],
+          "stride_mm": [
+            1,
+            2
+          ]
+        }
       }
     }
   ]

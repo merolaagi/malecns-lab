@@ -1,15 +1,20 @@
 {
  "defaults": {
   "seed": 7,
-  "duration": 24.0,
+  "duration": 16.0,
   "scenario": "rivalry",
   "condition": "intact",
-  "drive": 2.0,
+  "drive": 2.4,
   "gain": 10.0,
   "feedback": 2.0,
   "odour_gain": 1.0,
   "vision_gain": 0.6,
-  "song_gain": 0.5
+  "song_gain": 0.5,
+  "body": "pooled",
+  "steer_gain": 0.6,
+  "steer_tau": 0.12,
+  "drive_floor": 2.1,
+  "approach_max": 0.3
  },
  "scenarios": {
   "rivalry": "Two males, one female. Both males approach her odour; each male raises his drive when he hears a rival sing.",
@@ -30,114 +35,114 @@
  "summary": {
   "rivalry": {
    "intact": {
-    "male1_female_near_s": 6.069999999999915,
-    "male1_female_min_mm": 0.21912178654349238,
-    "both_males_near_female_s": 5.6850000000000005,
-    "song_s": 10.579999999999998,
-    "mean_path_mm": 19.69833333333333,
+    "male1_female_near_s": 0.5750000000000003,
+    "male1_female_min_mm": 2.0221630831637802,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.275,
+    "mean_path_mm": 168.37166666666667,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "no_vision": {
-    "male1_female_near_s": 4.614999999999946,
-    "male1_female_min_mm": 0.380359229721746,
-    "both_males_near_female_s": 3.71,
-    "song_s": 8.445,
-    "mean_path_mm": 21.975,
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 11.091873442793982,
+    "both_males_near_female_s": 0.0,
+    "song_s": 0.0,
+    "mean_path_mm": 59.25666666666666,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "no_odour": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 5.607902517032857,
+    "male1_female_min_mm": 10.685797417050816,
     "both_males_near_female_s": 0.0,
-    "song_s": 0.085,
-    "mean_path_mm": 20.32333333333333,
+    "song_s": 0.0,
+    "mean_path_mm": 60.540000000000006,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "isolated": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 12.639016364963798,
+    "male1_female_min_mm": 13.534120971993737,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 23.96,
+    "mean_path_mm": 60.80333333333333,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    }
   },
   "courtship": {
    "intact": {
-    "male1_female_near_s": 5.969999999999917,
-    "male1_female_min_mm": 0.6230141226611693,
+    "male1_female_near_s": 0.24000000000000013,
+    "male1_female_min_mm": 3.8392906036309835,
     "both_males_near_female_s": 0.0,
-    "song_s": 3.55,
-    "mean_path_mm": 23.113333333333333,
+    "song_s": 0.125,
+    "mean_path_mm": 119.63666666666667,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "no_vision": {
-    "male1_female_near_s": 4.869999999999941,
-    "male1_female_min_mm": 0.5421448993127764,
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 11.091873442793982,
     "both_males_near_female_s": 0.0,
-    "song_s": 3.93,
-    "mean_path_mm": 23.958333333333336,
+    "song_s": 0.0,
+    "mean_path_mm": 59.96666666666667,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "no_odour": {
-    "male1_female_near_s": 1.954999999999993,
-    "male1_female_min_mm": 4.572116181109729,
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 11.15239912506834,
     "both_males_near_female_s": 0.0,
-    "song_s": 0.68,
-    "mean_path_mm": 22.158333333333335,
+    "song_s": 0.0,
+    "mean_path_mm": 60.665000000000006,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "isolated": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 12.639016364963798,
+    "male1_female_min_mm": 13.534120971993737,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 23.96,
+    "mean_path_mm": 60.80333333333333,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    }
   },
   "food": {
    "intact": {
-    "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 9.06846809060176,
+    "male1_female_near_s": 0.23000000000000012,
+    "male1_female_min_mm": 4.942171792697479,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 78.17833333333333,
-    "food_arrived": 3.0,
-    "food_first_arrival_s": 2.5300000000000002
+    "mean_path_mm": 157.71833333333333,
+    "food_arrived": 2.5,
+    "food_first_arrival_s": 2.4400000000000004
    },
    "no_vision": {
-    "male1_female_near_s": 8.024999999999874,
-    "male1_female_min_mm": 3.2702006573089752,
-    "both_males_near_female_s": 5.135,
+    "male1_female_near_s": 0.0,
+    "male1_female_min_mm": 7.27659098366027,
+    "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 21.468333333333334,
-    "food_arrived": 3.0,
-    "food_first_arrival_s": 10.13
+    "mean_path_mm": 37.035,
+    "food_arrived": 2.0,
+    "food_first_arrival_s": 4.925
    },
    "no_odour": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 5.608111697874924,
+    "male1_female_min_mm": 10.685797417050816,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 20.326666666666668,
+    "mean_path_mm": 60.540000000000006,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "isolated": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 12.639016364963798,
+    "male1_female_min_mm": 13.534120971993737,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 23.96,
+    "mean_path_mm": 60.80333333333333,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    }
@@ -145,37 +150,37 @@
   "threat": {
    "intact": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 12.639016364963798,
+    "male1_female_min_mm": 12.212794049497845,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 25.861666666666665,
+    "mean_path_mm": 291.43666666666667,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "no_vision": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 12.639016364963798,
+    "male1_female_min_mm": 12.212794049497845,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 25.861666666666665,
+    "mean_path_mm": 291.43666666666667,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "no_odour": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 12.639016364963798,
+    "male1_female_min_mm": 12.212794049497845,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 25.861666666666665,
+    "mean_path_mm": 291.43666666666667,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    },
    "isolated": {
     "male1_female_near_s": 0.0,
-    "male1_female_min_mm": 12.639016364963798,
+    "male1_female_min_mm": 12.212794049497845,
     "both_males_near_female_s": 0.0,
     "song_s": 0.0,
-    "mean_path_mm": 25.861666666666665,
+    "mean_path_mm": 291.43666666666667,
     "food_arrived": 0.0,
     "food_first_arrival_s": null
    }

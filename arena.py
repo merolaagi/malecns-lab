@@ -25,7 +25,7 @@ import math
 import numpy as np
 
 import bodyplan
-from model import DT, Circuit, steer
+from model import DT, Circuit, gait, steer, turn_rate
 
 SCENARIOS = {
     'rivalry': 'Two males, one female. Both males approach her odour; each male raises his drive when he hears a rival sing.',
@@ -42,8 +42,13 @@ CONDITIONS = {
     'shuffled': 'Shuffled connectome in every agent',
     'silence_vnc': 'VNC interneurons silenced in every agent',
 }
-DEFAULT = dict(seed=7, duration=24.0, scenario='rivalry', condition='intact', drive=2.0, gain=10.0,
-               feedback=2.0, odour_gain=1.0, vision_gain=0.6, song_gain=0.5, body='pooled')
+DEFAULT = dict(seed=7, duration=16.0, scenario='rivalry', condition='intact', drive=2.4, gain=10.0,
+               feedback=2.0, odour_gain=1.0, vision_gain=0.6, song_gain=0.5, body='pooled', steer_gain=0.6, steer_tau=0.12,
+               drive_floor=2.1, approach_max=0.30)
+# Measured operating band of this subset: below about 2.1 of descending drive the motor pools are silent,
+# above about 3.0 they saturate. With only 10-15% of their real input the cells have a steep, narrow
+# range, so a behavioural command in [0, 1] is mapped into that band instead of being fed in raw.
+# Default drive 2.8: at 2.0 the agents crawl at under 1 mm/s, and above 3.0 the motor pools saturate.
 BODY_MODES = {
     'pooled': 'Body speed and turning from pooled motor rates (the lab\'s original readout)',
     'kinematic': 'Body motion from the planted feet, whose positions come from joint angles',
@@ -79,9 +84,15 @@ class Agent:
         self.contacts = np.zeros(6); self.strides = np.zeros(6)
         self.x, self.y = spec['start']; self.heading = spec['heading']
         self.speed = 0.0; self.motor_hz = np.zeros(6); self.path = 0.0
-        self.bias = self.drive = 0.0; self.singing = False; self.heard_song = 0.0
+        self.bias = self.drive = 0.0; self.bias_target = 0.0; self.singing = False; self.heard_song = 0.0
         self.joints = bodyplan.angles(legs, self.rates)
+        # Two stance rules. Absolute: the trochanter is depressed (femur angle <= 0). Relative: the
+        # leg is lower than its own recent average, which is what the drawing uses, because the
+        # measured levator/depressor balance is mostly static and a leg would otherwise never lift.
+        self.femur_ema = {leg: self.joints[leg]['femur'] for leg in bodyplan.LEGS}
         self.feet = {leg: bodyplan.foot(leg, self.joints[leg]) for leg in bodyplan.LEGS}
+        self.planted_abs = {leg: self.feet[leg][2] for leg in bodyplan.LEGS}
+        self.planted_rel = dict(self.planted_abs)
 
     pos = property(lambda self: np.array([self.x, self.y]))
 
@@ -98,14 +109,17 @@ class Agent:
         escaping something close, and lowered on arrival."""
         p = self.p
         bias = 0.0
-        drive = 0.75            # baseline exploration: below about 0.7 the circuit produces no motor output
+        drive = 0.15            # baseline exploration, as a fraction of the usable drive band
+        alignment = 1.0         # how squarely the fly faces whatever it is heading for
         if p['condition'] not in ('no_odour', 'isolated') and world['odour_sources']:
             left, right = self.antennae()
             cl, cr = concentration(left, world['odour_sources']), concentration(right, world['odour_sources'])
-            nearest = min(float(np.linalg.norm(src - self.pos)) for src, _ in world['odour_sources'])
+            src = min(world['odour_sources'], key=lambda s: float(np.linalg.norm(s[0] - self.pos)))[0]
+            nearest = float(np.linalg.norm(src - self.pos))
             # Left antenna stronger means the source is to the left; steering left needs a negative bias.
             bias -= p['odour_gain'] * float(np.clip(20 * (cl - cr) / (cl + cr + 1e-6), -1, 1))
-            drive = max(drive, min(1.0, nearest / 3))
+            drive = max(drive, min(p['approach_max'], 0.2 + nearest / 20))
+            alignment = min(alignment, math.cos(math.atan2(src[1] - self.y, src[0] - self.x) - self.heading))
         if p['condition'] not in ('no_vision', 'isolated'):
             for other in world['others']:
                 d = float(np.linalg.norm(other.pos - self.pos))
@@ -114,24 +128,33 @@ class Agent:
                 attract = world['attraction'](self, other)
                 if attract > 0:
                     bias += p['vision_gain'] * attract * steer(bearing)
-                    drive = max(drive, min(1.0, d / 3))
+                    drive = max(drive, min(p['approach_max'], 0.2 + d / 20))
+                    alignment = min(alignment, math.cos(bearing))
                 elif attract < 0:
                     bias += p['vision_gain'] * abs(attract) * steer(bearing + math.pi) * apparent
-                    if d < NEAR_MM: drive = max(drive, apparent)
+                    if d < NEAR_MM: drive = max(drive, min(0.8, apparent))
         if world['threat'] is not None:
             bearing = math.atan2(world['threat'][1] - self.y, world['threat'][0] - self.x) - self.heading
             bias += 2.0 * steer(bearing + math.pi); drive = 1.0
         if p['condition'] not in ('no_signals', 'isolated'):
             if self.spec['sex'] == 'female': drive *= max(0.0, 1 - p['song_gain'] * self.heard_song)
             else: drive = min(1.0, drive * (1 + p['song_gain'] * self.heard_song))
-        self.bias = float(np.clip(bias, -1, 1)); self.drive = float(np.clip(drive, 0, 1))
-        return self.bias, self.drive
+        # Steering gain and smoothing: with calibrated speed and differential turning the loop is fast
+        # enough to oscillate, so the bias is damped. Both are control parameters, not measurements.
+        # Flies slow down while turning; without this the loop overshoots at calibrated speeds.
+        drive *= 0.25 + 0.75 * max(0.0, alignment)
+        self.bias_target = float(np.clip(p['steer_gain'] * bias, -1, 1))
+        self.drive = float(np.clip(drive, 0, 1))
+        return self.bias_target, self.drive
 
     def step(self, step_index):
         p, c = self.p, self.c
         external = np.zeros(c.n)
+        alpha = min(1.0, DT / max(p['steer_tau'], DT))
+        self.bias += (self.bias_target - self.bias) * alpha
         if step_index * DT >= 0.5:
-            external[c.dn] = p['drive'] * self.drive * (1 + self.bias * c.side[c.dn])
+            level = p['drive_floor'] + (p['drive'] - p['drive_floor']) * self.drive
+            external[c.dn] = level * (1 + self.bias * c.side[c.dn])
         for k, idx in enumerate(c.sensory):
             external[idx] += p['feedback'] * self.contacts[k] * self.strides[k]
         current = external + p['gain'] * self.w.dot(self.syn) + self.rng.normal(0, .015, c.n)
@@ -147,11 +170,16 @@ class Agent:
         if step_index % 10 == 0:                                  # same 10 ms body update as model.py
             self.motor_hz = np.array([float(self.rates[idx].mean()) if len(idx) else 0 for idx in c.motor])
             self.strides = np.clip(self.motor_hz / 50., 0, 1)
-            self.phases += .010 * 2 * math.pi * 5 * self.strides
+            self.phases += .010 * 2 * math.pi * np.array([gait(v)[0] for v in self.strides])
             self.contacts = (np.sin(self.phases) <= 0).astype(float)
             # Every leg joint is driven by the motor neurons of its own muscles.
             self.joints = bodyplan.angles(self.legs, self.rates)
             previous, self.feet = self.feet, {leg: bodyplan.foot(leg, self.joints[leg]) for leg in bodyplan.LEGS}
+            for leg in bodyplan.LEGS:
+                f = self.joints[leg]['femur']
+                self.femur_ema[leg] += (f - self.femur_ema[leg]) * .02      # ~0.5 s average
+                self.planted_abs[leg] = self.feet[leg][2]
+                self.planted_rel[leg] = f <= self.femur_ema[leg]
             if p['body'] == 'kinematic':
                 # Planted feet do not slide: the body moves opposite to their motion in the body frame.
                 dx = dy = dtheta = 0.0; planted = 0
@@ -173,8 +201,8 @@ class Agent:
                     self.speed = 0.0
             else:
                 left, right = self.strides[:3].mean(), self.strides[3:].mean()
-                self.speed = 6 * (left + right) / 2
-                self.heading += 3 * (right - left) * .010
+                self.speed = gait((left + right) / 2)[2]      # calibrated speed, see model.gait
+                self.heading += turn_rate(left, right) * .010
                 self.x += math.cos(self.heading) * self.speed * .010
                 self.y += math.sin(self.heading) * self.speed * .010
                 self.path += self.speed * .010
@@ -188,8 +216,10 @@ class Arena:
         if p['scenario'] not in SCENARIOS: raise ValueError('Unknown scenario')
         if p['condition'] not in CONDITIONS: raise ValueError('Unknown condition')
         if p['body'] not in BODY_MODES: raise ValueError('Unknown body mode')
+        if p['drive_floor'] > p['drive']: raise ValueError('drive_floor must not exceed drive')
         for k, lo, hi in [('duration', 2, 30), ('drive', 0, 5), ('gain', 0, 20), ('feedback', 0, 2),
-                          ('odour_gain', 0, 3), ('vision_gain', 0, 3), ('song_gain', 0, 2)]:
+                          ('odour_gain', 0, 3), ('vision_gain', 0, 3), ('song_gain', 0, 2),
+                          ('steer_gain', 0, 2), ('steer_tau', 0.01, 1), ('drive_floor', 0, 5), ('approach_max', 0.05, 1)]:
             p[k] = float(p[k])
             if not math.isfinite(p[k]) or not lo <= p[k] <= hi: raise ValueError(f'{k} must be between {lo} and {hi}')
         s = p['seed']
@@ -217,6 +247,7 @@ class Arena:
         agents = [Agent(spec, self.c, w, np.random.default_rng(p['seed'] + 100 * i), p, legs) for i, spec in enumerate(AGENTS)]
         steps = round(p['duration'] / DT)
         trace, events = [], []
+        stance = {spec['id']: {'rel': [], 'abs': []} for spec in AGENTS}
         pair_keys = [('male_1', 'male_2'), ('male_1', 'female'), ('male_2', 'female')]
         stats = {k: {'min_distance': math.inf, 'contact_s': 0.0, 'near_s': 0.0} for k in map('|'.join, pair_keys)}
         arrivals, song_s, both_near_s = {}, {a['id']: 0.0 for a in AGENTS}, 0.0
@@ -249,6 +280,9 @@ class Arena:
                              'attraction': self.attraction(p), 'threat': threat})
             for a in agents: a.step(step)
             if step % 10 == 0:
+                for a in agents:
+                    stance[a.spec['id']]['rel'].append([a.planted_rel[leg] for leg in bodyplan.LEGS])
+                    stance[a.spec['id']]['abs'].append([a.planted_abs[leg] for leg in bodyplan.LEGS])
                 for (i, j) in pair_keys:
                     d = float(np.linalg.norm(by_id[i].pos - by_id[j].pos)); s = stats[f'{i}|{j}']
                     s['min_distance'] = min(s['min_distance'], d)
@@ -268,9 +302,25 @@ class Arena:
                                                             # Joint angles and foot positions, per leg, from that leg's muscles.
                                                             'legs': {leg: {'coxa': round(a.joints[leg]['coxa'], 3), 'femur': round(a.joints[leg]['femur'], 3),
                                                                            'tibia': round(a.joints[leg]['tibia'], 3), 'tarsus': round(a.joints[leg]['tarsus'], 3),
-                                                                           'foot': [round(a.feet[leg][0], 3), round(a.feet[leg][1], 3)], 'planted': a.feet[leg][2]}
+                                                                           'foot': [round(a.feet[leg][0], 3), round(a.feet[leg][1], 3)],
+                                                                           'planted': bool(a.planted_rel[leg]), 'planted_absolute': bool(a.planted_abs[leg])}
                                                                      for leg in bodyplan.LEGS}} for a in agents]})
         duration = steps * DT
+        gait_stats = {}
+        tripod_a, tripod_b = [0, 4, 2], [3, 1, 5]          # LF, RM, LH against RF, LM, RH
+        for a in agents:
+            rel = np.array(stance[a.spec['id']]['rel']); ab = np.array(stance[a.spec['id']]['abs'])
+            steps_per_leg = [int(np.count_nonzero(np.diff(rel[:, k].astype(int)) == 1)) for k in range(6)]
+            within = float(np.mean([np.mean(rel[:, i] == rel[:, j]) for group in (tripod_a, tripod_b) for i in group for j in group if i < j]))
+            across = float(np.mean([np.mean(rel[:, i] == rel[:, j]) for i in tripod_a for j in tripod_b]))
+            speeds = [t['agents'][[x['id'] for x in t['agents']].index(a.spec['id'])]['speed'] for t in trace]
+            gait_stats[a.spec['id']] = {
+                'duty_factor_relative': [round(float(v), 3) for v in rel.mean(0)],
+                'duty_factor_absolute': [round(float(v), 3) for v in ab.mean(0)],
+                'steps_per_second': [round(k / duration, 2) for k in steps_per_leg],
+                'tripod_within': round(within, 3), 'tripod_across': round(across, 3),
+                'tripod_index': round(within - across, 3),
+                'mean_speed_mm_s': round(float(np.mean(speeds)), 2), 'peak_speed_mm_s': round(float(np.max(speeds)), 2)}
         for k in stats:
             if not math.isfinite(stats[k]['min_distance']): stats[k]['min_distance'] = None
         return {
@@ -281,6 +331,9 @@ class Arena:
                         'path_mm': round(a.path, 2), 'mean_dn_hz': float(a.total[self.c.dn].sum() / (max(1, int(np.count_nonzero(self.c.dn))) * duration)),
                         'spikes': int(a.total.sum())} for a in agents],
             'pairs': stats, 'song_seconds': {k: round(v, 2) for k, v in song_s.items()},
+            'gait': gait_stats, 'legs_order': bodyplan.LEGS,
+            'reported_ranges': {'speed_mm_s': [5, 25], 'step_hz': [5, 15], 'duty_factor': [0.5, 0.7],
+                                'note': 'Reported ranges for walking Drosophila, for comparison only.'},
             'both_males_near_female_s': round(both_near_s, 2),
             'food': {'position': FOOD.tolist(), 'arrivals': arrivals} if p['scenario'] == 'food' else None,
             'threat': {'position': THREAT.tolist(), 'time': 4.0} if p['scenario'] == 'threat' else None,

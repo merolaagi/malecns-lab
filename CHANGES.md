@@ -7,6 +7,14 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Calibrate walking speed; measure gait quality
+
+- Walking speed came from two arbitrary constants (motor rate / 50, then 6 mm/s per unit stride, 5 Hz step cap), which put the default at 1.2 mm/s, below a real fly's walking speed. `model.gait()` now calibrates against reported Drosophila values (step frequency to 12 Hz, stride 1.1–2.0 mm, speed their product) and `model.turn_rate()` derives yaw from the left/right leg speed difference across a 1 mm track. The motion lab reports speed, step frequency and stride length against those ranges; `data/benchmark.json` regenerated.
+- Measured and documented: the subset's operating band is narrow (silent below about 2.1 of descending drive, saturated above 3.0), consistent with cells receiving 10–15% of their real input. Arena commands are mapped into that band, with the approach speed, steering gain and damping exposed as parameters and chosen by a grid search.
+- New gait metrics in `/arena`: duty factor (relative and absolute stance rules), steps per leg per second, tripod index, mean and peak speed, shown against reported ranges. Finding: no tripod coordination (index about −0.02) and several legs almost never lift, because trochanter depressors outnumber levators 14 to 2.
+- Honest cost of calibration: at about 13 mm/s the proportional steering overshoots, so rivalry now closes to 2 mm rather than 0.2 mm; a grid search found no setting with both realistic speed and reliable contact. Arena benchmark regenerated; sensory controls separate more sharply (2 mm intact against 10.7–13.5 mm).
+- Arena tests updated to the measured behaviour, plus new tests for gait reporting and the drive band.
+
 ## Drive each leg joint from its own motor neurons
 
 - `bodyplan.py` maps motor neurons to leg joints by the muscle their type names identify (coxa protractors/retractors, trochanter levator/depressors, tibia extensor/flexors, tarsus levator/depressors) and turns firing-rate differences into joint angles. All six legs can drive coxa, trochanter and tibia; tarsus levators exist only for the front legs; 59 motor neurons have no muscle name or leg and stay unused.

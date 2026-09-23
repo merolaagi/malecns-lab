@@ -235,11 +235,12 @@ Saved benchmark (`data/arena-benchmark.json`, two seeds per scenario and conditi
 
 | | All senses | No vision | No odour | Ignoring each other |
 |---|---|---|---|---|
-| Rivalry, closest male–female approach | 0.2 mm | 0.4 mm | 5.6 mm | 12.6 mm |
-| Rivalry, total song | 10.6 s | 8.4 s | 0.1 s | 0 s |
-| Food, agents reaching the patch (of 3) | 3, first at 2.5 s | 3, first at 10.1 s | 0 | 0 |
+| Rivalry, closest male–female approach | 2.0 mm | 11.1 mm | 10.7 mm | 13.5 mm |
+| Courtship, closest male–female approach | 3.8 mm | 11.1 mm | 11.2 mm | 13.5 mm |
+| Food, closest approach to another fly | 4.9 mm | 7.3 mm | 10.7 mm | 13.5 mm |
+| Mean path walked | 120–170 mm | 37–60 mm | 61 mm | 61 mm |
 
-**Findings.** Odour is the channel that finds both the female and the food; removing vision barely changes the outcome. Rivalry produces the triadic pattern the scenario was built for: both males converge, each sings about 5 s, and both are near her at once for 5.7 s. In the food scenario, vision makes agents arrive sooner (2.5 s versus 10.1 s) because mutual avoidance raises drive in the engineered rule, an artifact of that rule rather than a claim about flies. Below about 0.7 of the default drive the circuit produces no motor output, so baseline exploration sits just above that threshold.
+**Findings.** Both senses now matter: removing either odour or vision leaves the agents wandering at 11 mm separation, against 2 mm intact, and the threat scenario is unchanged by any sensory control because the threat response overrides them. Song is now brief and intermittent, because at walking speed the males pass the female rather than settling beside her.
 
 **Bug found while building this.** The motion lab's target mode steered away from its target: a positive descending bias turns the body readout clockwise, but the bearing-to-bias mapping assumed the opposite. `model.steer()` now holds the correct sign, shared by the motion lab and the arena. Target mode reaches within 1.5 mm of its target over 20 s instead of wandering off; `test_arena.py` guards it.
 
@@ -248,6 +249,18 @@ Saved benchmark (`data/arena-benchmark.json`, two seeds per scenario and conditi
 .venv/bin/python arena.py --benchmark        # about 5 minutes
 .venv/bin/python -m unittest -v test_arena.py
 ```
+
+### Walking speed, calibrated
+
+The gait readout used to map a pooled motor rate through two arbitrary constants (`stride = motor_hz / 50`, `speed = 6 mm/s × stride`, step frequency capped at 5 Hz), which put the default at 1.2 mm/s and the ceiling below a real fly's walking speed. `model.gait()` now calibrates against reported *Drosophila* walking: step frequency scales with motor output up to 12 Hz, stride length runs 1.1–2.0 mm, and speed is their product; `model.turn_rate()` derives yaw from the difference between the two sides' leg speeds across a 1 mm track. The motion lab reports speed, step frequency and stride length beside those reported ranges. These are calibration choices, not measurements: there is still no muscle model, load or inertia.
+
+**The circuit's operating band is narrow.** Below about 2.1 of descending drive the motor pools are silent; above about 3.0 they saturate. That fits cells receiving only 10–15% of their real input here, and it means the subset behaves close to a switch. The arena therefore maps a behavioural command in [0, 1] into that measured band rather than feeding drive in raw.
+
+**Calibration cost something.** At about 13 mm/s the arena's proportional steering overshoots, so one male usually reaches her (1.5–2 mm) while the other stalls several millimetres away, instead of both reliably making contact. Before calibration they made contact, but only because every agent crawled at roughly 1 mm/s. A grid search over drive, approach speed and steering gain found no setting giving both realistic speed and reliable contact, so the limit is the controller, not the speed.
+
+### Gait quality, measured
+
+The arena measures duty factor, steps per leg per second and a tripod index (how much legs within a tripod agree, minus agreement across tripods) and shows them against reported ranges. **The measured subset does not produce tripod coordination:** the tripod index is about −0.02, and several legs are almost never lifted, because trochanter depressor motor neurons outnumber levators 14 to 2. Speed (13 mm/s) and duty factor (0.50–0.79) land in the reported ranges; the coordination does not. The drawing uses a relative stance rule (a leg is planted when it is lower than its own recent average) so legs visibly step, while the metrics report both that rule and the absolute one.
 
 ### Legs driven joint by joint
 

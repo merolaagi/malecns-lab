@@ -16,6 +16,32 @@ DEFAULT = dict(duration=8, drive=2.0, bias=0., gain=10., feedback=2.,
                condition='intact', seed=7, mode='tonic')
 CONDITIONS = ['intact', 'silence_vnc', 'silence_left_dn', 'no_feedback', 'no_stimulus', 'shuffled']
 
+# Calibration of the engineered gait readout against reported Drosophila walking:
+# forward speed roughly 5-25 mm/s, step frequency about 5-15 Hz, stride length about 1-2 mm.
+# A pooled motor rate of MOTOR_REF_HZ counts as a full stride; step frequency scales with it (so a
+# resting fly does not drift) and stride length grows with it. These are calibration choices, not
+# measurements: there is no muscle model, load or inertia anywhere in this readout.
+MOTOR_REF_HZ = 50.0
+STEP_HZ_MAX = 12.0
+STRIDE_MM = (1.1, 2.0)
+TRACK_MM = 1.0          # distance between the left and right legs, used for differential turning
+YAW_MAX = 10.0          # rad/s, about 570 deg/s
+
+
+def turn_rate(left, right):
+    """Yaw from the difference between the two sides' leg speeds over the track width (rad/s)."""
+    return float(np.clip((gait(right)[2] - gait(left)[2]) / TRACK_MM, -YAW_MAX, YAW_MAX))
+
+
+def gait(stride):
+    """(step frequency Hz, stride length mm, forward speed mm/s) for a pooled stride in [0, 1]."""
+    stride = float(min(max(stride, 0.0), 1.0))
+    if stride < 0.02: return 0.0, 0.0, 0.0
+    frequency = STEP_HZ_MAX * stride
+    length = STRIDE_MM[0] + (STRIDE_MM[1] - STRIDE_MM[0]) * stride
+    return frequency, length, frequency * length
+
+
 def steer(bearing):
     """Descending bias that turns the body readout toward `bearing`.
 
@@ -128,13 +154,14 @@ class Circuit:
             # Kinematic proxy only: pooled motor firing modulates engineered leg oscillators.
             if step % 10 == 0:
                 motor_hz = np.array([float(rates[idx].mean()) if len(idx) else 0 for idx in self.motor])
-                strides = np.clip(motor_hz / 50., 0, 1)
-                saturation += int(np.any(motor_hz >= 50))
-                phases += .010 * 2 * math.pi * 5 * strides
+                strides = np.clip(motor_hz / MOTOR_REF_HZ, 0, 1)
+                saturation += int(np.any(motor_hz >= MOTOR_REF_HZ))
+                step_hz = np.array([gait(s)[0] for s in strides])
+                phases += .010 * 2 * math.pi * step_hz
                 contacts = (np.sin(phases) <= 0).astype(float)
                 left, right = strides[:3].mean(), strides[3:].mean()
-                speed = 6 * (left + right) / 2
-                omega = 3 * (right - left)
+                speed = gait((left + right) / 2)[2]
+                omega = turn_rate(left, right)
                 heading += omega * .010
                 x += math.cos(heading) * speed * .010
                 y += math.sin(heading) * speed * .010
@@ -143,7 +170,9 @@ class Circuit:
                 trace.append({'t': round(t, 3), 'x': x, 'y': y, 'heading': heading,
                               'motor': motor_hz.tolist(), 'strides': strides.tolist(), 'phases': phases.tolist(),
                               'dn_hz': float(rates[self.dn].mean()), 'vnc_hz': float(rates[self.vnc].mean()),
-                              'motor_hz': float(motor_hz.mean()), 'speed': float(speed)})
+                              'motor_hz': float(motor_hz.mean()), 'speed': float(speed),
+                              'step_hz': float(np.mean([gait(s)[0] for s in strides])),
+                              'stride_mm': float(np.mean([gait(s)[1] for s in strides]))})
         duration = round(p['duration'] / DT) * DT
         return {'parameters': p, 'trace': trace, 'raster': raster,
                 'neuron_hz': (total / duration).tolist(),
@@ -151,5 +180,9 @@ class Circuit:
                             'turn_deg': math.degrees(heading), 'spikes': int(total.sum()),
                             'active_neurons': int((total > 0).sum()),
                             'motor_mean_hz': float(np.mean([np.mean(total[idx] / duration) if len(idx) else 0 for idx in self.motor])),
-                            'clipped_motor_fraction': saturation / math.ceil(round(duration / DT) / 10)},
+                            'clipped_motor_fraction': saturation / math.ceil(round(duration / DT) / 10),
+                            'mean_speed_mm_s': float(np.mean([t['speed'] for t in trace])) if trace else 0.0,
+                            'mean_step_hz': float(np.mean([t['step_hz'] for t in trace])) if trace else 0.0,
+                            'mean_stride_mm': float(np.mean([t['stride_mm'] for t in trace])) if trace else 0.0,
+                            'reported_ranges': {'speed_mm_s': [5, 25], 'step_hz': [5, 15], 'stride_mm': [1, 2]}},
                 'interpretation': 'Model output, not biological validation. Motor pools drive an engineered 2D gait proxy. Target mode injects a hand-designed bearing signal into descending neurons.'}
