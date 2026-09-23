@@ -158,7 +158,7 @@ class Handler(BaseHTTPRequestHandler):
                        '/api/vision': {'seed','epochs'},
                        '/api/expansion': {'seed','per_class','epochs','sparsity','lr','task'},
                        '/api/theory': {'seed'},
-                       '/api/arena': {'seed','duration','scenario','condition','drive','gain','feedback','odour_gain','vision_gain','song_gain'}}[self.path]
+                       '/api/arena': {'seed','duration','scenario','condition','drive','gain','feedback','odour_gain','vision_gain','song_gain','body'}}[self.path]
             if set(options) - allowed: raise ValueError('Unknown parameter')
         except (ValueError, TypeError) as e: return self.send(400, {'error': str(e)})
         if not LOCK.acquire(blocking=False): return self.send(409, {'error': 'An experiment is already running'})

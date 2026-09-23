@@ -227,6 +227,8 @@ Open `/arena`. Two agents labelled male and one labelled female walk in a shared
 
 **What is measured:** each agent's circuit, its dynamics and its transmitter signs. **What is engineered:** odour falling off with distance, a two-antenna concentration comparison, seeing another fly as a bearing plus apparent size, who is attracted to whom, the courtship song rule, and the drive levels. There is no female connectome in this lab: MaleCNS is one male fly and the selected subset contains none of the sexually dimorphic courtship circuitry, so "female" labels engineered emissions and responses, not a different brain. There is no collision physics, so agents can overlap.
 
+Each agent is drawn to scale as a fly: a 2.5 mm body with abdomen, thorax, head and antennae, six legs animated by that agent's own leg oscillators (the same engineered gait as the motion lab, driven by its motor pools), and wings that fold back except when a male extends one to sing. Faint haloes show the odour field the agents sense, and the view fits itself to the trajectories.
+
 Scenarios: **rivalry** (both males approach her odour; each raises his drive on hearing a rival sing), **courtship** (only one male is attracted), **food** (a patch emits odour), **threat** (a looming threat at 4 s that everyone flees). Sensory controls remove vision, odour or song, or make the agents ignore each other entirely.
 
 Saved benchmark (`data/arena-benchmark.json`, two seeds per scenario and condition):
@@ -246,6 +248,18 @@ Saved benchmark (`data/arena-benchmark.json`, two seeds per scenario and conditi
 .venv/bin/python arena.py --benchmark        # about 5 minutes
 .venv/bin/python -m unittest -v test_arena.py
 ```
+
+### Legs driven joint by joint
+
+MaleCNS motor neuron types name the muscle each cell drives, so `bodyplan.py` groups them into the antagonist pairs of each leg joint: coxa protractors against retractors, trochanter levator against depressors, tibia extensor against flexors, tarsus levator against depressors. Each joint angle then follows `rest + span * tanh((agonist Hz − antagonist Hz) / scale)`, and the drawn legs are posed from those angles rather than from one oscillator phase. A leg counts as planted when its trochanter is depressed.
+
+All six legs can drive their coxa, trochanter and tibia. Tarsus levator motor neurons are annotated only for the front legs, so four tarsi cannot be driven, and 59 motor neurons have no muscle name or no leg assignment and stay unused; `/arena` reports both.
+
+**Body motion** offers two modes. "From pooled motor rates" is the lab's original readout. "From the planted feet" derives translation and turning from the movement of planted feet in the body frame, so body motion follows the joints rather than a stride average. Both are readouts of motor activity: there is no muscle model, tendon, load or inertia.
+
+A fly's compound eyes cannot move, so there is nothing to drive there. Head and antennal movement exist (neck and antennal motor neurons) but neither group is in this subset, so head, eyes and antennae stay fixed.
+
+Correction to an earlier note: the 59 motor neurons that leave through accessory nerves rather than leg nerves are, by their muscle names (trochanter flexor, sternotrochanter, pleural promotor and similar), leg-muscle motor neurons. Pooling them into leg stride is reasonable; only the 8 through the abdominal nerve remain unclear. The atlas flag now says this.
 
 ## Vision to walking (in progress)
 

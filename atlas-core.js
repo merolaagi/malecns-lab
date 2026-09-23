@@ -143,8 +143,14 @@
     if (n.layer === 'in') lines.push('Silenced in the "Silence VNC interneurons" condition.');
     if (n.layer === 'mn') lines.push(n.leg ? 'Firing rate is averaged into the ' + legText(n.leg) + ' pool that sets stride.' : 'Not assigned to any leg pool.');
     if (n.layer === 'sn') lines.push(n.leg ? 'Receives the engineered stance × stride current for the ' + legText(n.leg) + '.' : 'Receives no feedback current.');
-    if (n.layer === 'mn' && r.exitNerve && !LEG_NERVES[r.exitNerve] && n.leg)
-      flags.push('Leaves through ' + r.exitNerve + ', not a leg nerve, yet the model pools it into ' + legText(n.leg) + ' stride.');
+    if (n.layer === 'mn' && r.exitNerve && !LEG_NERVES[r.exitNerve] && n.leg) {
+      // Their type names are leg muscles (trochanter, sternotrochanter, pleural promotor), so these
+      // leave by an accessory nerve rather than belonging to another body part. AbN1 is less clear.
+      const known = /Tr |Sterno|Sternal|Tergo|Pleural|Fe |Ti |Ta |ltm/.test(r.type || '');
+      flags.push(known
+        ? 'Leaves through ' + r.exitNerve + ' rather than a leg nerve, but its muscle (' + r.type + ') is a leg muscle, so pooling it into ' + legText(n.leg) + ' stride is reasonable.'
+        : 'Leaves through ' + r.exitNerve + ' and its muscle is unnamed, so assigning it to ' + legText(n.leg) + ' stride is a guess.');
+    }
     if (n.sign === 0) flags.push('Transmitter is "' + (r.nt || 'unknown') + '", so this cell has no effect on its targets in the model.');
     if (r.nt === 'glutamate') flags.push('Glutamate is treated as inhibitory on every central target; receptor identity is unknown.');
     if (n.placed) flags.push('No soma position in the annotations. Drawn at the synapse-weighted centroid of its partners.');

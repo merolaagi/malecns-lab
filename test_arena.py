@@ -67,8 +67,25 @@ class ArenaTests(unittest.TestCase):
         intact = self.a.run(seed=7, scenario='rivalry', duration=6)
         self.assertGreater(min(a['path_mm'] for a in intact['agents']), 3.0)
 
+    def test_joints_are_driven_per_leg_and_reported(self):
+        a = self.rivalry['trace'][-1]['agents'][0]
+        self.assertEqual(set(a['legs']), set(['LF', 'LM', 'LH', 'RF', 'RM', 'RH']))
+        for leg, j in a['legs'].items():
+            for joint in ['coxa', 'femur', 'tibia', 'tarsus']: self.assertTrue(math.isfinite(j[joint]))
+            self.assertEqual(len(j['foot']), 2)
+        angles = [a['legs'][leg]['tibia'] for leg in a['legs']]
+        self.assertGreater(max(angles) - min(angles), 0.02)     # legs differ from each other
+        self.assertFalse(self.rivalry['leg_coverage']['LM']['tarsus']['drivable'])
+
+    def test_kinematic_body_mode_walks(self):
+        r = self.a.run(seed=7, scenario='rivalry', duration=8, body='kinematic')
+        paths = [x['path_mm'] for x in r['agents']]
+        self.assertTrue(all(math.isfinite(p) for p in paths))
+        self.assertGreater(max(paths), 1.0)
+        self.assertLess(max(paths), 60.0)
+
     def test_validation(self):
-        for bad in [{'scenario': 'x'}, {'condition': 'x'}, {'duration': 100}, {'seed': 1.5}, {'odour_gain': 9}]:
+        for bad in [{'scenario': 'x'}, {'condition': 'x'}, {'duration': 100}, {'seed': 1.5}, {'odour_gain': 9}, {'body': 'x'}]:
             with self.assertRaises(ValueError): self.a.run(**bad)
 
 

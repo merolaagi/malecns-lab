@@ -2,6 +2,19 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Draw the arena agents as flies
+
+- Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
+- The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
+
+## Drive each leg joint from its own motor neurons
+
+- `bodyplan.py` maps motor neurons to leg joints by the muscle their type names identify (coxa protractors/retractors, trochanter levator/depressors, tibia extensor/flexors, tarsus levator/depressors) and turns firing-rate differences into joint angles. All six legs can drive coxa, trochanter and tibia; tarsus levators exist only for the front legs; 59 motor neurons have no muscle name or leg and stay unused.
+- `/arena` flies are drawn to scale (2.5 mm body) and posed by those joint angles, with planted feet marked, an extended wing while singing, and a joint panel per agent. New body mode "from the planted feet" derives translation and turning from foot motion instead of pooled stride averages.
+- Noted on the page: compound eyes cannot move, and neck and antennal motor neurons are not in the subset, so head, eyes and antennae are static.
+- Correction: the 59 motor neurons leaving by accessory nerves are leg-muscle motor neurons, so pooling them into leg stride is reasonable. The atlas flag said they were not leg motor neurons; it now names the muscle and reserves doubt for the 8 abdominal-nerve cells.
+- `test_bodyplan.py` and new arena tests for joint drive and the kinematic body mode.
+
 ## Add three-fly arena; fix inverted steering in target mode
 
 - New `/arena` page and `arena.py`: two agents labelled male and one labelled female, each running the same measured locomotion circuit, coupled by engineered odour, vision and courtship-song channels. Four scenarios (rivalry, courtship, food, threat) and sensory controls (no vision, no odour, no song, isolated, shuffled connectome, silenced VNC), with an animated replay, pairwise distance plot and saved two-seed benchmark.

@@ -24,6 +24,7 @@ import math
 
 import numpy as np
 
+import bodyplan
 from model import DT, Circuit, steer
 
 SCENARIOS = {
@@ -42,7 +43,11 @@ CONDITIONS = {
     'silence_vnc': 'VNC interneurons silenced in every agent',
 }
 DEFAULT = dict(seed=7, duration=24.0, scenario='rivalry', condition='intact', drive=2.0, gain=10.0,
-               feedback=2.0, odour_gain=1.0, vision_gain=0.6, song_gain=0.5)
+               feedback=2.0, odour_gain=1.0, vision_gain=0.6, song_gain=0.5, body='pooled')
+BODY_MODES = {
+    'pooled': 'Body speed and turning from pooled motor rates (the lab\'s original readout)',
+    'kinematic': 'Body motion from the planted feet, whose positions come from joint angles',
+}
 AGENTS = [
     {'id': 'male_1', 'label': 'Male 1', 'sex': 'male', 'start': (-8.0, -4.0), 'heading': 0.5},
     {'id': 'male_2', 'label': 'Male 2', 'sex': 'male', 'start': (-8.0, 5.0), 'heading': -0.4},
@@ -64,8 +69,8 @@ def concentration(pos, sources):
 
 
 class Agent:
-    def __init__(self, spec, circuit, w, rng, p):
-        self.spec, self.c, self.w, self.rng, self.p = spec, circuit, w, rng, p
+    def __init__(self, spec, circuit, w, rng, p, legs):
+        self.spec, self.c, self.w, self.rng, self.p, self.legs = spec, circuit, w, rng, p, legs
         n = circuit.n
         self.v = rng.uniform(0, .3, n); self.syn = np.zeros(n); self.rates = np.zeros(n)
         self.refractory = np.zeros(n, dtype=int); self.total = np.zeros(n, dtype=int)
@@ -75,6 +80,8 @@ class Agent:
         self.x, self.y = spec['start']; self.heading = spec['heading']
         self.speed = 0.0; self.motor_hz = np.zeros(6); self.path = 0.0
         self.bias = self.drive = 0.0; self.singing = False; self.heard_song = 0.0
+        self.joints = bodyplan.angles(legs, self.rates)
+        self.feet = {leg: bodyplan.foot(leg, self.joints[leg]) for leg in bodyplan.LEGS}
 
     pos = property(lambda self: np.array([self.x, self.y]))
 
@@ -142,12 +149,35 @@ class Agent:
             self.strides = np.clip(self.motor_hz / 50., 0, 1)
             self.phases += .010 * 2 * math.pi * 5 * self.strides
             self.contacts = (np.sin(self.phases) <= 0).astype(float)
-            left, right = self.strides[:3].mean(), self.strides[3:].mean()
-            self.speed = 6 * (left + right) / 2
-            self.heading += 3 * (right - left) * .010
-            self.x += math.cos(self.heading) * self.speed * .010
-            self.y += math.sin(self.heading) * self.speed * .010
-            self.path += self.speed * .010
+            # Every leg joint is driven by the motor neurons of its own muscles.
+            self.joints = bodyplan.angles(self.legs, self.rates)
+            previous, self.feet = self.feet, {leg: bodyplan.foot(leg, self.joints[leg]) for leg in bodyplan.LEGS}
+            if p['body'] == 'kinematic':
+                # Planted feet do not slide: the body moves opposite to their motion in the body frame.
+                dx = dy = dtheta = 0.0; planted = 0
+                for leg, (fx, fy, down) in self.feet.items():
+                    px, py, pdown = previous[leg]
+                    if down and pdown:
+                        dx += fx - px; dy += fy - py
+                        r2 = px * px + py * py
+                        if r2 > 1e-6: dtheta += (px * (fy - py) - py * (fx - px)) / r2
+                        planted += 1
+                if planted:
+                    dx /= planted; dy /= planted; dtheta /= planted
+                    self.heading -= dtheta
+                    self.x -= math.cos(self.heading) * dx - math.sin(self.heading) * dy
+                    self.y -= math.sin(self.heading) * dx + math.cos(self.heading) * dy
+                    self.speed = math.hypot(dx, dy) / .010
+                    self.path += math.hypot(dx, dy)
+                else:
+                    self.speed = 0.0
+            else:
+                left, right = self.strides[:3].mean(), self.strides[3:].mean()
+                self.speed = 6 * (left + right) / 2
+                self.heading += 3 * (right - left) * .010
+                self.x += math.cos(self.heading) * self.speed * .010
+                self.y += math.sin(self.heading) * self.speed * .010
+                self.path += self.speed * .010
 
 
 class Arena:
@@ -157,6 +187,7 @@ class Arena:
         p = DEFAULT | options
         if p['scenario'] not in SCENARIOS: raise ValueError('Unknown scenario')
         if p['condition'] not in CONDITIONS: raise ValueError('Unknown condition')
+        if p['body'] not in BODY_MODES: raise ValueError('Unknown body mode')
         for k, lo, hi in [('duration', 2, 30), ('drive', 0, 5), ('gain', 0, 20), ('feedback', 0, 2),
                           ('odour_gain', 0, 3), ('vision_gain', 0, 3), ('song_gain', 0, 2)]:
             p[k] = float(p[k])
@@ -182,7 +213,8 @@ class Arena:
         p = self.validate(options)
         rng = np.random.default_rng(p['seed'])
         w = self.c.matrix('shuffled' if p['condition'] == 'shuffled' else 'intact', p['seed'])
-        agents = [Agent(spec, self.c, w, np.random.default_rng(p['seed'] + 100 * i), p) for i, spec in enumerate(AGENTS)]
+        legs = bodyplan.index(self.c.nodes)
+        agents = [Agent(spec, self.c, w, np.random.default_rng(p['seed'] + 100 * i), p, legs) for i, spec in enumerate(AGENTS)]
         steps = round(p['duration'] / DT)
         trace, events = [], []
         pair_keys = [('male_1', 'male_2'), ('male_1', 'female'), ('male_2', 'female')]
@@ -227,14 +259,24 @@ class Arena:
                     for a in agents:
                         if a.spec['id'] not in arrivals and float(np.linalg.norm(a.pos - FOOD)) < 3.0: arrivals[a.spec['id']] = round(t, 2)
             if step % 20 == 0:
-                trace.append({'t': round(t, 3), 'agents': [{'id': a.spec['id'], 'x': a.x, 'y': a.y, 'heading': a.heading,
-                                                            'speed': a.speed, 'bias': a.bias, 'drive': a.drive,
-                                                            'singing': bool(a.singing), 'dn_hz': float(a.rates[self.c.dn].mean())} for a in agents]})
+                trace.append({'t': round(t, 3), 'agents': [{'id': a.spec['id'], 'x': round(a.x, 3), 'y': round(a.y, 3), 'heading': round(a.heading, 4),
+                                                            'speed': round(a.speed, 3), 'bias': round(a.bias, 3), 'drive': round(a.drive, 3),
+                                                            'singing': bool(a.singing), 'dn_hz': round(float(a.rates[self.c.dn].mean()), 2),
+                                                            # Leg phases and strides drive the drawn legs, the same engineered gait as the motion lab.
+                                                            'phases': [round(v, 3) for v in a.phases.tolist()],
+                                                            'strides': [round(v, 3) for v in a.strides.tolist()],
+                                                            # Joint angles and foot positions, per leg, from that leg's muscles.
+                                                            'legs': {leg: {'coxa': round(a.joints[leg]['coxa'], 3), 'femur': round(a.joints[leg]['femur'], 3),
+                                                                           'tibia': round(a.joints[leg]['tibia'], 3), 'tarsus': round(a.joints[leg]['tarsus'], 3),
+                                                                           'foot': [round(a.feet[leg][0], 3), round(a.feet[leg][1], 3)], 'planted': a.feet[leg][2]}
+                                                                     for leg in bodyplan.LEGS}} for a in agents]})
         duration = steps * DT
         for k in stats:
             if not math.isfinite(stats[k]['min_distance']): stats[k]['min_distance'] = None
         return {
             'parameters': p, 'scenario_text': SCENARIOS[p['scenario']], 'condition_text': CONDITIONS[p['condition']],
+            'body_text': BODY_MODES[p['body']], 'leg_coverage': bodyplan.coverage(legs),
+            'unmatched_motor_neurons': int(len(legs['unmatched'])),
             'agents': [{'id': a.spec['id'], 'label': a.spec['label'], 'sex': a.spec['sex'],
                         'path_mm': round(a.path, 2), 'mean_dn_hz': float(a.total[self.c.dn].sum() / (max(1, int(np.count_nonzero(self.c.dn))) * duration)),
                         'spikes': int(a.total.sum())} for a in agents],

@@ -73,7 +73,10 @@ test('partners are sorted and complete', () => {
 test('known modeling problems are flagged', () => {
   const nonLeg = A.nodes.filter(n => n.layer === 'mn' && !['ProLN', 'MesoLN', 'MetaLN'].includes(n.raw.exitNerve));
   assert.strictEqual(nonLeg.length, 59);
-  assert.ok(nonLeg.every(n => core.treatment(A, n.i).flags.some(f => f.includes('not a leg nerve'))));
+  assert.ok(nonLeg.every(n => core.treatment(A, n.i).flags.some(f => f.includes('rather than a leg nerve') || f.includes('unnamed'))));
+  const named = nonLeg.filter(n => /Tr |Sterno|Sternal|Tergo|Pleural|Fe /.test(n.raw.type || ''));
+  assert.ok(named.length > 40);   // most are leg-muscle motor neurons taking an accessory nerve
+  assert.ok(named.every(n => core.treatment(A, n.i).flags.some(f => f.includes('is a leg muscle'))));
   const silent = A.nodes.filter(n => n.sign === 0);
   assert.ok(silent.every(n => core.treatment(A, n.i).flags.some(f => f.includes('no effect'))));
 });

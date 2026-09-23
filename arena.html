@@ -10,6 +10,7 @@
 <div class="wb-bar">
   <label>Scenario<select id="scenario"><option value="rivalry">Rivalry: two males, one female</option><option value="courtship">Courtship: one male approaches</option><option value="food">Food patch: all three approach</option><option value="threat">Threat: all three flee</option></select></label>
   <label>Senses<select id="condition"><option value="intact">All senses and signals</option><option value="no_vision">No vision</option><option value="no_odour">No odour</option><option value="no_signals">No song</option><option value="isolated">Ignore each other</option><option value="shuffled">Shuffled connectome</option><option value="silence_vnc">VNC silenced</option></select></label>
+  <label>Body motion<select id="bodyMode"><option value="pooled">From pooled motor rates</option><option value="kinematic">From the planted feet</option></select></label>
   <label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label>
   <button id="arenaRun">Run (about 9 s)</button><span class="wb-status" id="status" role="status"></span>
 </div>
@@ -18,10 +19,13 @@
     <div id="arenaCvWrap"><canvas id="arenaCv"></canvas></div>
     <div class="wb-row"><button class="chip" id="play">Pause</button><input id="frame" type="range" min="0" max="0" value="0" style="flex:1"><span class="lab" id="clock">0.0 s</span></div>
     <canvas id="distCv" style="height:180px"></canvas>
-    <p class="hint">Distance between each pair over time. Dotted line: the 5 mm "near" threshold used for the counts.</p>
+    <p class="hint">Distance between each pair over time. Dotted line: the 5 mm "near" threshold used for the counts.</p><p class="hint">Each fly is drawn to scale (2.5 mm body). Every leg is posed by its own joint angles, each driven by the motor neurons innervating that joint's muscles, and a planted foot carries a dot. One wing extends while a male sings. A fly's compound eyes cannot move, and the antennal and neck motor neurons are not in this subset, so head, eyes and antennae stay fixed. The faint haloes show the odour field the agents sense.</p>
   </section>
   <aside class="wb-card">
     <h2>What happened</h2><div id="metrics"></div>
+    <h2 style="margin-top:18px">Leg joints <select id="legAgent" style="max-width:110px"><option value="male_1">male 1</option><option value="male_2">male 2</option><option value="female">female</option></select></h2>
+    <div id="legs"></div>
+    <p class="hint">Each joint angle is the difference in firing rate between the motor neurons of its own muscles: coxa protractors against retractors, trochanter levator against depressors, tibia extensor against flexors, tarsus levator against depressors. Teal means agonist-dominant, gold antagonist-dominant, and ▪ marks a planted leg. Tarsus levator motor neurons exist only for the front legs, so the other four tarsi cannot be driven.</p>
     <h2 style="margin-top:18px">Measured and engineered</h2>
     <p class="note">Measured: each agent's 807-cell locomotion circuit, its dynamics, and the transmitter signs.</p>
     <p class="warn">Engineered: odour falling off with distance, two-antenna comparison, seeing another fly as a bearing and apparent size, who is attracted to whom, the song rule, and the drive levels. Below about 0.7 of the default drive the circuit produces no motor output, so baseline exploration sits just above that.</p>
