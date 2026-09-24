@@ -83,7 +83,9 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, LEARNING.data)
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
-        files = {'/arena': ('arena.html', 'text/html; charset=utf-8'),
+        files = {'/arena3d': ('arena3d.html', 'text/html; charset=utf-8'),
+                 '/arena3d.js': ('arena3d.js', 'text/javascript; charset=utf-8'),
+                 '/arena': ('arena.html', 'text/html; charset=utf-8'),
                  '/arena.js': ('arena.js', 'text/javascript; charset=utf-8'),
                  '/api/arena-benchmark': ('data/arena-benchmark.json', 'application/json; charset=utf-8'),
                  '/theory': ('theory.html', 'text/html; charset=utf-8'),

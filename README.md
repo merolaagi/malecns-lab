@@ -274,6 +274,27 @@ A fly's compound eyes cannot move, so there is nothing to drive there. Head and 
 
 Correction to an earlier note: the 59 motor neurons that leave through accessory nerves rather than leg nerves are, by their muscle names (trochanter flexor, sternotrochanter, pleural promotor and similar), leg-muscle motor neurons. Pooling them into leg stride is reasonable; only the 8 through the abdominal nerve remain unclear. The atlas flag now says this.
 
+### 3D arena
+
+Open `/arena3d` for the same arena run drawn as jointed 3D bodies: thorax, abdomen, head with fixed compound eyes, antennae, wings and six legs built from coxa, femur, tibia and tarsus segments at the lengths in `bodyplan.py`. Each fly stands on its own legs: the body height is set from the lowest planted foot rather than fixed.
+
+**Brain-driven parts:** coxa, trochanter and tibia joints on all six legs, and the tarsus on the front legs, posed from the motor neurons of each joint's muscles. The panel lists every joint angle in degrees, with ▪ marking planted legs.
+
+**Hand-driven parts:** head yaw and pitch, antennae, abdomen bend and both wings, with sliders. These have no motor neurons in this subset, so nothing in the simulation drives them; a wing can also extend automatically while a male sings. Compound eyes cannot move in a fly at all, so they are fixed to the head.
+
+### How the neurons are modelled
+
+The modules use different levels of detail, and only the workbench is biophysical:
+
+| Module | Neuron model |
+|---|---|
+| Locomotion network and arena (`model.py`) | Leaky integrate-and-fire: 20 ms membrane constant, threshold 1, reset 0, 2 ms refractory, current-based synapses with a 10 ms exponential trace, Gaussian noise |
+| Neuron workbench (`neuron-core.js`) | Hodgkin–Huxley with squid kinetics, two compartments, conductance-based synapses (0 mV excitatory, −80 mV inhibitory) |
+| Odour learning (`learning.py`), numerosity, expansion | Firing-rate models, no membrane |
+| Vision network (`vision.py`) | Discrete-time recurrent tanh units, one or two states per cell, trained by backpropagation through time |
+
+What this leaves out of real fly neurons: graded (non-spiking) transmission, which many fly neurons use; conductance-based synapses in the network models, so no reversal potentials or shunting inhibition; dendritic compartments, although skeletons are now available; cell-type-specific time constants and spike-frequency adaptation; and Drosophila channel kinetics (para, Shaker, Shab) rather than squid.
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

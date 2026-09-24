@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · 3D arena</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>
+#stage3{position:relative;height:70vh;min-height:460px;background:#0b110d;border:1px solid var(--line)}
+#stage3 canvas{display:block;width:100%;height:100%}
+.sl3{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin:5px 0}
+.sl3 span:first-child{min-width:104px}.sl3 input{flex:1;margin:0}.sl3 output{min-width:42px;text-align:right}
+.tag{font-size:10px;padding:1px 6px;border-radius:var(--radius);border:1px solid var(--line);color:var(--muted)}
+.tag.brain{color:var(--accent);border-color:var(--accent)}
+</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ 3D arena</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/arena">Arena</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/atlas">Circuit atlas</a><a href="/neuron">Neuron workbench</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
+<main class="wb">
+<h1>Three flies in 3D</h1>
+<p class="sub">The same arena run, drawn as jointed 3D bodies. Every leg joint is posed by the motor neurons of its own muscles; the parts the connectome subset cannot drive are yours to move by hand.</p>
+<div class="notice"><strong>Brain-driven and hand-driven parts are labelled separately.</strong> Coxa, trochanter and tibia joints on all six legs follow their measured motor neurons, and the tarsus follows them on the front legs only, because tarsus levator motor neurons are annotated only there. Head, antennae, wings and abdomen have no motor neurons in this subset, so they move only when you move them. A fly's compound eyes cannot move at all.</div>
+<div class="wb-bar">
+  <label>Scenario<select id="scenario"><option value="rivalry">Rivalry</option><option value="courtship">Courtship</option><option value="food">Food patch</option><option value="threat">Threat</option></select></label>
+  <label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label>
+  <label>Follow<select id="follow"><option value="">Free camera</option><option value="male_1">Male 1</option><option value="male_2">Male 2</option><option value="female">Female</option></select></label>
+  <button id="run3">Run (about 9 s)</button><span class="wb-status" id="status" role="status"></span>
+</div>
+<div class="wb-grid" style="margin-top:20px">
+  <section>
+    <div id="stage3"></div>
+    <div class="wb-row"><button class="chip" id="play3">Pause</button><input id="frame3" type="range" min="0" max="0" value="0" style="flex:1"><span class="lab" id="clock3">0.0 s</span></div>
+    <p class="hint">Drag to orbit, shift-drag to pan, scroll to zoom. Legs are drawn as coxa, femur, tibia and tarsus segments; a planted foot is marked.</p>
+  </section>
+  <aside class="wb-card">
+    <h2>Body parts <select id="who" style="max-width:110px"><option value="male_1">male 1</option><option value="male_2">male 2</option><option value="female">female</option></select></h2>
+    <p class="hint"><span class="tag brain">brain</span> follows the simulation · <span class="tag">manual</span> is yours</p>
+    <h3 style="font-size:12px;margin:14px 0 4px">Legs <span class="tag brain">brain</span></h3>
+    <div id="legreadout"></div>
+    <h3 style="font-size:12px;margin:14px 0 4px">Head and body <span class="tag">manual</span></h3>
+    <div class="sl3"><span>Head yaw</span><input id="headYaw" type="range" min="-45" max="45" value="0"><output id="headYawOut">0°</output></div>
+    <div class="sl3"><span>Head pitch</span><input id="headPitch" type="range" min="-30" max="30" value="0"><output id="headPitchOut">0°</output></div>
+    <div class="sl3"><span>Antennae</span><input id="antenna" type="range" min="-40" max="40" value="0"><output id="antennaOut">0°</output></div>
+    <div class="sl3"><span>Abdomen bend</span><input id="abdomen" type="range" min="-35" max="35" value="0"><output id="abdomenOut">0°</output></div>
+    <div class="sl3"><span>Left wing</span><input id="wingL" type="range" min="0" max="90" value="8"><output id="wingLOut">8°</output></div>
+    <div class="sl3"><span>Right wing</span><input id="wingR" type="range" min="0" max="90" value="8"><output id="wingROut">8°</output></div>
+    <div class="wb-row"><label style="margin:0;display:flex;gap:6px;align-items:center;min-width:0"><input type="checkbox" id="songWing" checked style="width:auto"> Extend a wing while singing</label></div>
+    <p class="hint">Real flies move head and antennae with neck and antennal motor neurons, and wings with the flight muscles. None of those cells are in this subset, so nothing here drives them.</p>
+  </aside>
+</div>
+</main>
+<script src="/vendor/three.min.js"></script><script src="/arena3d.js"></script>
+</body></html>

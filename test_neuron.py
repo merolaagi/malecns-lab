@@ -48,7 +48,8 @@ class RouteTests(unittest.TestCase):
 
     def test_pages_and_api(self):
         for path in ['/neuron', '/neuron.js', '/neuron-core.js', '/workbench.css', '/numerosity', '/numerosity.js', '/api/numerosity-benchmark',
-                     '/expansion', '/expansion.js', '/api/expansion-benchmark', '/3d', '/viewer3d.js', '/ng.js', '/vendor/three.min.js']:
+                     '/expansion', '/expansion.js', '/api/expansion-benchmark', '/3d', '/viewer3d.js', '/ng.js', '/vendor/three.min.js',
+                     '/arena', '/arena.js', '/arena3d', '/arena3d.js', '/theory', '/theory.js', '/api/arena-benchmark']:
             with urllib.request.urlopen(self.url + path) as r: self.assertEqual(r.status, 200)
         with urllib.request.urlopen(self.url + '/api/neuron?circuit=learning&id=random&seed=5') as r:
             self.assertEqual(json.loads(r.read())['cell']['role'], 'KC')

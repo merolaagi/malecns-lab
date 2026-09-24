@@ -7,6 +7,12 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add 3D arena with controllable body parts
+
+- New `/arena3d`: the arena run drawn as jointed 3D flies (thorax, abdomen, head, fixed compound eyes, antennae, wings, and six legs of coxa, femur, tibia and tarsus at the lengths in `bodyplan.py`), with orbit, pan, zoom, playback and a follow camera. Each fly's body height is derived from its lowest planted foot, so it stands on its own legs.
+- Leg joints are posed by the motor neurons of each joint's muscles and listed in degrees; head, antennae, abdomen and wings have no motor neurons in this subset and are exposed as manual sliders, labelled separately from the brain-driven parts. Compound eyes are fixed, as in a real fly.
+- README documents the neuron models used across the lab (leaky integrate-and-fire for the networks, Hodgkin–Huxley in the workbench, rate models elsewhere) and what they leave out.
+
 ## Calibrate walking speed; measure gait quality
 
 - Walking speed came from two arbitrary constants (motor rate / 50, then 6 mm/s per unit stride, 5 Hz step cap), which put the default at 1.2 mm/s, below a real fly's walking speed. `model.gait()` now calibrates against reported Drosophila values (step frequency to 12 Hz, stride 1.1–2.0 mm, speed their product) and `model.turn_rate()` derives yaw from the left/right leg speed difference across a 1 mm track. The motion lab reports speed, step frequency and stride length against those ranges; `data/benchmark.json` regenerated.
