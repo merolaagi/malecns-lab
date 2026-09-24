@@ -151,7 +151,7 @@ class Handler(BaseHTTPRequestHandler):
             if not 0 < size <= 8192: raise ValueError('Invalid request size')
             options = json.loads(self.rfile.read(size))
             if not isinstance(options, dict): raise ValueError('Expected JSON object')
-            allowed = {'/api/run': {'duration','drive','bias','gain','feedback','condition','seed','mode'},
+            allowed = {'/api/run': {'duration','drive','bias','gain','feedback','condition','seed','mode','neuron'},
                        '/api/learn': {'seed','train_trials','probe_trials','learning_rate','temperature','retention','delay','condition','rewarded_odor'},
                        '/api/numerosity': {'seed','numbers','width','step','held_out','train_trials','learning_rate','temperature','noise','test_exemplars','condition'},
                        '/api/math': {'seed','epochs','learning_rate','condition'},

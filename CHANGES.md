@@ -7,6 +7,12 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add adaptive exponential neurons with conductance synapses
+
+- `model.py` gains a second neuron model (`neuron='adex'`): adaptive exponential integrate-and-fire with conductance-based synapses (0 mV excitatory, −75 mV inhibitory reversal potentials), integrated in 0.1 ms substeps. Standard cortical parameters, scaled so both models match the leaky integrate-and-fire rate at the default drive. Selectable in the motion lab; the default stays `lif`.
+- Finding: raising drive from 2.0 to 4.0 saturates the integrate-and-fire network (9 → 82 Hz motor, 79% clipped) but leaves the adaptive one near 10 Hz with 4% clipped, while descending rates rise under both. Shunting inhibition and adaptation give the VNC gain control, so the narrow operating band the arena compensates for belongs to the simpler neuron model, not to the connectome.
+- `test_neuron_models.py`: reproducibility, rate calibration, the gain-control regression, sign-split conductance matrices, and controls under both models.
+
 ## Add 3D arena with controllable body parts
 
 - New `/arena3d`: the arena run drawn as jointed 3D flies (thorax, abdomen, head, fixed compound eyes, antennae, wings, and six legs of coxa, femur, tibia and tarsus at the lengths in `bodyplan.py`), with orbit, pan, zoom, playback and a follow camera. Each fly's body height is derived from its lowest planted foot, so it stands on its own legs.

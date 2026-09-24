@@ -13,7 +13,11 @@ BASE = Path(__file__).resolve().parent
 DT = .001
 LEGS = ['LF', 'LM', 'LH', 'RF', 'RM', 'RH']
 DEFAULT = dict(duration=8, drive=2.0, bias=0., gain=10., feedback=2.,
-               condition='intact', seed=7, mode='tonic')
+               condition='intact', seed=7, mode='tonic', neuron='lif')
+NEURON_MODELS = {
+    'lif': 'Leaky integrate-and-fire, current-based synapses (the lab default)',
+    'adex': 'Adaptive exponential integrate-and-fire, conductance-based synapses',
+}
 CONDITIONS = ['intact', 'silence_vnc', 'silence_left_dn', 'no_feedback', 'no_stimulus', 'shuffled']
 
 # Calibration of the engineered gait readout against reported Drosophila walking:
@@ -40,6 +44,18 @@ def gait(stride):
     frequency = STEP_HZ_MAX * stride
     length = STRIDE_MM[0] + (STRIDE_MM[1] - STRIDE_MM[0]) * stride
     return frequency, length, frequency * length
+
+
+# Adaptive exponential integrate-and-fire with conductance-based synapses (Brette & Gerstner, 2005).
+# Adds three things the leaky integrate-and-fire model lacks: a spike-initiation nonlinearity, spike
+# frequency adaptation, and synapses as conductances, so inhibition shunts rather than subtracting a
+# fixed current. Parameters are standard cortical values, not Drosophila measurements: no cell-type
+# fitting exists for this subset. Reversal potentials follow the transmitter signs already in use.
+ADEX = dict(C=200.0, g_L=10.0, E_L=-60.0, V_T=-50.0, delta_T=2.0, V_peak=0.0, V_reset=-58.0,
+            tau_w=100.0, a=2.0, b=30.0, E_exc=0.0, E_inh=-75.0)
+EXT_TO_PA = 250.0       # dimensionless drive -> injected current (pA); calibrated to match the LIF rates
+SYN_TO_NS = 8.0         # synaptic trace * gain -> conductance (nS); calibrated the same way
+SUBSTEPS = 10           # the exponential term needs a finer step than the 1 ms network step
 
 
 def steer(bearing):
@@ -80,6 +96,11 @@ class Circuit:
         self.motor = [np.array([i for i, n in enumerate(self.nodes) if n['superclass'] == 'vnc_motor' and self.leg[i] == k], dtype=int) for k in range(6)]
         self.sensory = [np.array([i for i, n in enumerate(self.nodes) if n['superclass'] == 'vnc_sensory' and self.leg[i] == k], dtype=int) for k in range(6)]
 
+    def conductance_matrices(self, condition, seed):
+        """Excitatory and inhibitory weight matrices (both non-negative) for conductance synapses."""
+        w = self.matrix(condition, seed)
+        return w.maximum(0), (-w).maximum(0)
+
     def matrix(self, condition, seed):
         post = self.post.copy()
         if condition == 'shuffled':
@@ -95,6 +116,7 @@ class Circuit:
         p = DEFAULT | options
         if p['condition'] not in CONDITIONS: raise ValueError('Unknown condition')
         if p['mode'] not in ['tonic', 'pulse', 'target']: raise ValueError('Unknown stimulus mode')
+        if p['neuron'] not in NEURON_MODELS: raise ValueError('Unknown neuron model')
         bounds = {'duration': (.5, 20), 'drive': (0, 5), 'bias': (-1, 1), 'gain': (0, 20), 'feedback': (0, 2)}
         for key, (lo, hi) in bounds.items():
             p[key] = float(p[key])
@@ -102,7 +124,9 @@ class Circuit:
         p['seed'] = int(p['seed'])
         rng = np.random.default_rng(p['seed'])
         w = self.matrix(p['condition'], p['seed'])
-        v = rng.uniform(0, .3, self.n)
+        w_exc, w_inh = self.conductance_matrices(p['condition'], p['seed']) if p['neuron'] == 'adex' else (None, None)
+        v = (ADEX['E_L'] + rng.uniform(0, 3, self.n)) if p['neuron'] == 'adex' else rng.uniform(0, .3, self.n)
+        wad = np.zeros(self.n)                      # AdEx adaptation current (pA)
         syn = np.zeros(self.n)
         rates = np.zeros(self.n)
         refractory = np.zeros(self.n, dtype=int)
@@ -134,13 +158,30 @@ class Circuit:
                 for k, idx in enumerate(self.sensory):
                     external[idx] += p['feedback'] * contacts[k] * strides[k]
             # No tonic motor drive. Gaussian current noise is an assumption; seed is fixed.
-            current = external + p['gain'] * w.dot(syn) + rng.normal(0, .015, self.n)
             refractory = np.maximum(refractory - 1, 0)
             active = (refractory == 0) & ~silenced
-            v[active] += DT / .020 * (-v[active] + current[active])
-            v[silenced] = 0
-            spikes = (v >= 1) & active
-            v[spikes] = 0
+            if p['neuron'] == 'adex':
+                A = ADEX
+                ge = SYN_TO_NS * p['gain'] * w_exc.dot(syn)
+                gi = SYN_TO_NS * p['gain'] * w_inh.dot(syn)
+                I = EXT_TO_PA * (external + rng.normal(0, .015, self.n))
+                spikes = np.zeros(self.n, dtype=bool)
+                sub = DT * 1000.0 / SUBSTEPS                      # ms
+                for _ in range(SUBSTEPS):
+                    drift = (-A['g_L'] * (v - A['E_L'])
+                             + A['g_L'] * A['delta_T'] * np.exp(np.clip((v - A['V_T']) / A['delta_T'], -30, 20))
+                             + ge * (A['E_exc'] - v) + gi * (A['E_inh'] - v) + I - wad)
+                    v[active] += sub / A['C'] * drift[active]
+                    wad += sub / A['tau_w'] * (A['a'] * (v - A['E_L']) - wad)
+                    fired = (v >= A['V_peak']) & active
+                    v[fired] = A['V_reset']; wad[fired] += A['b']; spikes |= fired
+                v[silenced] = A['E_L']; wad[silenced] = 0
+            else:
+                current = external + p['gain'] * w.dot(syn) + rng.normal(0, .015, self.n)
+                v[active] += DT / .020 * (-v[active] + current[active])
+                v[silenced] = 0
+                spikes = (v >= 1) & active
+                v[spikes] = 0
             refractory[spikes] = 2
             # 10 ms exponentially decaying synaptic trace, unit increment per spike.
             syn *= math.exp(-DT / .010)

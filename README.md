@@ -295,6 +295,17 @@ The modules use different levels of detail, and only the workbench is biophysica
 
 What this leaves out of real fly neurons: graded (non-spiking) transmission, which many fly neurons use; conductance-based synapses in the network models, so no reversal potentials or shunting inhibition; dendritic compartments, although skeletons are now available; cell-type-specific time constants and spike-frequency adaptation; and Drosophila channel kinetics (para, Shaker, Shab) rather than squid.
 
+### Two neuron models
+
+`model.py` now offers a second neuron model, selectable in the motion lab and via `neuron` on `/api/run`:
+
+- **`lif` (default):** leaky integrate-and-fire, 20 ms membrane constant, threshold 1, 2 ms refractory, current-based synapses.
+- **`adex`:** adaptive exponential integrate-and-fire with conductance-based synapses (Brette & Gerstner). Adds a spike-initiation nonlinearity, spike-frequency adaptation, and synapses as conductances with reversal potentials (0 mV excitatory, −75 mV inhibitory), so inhibition shunts instead of subtracting a fixed current. The membrane is integrated in 0.1 ms substeps inside each 1 ms network step. Parameters are standard cortical values, not Drosophila measurements, with the drive and conductance scalings calibrated so both models fire at the same rate at the default drive (9.2 versus 9.6 Hz).
+
+**Finding: the two models disagree about gain.** Raising descending drive from 2.0 to 4.0 makes the integrate-and-fire network escalate (motor pools 9 → 82 Hz, saturated 79% of the time), while the adaptive network holds motor output near 10 Hz with almost no saturation. Descending rates still rise with drive under both (15 → 25 Hz for the adaptive model), so the clamp is downstream: shunting inhibition and adaptation give the VNC gain control. That also means the narrow "usable band" the arena works around is a property of the integrate-and-fire model rather than of the connectome. Which behaviour is right is unknown: neither set of parameters is fitted to fly recordings.
+
+The arena still uses the integrate-and-fire model, because its drive-to-speed mapping depends on that escalation.
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

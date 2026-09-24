@@ -6,7 +6,7 @@ let circuit,run,playing=false,frame=0,previous=0,history=[];
 const colors={dn:'#c2e899',vnc:'#6fc7bc',mn:'#e9be75',grid:'#243229',muted:'#99aa9c',text:'#e7eee5'};
 for(const key of ['drive','bias','gain','feedback']) $(key).oninput=()=>$(key+'Value').textContent=Number($(key).value).toFixed(1);
 $('legbars').innerHTML=legNames.map((l,i)=>`<div class="bar"><span>${l}</span><div class="track"><div class="fill" id="bar${i}" style="width:0"></div></div><span id="hz${i}">—</span></div>`).join('');
-function parameters(){const p={};for(const k of ['mode','condition'])p[k]=$(k).value;for(const k of ['drive','bias','gain','feedback','duration','seed'])p[k]=Number($(k).value);return p;}
+function parameters(){const p={};for(const k of ['mode','condition','neuron'])p[k]=$(k).value;for(const k of ['drive','bias','gain','feedback','duration','seed'])p[k]=Number($(k).value);return p;}
 function line(ctx,points,color,width=1){if(!points.length)return;ctx.beginPath();ctx.moveTo(...points[0]);for(const p of points.slice(1))ctx.lineTo(...p);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();}
 function arena(){
  const canvas=$('arena'),ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
