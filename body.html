@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Body studio</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>
+.studio{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px}
+#stage{height:72vh;min-height:500px;position:relative;border:1px solid var(--line);background:#0b110d}
+#stage canvas{display:block;width:100%;height:100%}
+#hud{position:absolute;left:12px;bottom:10px;font-size:11px;color:var(--muted);pointer-events:none}
+.sl{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin:5px 0}
+.sl span:first-child{min-width:94px}.sl input[type=range]{flex:1;margin:0}.sl output{min-width:42px;text-align:right}
+.sl input[type=checkbox]{width:auto}
+.tag{font-size:10px;padding:1px 6px;border:1px solid var(--line);border-radius:var(--radius);color:var(--muted)}
+.tag.brain{color:var(--accent);border-color:var(--accent)}
+.panel{border:1px solid var(--line);padding:16px;max-height:72vh;overflow:auto}
+h3{font-size:12px;margin:16px 0 4px;color:var(--accent)}
+@media(max-width:1000px){.studio{grid-template-columns:1fr}#stage{height:58vh}}
+</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ body studio</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/arena">Arena</a><a href="/arena3d">3D arena</a><a href="/synapse">Synapses</a><a href="/neuron">Neuron workbench</a><a href="/atlas">Circuit atlas</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
+<main class="wb">
+<h1>Pose the fly, joint by joint</h1>
+<p class="sub">The full body at inspection size: six legs with four joints each, wings, head, antennae, proboscis, abdomen and halteres. Pose it by hand, or let the measured circuit drive the legs.</p>
+<div class="notice"><strong>Only the legs have motor neurons behind them.</strong> Each leg's coxa, trochanter and tibia angle comes from the motor neurons innervating that joint's muscles, and the tarsus from the front legs' tarsal motor neurons; the arena's simulation supplies them. Head, antennae, proboscis, abdomen, wings and halteres have no motor neurons in this subset, so they move only from these controls. A fly's compound eyes cannot move at all. Segment proportions and the mesh are drawn by eye; there is no muscle model, load or inertia.</div>
+<div class="studio" style="margin-top:20px">
+  <section>
+    <div id="stage"><div id="hud">Drag to orbit · shift-drag to pan · scroll to zoom · click a part to select it</div></div>
+    <div class="wb-row"><button id="drive">Drive legs from the circuit</button><button class="secondary" id="play">Pause</button><input id="frame" type="range" min="0" max="0" value="0" style="flex:1"><span class="lab" id="clock">manual pose</span></div>
+    <p class="hint" id="status" role="status">Manual pose. Run the circuit drive to animate the legs from a measured simulation.</p>
+  </section>
+  <aside class="panel">
+    <h3>View</h3>
+    <div class="sl"><span>Model size</span><input id="zoom" type="range" min="1" max="6" step=".1" value="2"><output id="zoomOut">2×</output></div>
+    <div class="sl"><span>Exploded</span><input id="explode" type="range" min="0" max="1.2" step=".02" value="0"><output id="explodeOut">0</output></div>
+    <div class="sl"><label style="margin:0"><input id="grid" type="checkbox" checked> Floor</label><label style="margin:0"><input id="ghost" type="checkbox"> Ghost body</label></div>
+    <div class="wb-row"><button class="chip" id="reset">Reset camera</button><button class="chip" id="resetPose">Reset pose</button></div>
+    <h3>Selected part</h3>
+    <div class="sl"><span>Part</span><select id="part" style="flex:1"></select></div>
+    <div class="sl"><span>Yaw</span><input id="yaw" type="range" min="-90" max="90" value="0"><output id="yawOut">0°</output></div>
+    <div class="sl"><span>Pitch</span><input id="pitch" type="range" min="-90" max="90" value="0"><output id="pitchOut">0°</output></div>
+    <div class="sl"><label style="margin:0"><input id="visible" type="checkbox" checked> Visible</label><span class="tag" id="partTag">manual</span></div>
+    <h3>Legs <span class="tag brain">brain</span></h3>
+    <div class="sl"><span>Leg</span><select id="leg" style="flex:1"><option value="all">All six</option><option>LF</option><option>LM</option><option>LH</option><option>RF</option><option>RM</option><option>RH</option></select></div>
+    <div class="sl"><span>Coxa swing</span><input id="coxa" type="range" min="-45" max="45" value="0"><output id="coxaOut">0°</output></div>
+    <div class="sl"><span>Femur lift</span><input id="femur" type="range" min="-40" max="60" value="0"><output id="femurOut">0°</output></div>
+    <div class="sl"><span>Knee bend</span><input id="knee" type="range" min="-60" max="90" value="0"><output id="kneeOut">0°</output></div>
+    <div class="sl"><span>Tarsus</span><input id="tarsus" type="range" min="-45" max="45" value="0"><output id="tarsusOut">0°</output></div>
+    <div id="legReadout" style="font-size:11px;color:var(--muted)"></div>
+    <h3>Wings and halteres <span class="tag">manual</span></h3>
+    <div class="sl"><span>Wing angle</span><input id="wing" type="range" min="-10" max="80" value="12"><output id="wingOut">12°</output></div>
+    <div class="sl"><span>Stroke</span><input id="stroke" type="range" min="0" max="1" step=".05" value="0"><output id="strokeOut">0</output></div>
+    <div class="sl"><label style="margin:0"><input id="flap" type="checkbox"> Animate stroke</label></div>
+    <div class="sl"><span>Halteres</span><input id="haltere" type="range" min="0" max="1" step=".05" value="0"><output id="haltereOut">0</output></div>
+    <h3>Head and abdomen <span class="tag">manual</span></h3>
+    <div class="sl"><span>Head yaw</span><input id="headYaw" type="range" min="-50" max="50" value="0"><output id="headYawOut">0°</output></div>
+    <div class="sl"><span>Head pitch</span><input id="headPitch" type="range" min="-35" max="35" value="0"><output id="headPitchOut">0°</output></div>
+    <div class="sl"><span>Antennae</span><input id="antenna" type="range" min="-45" max="45" value="0"><output id="antennaOut">0°</output></div>
+    <div class="sl"><span>Proboscis</span><input id="proboscis" type="range" min="0" max="1" step=".05" value="0"><output id="proboscisOut">0</output></div>
+    <div class="sl"><span>Abdomen bend</span><input id="abdomen" type="range" min="-35" max="35" value="0"><output id="abdomenOut">0°</output></div>
+  </aside>
+</div>
+</main>
+<script src="/vendor/three.min.js"></script><script src="/flymesh.js"></script><script src="/body.js"></script>
+</body></html>

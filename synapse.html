@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Synaptic conductances</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}
+.sl{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin:6px 0}
+.sl span:first-child{min-width:100px}.sl input[type=range]{flex:1;margin:0}.sl output{min-width:42px;text-align:right}
+.sl input[type=checkbox]{width:auto}
+.ptable{max-height:300px;overflow:auto}
+</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ synapses</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/body">Body studio</a><a href="/arena">Arena</a><a href="/arena3d">3D arena</a><a href="/neuron">Neuron workbench</a><a href="/atlas">Circuit atlas</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
+<main class="wb">
+<h1>What arrives at one neuron</h1>
+<p class="sub">Measured synapse counts become synaptic conductances with transmitter-specific receptor kinetics, driving one passive compartment. The locomotion network uses current-based synapses; this is what conductances change.</p>
+<div class="notice"><strong>Measured wiring, assumed physiology.</strong> Which cells connect, how many synapses they make and the transmitter predictions with their probabilities come from the dataset. Receptor kinetics, conductance per synapse, membrane capacitance and leak, threshold and presynaptic rates are assumptions that no fly recording sets here. There is no morphology or cable structure, no receptor subtypes and no desensitisation, and a transmitter prediction is not a receptor identification.</div>
+<div class="wb-grid" style="margin-top:20px">
+  <section>
+    <div class="wb-card"><h2 id="title">Membrane</h2>
+      <canvas id="voltage" style="height:250px"></canvas>
+      <p class="hint">Dashed line: the assumed −45 mV threshold; reset to −60 mV with a 2 ms refractory period.</p>
+      <canvas id="conductance" style="height:190px;margin-top:12px"></canvas>
+      <p class="hint">Synaptic conductance by receptor (nS).</p>
+      <p class="note" id="summary"></p>
+    </div>
+    <div class="wb-card" style="margin-top:20px"><h2>Measured inputs</h2>
+      <div class="ptable"><table class="bench" id="partners"><tr><th>Source</th><th>Synapses</th><th>Transmitter</th><th>Receptor</th><th>Top probabilities</th></tr></table></div>
+    </div>
+  </section>
+  <aside class="wb-card">
+    <h2>Probe</h2>
+    <div class="wb-row"><input id="search" placeholder="Search name or body ID" style="flex:1;min-width:0"><button class="chip" id="go">Find</button></div>
+    <ul class="inlist" id="hits" style="max-height:150px;overflow:auto"></ul>
+    <div class="sl"><span>Presynaptic rate</span><input id="rate" type="range" min="0" max="150" value="60"><output id="rateOut">60 Hz</output></div>
+    <div class="sl"><span>Excitatory ×</span><input id="exc" type="range" min="0" max="5" step=".1" value="1"><output id="excOut">1</output></div>
+    <div class="sl"><span>Inhibitory ×</span><input id="inh" type="range" min="0" max="5" step=".1" value="1"><output id="inhOut">1</output></div>
+    <div class="sl"><span>Duration</span><input id="duration" type="range" min="50" max="1000" step="50" value="300"><output id="durationOut">300 ms</output></div>
+    <div class="sl"><span>Transmitters</span><select id="mode" style="flex:1"><option value="dominant">Consensus per cell</option><option value="probability">Split by measured probabilities</option></select></div>
+    <div class="sl"><label style="margin:0"><input id="spiking" type="checkbox" checked> Spike threshold at −45 mV</label></div>
+    <div class="sl"><span>Seed</span><input id="seed" type="number" min="0" max="999999" value="7" style="flex:1"></div>
+    <div class="actions"><button id="run">Run probe</button><button class="chip" id="shunt">Shunting test</button></div>
+    <p class="wb-status" id="status" role="status">Loading…</p>
+    <h2 style="margin-top:16px">Receptors</h2>
+    <div id="receptors"></div>
+  </aside>
+</div>
+</main>
+<script src="/synapse.js"></script>
+</body></html>

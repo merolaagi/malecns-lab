@@ -7,6 +7,13 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add body studio and synaptic conductance page
+
+- New `/body`: the fly at inspection size with every joint exposed (six legs of four joints, wings with animated stroke, halteres, head, antennae, proboscis, abdomen), click-to-select parts, exploded view, model size, and a circuit drive that poses each leg from the motor neurons of its own muscles with planted feet marked. `flymesh.js` holds the shared procedural body: segmented abdomen, faceted compound eyes, veined wings, bristles, aristae, halteres and proboscis.
+- New `/synapse` and `synapse.py`: measured synapse counts become receptor conductances with transmitter-specific kinetics (nicotinic 0 mV, GABA-A and glutamate-gated chloride −70 mV, histamine-gated chloride −80 mV) driving one passive compartment. Two transmitter modes: consensus per cell, or conductance split by the measured per-transmitter probabilities in `data/quality.json`, which also recovers partners whose consensus label lies outside the receptor set.
+- Shunting test: the same excitatory drive with and without inhibitory conductances. For DNa02 at double excitation the depolarisation falls from 2.6 mV to 0.4 mV (ratio 0.16), which a current-based synapse cannot express.
+- `test_synapse.py`: partners match the measured edges, receptors follow the transmitters, voltages stay between reversal potentials, silent input rests at −60 mV, probability mode conserves and extends total conductance, inhibition shunts, and parameters are validated.
+
 ## Add adaptive exponential neurons with conductance synapses
 
 - `model.py` gains a second neuron model (`neuron='adex'`): adaptive exponential integrate-and-fire with conductance-based synapses (0 mV excitatory, −75 mV inhibitory reversal potentials), integrated in 0.1 ms substeps. Standard cortical parameters, scaled so both models match the leaky integrate-and-fire rate at the default drive. Selectable in the motion lab; the default stays `lif`.

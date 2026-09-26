@@ -306,6 +306,29 @@ What this leaves out of real fly neurons: graded (non-spiking) transmission, whi
 
 The arena still uses the integrate-and-fire model, because its drive-to-speed mapping depends on that escalation.
 
+## Body studio (new)
+
+`/body` shows the fly at inspection size with every joint exposed: six legs with coxa, trochanter, tibia and tarsus controls, wings with an animated stroke, halteres, head yaw and pitch, antennae, proboscis and abdomen, plus part selection by click or menu, visibility, exploded view and model size. `flymesh.js` holds the procedural body: segmented abdomen, faceted compound eyes, veined wings, bristles, antennae with aristae, halteres and proboscis, with leg segments at the lengths in `bodyplan.py`.
+
+"Drive legs from the circuit" runs the arena simulation and poses each leg from the motor neurons of that joint's own muscles, with planted feet marked and every joint angle listed in degrees. The panel labels which parts are brain-driven and which are not: head, antennae, proboscis, abdomen, wings and halteres have no motor neurons in this subset, and a fly's compound eyes cannot move at all. The body stands on its lowest foot, so it sits on the floor at any pose. Segment proportions and the mesh are drawn by eye; there is no muscle model, load or inertia.
+
+## Synaptic conductances and receptor kinetics (new)
+
+`/synapse` connects measured synapse counts to receptor conductances, which neither the locomotion network (current-based synapses) nor the workbench (generic conductances on one cell) does. For any cell in the circuit, each measured presynaptic partner opens a conductance with transmitter-specific kinetics: acetylcholine on a nicotinic cation channel (0 mV, 0.3/5 ms), GABA on GABA-A (−70 mV, 0.5/8 ms), glutamate on a glutamate-gated chloride channel (−70 mV, 0.5/10 ms, the insect inhibitory receptor) and histamine on a histamine-gated chloride channel (−80 mV, 0.3/6 ms). Conductances sum into one passive compartment with an optional −45 mV threshold.
+
+Two ways of using the transmitter predictions:
+
+- **Consensus per cell** uses each partner's consensus transmitter, the same call the network model makes.
+- **Split by measured probabilities** divides each partner's conductance across receptors in proportion to the per-transmitter probabilities in `data/quality.json`, so prediction uncertainty reaches the membrane. It also recovers cells whose consensus label sits outside the receptor set but whose probabilities include one: for DNa02 that is 2 of 297 synapses, and conductance reaches four receptor types instead of three.
+
+**What conductances change.** The shunting test runs the same excitatory drive with and without the inhibitory conductances. For DNa02 at double excitation the depolarisation falls from 2.6 mV to 0.4 mV, a ratio of 0.16: an inhibitory conductance shrinks the excitatory response itself, which a current-based synapse cannot do. DNa02 also stays silent under its measured input, since 24 of its 45 inputs are inhibitory against 19 cholinergic ones.
+
+Measured: which cells connect, how many synapses, and the transmitter predictions with probabilities. Assumed: every kinetic constant, 0.03 nS per synapse, membrane capacitance and leak, threshold and presynaptic rates. No morphology, no cable structure, no receptor subtypes, no desensitisation; a transmitter prediction is not a receptor identification.
+
+```sh
+.venv/bin/python -m unittest -v test_synapse.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.
