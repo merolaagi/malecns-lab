@@ -69,6 +69,9 @@ class Handler(BaseHTTPRequestHandler):
                 body_id = int(parse_qs(url.query).get('id', ['10360'])[0])
                 return self.send(200, EXPLORER.skeleton(body_id))
             except (ValueError, OSError) as e: return self.send(400, {'error': str(e)})
+        if path == '/api/navigation-report':
+            try: return self.send(200, navigation.measured_report())
+            except ValueError as e: return self.send(404, {'error': str(e)})
         if path in ('/api/quality', '/api/regions'):
             name = path.split('/')[-1]; q = BASE / f'data/{name}.json'
             if not q.exists(): return self.send(404, {'error': f'No data/{name}.json yet. Run build_{name}.py (see README).'})

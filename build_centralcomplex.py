@@ -41,8 +41,23 @@ GROUPS = {
     'ExR': ('cue', 'Extrinsic ring neurons'),
 }
 DN_TARGETS = ['DNa02', 'DNa01', 'DNg13']
-# Column labels appear inside instance strings, e.g. glomerulus "PB L4" or wedge "EB R5".
-COLUMN_PATTERNS = [re.compile(r'\bPB[_ ]?([LR])(\d+)\b'), re.compile(r'\bEB[_ ]?([LR])?(\d+)\b'), re.compile(r'\b([LR])(\d+)\b')]
+# Column labels live in the instance suffix, as the probe on the real annotations showed:
+#   EPG(PB08)_R2          protocerebral-bridge glomerulus R2 (the parenthetical is a type code)
+#   PEN_a(PB06a)_L3       glomerulus L3
+#   PFNv(PB05)_L4_C3      glomerulus L4 and fan-shaped-body column C3
+#   PFL2(PB12b)_R4_C2     glomerulus R4 and column C2
+#   Delta7(PB15)_L3R6_R   spans glomeruli L3 and R6; the trailing _R is the soma side
+#   FC2A_C2_L             column C2, soma side L
+#   hDeltaB_08_C7         fan-shaped-body index 08 and column C7
+#   ER5_L, ExR1_R         no column at all
+PAREN = re.compile(r'\([^)]*\)')
+# A glomerulus token is a whole underscore-separated field made only of side+number pairs, so that
+# 'ER5' and 'ExR1' (type names) do not masquerade as glomerulus R5 and R1.
+GLOMERULUS_TOKEN = re.compile(r'^(?:[LR]\d+)+$')
+GLOMERULUS = re.compile(r'([LR])(\d+)')
+FB_COLUMN = re.compile(r'_C(\d+)')
+FB_INDEX = re.compile(r'_(\d{2})(?:_|$)')
+RING = 16                      # 8 glomeruli per side of the bridge
 
 
 def group_of(type_name):
@@ -53,15 +68,27 @@ def group_of(type_name):
 
 
 def column_of(instance):
-    """Best-effort column index from an instance string; None when it cannot be parsed."""
-    if not instance: return None
-    for pattern in COLUMN_PATTERNS:
-        match = pattern.search(str(instance))
-        if match:
-            side, number = match.groups()[-2], match.groups()[-1]
-            index = int(number)
-            return index if side in (None, 'R') else -index
-    return None
+    """Ring column 0-15 from an instance string, with the rule used. (None, None) when unparseable.
+
+    Bridge glomeruli map directly: R1-R8 to 0-7 and L1-L8 to 8-15. Cells labelled only by a
+    fan-shaped-body column are spread over the same ring, two ring columns per body column. Cells that
+    span several glomeruli, like Delta7, take the circular mean of the ones they list."""
+    if not instance: return None, None
+    text = PAREN.sub('', str(instance))
+    glomeruli = []
+    for token in text.split('_'):
+        if GLOMERULUS_TOKEN.match(token):
+            glomeruli += [(side, int(number)) for side, number in GLOMERULUS.findall(token) if 1 <= int(number) <= 9]
+    if glomeruli:
+        positions = [((number - 1) % 8) + (8 if side == 'L' else 0) for side, number in glomeruli]
+        if len(positions) == 1: return positions[0], 'glomerulus'
+        vectors = np.exp(2j * np.pi * np.array(positions) / RING).sum()
+        return int(round(np.angle(vectors) / (2 * np.pi) * RING)) % RING, 'glomerulus_mean'
+    column = FB_COLUMN.search(str(instance))
+    if column: return ((int(column.group(1)) - 1) * 2) % RING, 'fb_column'
+    index = FB_INDEX.search(str(instance))
+    if index: return ((int(index.group(1)) - 1) * 2) % RING, 'fb_index'
+    return None, None
 
 
 def probe(raw):
@@ -83,7 +110,7 @@ def probe(raw):
     print('\nsample instances (3 per type):')
     for prefix, rows_ in samples.items():
         for r in rows_[:3]: print(f'  {prefix:8} {r["bodyId"]} {r["type"]!s:14} {r["instance"]!s:38} side={r["somaSide"]} column_guess={r["column_guess"]}')
-    parsed = sum(1 for rows_ in samples.values() for r in rows_ if r['column_guess'] is not None)
+    parsed = sum(1 for rows_ in samples.values() for r in rows_ if r['column_guess'][0] is not None)
     total = sum(len(rows_) for rows_ in samples.values())
     print(f'\ncolumn parsed from instance for {parsed} of {total} central-complex cells')
     print('populated fields across these cells:', dict(populated.most_common(25)))
@@ -99,9 +126,10 @@ def build(raw):
         hit = group_of(name)
         if not hit: continue
         prefix, group = hit
+        column, rule = column_of(r.get('instance'))
         nodes.append({'bodyId': int(r['bodyId']), 'type': r.get('type'), 'instance': r.get('instance'),
                       'somaSide': r.get('somaSide'), 'prefix': prefix, 'group': group,
-                      'column': column_of(r.get('instance'))})
+                      'column': column, 'column_rule': rule})
     ids = np.array(sorted({n['bodyId'] for n in nodes} | set(dn_ids)))
     edges = []
     with pa.memory_map(str(raw / 'weights.feather'), 'r') as file:
@@ -123,6 +151,7 @@ def build(raw):
            'groups': {k: {'group': v[0], 'role': v[1]} for k, v in GROUPS.items()},
            'nodes': nodes, 'descending_targets': sorted(dn_ids), 'edges': edges,
            'columns_parsed': sum(1 for n in nodes if n['column'] is not None),
+           'column_rules': dict(Counter(n['column_rule'] for n in nodes)),
            'scope': 'Traced central-complex navigation types plus the lab\'s descending targets, with the measured edges among '
                     'them. Functional group labels are assignments by type prefix from published roles, not measurements. Column '
                     'identity is parsed from instance strings and may be incomplete; check with --probe.'}

@@ -81,4 +81,18 @@ async function bench() {
 $('run').onclick = go;
 $('noise').oninput = () => $('noiseOut').textContent = $('noise').value;
 window.addEventListener('resize', () => { drawPath(); drawBump(); });
-go(); bench();
+async function report() {
+  try {
+    const response = await fetch('/api/navigation-report');
+    const d = await response.json();
+    if (!response.ok) { $('report').innerHTML = `<p class="hint">${d.error}</p>`; return; }
+    let h = `<p class="hint">${d.cells} cells, ${d.columns_parsed} with a parsed column (${Object.entries(d.column_rules).map(([k, v]) => `${v} by ${k}`).join(', ')}).</p>`;
+    h += '<table class="bench"><tr><th>Connection</th><th>Mean column offset</th><th>Synapses</th></tr>'
+      + Object.entries(d.group_pairs).map(([pair, v]) => `<tr><td>${pair}</td><td>${v.mean_offset_columns >= 0 ? '+' : ''}${v.mean_offset_columns}</td><td>${v.synapses.toLocaleString()}</td></tr>`).join('') + '</table>';
+    const rotation = Object.entries(d.rotation_offsets_by_type);
+    if (rotation.length) h += `<p class="note">Rotation cells onto the compass, by type and side: ${rotation.map(([k, v]) => `${k} ${v >= 0 ? '+' : ''}${v}`).join(', ')}. Opposite shifts by side: <b>${d.rotation_opposite_by_side ? 'yes' : 'no'}</b>, which is what the algorithm needs for a turn to move the bump the right way.</p>`;
+    h += `<p class="hint">${d.note}</p>`;
+    $('report').innerHTML = h;
+  } catch (e) { $('report').innerHTML = `<p class="hint">${e.message}</p>`; }
+}
+go(); bench(); report();

@@ -59,7 +59,11 @@ def ring_weights(n=N, width=1.2, inhibition=0.6):
 
 
 def measured_offsets(path=None):
-    """Column offsets between groups, averaged over the measured edges."""
+    """Column offsets between functional groups, taken from the measured edges.
+
+    Columns are ring positions 0-15 from build_centralcomplex.py: bridge glomeruli R1-R8 map to 0-7 and
+    L1-L8 to 8-15. For each pair of groups this histograms the offset between the presynaptic and
+    postsynaptic column, weighted by synapse count."""
     path = Path(path or BASE / 'data/central-complex.json')
     if not path.exists():
         raise ValueError('data/central-complex.json is missing. Build it with build_centralcomplex.py on a machine with the raw tables.')
@@ -68,16 +72,50 @@ def measured_offsets(path=None):
     parsed = [n for n in data['nodes'] if n.get('column') is not None]
     if len(parsed) < 20:
         raise ValueError(f'Only {len(parsed)} central-complex cells have a parsed column; run build_centralcomplex.py --probe and check the instance format.')
-    offsets, weights = {}, {}
+    offsets, totals, by_type = {}, {}, {}
     for pre, post, count in data['edges']:
         a, b = nodes.get(pre), nodes.get(post)
         if not a or not b or a.get('column') is None or b.get('column') is None: continue
+        shift = (int(b['column']) - int(a['column'])) % N
         key = (a['group'], b['group'])
-        shift = (abs(b['column']) - abs(a['column'])) % N
         offsets.setdefault(key, np.zeros(N))[shift] += count
-        weights[key] = weights.get(key, 0) + count
-    return {'offsets': {k: (v / v.sum()).tolist() for k, v in offsets.items()}, 'totals': weights,
-            'cells': len(data['nodes']), 'columns_parsed': len(parsed)}
+        totals[key] = totals.get(key, 0) + count
+        type_key = (a.get('type'), b['group'], a.get('somaSide'))
+        by_type.setdefault(type_key, np.zeros(N))[shift] += count
+    return {'offsets': {k: (v / v.sum()).tolist() for k, v in offsets.items() if v.sum() > 0},
+            'totals': totals, 'by_type': {k: (v / v.sum()).tolist() for k, v in by_type.items() if v.sum() > 0},
+            'cells': len(data['nodes']), 'columns_parsed': len(parsed),
+            'column_rules': data.get('column_rules', {})}
+
+
+def circular_mean_offset(profile):
+    """Mean offset of a column-offset distribution, in columns, signed within -N/2..N/2."""
+    weights = np.asarray(profile, dtype=float)
+    angle = np.angle((weights * np.exp(2j * np.pi * np.arange(len(weights)) / len(weights))).sum())
+    return float(angle / (2 * np.pi) * len(weights))
+
+
+def measured_report(path=None):
+    """What the measured wiring says about the rotation shift the algorithm assumes.
+
+    The published account has the two rotation cell classes shifting the bump by about one glomerulus in
+    opposite directions, which is what makes a turn move the compass the right way. This reports the
+    measured offsets so that claim can be checked rather than assumed."""
+    data = measured_offsets(path)
+    pairs = {f'{a} to {b}': {'mean_offset_columns': round(circular_mean_offset(profile), 2),
+                             'synapses': int(data['totals'][(a, b)]), 'profile': [round(v, 4) for v in profile]}
+             for (a, b), profile in sorted(data['offsets'].items())}
+    rotation = {}
+    for (type_name, group, side), profile in data['by_type'].items():
+        if group == 'heading' and type_name and str(type_name).startswith('PEN'):
+            rotation[f'{type_name} {side}'] = round(circular_mean_offset(profile), 2)
+    lefts = [v for k, v in rotation.items() if k.endswith(' L')]
+    rights = [v for k, v in rotation.items() if k.endswith(' R')]
+    return {'cells': data['cells'], 'columns_parsed': data['columns_parsed'], 'column_rules': data['column_rules'],
+            'group_pairs': pairs, 'rotation_offsets_by_type': rotation,
+            'rotation_opposite_by_side': bool(lefts and rights and np.mean(lefts) * np.mean(rights) < 0),
+            'note': 'Offsets are measured; the functional grouping and the claim that these offsets implement rotation are '
+                    'assumptions from the literature.'}
 
 
 class Navigator:
