@@ -389,7 +389,20 @@ Locomotion subset, incoming-L1 normalisation:
 
 **Other graphs.** The mushroom-body subset is essentially feedforward: measured radius about 0, while rewiring creates loops and pushes it to 1. The optic-lobe patch gives exactly 1 for every condition, because its cells' inputs lie entirely inside the patch.
 
-**Conclusion for the deep-learning idea.** The spectral signature is real but it belongs to the lab's matrices, not to the fly: subset selection decides which cells look self-contained, and row normalisation turns those into unit eigenvalues. Using the connectome as an initialisation prior on the strength of "it sits near the edge of stability" would be building on an artefact. A fair test would need a subset chosen without a synapse threshold, a normalisation that does not bound the radius, and cells with high input coverage.
+### A subset selected for observability
+
+`build_coverage_subset.py` answers the objection above by building a subset the other way round. Coverage is circular, since a cell's input coverage depends on which other cells are present, so it grows outward: seed with the lab's existing subsets, read every edge into them, measure each cell's coverage as the share of its true input synapses (from `body-stats.feather`) arriving from cells *inside* the subset, add the strongest missing upstream partners of the worst-covered cells up to a budget, then keep only cells that reach the target coverage. Dropping a cell removes its edges and lowers its neighbours' coverage, so the keep-set is iterated until stable, which means cells propped up by poorly observed neighbours fall out too.
+
+The result is smaller and better observed than the type-selected subsets, and it is the matrix on which the spectral question can actually be asked: if measured still differs from its randomisations here, under a normalisation that does not bound the radius, the difference is about the wiring rather than about the cut. `/spectrum` lists it as "Coverage-selected subset" once built.
+
+```sh
+.venv/bin/python build_coverage_subset.py raw-data --target 0.5 --budget 3000
+.venv/bin/python spectral.py --benchmark
+```
+
+Two passes over `weights.feather`, a few minutes each. Lower `--target` if too few cells survive; the run prints the seed coverage, how far it grew and how many cells reached the target.
+
+**Conclusion for the deep-learning idea.** The spectral signature is real but it belongs to the lab's matrices, not to the fly: subset selection decides which cells look self-contained, and row normalisation turns those into unit eigenvalues. Using the connectome as an initialisation prior on the strength of "it sits near the edge of stability" would be building on an artefact. A fair test needs a subset chosen without a synapse threshold, a normalisation that does not bound the radius, and cells with high input coverage; `build_coverage_subset.py` above provides the first and third, and the `global_scale` normalisation the second.
 
 ```sh
 .venv/bin/python spectral.py --benchmark

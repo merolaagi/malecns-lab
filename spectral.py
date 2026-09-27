@@ -57,7 +57,8 @@ def graphs():
     available['locomotion'] = (circuit.pre, circuit.post, circuit.count, signs, circuit.n, 'Locomotion subset')
     for name, path, label in [('learning', 'data/learning-circuit.json', 'Mushroom-body subset'),
                               ('vision', 'data/vision-circuit.json', 'Optic-lobe patch'),
-                              ('central_complex', 'data/central-complex.json', 'Central-complex navigation subset')]:
+                              ('central_complex', 'data/central-complex.json', 'Central-complex navigation subset'),
+                              ('coverage', 'data/coverage-subset.json', 'Coverage-selected subset')]:
         file = BASE / path
         if not file.exists(): continue
         data = json.loads(file.read_text())

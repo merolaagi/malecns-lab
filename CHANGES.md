@@ -7,6 +7,13 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add a coverage-selected subset for the spectral question
+
+- `build_coverage_subset.py`: grows a subset outward from the existing ones and keeps only cells whose measured input inside the subset reaches a target share of their true input synapse count, iterating the keep-set until stable so that cells propped up by poorly observed neighbours also fall out. Selected for observability rather than by synapse threshold or cell type, which is what the spectral finding needed.
+- Coverage counts only sources inside the subset: an earlier version counted all observed input, which is the wrong measure, since the matrix contains no edges from cells that were left out.
+- `/spectrum` lists the new subset once built, so the same comparisons and normalisations apply to it.
+- `test_coverage_subset.py`: coverage restricted to in-subset sources, an end-to-end build on synthetic tables where the observed core survives while cells fed from outside and the outside cells themselves are dropped, and a clear error when the target exceeds what the data supports.
+
 ## Add spectral analysis of the measured graphs
 
 - `spectral.py` and `/spectrum`: eigenvalues, non-normality, transient gain, leading-eigenvector spread and reciprocity for every measured graph, against six randomisations (destination permutation, weight permutation, target rewiring, sign permutation, full randomisation, and reciprocity-matched random) under three normalisations.
