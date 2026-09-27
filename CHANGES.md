@@ -7,6 +7,14 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add central-complex navigation: compass, home vector and steering
+
+- `navigation.py` and `/navigation`: heading ring with rotation and long-range inhibition, vector cells that accumulate the travelled path, goal cells and steering cells that drive the descending neurons. The fly wanders, then homes.
+- Five-seed benchmark: intact gets within 5.5 mm and home in 80% of runs with 4.6° compass error, while every control fails (no rotation 93 mm, no inhibition 72 mm, no vector cells 93 mm, shuffled column map 74 mm, random goal 93 mm, all 0% home). Compass drift sets difficulty: exact integration homes perfectly, 0.6 rad/s drift lands 22 mm out.
+- `build_centralcomplex.py` extracts the central-complex navigation types and their measured edges plus the descending targets, with a `--probe` mode that reports annotation fields, per-type counts, sample instances and how many cells yield a parsed column, since column identity is not stored like the optic-lobe hex coordinates.
+- Bump rotation is an exact circular shift: the discretised gradient version is pinned by the attractor at 16 columns. Ring shape parameters were calibrated against heading-tracking error rather than chosen by eye.
+- `test_navigation.py`: compass tracking under constant turns, each control's specific failure, home-vector accuracy against a straight path, steering sign, homing regression, drift ordering, and a clear error when the measured subset is missing.
+
 ## Add body studio and synaptic conductance page
 
 - New `/body`: the fly at inspection size with every joint exposed (six legs of four joints, wings with animated stroke, halteres, head, antennae, proboscis, abdomen), click-to-select parts, exploded view, model size, and a circuit drive that poses each leg from the motor neurons of its own muscles with planted feet marked. `flymesh.js` holds the shared procedural body: segmented abdomen, faceted compound eyes, veined wings, bristles, aristae, halteres and proboscis.

@@ -329,6 +329,34 @@ Measured: which cells connect, how many synapses, and the transmitter prediction
 .venv/bin/python -m unittest -v test_synapse.py
 ```
 
+## Navigation: heading, home vector and steering (new)
+
+`/navigation` runs the fly's published navigation algorithm as a model: a ring of heading cells holds a compass bump, rotation cells shift it with turning, long-range inhibition keeps a single bump, vector cells accumulate the path travelled, goal cells hold a direction, and steering cells compare goal against heading and drive the descending neurons. The fly wanders for 12 s, then tries to get back to where it started.
+
+Results with five seeds (`data/navigation-benchmark.json`), at the default compass drift of 0.15 rad/s:
+
+| Condition | Closest to home | Got home | Compass error |
+|---|---|---|---|
+| Intact | 5.5 mm | 80% | 4.6° |
+| No rotation cells | 93.0 mm | 0% | 31.8° |
+| No long-range inhibition | 71.8 mm | 0% | 69.4° |
+| No vector cells | 92.8 mm | 0% | 5.1° |
+| Shuffled column map | 74.0 mm | 0% | 71.4° |
+| Random goal | 93.0 mm | 0% | 5.1° |
+
+Each control removes one mechanism and homing stops, for a different reason each time: without rotation the compass no longer tracks turning, without inhibition the bump spreads, without vector cells nothing is accumulated to return along, a shuffled column map breaks the correspondence between cells and directions, and a random goal leaves steering intact but aimed wrongly. Compass drift sets the difficulty: with no drift the integration is exact and homing is perfect, at 0.3 rad/s the fly lands 11 mm out, at 0.6 rad/s 22 mm out.
+
+**What is assumed.** That these cell types play these roles (from the navigation literature), the ring dynamics and their gains, the drift, the conversion from steering activity to turning, and the movement model. The bump rotation is implemented as an exact circular shift rather than the discretised gradient version, because at 16 columns the attractor pins the latter; the mechanism is the same, the numerics are not.
+
+**Measured connectivity.** `build_centralcomplex.py` extracts the central-complex navigation types (EPG, PEN, PEG, Delta7, PFN, FC2, hDelta, PFL, ER, ExR) and the measured edges among them and onto the lab's descending targets, writing `data/central-complex.json`. Then `/navigation` can use measured column offsets instead of published ones. Run the probe first: column identity is parsed from instance strings, and it is not guaranteed to be stored the way the optic-lobe hex coordinates are.
+
+```sh
+.venv/bin/python build_centralcomplex.py raw-data --probe    # what the annotations hold
+.venv/bin/python build_centralcomplex.py raw-data            # writes data/central-complex.json
+.venv/bin/python navigation.py --benchmark
+.venv/bin/python -m unittest -v test_navigation.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

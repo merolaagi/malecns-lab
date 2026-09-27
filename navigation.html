@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Navigation</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ navigation</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/body">Body studio</a><a href="/synapse">Synapses</a><a href="/arena">Arena</a><a href="/arena3d">3D arena</a><a href="/neuron">Neuron workbench</a><a href="/atlas">Circuit atlas</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
+<main class="wb">
+<h1>Finding the way home</h1>
+<p class="sub">The fly's navigation algorithm as a model: a ring of heading cells holds a compass, rotation cells turn it, vector cells accumulate the path travelled, and steering cells compare a goal against heading and push the descending neurons. The fly wanders, then tries to get back.</p>
+<div class="notice"><strong>A published algorithm, not a measurement.</strong> The roles of these cell types come from the navigation literature; the ring dynamics, gains, drift and movement model are ours. With <em>idealised</em> connectivity the ring offsets are the published ones. With <em>measured</em> connectivity they come from <code>data/central-complex.json</code>, built by <code>build_centralcomplex.py</code> from the raw tables; without that file the measured option reports what to run. Whether the fly computes it this way is not tested here.</div>
+<div class="wb-bar">
+  <label>Connectivity<select id="connectivity"><option value="idealised">Idealised ring</option><option value="measured">Measured subset</option></select></label>
+  <label>Condition<select id="condition"><option value="intact">Intact</option><option value="no_rotation">No rotation cells</option><option value="no_inhibition">No long-range inhibition</option><option value="no_vector">No vector cells</option><option value="shuffled_columns">Shuffled column map</option><option value="random_goal">Random goal</option></select></label>
+  <label>Compass drift<input id="noise" type="range" min="0" max="1" step=".05" value="0.15"><output id="noiseOut">0.15</output></label>
+  <label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label>
+  <button id="run">Run</button><span class="wb-status" id="status" role="status"></span>
+</div>
+<div class="num-grid" style="margin-top:20px">
+  <div class="wb-card"><h2>Path</h2><canvas id="path" style="height:340px"></canvas>
+    <p class="hint">Grey: outbound wandering. Green: homing. The cross marks home; the dotted line is the fly's own estimate of where home lies.</p></div>
+  <div class="wb-card"><h2>Heading bump</h2><canvas id="bump" style="height:340px"></canvas>
+    <p class="hint">Activity across the 16 heading columns over time. The white line is the true heading; the bump should follow it.</p></div>
+</div>
+<div class="wb-card" style="margin-top:20px"><h2>What happened</h2><div id="metrics"></div></div>
+<div class="wb-card" style="margin-top:20px"><h2>Saved benchmark: five seeds per condition</h2><div id="bench" style="overflow:auto"><p class="hint">Loading…</p></div>
+<p class="hint">Regenerate with <code>.venv/bin/python navigation.py --benchmark</code>.</p></div>
+</main>
+<script src="/navigation.js"></script>
+</body></html>

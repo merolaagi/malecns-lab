@@ -1,0 +1,81 @@
+{
+ "seeds": 5,
+ "connectivity": "idealised",
+ "conditions": {
+  "intact": "Full circuit",
+  "no_rotation": "Rotation cells removed: the bump cannot follow turning",
+  "no_inhibition": "Long-range inhibition removed: nothing enforces a single bump",
+  "no_vector": "Vector cells silenced: no home vector accumulates",
+  "shuffled_columns": "Column identities shuffled: the same cells, the wrong map",
+  "random_goal": "Goal direction randomised: steering works, the target does not"
+ },
+ "summary": {
+  "intact": {
+   "final_distance_from_home_mm": 7.556,
+   "furthest_distance_mm": 94.92,
+   "closest_during_homing_mm": 5.54,
+   "homing_improvement": 0.942,
+   "mean_heading_error_deg": 4.63,
+   "final_heading_error_deg": 5.268,
+   "home_vector_error_mm": 5.802,
+   "bumps_at_end": 1.0,
+   "homed": 0.8
+  },
+  "no_rotation": {
+   "final_distance_from_home_mm": 231.704,
+   "furthest_distance_mm": 231.074,
+   "closest_during_homing_mm": 92.96,
+   "homing_improvement": 0.598,
+   "mean_heading_error_deg": 31.84,
+   "final_heading_error_deg": 36.038,
+   "home_vector_error_mm": 114.758,
+   "bumps_at_end": 1.0,
+   "homed": 0.0
+  },
+  "no_inhibition": {
+   "final_distance_from_home_mm": 83.066,
+   "furthest_distance_mm": 112.76,
+   "closest_during_homing_mm": 71.756,
+   "homing_improvement": 0.359,
+   "mean_heading_error_deg": 69.436,
+   "final_heading_error_deg": 109.418,
+   "home_vector_error_mm": 179.176,
+   "bumps_at_end": 0.0,
+   "homed": 0.0
+  },
+  "no_vector": {
+   "final_distance_from_home_mm": 109.188,
+   "furthest_distance_mm": 109.122,
+   "closest_during_homing_mm": 92.834,
+   "homing_improvement": 0.149,
+   "mean_heading_error_deg": 5.066,
+   "final_heading_error_deg": 7.958,
+   "home_vector_error_mm": 109.188,
+   "bumps_at_end": 1.0,
+   "homed": 0.0
+  },
+  "shuffled_columns": {
+   "final_distance_from_home_mm": 188.696,
+   "furthest_distance_mm": 203.542,
+   "closest_during_homing_mm": 74.016,
+   "homing_improvement": 0.659,
+   "mean_heading_error_deg": 71.368,
+   "final_heading_error_deg": 74.298,
+   "home_vector_error_mm": 174.208,
+   "bumps_at_end": 1.0,
+   "homed": 0.0
+  },
+  "random_goal": {
+   "final_distance_from_home_mm": 217.15,
+   "furthest_distance_mm": 216.616,
+   "closest_during_homing_mm": 92.96,
+   "homing_improvement": 0.569,
+   "mean_heading_error_deg": 5.066,
+   "final_heading_error_deg": 7.958,
+   "home_vector_error_mm": 17.746,
+   "bumps_at_end": 1.0,
+   "homed": 0.0
+  }
+ },
+ "interpretation": "Five seeds per condition. Controls remove one mechanism at a time: the heading bump's rotation, its single-bump inhibition, the vector accumulation, the column map, or the goal itself."
+}
