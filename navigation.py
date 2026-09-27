@@ -128,13 +128,22 @@ class Navigator:
         self.ring = ring_weights(inhibition=inhibition)
         self.map = np.arange(N)
         if condition == 'shuffled_columns': self.map = self.rng.permutation(N)
-        self.shift_profile = None
+        # How strongly, and in which direction, the rotation cells shift the compass. In idealised mode
+        # this is the published one column per side, opposite by side. In measured mode it is read off the
+        # wiring: if the two sides do not shift oppositely, the compass cannot track turning, and that
+        # failure is the point of the test rather than something to patch around.
+        self.rotation_gain = 1.0
+        self.measured_summary = None
         if connectivity == 'measured':
-            data = offsets if offsets is not None else measured_offsets()
-            profile = data['offsets'].get(('rotate', 'heading')) or data['offsets'].get(('heading', 'rotate'))
-            self.shift_profile = np.array(profile) if profile else None
+            data = offsets if offsets is not None else measured_report()
+            by_type = data['rotation_offsets_by_type']
+            lefts = [v for k, v in by_type.items() if k.endswith(' L')]
+            rights = [v for k, v in by_type.items() if k.endswith(' R')]
+            self.rotation_gain = ((float(np.mean(lefts)) - float(np.mean(rights))) / 2) if (lefts and rights) else 0.0
             self.measured_summary = {'cells': data['cells'], 'columns_parsed': data['columns_parsed'],
-                                     'group_pairs': len(data['offsets'])}
+                                     'rotation_gain_columns': round(self.rotation_gain, 3),
+                                     'rotation_opposite_by_side': data['rotation_opposite_by_side'],
+                                     'rotation_offsets_by_type': by_type}
         bump = np.exp(np.cos(angles() - 0.0) * 2.0)
         self.heading_cells = bump / bump.sum()
         self.vector_cells = np.zeros(len(PFN_OFFSETS))       # accumulated home vector, per population
@@ -156,15 +165,12 @@ class Navigator:
         shifts a ring attractor, then sharpened and renormalised so one bump survives."""
         recurrent = self.ring @ self.heading_cells
         b = self.heading_cells + RECURRENT_HZ * dt * (recurrent - self.heading_cells)
-        if self.condition != 'no_rotation':
-            # Rotation cells shift the bump by the turn. Implemented as an exact circular rotation
-            # (a Fourier shift), because the discretised gradient version is pinned by the attractor at
-            # 16 columns; the mechanism is the same, the numerics are not.
+        if self.condition != 'no_rotation' and abs(self.rotation_gain) > 1e-6:
+            # Rotation cells shift the bump by the turn, scaled by how far apart the two sides' offsets
+            # are. Implemented as an exact circular rotation (a Fourier shift), because the discretised
+            # gradient version is pinned by the attractor at 16 columns: same mechanism, different numerics.
             frequencies = np.fft.fftfreq(N, d=1.0 / N)
-            b = np.real(np.fft.ifft(np.fft.fft(b) * np.exp(-1j * frequencies * omega * dt)))
-            if self.shift_profile is not None:
-                # Measured offsets sharpen or blur that shift, depending on how the rotation cells land.
-                b = np.real(np.fft.ifft(np.fft.fft(b) * np.fft.fft(self.shift_profile)))
+            b = np.real(np.fft.ifft(np.fft.fft(b) * np.exp(-1j * frequencies * self.rotation_gain * omega * dt)))
         b = np.maximum(b, 0)
         if self.condition != 'no_inhibition': b = b ** SHARPEN        # keeps one bump without pinning it
         total = b.sum()
@@ -189,7 +195,8 @@ class Navigator:
         return float(right - left) / 2
 
 
-def run(**options):
+def run(offsets=None, **options):
+    """offsets: a measured_report() dict, for tests or for a subset file other than the default one."""
     p = DEFAULT | options
     if p['connectivity'] not in CONNECTIVITY: raise ValueError('Unknown connectivity')
     if p['condition'] not in CONDITIONS: raise ValueError('Unknown condition')
@@ -203,7 +210,7 @@ def run(**options):
     p['seed'] = seed = int(seed)
 
     rng = np.random.default_rng(seed)
-    navigator = Navigator(p['connectivity'], p['condition'], rng=rng)
+    navigator = Navigator(p['connectivity'], p['condition'], offsets=offsets, rng=rng)
     x = y = heading = 0.0
     trace, heading_error = [], []
     steps_out, steps_home = int(p['outbound_s'] / DT), int(p['homing_s'] / DT)
@@ -250,6 +257,7 @@ def run(**options):
     vector_error = math.hypot(estimated[0] - x, estimated[1] - y)   # accumulated against travelled
     return {
         'parameters': p, 'connectivity_text': CONNECTIVITY[p['connectivity']], 'condition_text': CONDITIONS[p['condition']],
+        'measured': navigator.measured_summary,
         'trace': trace, 'goal': None if goal is None else round(goal, 4),
         'metrics': {
             'final_distance_from_home_mm': round(distance_home, 2),

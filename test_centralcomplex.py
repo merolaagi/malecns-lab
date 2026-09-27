@@ -68,6 +68,23 @@ class MeasuredOffsetTests(unittest.TestCase):
         self.assertEqual(report['rotation_offsets_by_type']['PEN_b(PEN2) R'], -1.0)
         self.assertTrue(report['rotation_opposite_by_side'])
 
+    def test_measured_rotation_gain_decides_whether_the_compass_works(self):
+        report = nav.measured_report(self.path)
+        navigator = nav.Navigator('measured', 'intact', offsets=report)
+        self.assertAlmostEqual(navigator.rotation_gain, 1.0, places=6)
+        homed = [nav.run(seed=s, connectivity='measured', offsets=report)['metrics']['homed'] for s in range(7, 12)]
+        self.assertGreater(sum(homed), 2)                     # measured offsets support homing
+        # Wiring where both sides shift the same way cannot track turning, and homing stops.
+        nodes = json.loads(self.path.read_text())['nodes']
+        edges = [[2000 + c, 1000 + (c + 1) % 16, 20] for c in range(16)] + [[3000 + c, 1000 + (c + 1) % 16, 20] for c in range(16)]
+        with tempfile.TemporaryDirectory() as d:
+            broken_path = Path(d) / 'cx.json'
+            broken_path.write_text(json.dumps({'nodes': nodes, 'edges': edges, 'column_rules': {}}))
+            broken = nav.measured_report(broken_path)
+            self.assertFalse(broken['rotation_opposite_by_side'])
+            self.assertAlmostEqual(nav.Navigator('measured', 'intact', offsets=broken).rotation_gain, 0.0, places=6)
+            self.assertEqual(sum(nav.run(seed=s, connectivity='measured', offsets=broken)['metrics']['homed'] for s in range(7, 10)), 0)
+
     def test_circular_mean_offset(self):
         profile = [0.0] * 16; profile[1] = 1.0
         self.assertAlmostEqual(nav.circular_mean_offset(profile), 1.0, places=6)

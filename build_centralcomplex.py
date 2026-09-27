@@ -140,18 +140,32 @@ def build(raw):
             mask = np.isin(a, ids) & np.isin(b, ids) & (w > 0)
             edges.extend([[int(x), int(y), int(z)] for x, y, z in zip(a[mask], b[mask], w[mask])])
             if k % 600 == 0: print('batch', k, 'edges', len(edges), flush=True)
+    # The transmitter table keys cells by 'body', not 'bodyId' (see build_dataset.py), and the column
+    # holding the call has varied, so both are detected rather than assumed.
     transmitters = {}
     path = raw / 'neurotransmitters.feather'
-    if path.exists():
-        for r in feather.read_table(path).to_pylist():
-            if int(r['bodyId']) in set(ids): transmitters[int(r['bodyId'])] = r.get('consensus_nt') or r.get('predicted_nt')
+    try:
+      if path.exists():
+          wanted = set(int(i) for i in ids)
+          rows_nt = feather.read_table(path).to_pylist()
+          id_key = next((k for k in ('body', 'bodyId', 'bodyid', 'body_id') if rows_nt and k in rows_nt[0]), None)
+          nt_keys = [k for k in ('consensus_nt', 'predicted_nt', 'nt', 'top_nt') if rows_nt and k in rows_nt[0]]
+          if id_key and nt_keys:
+              for r in rows_nt:
+                  body = int(r[id_key])
+                  if body in wanted:
+                      transmitters[body] = next((r[k] for k in nt_keys if r.get(k)), None)
+          else:
+              print('transmitter table columns not recognised:', sorted(rows_nt[0]) if rows_nt else 'empty', flush=True)
+    except Exception as error:          # never lose the extracted edges over the transmitter step
+        print('transmitters skipped:', error, flush=True)
     for n in nodes: n['nt'] = transmitters.get(n['bodyId'])
     provenance = json.loads((BASE / 'data/circuit.json').read_text())
     out = {'dataset': 'male-cns:v1.0', 'license': 'CC-BY-4.0', 'source': provenance['source'], 'files': provenance['files'],
            'groups': {k: {'group': v[0], 'role': v[1]} for k, v in GROUPS.items()},
            'nodes': nodes, 'descending_targets': sorted(dn_ids), 'edges': edges,
            'columns_parsed': sum(1 for n in nodes if n['column'] is not None),
-           'column_rules': dict(Counter(n['column_rule'] for n in nodes)),
+           'column_rules': dict(Counter(n['column_rule'] or 'unparsed' for n in nodes)),
            'scope': 'Traced central-complex navigation types plus the lab\'s descending targets, with the measured edges among '
                     'them. Functional group labels are assignments by type prefix from published roles, not measurements. Column '
                     'identity is parsed from instance strings and may be incomplete; check with --probe.'}
