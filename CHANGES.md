@@ -7,6 +7,14 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Test whether inhibition placement does anything computational
+
+- `inhibition.py` and `/inhibition`: the measured graph as a fixed recurrent network with a trained linear readout, comparing six placements of the same number of inhibitory cells (measured, random, out-degree matched, highest-throughput, lowest-throughput, none) on memory capacity and delayed integration.
+- Spectral effect confirmed on the coverage-selected subset: measured placement gives a natural radius of 33.4 against 39.9 random and 47.4 with no inhibition, from about 6% of cells that are not the highest-degree ones.
+- Computational effect is small and conditional. Rescaled to a common radius, all placements tie. Under a shared scale factor, measured beats random by +0.206 ± 0.175 memory capacity (14 of 15 seeds, t = 4.6) and beats no inhibition by +0.131, but ties with placing inhibition on the highest-throughput cells (+0.020, t = 0.8). The finding is better stated as "inhibition belongs on high-throughput cells" than as something specific to this connectome.
+- Paired statistics throughout: the seed fixes the subsample, so per-seed differences are the right test and overlapping error bars across conditions are not.
+- `test_inhibition.py`: placements keep the inhibitory count, hub and antihub placements differ in throughput, the three scaling modes behave as documented, measured inhibition lowers the radius, memory decays with delay, and the paired comparison is genuinely paired.
+
 ## Add a coverage-selected subset for the spectral question
 
 - `build_coverage_subset.py`: grows a subset outward from the existing ones and keeps only cells whose measured input inside the subset reaches a target share of their true input synapse count, iterating the keep-set until stable so that cells propped up by poorly observed neighbours also fall out. Selected for observability rather than by synapse threshold or cell type, which is what the spectral finding needed.

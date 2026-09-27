@@ -409,6 +409,40 @@ Two passes over `weights.feather`, a few minutes each. Lower `--target` if too f
 .venv/bin/python -m unittest -v test_spectral.py
 ```
 
+## Where inhibition sits (new)
+
+`/inhibition` follows up the one spectral effect that survived the observability control. On the coverage-selected subset the measured network is less excitable than matched random wiring, and moving which cells are inhibitory changes that substantially, from only about 6% of cells:
+
+| Placement | Natural spectral radius |
+|---|---|
+| Measured | 33.4 |
+| Random | 39.9 |
+| Random, out-degree matched | 41.1 |
+| Highest-throughput cells | 40.0 |
+| Lowest-throughput cells | 47.4 |
+| No inhibition | 47.4 |
+
+Inhibitory cells are not the highest-degree ones (mean out-degree 127 against 194 for excitatory cells), but they carry more synapses each and 19% of all outgoing synapses in the subset.
+
+**Does the placement compute anything?** `inhibition.py` uses the measured graph as a fixed recurrent network and trains only a linear readout, the standard reservoir test, keeping the number of inhibitory cells identical across conditions and moving only which cells they are. Tasks: memory capacity (reconstructing a random input stream at increasing delays) and delayed integration.
+
+Rescaled to a common spectral radius, every placement scores the same (memory 8.2–8.3, integration at ceiling): with gain equalised, placement does nothing. Under one shared scale factor, so gain differences survive, the differences are small but consistent, and the right statistic is the per-seed difference, since the seed fixes which cells the subsample contains:
+
+| Comparison | Memory difference | Seeds favouring measured | t |
+|---|---|---|---|
+| measured − random | +0.206 ± 0.175 | 14 of 15 | 4.6 |
+| measured − no inhibition | +0.131 ± 0.133 | 14 of 15 | 3.8 |
+| measured − lowest-throughput | +0.129 ± 0.134 | 14 of 15 | 3.8 |
+| measured − out-degree matched | +0.093 ± 0.118 | 13 of 15 | 3.0 |
+| measured − highest-throughput | +0.020 ± 0.101 | 9 of 15 | 0.8 |
+
+**What this supports, and what it does not.** The measured placement beats random placement by about 3% of memory capacity, consistently across seeds, and beats having no inhibition at all by a similar margin. But it ties with simply putting inhibition on the highest-throughput cells, so the result is better described as "inhibition belongs on high-throughput cells" than as anything specific to this connectome. The effect is small, it disappears once gain is equalised, and it rests on transmitter predictions rather than measured receptors.
+
+```sh
+.venv/bin/python inhibition.py --benchmark --seeds 5
+.venv/bin/python -m unittest -v test_inhibition.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Inhibition placement</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ inhibition</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/spectrum">Spectra</a><a href="/navigation">Navigation</a><a href="/body">Body studio</a><a href="/synapse">Synapses</a><a href="/arena">Arena</a><a href="/arena3d">3D arena</a><a href="/neuron">Neuron workbench</a><a href="/atlas">Circuit atlas</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/explore">Neuron explorer</a><a href="/numerosity">Numerosity</a><a href="/math">Math classroom</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
+<main class="wb">
+<h1>Does it matter where inhibition sits?</h1>
+<p class="sub">The measured network is less excitable than matched random wiring, and moving which cells are inhibitory changes that a lot, from only about 6% of cells. This asks whether the placement also changes what the network can compute.</p>
+<div class="notice"><strong>Fixed wiring, trained readout.</strong> The measured graph is used as a recurrent network and only a linear readout is fitted, the standard reservoir test. Conditions keep the number of inhibitory cells identical and move only which cells they are. Measured: the graph and the transmitter predictions. Assumed: the dynamics, scaling, readout and tasks, and that a transmitter prediction fixes a cell's sign.</div>
+<div class="wb-bar">
+  <label>Placement<select id="placement"></select></label>
+  <label>Scaling<select id="scaling"><option value="shared">One scale for all placements (gain differences survive)</option><option value="per_condition">Each rescaled to the same radius (structure only)</option><option value="natural">No rescaling</option></select></label>
+  <label>Cells<input id="cells" type="number" min="100" max="3000" value="700"></label>
+  <label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label>
+  <button id="run">Run</button><span class="wb-status" id="status" role="status"></span>
+</div>
+<div class="num-grid" style="margin-top:20px">
+  <div class="wb-card"><h2>Memory by delay</h2><canvas id="memory" style="height:280px"></canvas>
+    <p class="hint">How much of the input stream can be reconstructed at each delay. Their sum is the memory capacity.</p></div>
+  <div class="wb-card"><h2>This run</h2><div id="detail"></div></div>
+</div>
+<div class="wb-card" style="margin-top:20px"><h2>Placement comparison</h2><div id="summary"><p class="hint">Loading…</p></div></div>
+<div class="wb-card" style="margin-top:20px"><h2>Paired comparison</h2><div id="paired"></div>
+<p class="hint">Seeds fix which cells the subsample contains, so runs are paired and the per-seed difference is the statistic that matters; overlapping error bars across conditions are not. Regenerate with <code>.venv/bin/python inhibition.py --benchmark --seeds 5</code>.</p></div>
+</main>
+<script src="/inhibition.js"></script>
+</body></html>

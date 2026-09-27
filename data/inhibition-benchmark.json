@@ -1,0 +1,325 @@
+{
+ "per_condition": {
+  "seeds": 5,
+  "scaling": "per_condition",
+  "scaling_text": "Each placement rescaled to the same spectral radius: differences are structural only",
+  "placements": {
+   "measured": "Inhibitory cells as the transmitter predictions call them",
+   "random": "Same number of inhibitory cells, chosen at random",
+   "degree_matched": "Random, matched to the measured inhibitory out-degree distribution",
+   "hubs": "The cells with the most outgoing synapses",
+   "antihubs": "The cells with the fewest outgoing synapses",
+   "none": "No inhibition"
+  },
+  "summary": {
+   "measured": {
+    "text": "Inhibitory cells as the transmitter predictions call them",
+    "inhibitory_cells": 44,
+    "natural_radius": 33.4341,
+    "effective_radius": 0.95,
+    "memory_capacity": 8.301,
+    "memory_sd": 0.15,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1299,
+    "saturated_fraction": 0.0
+   },
+   "random": {
+    "text": "Same number of inhibitory cells, chosen at random",
+    "inhibitory_cells": 44,
+    "natural_radius": 39.9113,
+    "effective_radius": 0.95,
+    "memory_capacity": 8.2,
+    "memory_sd": 0.105,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1302,
+    "saturated_fraction": 0.0
+   },
+   "degree_matched": {
+    "text": "Random, matched to the measured inhibitory out-degree distribution",
+    "inhibitory_cells": 44,
+    "natural_radius": 41.1118,
+    "effective_radius": 0.95,
+    "memory_capacity": 8.225,
+    "memory_sd": 0.144,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1287,
+    "saturated_fraction": 0.0
+   },
+   "hubs": {
+    "text": "The cells with the most outgoing synapses",
+    "inhibitory_cells": 44,
+    "natural_radius": 40.0324,
+    "effective_radius": 0.95,
+    "memory_capacity": 8.277,
+    "memory_sd": 0.143,
+    "integration_score": 0.9997,
+    "mean_activity": 0.1287,
+    "saturated_fraction": 0.0
+   },
+   "antihubs": {
+    "text": "The cells with the fewest outgoing synapses",
+    "inhibitory_cells": 44,
+    "natural_radius": 47.4128,
+    "effective_radius": 0.95,
+    "memory_capacity": 8.203,
+    "memory_sd": 0.149,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1282,
+    "saturated_fraction": 0.0
+   },
+   "none": {
+    "text": "No inhibition",
+    "inhibitory_cells": 0,
+    "natural_radius": 47.4361,
+    "effective_radius": 0.95,
+    "memory_capacity": 8.204,
+    "memory_sd": 0.144,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1282,
+    "saturated_fraction": 0.0
+   }
+  }
+ },
+ "shared": {
+  "seeds": 5,
+  "scaling": "shared",
+  "scaling_text": "One scale factor for every placement, set by the measured network: gain differences survive",
+  "placements": {
+   "measured": "Inhibitory cells as the transmitter predictions call them",
+   "random": "Same number of inhibitory cells, chosen at random",
+   "degree_matched": "Random, matched to the measured inhibitory out-degree distribution",
+   "hubs": "The cells with the most outgoing synapses",
+   "antihubs": "The cells with the fewest outgoing synapses",
+   "none": "No inhibition"
+  },
+  "summary": {
+   "measured": {
+    "text": "Inhibitory cells as the transmitter predictions call them",
+    "inhibitory_cells": 44,
+    "natural_radius": 33.4341,
+    "effective_radius": 0.95,
+    "memory_capacity": 8.301,
+    "memory_sd": 0.15,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1299,
+    "saturated_fraction": 0.0
+   },
+   "random": {
+    "text": "Same number of inhibitory cells, chosen at random",
+    "inhibitory_cells": 44,
+    "natural_radius": 39.9113,
+    "effective_radius": 1.1581,
+    "memory_capacity": 8.207,
+    "memory_sd": 0.11,
+    "integration_score": 1.0,
+    "mean_activity": 0.1426,
+    "saturated_fraction": 0.0
+   },
+   "degree_matched": {
+    "text": "Random, matched to the measured inhibitory out-degree distribution",
+    "inhibitory_cells": 44,
+    "natural_radius": 41.1118,
+    "effective_radius": 1.1916,
+    "memory_capacity": 8.223,
+    "memory_sd": 0.152,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1405,
+    "saturated_fraction": 0.0
+   },
+   "hubs": {
+    "text": "The cells with the most outgoing synapses",
+    "inhibitory_cells": 44,
+    "natural_radius": 40.0324,
+    "effective_radius": 1.1468,
+    "memory_capacity": 8.32,
+    "memory_sd": 0.161,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1297,
+    "saturated_fraction": 0.0
+   },
+   "antihubs": {
+    "text": "The cells with the fewest outgoing synapses",
+    "inhibitory_cells": 44,
+    "natural_radius": 47.4128,
+    "effective_radius": 1.3736,
+    "memory_capacity": 8.217,
+    "memory_sd": 0.151,
+    "integration_score": 0.9999,
+    "mean_activity": 0.149,
+    "saturated_fraction": 0.0
+   },
+   "none": {
+    "text": "No inhibition",
+    "inhibitory_cells": 0,
+    "natural_radius": 47.4361,
+    "effective_radius": 1.3743,
+    "memory_capacity": 8.212,
+    "memory_sd": 0.146,
+    "integration_score": 0.9999,
+    "mean_activity": 0.1495,
+    "saturated_fraction": 0.0
+   }
+  }
+ },
+ "natural": {
+  "seeds": 5,
+  "scaling": "natural",
+  "scaling_text": "No rescaling at all",
+  "placements": {
+   "measured": "Inhibitory cells as the transmitter predictions call them",
+   "random": "Same number of inhibitory cells, chosen at random",
+   "degree_matched": "Random, matched to the measured inhibitory out-degree distribution",
+   "hubs": "The cells with the most outgoing synapses",
+   "antihubs": "The cells with the fewest outgoing synapses",
+   "none": "No inhibition"
+  },
+  "summary": {
+   "measured": {
+    "text": "Inhibitory cells as the transmitter predictions call them",
+    "inhibitory_cells": 44,
+    "natural_radius": 33.4341,
+    "effective_radius": 33.4341,
+    "memory_capacity": 2.012,
+    "memory_sd": 0.239,
+    "integration_score": 0.9262,
+    "mean_activity": 0.9812,
+    "saturated_fraction": 0.9486
+   },
+   "random": {
+    "text": "Same number of inhibitory cells, chosen at random",
+    "inhibitory_cells": 44,
+    "natural_radius": 39.9113,
+    "effective_radius": 39.9113,
+    "memory_capacity": 1.42,
+    "memory_sd": 0.512,
+    "integration_score": 0.8676,
+    "mean_activity": 0.994,
+    "saturated_fraction": 0.9774
+   },
+   "degree_matched": {
+    "text": "Random, matched to the measured inhibitory out-degree distribution",
+    "inhibitory_cells": 44,
+    "natural_radius": 41.1118,
+    "effective_radius": 41.1118,
+    "memory_capacity": 1.68,
+    "memory_sd": 0.964,
+    "integration_score": 0.7573,
+    "mean_activity": 0.9899,
+    "saturated_fraction": 0.9647
+   },
+   "hubs": {
+    "text": "The cells with the most outgoing synapses",
+    "inhibitory_cells": 44,
+    "natural_radius": 40.0324,
+    "effective_radius": 40.0324,
+    "memory_capacity": 2.07,
+    "memory_sd": 0.646,
+    "integration_score": 0.8647,
+    "mean_activity": 0.9587,
+    "saturated_fraction": 0.9209
+   },
+   "antihubs": {
+    "text": "The cells with the fewest outgoing synapses",
+    "inhibitory_cells": 44,
+    "natural_radius": 47.4128,
+    "effective_radius": 47.4128,
+    "memory_capacity": 2.535,
+    "memory_sd": 0.373,
+    "integration_score": 0.9446,
+    "mean_activity": 0.991,
+    "saturated_fraction": 0.9629
+   },
+   "none": {
+    "text": "No inhibition",
+    "inhibitory_cells": 0,
+    "natural_radius": 47.4361,
+    "effective_radius": 47.4361,
+    "memory_capacity": 0.746,
+    "memory_sd": 0.526,
+    "integration_score": 0.6424,
+    "mean_activity": 0.9955,
+    "saturated_fraction": 0.9831
+   }
+  }
+ },
+ "paired": {
+  "reference": "measured",
+  "options": {
+   "scaling": "shared",
+   "cells": 200,
+   "delays": 25,
+   "noise": 0.05
+  },
+  "rows": {
+   "random": {
+    "mean_difference": 0.2058,
+    "sd": 0.1751,
+    "favours_reference": 14,
+    "seeds": 15,
+    "t": 4.55
+   },
+   "degree_matched": {
+    "mean_difference": 0.0932,
+    "sd": 0.1184,
+    "favours_reference": 13,
+    "seeds": 15,
+    "t": 3.05
+   },
+   "hubs": {
+    "mean_difference": 0.0205,
+    "sd": 0.1005,
+    "favours_reference": 9,
+    "seeds": 15,
+    "t": 0.79
+   },
+   "antihubs": {
+    "mean_difference": 0.1293,
+    "sd": 0.1336,
+    "favours_reference": 14,
+    "seeds": 15,
+    "t": 3.75
+   },
+   "none": {
+    "mean_difference": 0.1309,
+    "sd": 0.1328,
+    "favours_reference": 14,
+    "seeds": 15,
+    "t": 3.82
+   }
+  },
+  "note": "Positive means the reference placement stored more of the input stream. Paired by seed, since the seed fixes which cells the subsample contains."
+ },
+ "paired_hubs": {
+  "reference": "hubs",
+  "options": {
+   "scaling": "shared",
+   "cells": 200,
+   "delays": 25,
+   "noise": 0.05
+  },
+  "rows": {
+   "random": {
+    "mean_difference": 0.1853,
+    "sd": 0.1818,
+    "favours_reference": 12,
+    "seeds": 15,
+    "t": 3.95
+   },
+   "none": {
+    "mean_difference": 0.1104,
+    "sd": 0.1601,
+    "favours_reference": 12,
+    "seeds": 15,
+    "t": 2.67
+   },
+   "measured": {
+    "mean_difference": -0.0205,
+    "sd": 0.1005,
+    "favours_reference": 5,
+    "seeds": 15,
+    "t": -0.79
+   }
+  },
+  "note": "Positive means the reference placement stored more of the input stream. Paired by seed, since the seed fixes which cells the subsample contains."
+ }
+}
