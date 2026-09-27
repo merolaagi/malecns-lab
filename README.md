@@ -363,6 +363,39 @@ Once the file exists, `/navigation` reports the measured column offsets between 
 .venv/bin/python -m unittest -v test_navigation.py
 ```
 
+## Spectra: is the measured wiring special? (new)
+
+`/spectrum` asks the structural version of the question the task experiments kept answering with "no": do the eigenvalues of the measured weight matrix differ from randomisations with the same statistics? `spectral.py` compares six randomisations (destinations permuted, weights permuted among edges, targets redrawn, inhibitory cells permuted, fully random, and random wiring matched to the measured share of reciprocal pairs) under three normalisations.
+
+**The lab's default normalisation caps the answer.** Incoming absolute weights sum to one per cell, so the spectral radius cannot exceed 1. A measured value near 1 means the matrix nearly attains its bound, not that the fly sits at the edge of chaos.
+
+Locomotion subset, incoming-L1 normalisation:
+
+| Condition | Radius | Reciprocity |
+|---|---|---|
+| Measured | 0.976 | 28.1% |
+| Weights permuted among edges | 0.985 | 28.1% |
+| Inhibitory cells permuted | 0.875 | 28.1% |
+| Destinations permuted | 0.254 | 5.3% |
+| Targets redrawn | 0.274 | 3.1% |
+| Fully random | 0.265 | 3.3% |
+| Random, reciprocity matched | 0.266 | 30.6% |
+
+**What this says.** The near-unit radius follows the measured *topology*: it survives shuffling weights (0.985) and largely survives permuting which cells are inhibitory (0.875), but collapses to about 0.26 under anything that moves edges. Reciprocity alone does not explain it, since random wiring matched on reciprocity still gives 0.266. The gap survives the synapse-count threshold control and input-coverage filtering.
+
+**But it does not survive changing the normalisation.** Scaled so the largest singular value is 1, the measured radius is 0.184 against 0.157–0.230 for the randomisations, with fully random highest. So the effect is a property of row-normalised measured topology, not a scale-free property of the graph.
+
+**Where it comes from.** The leading eigenvector is concentrated, not global: its participation ratio is 0.019 against 0.609 when shuffled, and its mass sits on five SNpp39 sensory cells plus a couple of motor neurons. Those cells receive all of their measured input from each other, which under row normalisation makes a stochastic sub-block with an eigenvalue of 1 by construction. 619 of 794 cells with input are fed only from within their own strongly connected component, a consequence of how the subsets were cut.
+
+**Other graphs.** The mushroom-body subset is essentially feedforward: measured radius about 0, while rewiring creates loops and pushes it to 1. The optic-lobe patch gives exactly 1 for every condition, because its cells' inputs lie entirely inside the patch.
+
+**Conclusion for the deep-learning idea.** The spectral signature is real but it belongs to the lab's matrices, not to the fly: subset selection decides which cells look self-contained, and row normalisation turns those into unit eigenvalues. Using the connectome as an initialisation prior on the strength of "it sits near the edge of stability" would be building on an artefact. A fair test would need a subset chosen without a synapse threshold, a normalisation that does not bound the radius, and cells with high input coverage.
+
+```sh
+.venv/bin/python spectral.py --benchmark
+.venv/bin/python -m unittest -v test_spectral.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.

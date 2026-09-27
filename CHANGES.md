@@ -7,6 +7,14 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add spectral analysis of the measured graphs
+
+- `spectral.py` and `/spectrum`: eigenvalues, non-normality, transient gain, leading-eigenvector spread and reciprocity for every measured graph, against six randomisations (destination permutation, weight permutation, target rewiring, sign permutation, full randomisation, and reciprocity-matched random) under three normalisations.
+- Finding, and its deflation: under the lab's incoming-L1 normalisation the measured locomotion matrix has radius 0.976 against about 0.26 for anything that moves edges, and reciprocity-matched random wiring does not reproduce it. But weight shuffling keeps it (0.985), scale normalisation removes the advantage entirely (0.184 measured against 0.230 fully random), and the leading eigenvector is concentrated on five SNpp39 sensory cells that receive all their measured input from each other. Row normalisation turns such closed blocks into unit eigenvalues, and 619 of 794 cells are fed only from their own strongly connected component, which is a consequence of subset selection.
+- Controls included: synapse-count threshold sweep, input-coverage filtering using `data/quality.json`, and closed-block detection. The README states plainly that using this as a deep-learning initialisation prior would be building on an artefact, and what a fair test would require.
+- Other graphs: the mushroom-body subset is essentially feedforward (radius about 0, rising to 1 when rewired); the optic patch gives 1 for every condition because its inputs lie inside the patch.
+- `test_spectral.py`: the normalisation bound, what each randomisation preserves, normality and transient measures on a symmetric matrix, the topology-versus-weights result, reciprocity not explaining it, normalisation dependence, eigenvector localisation and the controls.
+
 ## Add central-complex navigation: compass, home vector and steering
 
 - `navigation.py` and `/navigation`: heading ring with rotation and long-range inhibition, vector cells that accumulate the travelled path, goal cells and steering cells that drive the descending neurons. The fly wanders, then homes.
