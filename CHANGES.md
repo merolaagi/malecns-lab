@@ -7,6 +7,13 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add the complete mushroom-body extractor for memory
+
+- `build_mushroombody.py`: Kenyon cells, output neurons, PAM and PPL dopamine neurons, DPM, APL, the lab's projection neurons and the 200 strongest downstream partners of the output neurons, with all edges among them except Kenyon-cell-to-Kenyon-cell, which are summarised. The lab's learning subset had no aversive dopamine neurons, no APL or DPM, and no loops from output neurons back to dopamine neurons, all of which memory models need.
+- Compartment parser for instance names: dendritic and axonal compartments for output neurons (split on `>`), teaching and receiving compartments for dopamine neurons (split on `<`), sub-compartments like β′2a, and adjacent compartments split correctly. Produces a compartment table of teachers and readers.
+- `--probe` mode reports traced cells by role, sample instances with their parsed compartments, and parse coverage, before the weights pass.
+- `test_mushroombody.py`: parsing on the real instance formats, role and Kenyon-cell class assignment, and an end-to-end build on synthetic tables checking the new loop edges, the compartment table and the Kenyon-cell summary.
+
 ## Test whether inhibition placement does anything computational
 
 - `inhibition.py` and `/inhibition`: the measured graph as a fixed recurrent network with a trained linear readout, comparing six placements of the same number of inhibitory cells (measured, random, out-degree matched, highest-throughput, lowest-throughput, none) on memory capacity and delayed integration.

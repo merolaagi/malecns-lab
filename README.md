@@ -443,6 +443,20 @@ Rescaled to a common spectral radius, every placement scores the same (memory 8.
 .venv/bin/python -m unittest -v test_inhibition.py
 ```
 
+## Memory: the mushroom body, rebuilt for it (new, in progress)
+
+Olfactory associative memory in the fly lives in the mushroom body, and its mechanism is well enough known to model honestly. An odour activates a sparse set of Kenyon cells; their axons run through about fifteen compartments, each with its own dopamine neurons delivering a teaching signal and its own output neurons reading out. When an odour's Kenyon cells fire together with a compartment's dopamine neurons, the Kenyon-cell-to-output synapses in that compartment weaken, and that weakened set of synapses is the memory. Presenting the odour again drives that compartment's output neuron less, tipping the balance of the output population toward approach or avoidance. The wiring decides where a memory can be written; the weights decide what it says. A connectome cannot show memory contents, since short-term memory changes synaptic strength rather than synapse count, but it can show exactly where memory can be written.
+
+The lab's learning subset cannot support that model: it has no PPL1 dopamine neurons (the aversive teachers), no APL or DPM, and no loops from output neurons back to dopamine neurons or to each other, which extinction and second-order conditioning need. `build_mushroombody.py` extracts the complete circuit: Kenyon cells, output neurons, PAM and PPL dopamine neurons, DPM, APL, the lab's projection neurons, and the 200 strongest downstream partners of the output neurons, where memory leaves the mushroom body on its way to behaviour. Kenyon-cell-to-Kenyon-cell edges are summarised as a total rather than stored, since there are very many.
+
+Compartments are parsed from instance names: `MBON01(y5B'2a)` has dendrites in γ5 and β′2a, `MBON11(y1pedc>a/B)` has dendrites in γ1-pedunculus and an axon to the α/β lobes, and `PAM07(y4<y1y2)` teaches in γ4 while receiving input in γ1 and γ2. Adjacent compartments are split correctly (`y1y2` is γ1 and γ2). The output is a compartment table listing which dopamine neurons teach and which output neurons read in each compartment.
+
+```sh
+.venv/bin/python build_mushroombody.py raw-data --probe    # what the annotations hold
+.venv/bin/python build_mushroombody.py raw-data            # writes data/mushroom-body.json
+.venv/bin/python -m unittest -v test_mushroombody.py
+```
+
 ## Vision to walking (in progress)
 
 Goal: a simulated fly that sees and steers. Moving scenes go through a pretrained connectome-constrained eye model ([flyvis](https://pypi.org/project/flyvis/), Lappalainen et al., Nature 2024), its output cell types reach the lab's steering descending neurons through measured MaleCNS pathways, and the existing locomotion model walks.
