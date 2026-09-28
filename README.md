@@ -449,12 +449,37 @@ Olfactory associative memory in the fly lives in the mushroom body, and its mech
 
 The lab's learning subset cannot support that model: it has no PPL1 dopamine neurons (the aversive teachers), no APL or DPM, and no loops from output neurons back to dopamine neurons or to each other, which extinction and second-order conditioning need. `build_mushroombody.py` extracts the complete circuit: Kenyon cells, output neurons, PAM and PPL dopamine neurons, DPM, APL, the lab's projection neurons, and the 200 strongest downstream partners of the output neurons, where memory leaves the mushroom body on its way to behaviour. Kenyon-cell-to-Kenyon-cell edges are summarised as a total rather than stored, since there are very many.
 
-Compartments are parsed from instance names: `MBON01(y5B'2a)` has dendrites in γ5 and β′2a, `MBON11(y1pedc>a/B)` has dendrites in γ1-pedunculus and an axon to the α/β lobes, and `PAM07(y4<y1y2)` teaches in γ4 while receiving input in γ1 and γ2. Adjacent compartments are split correctly (`y1y2` is γ1 and γ2). The output is a compartment table listing which dopamine neurons teach and which output neurons read in each compartment.
+Compartments are parsed from instance names: `MBON01(y5B'2a)` has dendrites in γ5 and β′2a, `MBON11(y1pedc>a/B)` has dendrites in γ1-pedunculus and an axon to the α/β lobes, and `PAM07(y4<y1y2)` teaches in γ4 while receiving input in γ1 and γ2. Adjacent compartments are split correctly (`y1y2` is γ1 and γ2), β is written both `B` and `b` (`MBON26(b'2d)`), and the pedunculus both `pedc` and `ped` (`PPL101(y1ped)`).
+
+The probe on the real annotations found every cell type the memory model needs: 4,064 Kenyon cells, 97 output neurons, 316 PAM reward-type dopamine neurons, 16 PPL1 aversive dopamine neurons (PPL101–PPL108, one per hemisphere each), 2 APL and 2 DPM. The 8 PPL2 cells are dopaminergic but innervate the calyx and lateral horn, so they get their own role and never count as compartment teachers.
+
+Some cells carry no compartment in their name (PPL107 and PPL108 among the aversive teachers). They are placed from the data: within a compartment, the dopamine neurons and the output neurons contact the same stretch of Kenyon-cell axons, so the overlap between a cell's Kenyon-cell partners and each compartment's identifies where it works. Such assignments are recorded as inferred, with their overlap score, so they are never mistaken for annotations. The output is a compartment table listing which dopamine neurons teach and which output neurons read in each compartment.
 
 ```sh
 .venv/bin/python build_mushroombody.py raw-data --probe    # what the annotations hold
 .venv/bin/python build_mushroombody.py raw-data            # writes data/mushroom-body.json
 .venv/bin/python -m unittest -v test_mushroombody.py
+```
+
+### The memory model
+
+`memory.py` and `/memory` run the established account on that circuit, with the measured wiring deciding where memory can be written:
+
+- **Encoding:** an odour's projection-neuron pattern drives Kenyon cells through the measured wiring, with about 5% left active (the APL's role, here a threshold).
+- **Writing:** where active Kenyon cells coincide with dopamine in a compartment, their synapses onto that compartment's output neurons are depressed. Reward reaches the PAM cells and punishment the PPL1 cells, and each dopamine cell teaches only in the compartments it measurably innervates.
+- **Reading:** an output neuron's valence follows from its compartment's teachers (punishment-taught compartments hold approach-promoting outputs), and behaviour is the change in approach drive relative to the untrained state.
+- **Keeping:** a labile trace forms on every pairing and fades within hours; a consolidated trace forms only with spaced training and fades over days.
+- **Extinction:** re-exposure without reinforcement lets output neurons drive dopamine neurons through the measured MBON-to-DAN loops, writing an opposing trace. Recovery is measured against the same fly trained identically but never re-exposed, so ordinary forgetting cancels out.
+
+Experiments: forgetting after massed and spaced training for both reinforcers, extinction with and without the loops, compartment-by-compartment ablation (the direct test of "is memory everywhere?"), and controls with the loops cut, Kenyon-cell-to-output destinations permuted (which scrambles compartment membership) and no consolidation.
+
+The model is validated on a small synthetic mushroom body with the published layout (`tests_support/mbsynth.py`): punishment teaches avoidance and reward approach; spaced training leaves a trace at 96 hours where massed training leaves none; blocking a punishment-taught compartment weakens aversive memory while blocking a reward-taught one does not; extinction happens only with the loops intact and fades back after a day, as a separate memory should. Those are checks that the model behaves correctly, not findings about the fly; the results on the measured circuit come from `data/mushroom-body.json`.
+
+Assumed throughout: the learning rule, rates and time constants, the consolidation rule, PAM as rewarding and PPL1 as punishing (the real fly has exceptions), the valence rule, random odour codes and the readout.
+
+```sh
+.venv/bin/python memory.py
+.venv/bin/python -m unittest -v test_memory.py
 ```
 
 ## Vision to walking (in progress)

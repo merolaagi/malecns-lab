@@ -19,6 +19,10 @@ CASES = [
     ('PAM07(y4<y1y2)_L', 'DAN', (['γ1', 'γ2'], ['γ4'])),
     ('PPL101(y1pedc)_R', 'DAN', ([], ['γ1pedc'])),
     ('APL_R', 'APL', ([], [])),
+    ("MBON26(b'2d)_R", 'MBON', (["β'2d"], [])),                  # lowercase b for beta
+    ('PPL101(y1ped)_R', 'DAN', ([], ['γ1pedc'])),                 # 'ped' abbreviates the pedunculus
+    ("PPL105(a'2a2)_R", 'DAN', ([], ["α'2", 'α2'])),
+    ('PPL107_R', 'DAN', ([], [])),                                # no compartment in the name
 ]
 
 
@@ -32,12 +36,28 @@ class ParsingTests(unittest.TestCase):
 
     def test_roles_and_classes(self):
         self.assertEqual(mb.role_of('PPL101'), 'DAN')
+        self.assertEqual(mb.role_of('PPL201'), 'DAN_calyx')          # calyx and lateral horn, not lobe teachers
         self.assertEqual(mb.role_of('PAM07'), 'DAN')
         self.assertEqual(mb.role_of('APL'), 'APL')
         self.assertIsNone(mb.role_of('SMP001'))
         self.assertEqual(mb.kc_class("KCa'b'-ap1"), "α'/β'")
         self.assertEqual(mb.kc_class('KCab-s'), 'α/β')
         self.assertEqual(mb.kc_class('KCg-m'), 'γ')
+
+
+class InferenceTests(unittest.TestCase):
+    def test_unnamed_teacher_is_placed_by_kenyon_cell_overlap(self):
+        node = lambda body, role, cin=(), cout=(): {'bodyId': body, 'role': role, 'compartments_in': list(cin), 'compartments_out': list(cout)}
+        nodes = {1: node(1, 'KC'), 2: node(2, 'KC'), 3: node(3, 'KC'), 4: node(4, 'KC'),
+                 10: node(10, 'MBON', ['γ1pedc']), 11: node(11, 'MBON', ['α3']),
+                 20: node(20, 'DAN'), 21: node(21, 'DAN_calyx')}
+        edges = [[1, 10, 5], [2, 10, 5], [3, 11, 5], [4, 11, 5],     # KCs 1-2 feed gamma1pedc, 3-4 feed alpha3
+                 [20, 1, 4], [20, 2, 4], [21, 3, 4]]                 # the unnamed teacher targets KCs 1-2
+        mb.infer_compartments(nodes, edges)
+        self.assertEqual(nodes[20]['compartments_out'], ['γ1pedc'])
+        self.assertTrue(nodes[20]['compartment_source'].startswith('inferred'))
+        self.assertEqual(nodes[10]['compartment_source'], 'name')
+        self.assertEqual(nodes[21]['compartments_out'], [])          # calyx dopamine cells are never placed
 
 
 class BuildTests(unittest.TestCase):

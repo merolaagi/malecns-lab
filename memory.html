@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Memory</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ memory</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/inhibition">Inhibition</a><a href="/spectrum">Spectra</a><a href="/navigation">Navigation</a><a href="/body">Body studio</a><a href="/synapse">Synapses</a><a href="/arena">Arena</a><a href="/arena3d">3D arena</a><a href="/neuron">Neuron workbench</a><a href="/atlas">Circuit atlas</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/explore">Neuron explorer</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
+<main class="wb">
+<h1>How a fly remembers an odour</h1>
+<p class="sub">Memory written where Kenyon-cell activity meets dopamine in a mushroom-body compartment, kept as a labile and a consolidated trace, read out through the balance of output neurons, and countered by extinction through the loops back onto dopamine neurons.</p>
+<div class="notice"><strong>The wiring decides where memory can be written; the model decides how.</strong> Every cell, compartment and edge comes from <code>data/mushroom-body.json</code>. Assumed: the learning rule and its rates and time constants, the consolidation rule, PAM cells as rewarding and PPL1 cells as punishing (the real fly has exceptions), output-neuron valence derived from each compartment's teachers, random odour codes, and the behavioural readout. A connectome cannot show what this fly remembers; it shows where a memory could be stored.</div>
+<div class="wb-bar"><label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label><button id="run">Run all experiments</button><span class="wb-status" id="status" role="status"></span></div>
+<div class="wb-card" style="margin-top:20px"><h2>Circuit</h2><div id="summary"><p class="hint">Loading…</p></div></div>
+<div class="num-grid" style="margin-top:20px">
+  <div class="wb-card"><h2>Forgetting: massed against spaced training</h2><canvas id="forget" style="height:290px"></canvas>
+    <p class="hint">Change in approach toward the trained odour after five pairings. Below zero: avoidance. Spaced training builds a consolidated trace; massed training does not.</p></div>
+  <div class="wb-card"><h2>Extinction</h2><canvas id="extinct" style="height:290px"></canvas>
+    <p class="hint">Green: re-exposed to the odour without punishment. Grey: the same fly never re-exposed. The gap is extinction; if it closes after the delay, extinction was a separate, faster-fading memory.</p></div>
+</div>
+<div class="wb-card" style="margin-top:20px"><h2>Which compartments hold which memory</h2><div id="ablation"></div>
+  <p class="hint">Plasticity blocked in one compartment at a time, after spaced training. This is the direct test of whether memory is everywhere or somewhere.</p></div>
+<div class="wb-card" style="margin-top:20px"><h2>Controls</h2><div id="controls"></div></div>
+</main>
+<script src="/memory.js"></script>
+</body></html>

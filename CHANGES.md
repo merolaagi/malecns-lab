@@ -7,11 +7,19 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Add the mushroom-body memory model
+
+- `memory.py` and `/memory`: odour encoding through measured projection-neuron-to-Kenyon-cell wiring, compartment-specific depression of Kenyon-cell-to-output synapses gated by the dopamine cells measured to innervate each compartment, output valence derived from each compartment's teachers, a labile trace plus a consolidated trace that forms only with spaced training, and extinction written through the measured MBON-to-DAN loops.
+- Experiments: forgetting after massed and spaced training for reward and punishment, extinction measured against an identically trained twin that is never re-exposed (so forgetting cancels out), compartment-by-compartment ablation, and controls with loops cut, compartment membership scrambled and consolidation removed.
+- The readout is the change in approach drive relative to the untrained state; an earlier tanh readout saturated and read every condition as the same.
+- `test_memory.py` validates behaviour on a synthetic mushroom body with the published layout (`tests_support/mbsynth.py`): signs of reward and punishment, spacing effect, compartment specificity, loop-dependent extinction with spontaneous recovery, and the missing-file message. Results on the measured circuit await `data/mushroom-body.json`.
+
 ## Add the complete mushroom-body extractor for memory
 
 - `build_mushroombody.py`: Kenyon cells, output neurons, PAM and PPL dopamine neurons, DPM, APL, the lab's projection neurons and the 200 strongest downstream partners of the output neurons, with all edges among them except Kenyon-cell-to-Kenyon-cell, which are summarised. The lab's learning subset had no aversive dopamine neurons, no APL or DPM, and no loops from output neurons back to dopamine neurons, all of which memory models need.
 - Compartment parser for instance names: dendritic and axonal compartments for output neurons (split on `>`), teaching and receiving compartments for dopamine neurons (split on `<`), sub-compartments like β′2a, and adjacent compartments split correctly. Produces a compartment table of teachers and readers.
-- `--probe` mode reports traced cells by role, sample instances with their parsed compartments, and parse coverage, before the weights pass.
+- `--probe` mode reports traced cells by role, sample instances with their parsed compartments, and parse coverage, before the weights pass. On the real annotations: 4,064 Kenyon cells, 97 output neurons, 316 PAM and 16 PPL1 dopamine neurons, 2 APL, 2 DPM.
+- From the probe: β written as `b` and the pedunculus as `ped` are now parsed; PPL2 cells (calyx and lateral horn) get their own role and are never compartment teachers; dopamine and output neurons whose names carry no compartment, including the aversive PPL107 and PPL108, are placed by the overlap of their Kenyon-cell partners with each compartment's, and marked as inferred with the overlap score.
 - `test_mushroombody.py`: parsing on the real instance formats, role and Kenyon-cell class assignment, and an end-to-end build on synthetic tables checking the new loop edges, the compartment table and the Kenyon-cell summary.
 
 ## Test whether inhibition placement does anything computational

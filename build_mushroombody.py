@@ -31,12 +31,15 @@ import pyarrow.feather as feather
 
 from model import BASE
 
-ROLES = [('KC', 'KC'), ('MBON', 'MBON'), ('PAM', 'DAN'), ('PPL1', 'DAN'), ('PPL2', 'DAN'), ('DPM', 'DPM'), ('APL', 'APL')]
-LOBE = {'y': 'γ', "a'": "α'", "B'": "β'", 'a': 'α', 'B': 'β'}
+# PPL2 cells are dopaminergic but innervate the calyx and lateral horn, not the lobe compartments where
+# associative memory is written, so they get their own role and never count as compartment teachers.
+ROLES = [('KC', 'KC'), ('MBON', 'MBON'), ('PAM', 'DAN'), ('PPL1', 'DAN'), ('PPL2', 'DAN_calyx'), ('DPM', 'DPM'), ('APL', 'APL')]
+# Instance names write beta both as 'B' and 'b' (MBON26(b'2d)), and the pedunculus as 'pedc' or 'ped'.
+LOBE = {'y': 'γ', "a'": "α'", "B'": "β'", "b'": "β'", 'a': 'α', 'B': 'β', 'b': 'β'}
 # A trailing letter is a sub-compartment ("B'2a") only when no digit follows it; otherwise it starts the
 # next compartment ("y1y2" is gamma1 and gamma2, not "gamma1y").
-COMPARTMENT = re.compile(r"(a'|B'|a|B|y)(\d)(pedc|[a-z](?!\d)(?!'))?")
-LOBE_ONLY = re.compile(r"(?<![\w'])(a'|B'|a|B|y)(?![\d'\w])")
+COMPARTMENT = re.compile(r"(a'|B'|b'|a|B|b|y)(\d)(pedc|ped|[a-z](?!\d)(?!'))?")
+LOBE_ONLY = re.compile(r"(?<![\w'])(a'|B'|b'|a|B|b|y)(?![\d'\w])")
 MBON_TARGETS = 200          # strongest downstream partners of the MBONs, where memory leaves the MB
 
 
@@ -60,6 +63,7 @@ def compartments(text):
     """Normalised compartments in one parenthetical field, e.g. "y5B'2a" -> ['γ5', "β'2a"]."""
     found = []
     for lobe, number, suffix in COMPARTMENT.findall(text or ''):
+        suffix = 'pedc' if suffix == 'ped' else suffix
         found.append(f'{LOBE[lobe]}{number}{suffix or ""}')
     if not found:
         found = [f'{LOBE[lobe]} lobe' for lobe in LOBE_ONLY.findall(text or '')]
@@ -181,6 +185,7 @@ def build(raw):
         print('transmitters skipped:', error, flush=True)
     for body, n in nodes.items(): n['nt'] = transmitters.get(body)
 
+    infer_compartments(nodes, edges)
     role_of_body = {b: n['role'] for b, n in nodes.items()}
     kinds = Counter(f'{role_of_body[a]}->{role_of_body[b]}' for a, b, _ in edges)
     out = {'dataset': 'male-cns:v1.0', 'license': 'CC-BY-4.0', 'nodes': list(nodes.values()), 'edges': edges,
@@ -193,6 +198,40 @@ def build(raw):
     (BASE / 'data/mushroom-body.json').write_text(json.dumps(out, separators=(',', ':')))
     print('DONE', json.dumps({'roles': out['roles'], 'edges': len(edges), 'edge_kinds': dict(kinds.most_common(12)),
                               'compartments': len(out['compartments'])}), flush=True)
+
+
+def infer_compartments(nodes, edges, minimum_overlap=0.05):
+    """Place dopamine and output neurons whose names carry no compartment, from their Kenyon-cell partners.
+
+    Within a compartment, the dopamine neurons and the output neurons contact the same stretch of Kenyon
+    cell axons, so the Kenyon cells a dopamine neuron targets overlap with those that feed that compartment's
+    output neurons. Each unnamed cell is assigned the compartment with the largest overlap (Jaccard), and the
+    assignment is marked as inferred so it is never mistaken for an annotation."""
+    kc_out, kc_in = defaultdict(set), defaultdict(set)
+    for a, b, _ in edges:
+        if nodes[a]['role'] == 'KC' and nodes[b]['role'] == 'MBON': kc_in[b].add(a)
+        if nodes[a]['role'] == 'DAN' and nodes[b]['role'] == 'KC': kc_out[a].add(b)
+    by_compartment = defaultdict(set)
+    for body, n in nodes.items():
+        if n['role'] == 'MBON':
+            for c in n['compartments_in']: by_compartment[c] |= kc_in[body]
+        if n['role'] == 'DAN':
+            for c in n['compartments_out']: by_compartment[c] |= kc_out[body]
+    def best(kcs):
+        scores = {c: len(kcs & members) / max(len(kcs | members), 1) for c, members in by_compartment.items() if members}
+        if not scores: return None, 0.0
+        compartment = max(scores, key=scores.get)
+        return compartment, scores[compartment]
+    for body, n in nodes.items():
+        n['compartment_source'] = 'name' if (n['compartments_in'] or n['compartments_out']) else None
+        if n['role'] == 'DAN' and not n['compartments_out'] and kc_out[body]:
+            compartment, score = best(kc_out[body])
+            if compartment and score >= minimum_overlap:
+                n['compartments_out'] = [compartment]; n['compartment_source'] = f'inferred (overlap {score:.2f})'
+        if n['role'] == 'MBON' and not n['compartments_in'] and kc_in[body]:
+            compartment, score = best(kc_in[body])
+            if compartment and score >= minimum_overlap:
+                n['compartments_in'] = [compartment]; n['compartment_source'] = f'inferred (overlap {score:.2f})'
 
 
 def compartment_table(nodes):
