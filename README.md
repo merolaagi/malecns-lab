@@ -495,7 +495,18 @@ Each memory is spread across a handful of compartments set by where its teachers
 
 Blocking some aversive compartments strengthens appetitive memory (α′3 by 20%, α2 by 11%): during reward training the output neurons drive the PPL1 cells through the measured loops, writing an opposing trace, and removing it helps. Cutting the loops entirely raises appetitive memory from 0.22 to 0.30 while leaving aversive memory unchanged.
 
-**Where the model and the fly disagree.** γ1, taught by PPL101, is the compartment most strongly required for short-term aversive memory in fly experiments, but here it carries only 8%. And with the measured loops, this model produces no extinction (effect −0.001), where flies extinguish readily; the synthetic circuit extinguished only because its loop was built to. Both point at the same limitation: output neurons are weighted only by their Kenyon-cell input, loop effects are reduced to excitation onto dopamine cells, and the real extinction pathways, which involve specific output-to-dopamine connections and their signs, are not captured by that simplification.
+**Where the model and the fly disagreed, and what the signed loops changed.** The first version reduced the loops to plain excitation from output neurons onto dopamine cells and ignored the output neurons' connections to each other. It produced no extinction at all and gave γ1, the compartment fly experiments most strongly require for short-term aversive memory, only 8% of aversive memory.
+
+The measured data carries more than that. Output neurons make 26,259 synapses onto each other, mostly inhibitory (glutamate and GABA outnumber acetylcholine about four to one), and 11,309 onto dopamine cells. The default model now uses both with their signs: output neurons settle through their measured signed network, and the loops drive each dopamine cell by the relative change in its input since learning, so a depressed inhibitory output neuron disinhibits the dopamine cells it contacts.
+
+| Loop model | Extinction of aversive memory | γ1 share |
+|---|---|---|
+| Plain excitation, no output network | 0% | 8% |
+| Signed, change-driven, with the output network | 21%, recovering after a day | 5% |
+
+**Extinction is resolved by the wiring's signs.** With the measured signs, re-exposure writes an opposing memory that removes 21% of the aversive memory and fades back after a day, which is spontaneous recovery, as in flies. No parameter was tuned to get it.
+
+**γ1 is not resolved, and the data shows why.** MBON11, the γ1 output neuron, is GABAergic and sends 2,385 synapses onto other output neurons, but it inhibits approach and avoidance outputs almost equally (3.79 against 3.69), so depressing it releases both sides and the net change in valence cancels. Its share stays at 4–5% for short-term (massed) and long-term (spaced) memory alike, and falls as the output network is made stronger. Its strongest outputs go to CRE neurons outside the output layer (CRE072 807 synapses, CRE050 720, the CRE080 family about 1,070), which this readout does not include. γ1's behavioural weight most likely runs through those downstream cells, which makes a readout through the output neurons' downstream targets the next test rather than a parameter to tune.
 
 **Spacing works for both reinforcers:** aversive memory from spaced training is −0.033 at 96 hours against 0 after massed training, and appetitive +0.018 against 0. Scrambling compartment membership (Kenyon-cell-to-output destinations permuted) changes memory only modestly (aversive −0.40 against −0.43), because the teaching signal is gated by the output neuron's compartment rather than the Kenyon cell's.
 

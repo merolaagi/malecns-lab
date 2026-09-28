@@ -51,7 +51,10 @@ function tables() {
   $('ablation').innerHTML = h;
   $('controls').innerHTML = '<table class="bench"><tr><th>Condition</th><th>Aversive memory right after spaced training</th></tr>'
     + Object.entries(data.controls).map(([k, v]) => `<tr><td>${esc(data.conditions[k])}</td><td>${v}</td></tr>`).join('') + '</table>'
-    + `<p class="note">Extinction removes ${Math.round(ext.intact.extinction_fraction * 100)}% of the aversive memory with the loops intact and ${Math.round(ext.no_loops.extinction_fraction * 100)}% with them cut. Spontaneous recovery after the delay: ${ext.intact.spontaneous_recovery ? 'yes' : 'no'}.</p>`;
+    + `<p class="note">Extinction removes ${Math.round(ext.intact.extinction_fraction * 100)}% of the aversive memory with the loops intact and ${Math.round(ext.no_loops.extinction_fraction * 100)}% with them cut. Spontaneous recovery after the delay: ${ext.intact.spontaneous_recovery ? 'yes' : 'no'}.</p>`
+    + '<h3 style="font-size:12px;margin:14px 0 6px">Loop models</h3><table class="bench"><tr><th>Model</th><th>Extinction</th><th>γ1 share of aversive memory</th></tr>'
+    + Object.entries(data.loop_models).map(([k, v]) => `<tr><td>${esc(v.text)}</td><td>${Math.round(v.extinction * 100)}%</td><td>${Math.round((v.gamma1_share || 0) * 100)}%</td></tr>`).join('') + '</table>'
+    + '<p class="hint">Signed loops reproduce extinction with recovery; neither model gives γ1 the weight fly experiments do. The γ1 output neuron inhibits approach and avoidance outputs about equally, and its strongest outputs go to CRE neurons outside the output layer, which this readout does not include.</p>';
 }
 async function go() {
   $('run').disabled = true; $('status').textContent = 'Running experiments…'; $('status').className = 'wb-status';

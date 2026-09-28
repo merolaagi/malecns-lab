@@ -7,6 +7,14 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Signed loops and the output network in the memory model
+
+- Output neurons now interact through their measured signed connections (26,259 synapses, mostly inhibitory), settled to a fixed point, and the loops drive each dopamine cell by the relative change in its input since learning, so a depressed inhibitory output neuron disinhibits its targets. The earlier plain-excitation loop is kept as `loop_model='simple'` for comparison, with a `no_output_network` control.
+- Result: the measured circuit now extinguishes 21% of the aversive memory, and that extinction fades back after a day, which is spontaneous recovery as in flies. The simple loop model produced none.
+- γ1 still carries only 4–5% of aversive memory, for short-term and long-term training alike, where fly experiments show it is essential. The data shows why: the γ1 output neuron (MBON11, GABAergic) inhibits approach and avoidance outputs almost equally, so its depression cancels in a valence sum, and its strongest outputs go to CRE neurons outside the output layer. The page and README name a downstream readout as the next test.
+- `ablation()` can now measure short-term memory (massed training) as well as spaced.
+- Tests for the loop models, the stability and signs of the output network, loops acting only on change since learning, and short-term ablation.
+
 ## Run the memory model on the measured mushroom body
 
 - Sub-compartment labels are merged onto the fifteen canonical compartments (γ1, γ1p and γ1pedc are all γ1). Without this, a dopamine cell labelled γ1p never reached an output neuron labelled γ1pedc and 31 of 93 output neurons had no valence; now 6 do.

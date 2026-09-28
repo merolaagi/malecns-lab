@@ -1,6 +1,8 @@
 import json
 import unittest
 
+import numpy as np
+
 import memory as mem
 from tests_support.mbsynth import synthetic
 
@@ -76,6 +78,30 @@ class MemoryTests(unittest.TestCase):
         mb = mem.MushroomBody(data)
         mb.teach('A', 'punishment', mem.validate({}))
         self.assertLessEqual(float((mb.fast + mb.slow).max()), 1.0 + 1e-9)
+
+    def test_loop_models(self):
+        simple = mem.forgetting(self.data, 'punishment', True, loop_model='simple')['curve'][0]['preference']
+        signed = mem.forgetting(self.data, 'punishment', True, loop_model='signed')['curve'][0]['preference']
+        self.assertLess(simple, 0); self.assertLess(signed, 0)
+        with self.assertRaises(ValueError): mem.forgetting(self.data, loop_model='nonsense')
+
+    def test_output_network_is_signed_and_stable(self):
+        mb = mem.MushroomBody(self.data)
+        rows = np.abs(mb.mbon_mbon).sum(1)
+        self.assertTrue(np.all((rows < 1e-9) | (np.abs(rows - 1) < 1e-9)))     # unit input per target, so gain < 1 is stable
+        self.assertTrue(np.all(np.isfinite(mb.outputs('A'))))
+        off = mem.MushroomBody(self.data, condition='no_output_network')
+        self.assertEqual(off.network_gain, 0.0)
+
+    def test_signed_loops_act_on_the_change_since_learning(self):
+        mb = mem.MushroomBody(self.data)
+        np.testing.assert_allclose(mb.outputs('A'), mb.naive_outputs('A'))     # nothing learned: no loop drive yet
+        p = mem.validate({})
+        before = mb.fast.copy(); mb.teach('A', None, p)
+        np.testing.assert_allclose(mb.fast, before)                             # no reinforcer, no change: nothing written
+
+    def test_ablation_can_measure_short_term_memory(self):
+        self.assertFalse(mem.ablation(self.data, 'punishment', spaced=False)['spaced'])
 
     def test_missing_file_is_reported(self):
         from pathlib import Path

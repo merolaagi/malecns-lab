@@ -34,9 +34,15 @@ import numpy as np
 from model import BASE
 
 DEFAULT = dict(seed=7, sparsity=0.05, fast_rate=0.35, slow_rate=0.06, fast_hours=3.0, slow_hours=96.0,
-               spacing_hours=0.25, loop_gain=1.0, odour_fraction=0.1)
+               spacing_hours=0.25, loop_gain=1.0, odour_fraction=0.1, network_gain=0.6, loop_model='signed')
+LOOP_MODELS = {
+    'signed': 'Output neurons interact through their measured signed connections, and loops drive dopamine cells by the '
+              'change in output activity since learning, so a depressed inhibitory output neuron disinhibits its targets',
+    'simple': 'No output-to-output interactions, and loops as plain excitation from current output activity',
+}
 CONDITIONS = {
     'intact': 'Measured circuit',
+    'no_output_network': 'Output-to-output connections removed',
     'no_loops': 'MBON-to-DAN loops cut',
     'shuffled': 'KC-to-MBON destinations permuted, which scrambles compartment membership',
     'no_consolidation': 'No consolidated trace',
@@ -65,7 +71,7 @@ def load(path=None):
 
 
 class MushroomBody:
-    def __init__(self, data, condition='intact', seed=7, sparsity=0.05, odour_fraction=0.1):
+    def __init__(self, data, condition='intact', seed=7, sparsity=0.05, odour_fraction=0.1, network_gain=0.6, loop_model='signed'):
         if condition not in CONDITIONS: raise ValueError('Unknown condition')
         self.condition, self.rng = condition, np.random.default_rng(seed)
         nodes = data['nodes']
@@ -87,12 +93,14 @@ class MushroomBody:
 
         P, K, M = len(self.pn), len(self.kc), len(self.mbon)
         self.pn_kc = np.zeros((K, P)); self.kc_mbon = np.zeros((M, K)); self.mbon_dan = np.zeros((len(dans), M))
+        self.mbon_mbon = np.zeros((M, M))
         edges = data['edges']
         kc_mbon_pairs = []
         for pre, post, w in edges:
             if pre in self.pn and post in self.kc: self.pn_kc[self.kc[post], self.pn[pre]] += w
             elif pre in self.kc and post in self.mbon: kc_mbon_pairs.append((self.kc[pre], self.mbon[post], w))
             elif pre in self.mbon and post in self.dan: self.mbon_dan[self.dan[post], self.mbon[pre]] += w
+            elif pre in self.mbon and post in self.mbon and pre != post: self.mbon_mbon[self.mbon[post], self.mbon[pre]] += w
         if condition == 'shuffled' and kc_mbon_pairs:
             targets = self.rng.permutation([m for _, m, _ in kc_mbon_pairs])
             kc_mbon_pairs = [(k, int(t), w) for (k, _, w), t in zip(kc_mbon_pairs, targets)]
@@ -103,6 +111,13 @@ class MushroomBody:
         signs = np.array([-1.0 if str(n.get('nt')) in ('gaba', 'glutamate') else 1.0 for n in mbons])
         self.mbon_dan = np.log1p(self.mbon_dan) * signs[None, :]
         if condition == 'no_loops': self.mbon_dan[:] = 0
+        # Output neurons acting on each other, signed by the presynaptic transmitter, each target's input scaled
+        # to unit total so that network_gain < 1 keeps the recurrence stable.
+        self.mbon_mbon = np.log1p(self.mbon_mbon) * signs[None, :]
+        self.mbon_mbon /= np.maximum(np.abs(self.mbon_mbon).sum(1, keepdims=True), 1e-9)
+        self.loop_model = loop_model
+        self.network_gain = 0.0 if (condition == 'no_output_network' or loop_model == 'simple') else network_gain
+        self.naive = {}
 
         # Teaching: which reinforcer reaches which compartment, from the measured dopamine cells.
         self.family = np.array(['reward' if str(n['type']).startswith('PAM') else 'punishment' for n in dans])
@@ -136,9 +151,18 @@ class MushroomBody:
         code = np.zeros_like(drive); code[np.argsort(-drive)[:k]] = 1.0
         return code
 
-    def outputs(self, name):
-        strength = np.clip(1 - self.fast - self.slow, 0, 1)
-        return (self.kc_mbon * strength) @ self.kenyon(name)
+    def outputs(self, name, strength=None):
+        if strength is None: strength = np.clip(1 - self.fast - self.slow, 0, 1)
+        drive = (self.kc_mbon * strength) @ self.kenyon(name)
+        if not self.network_gain: return drive
+        activity = drive.copy()
+        for _ in range(30):                                   # settle the output network to its fixed point
+            activity = np.maximum(drive + self.network_gain * self.mbon_mbon @ activity, 0)
+        return activity
+
+    def naive_outputs(self, name):
+        if name not in self.naive: self.naive[name] = self.outputs(name, np.ones_like(self.kc_mbon))
+        return self.naive[name]
 
     def value(self, name):
         return float(self.valence @ self.outputs(name))
@@ -149,8 +173,15 @@ class MushroomBody:
         code = self.kenyon(name)
         dopamine = np.zeros(len(self.dan_nodes))
         if reinforcer in ('reward', 'punishment'): dopamine[self.family == reinforcer] = 1.0
-        loop = self.mbon_dan @ self.outputs(name)
-        dopamine = np.clip(dopamine + p['loop_gain'] * np.maximum(loop, 0) / max(np.abs(loop).max(), 1e-9) * 0.5, 0, 1)
+        if self.loop_model == 'signed':
+            # Relative change in each dopamine cell's loop input since learning: a depressed inhibitory output
+            # neuron raises it, a depressed excitatory one lowers it.
+            change = self.mbon_dan @ (self.outputs(name) - self.naive_outputs(name))
+            baseline = np.abs(self.mbon_dan) @ self.naive_outputs(name) + 1e-9
+            dopamine = np.clip(dopamine + p['loop_gain'] * change / baseline, 0, 1)
+        else:
+            loop = self.mbon_dan @ self.outputs(name)
+            dopamine = np.clip(dopamine + p['loop_gain'] * np.maximum(loop, 0) / max(np.abs(loop).max(), 1e-9) * 0.5, 0, 1)
         # Fraction of each compartment's dopamine cells that are active, in [0, 1]. Summing instead would scale
         # the teaching signal with how many cells a compartment has (PAM08 alone is 50 cells) and saturate it.
         compartment_signal = (dopamine @ self.dan_comp) / np.maximum(self.dan_comp.sum(0), 1.0)
@@ -187,8 +218,10 @@ def preference(mb, naive, trained='A', control='B'):
 
 def validate(options):
     p = DEFAULT | options
+    if p['loop_model'] not in LOOP_MODELS: raise ValueError('Unknown loop model')
     for key, lo, hi in [('sparsity', 0.01, 0.5), ('fast_rate', 0, 1), ('slow_rate', 0, 1), ('fast_hours', 0.1, 100),
-                        ('slow_hours', 1, 1000), ('spacing_hours', 0, 24), ('loop_gain', 0, 5), ('odour_fraction', 0.01, 0.5)]:
+                        ('slow_hours', 1, 1000), ('spacing_hours', 0, 24), ('loop_gain', 0, 5), ('odour_fraction', 0.01, 0.5),
+                        ('network_gain', 0, 0.95)]:
         p[key] = float(p[key])
         if not math.isfinite(p[key]) or not lo <= p[key] <= hi: raise ValueError(f'{key} must be between {lo} and {hi}')
     p['seed'] = int(p['seed'])
@@ -206,7 +239,7 @@ def train(mb, p, reinforcer, trials=5, spaced=False):
 
 def forgetting(data=None, reinforcer='punishment', spaced=False, condition='intact', hours=(0, 1, 3, 6, 24, 48, 96), **options):
     p = validate(options); data = data or load()
-    mb = MushroomBody(data, condition, p['seed'], p['sparsity'], p['odour_fraction'])
+    mb = MushroomBody(data, condition, p['seed'], p['sparsity'], p['odour_fraction'], p['network_gain'], p['loop_model'])
     naive = snapshot(mb)
     train(mb, p, reinforcer, spaced=spaced)
     curve, elapsed = [], 0.0
@@ -225,7 +258,7 @@ def extinction(data=None, condition='intact', exposures=6, recovery_hours=24, **
     separate, faster-fading memory rather than erasure of the original."""
     p = validate(options); data = data or load()
     def trained():
-        mb = MushroomBody(data, condition, p['seed'], p['sparsity'], p['odour_fraction'])
+        mb = MushroomBody(data, condition, p['seed'], p['sparsity'], p['odour_fraction'], p['network_gain'], p['loop_model'])
         naive = snapshot(mb); train(mb, p, 'punishment', spaced=True)
         return mb, naive
     extinguished, naive = trained()
@@ -250,23 +283,23 @@ def extinction(data=None, condition='intact', exposures=6, recovery_hours=24, **
             'spontaneous_recovery': bool(-sign * effect_now > 0.05 * abs(after_training) and abs(effect_later) < 0.5 * abs(effect_now))}
 
 
-def ablation(data=None, reinforcer='punishment', **options):
+def ablation(data=None, reinforcer='punishment', spaced=True, **options):
     """Block plasticity in one compartment at a time: which memories need which compartment?"""
     p = validate(options); data = data or load()
-    base = MushroomBody(data, 'intact', p['seed'], p['sparsity'], p['odour_fraction'])
+    base = MushroomBody(data, 'intact', p['seed'], p['sparsity'], p['odour_fraction'], p['network_gain'], p['loop_model'])
     rows = []
     for compartment in [None] + base.compartments:
-        mb = MushroomBody(data, 'intact', p['seed'], p['sparsity'], p['odour_fraction'])
+        mb = MushroomBody(data, 'intact', p['seed'], p['sparsity'], p['odour_fraction'], p['network_gain'], p['loop_model'])
         if compartment is not None:
             mb.dan_comp[:, mb.comp_index[compartment]] = 0.0
         naive = snapshot(mb)
-        train(mb, p, reinforcer, spaced=True)
+        train(mb, p, reinforcer, spaced=spaced)
         rows.append({'blocked': compartment or 'none', 'memory': round(preference(mb, naive), 4),
                      'teachers': sorted({n['type'] for n in mb.dan_nodes if compartment in n['canonical_out']}) if compartment else [],
                      'readers': sorted({n['type'] for n in mb.mbon_nodes if compartment in n['canonical_in']}) if compartment else []})
     full = rows[0]['memory']
     for row in rows[1:]: row['share_lost'] = round(1 - row['memory'] / full, 3) if abs(full) > 1e-9 else None
-    return {'reinforcer': reinforcer, 'rows': rows}
+    return {'reinforcer': reinforcer, 'spaced': spaced, 'rows': rows}
 
 
 def report(seed=7, **options):
@@ -280,6 +313,10 @@ def report(seed=7, **options):
         'controls': {c: forgetting(data, 'punishment', True, condition=c, **common)['curve'][0]['preference']
                      for c in CONDITIONS},
         'extinction': {c: extinction(data, condition=c, **common) for c in ('intact', 'no_loops')},
+        'loop_models': {model: {'extinction': extinction(data, loop_model=model, **common)['extinction_fraction'],
+                                'gamma1_share': next(r['share_lost'] for r in ablation(data, 'punishment', loop_model=model, **common)['rows']
+                                                     if r['blocked'] == 'γ1'),
+                                'text': LOOP_MODELS[model]} for model in LOOP_MODELS},
         'ablation': {r: ablation(data, r, **common) for r in ('punishment', 'reward')},
         'conditions': CONDITIONS,
         'interpretation': 'Measured cells, compartments and edges; assumed learning rule, rates, time constants, valence '
