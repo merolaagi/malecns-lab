@@ -14,8 +14,8 @@ class MemoryTests(unittest.TestCase):
 
     def test_valence_comes_from_the_teachers(self):
         mb = mem.MushroomBody(self.data)
-        by_compartment = {n['compartments_in'][0]: v for n, v in zip(mb.mbon_nodes, mb.valence)}
-        self.assertEqual(by_compartment['γ1pedc'], 1.0)      # punishment-taught: approach-promoting
+        by_compartment = {n['canonical_in'][0]: v for n, v in zip(mb.mbon_nodes, mb.valence)}
+        self.assertEqual(by_compartment['γ1'], 1.0)      # punishment-taught: approach-promoting
         self.assertEqual(by_compartment['γ4'], -1.0)         # reward-taught: avoidance-promoting
 
     def test_punishment_teaches_avoidance_and_reward_approach(self):
@@ -40,9 +40,9 @@ class MemoryTests(unittest.TestCase):
 
     def test_ablation_is_compartment_specific(self):
         rows = {r['blocked']: r for r in mem.ablation(self.data, 'punishment')['rows']}
-        self.assertLess(abs(rows['γ1pedc']['memory']), abs(rows['none']['memory']))   # a punishment compartment
+        self.assertLess(abs(rows['γ1']['memory']), abs(rows['none']['memory']))       # a punishment compartment
         self.assertAlmostEqual(rows['γ5']['memory'], rows['none']['memory'], places=6)  # a reward compartment
-        self.assertEqual(rows['γ1pedc']['teachers'], ['PPL101'])
+        self.assertEqual(rows['γ1']['teachers'], ['PPL101'])
 
     def test_shuffled_wiring_changes_the_memory(self):
         intact = self.curve('punishment', True)[0]
@@ -56,6 +56,26 @@ class MemoryTests(unittest.TestCase):
         for bad in [{'sparsity': 0.9}, {'fast_rate': 2}, {'loop_gain': -1}]:
             with self.assertRaises(ValueError): mem.forgetting(self.data, **bad)
         with self.assertRaises(ValueError): mem.MushroomBody(self.data, condition='nonsense')
+
+    def test_subcompartments_collapse_to_the_fifteen(self):
+        self.assertEqual(mem.canonical('γ1pedc'), 'γ1'); self.assertEqual(mem.canonical('γ1p'), 'γ1')
+        self.assertEqual(mem.canonical("β'2m"), "β'2"); self.assertEqual(mem.canonical("α'3a"), "α'3")
+        self.assertEqual(mem.canonical('α2s'), 'α2'); self.assertIsNone(mem.canonical('α lobe'))
+
+    def test_traces_only_decay_after_training(self):
+        # Regression: summed dopamine drive saturated the traces, so memory appeared to grow after training.
+        for reinforcer in ('punishment', 'reward'):
+            curve = [abs(v) for v in self.curve(reinforcer, False)]
+            self.assertTrue(all(a >= b - 1e-9 for a, b in zip(curve, curve[1:])), reinforcer)
+
+    def test_teaching_signal_is_bounded_by_compartment_size(self):
+        data = synthetic()
+        for n in [n for n in data['nodes'] if n['role'] == 'DAN'][:2]:          # clone teachers many times
+            for k in range(30):
+                clone = dict(n, bodyId=n['bodyId'] * 100 + k); data['nodes'].append(clone)
+        mb = mem.MushroomBody(data)
+        mb.teach('A', 'punishment', mem.validate({}))
+        self.assertLessEqual(float((mb.fast + mb.slow).max()), 1.0 + 1e-9)
 
     def test_missing_file_is_reported(self):
         from pathlib import Path

@@ -7,6 +7,14 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.
 - The arena trace now carries each agent's leg phases and strides; the view fits itself to the trajectories, and faint haloes show the odour field.
 
+## Run the memory model on the measured mushroom body
+
+- Sub-compartment labels are merged onto the fifteen canonical compartments (γ1, γ1p and γ1pedc are all γ1). Without this, a dopamine cell labelled γ1p never reached an output neuron labelled γ1pedc and 31 of 93 output neurons had no valence; now 6 do.
+- Bug fixed: the teaching signal summed over a compartment's dopamine cells (PAM08 alone is 50 cells), saturating the traces so appetitive memory appeared to grow for hours after training. It is now the fraction of a compartment's teachers that are active. Regression tests check that memory only decays after training and that the signal stays bounded however many teachers a compartment has.
+- Spontaneous recovery is only reported when there was extinction to recover from.
+- Results: aversive memory spreads over the six PPL1-taught compartments (α2 21%, α′1 19%, γ2 17%, α′3 14%, α′2 9%, γ1 8%), appetitive over the seven PAM-taught ones (β′1 39%, β′2 22%, α1 17%, γ5 12%, γ4 11%, β2 6%, β1 4%), with no overlap. Spaced training outlasts massed for both reinforcers. The measured loops weaken appetitive memory and produce no extinction in this model; γ1 carries far less aversive memory than fly experiments show. Both mismatches are documented as limits of the simplified loop and readout.
+- PPL107 and PPL108 make only 13 and 1 synapses onto Kenyon cells, so they are correctly not compartment teachers.
+
 ## Add the mushroom-body memory model
 
 - `memory.py` and `/memory`: odour encoding through measured projection-neuron-to-Kenyon-cell wiring, compartment-specific depression of Kenyon-cell-to-output synapses gated by the dopamine cells measured to innervate each compartment, output valence derived from each compartment's teachers, a labile trace plus a consolidated trace that forms only with spaced training, and extinction written through the measured MBON-to-DAN loops.

@@ -43,6 +43,20 @@ CONDITIONS = {
 }
 
 
+import re
+CANONICAL = re.compile(r"^(γ|α'|β'|α|β)(\d)")
+
+
+def canonical(compartment):
+    """The fifteen named compartments, without sub-compartment suffixes.
+
+    Instance names split some compartments further (gamma1, gamma1p and gamma1pedc are all gamma1;
+    beta'2a, beta'2m and beta'2p are all beta'2). Teaching must be matched at the compartment level, or a
+    dopamine cell labelled gamma1p never reaches an output neuron labelled gamma1pedc."""
+    match = CANONICAL.match(str(compartment))
+    return f'{match.group(1)}{match.group(2)}' if match else None
+
+
 def load(path=None):
     path = Path(path or BASE / 'data/mushroom-body.json')
     if not path.exists():
@@ -60,13 +74,15 @@ class MushroomBody:
         self.pn = {n['bodyId']: i for i, n in enumerate(by_role['PN'])}
         self.kc = {n['bodyId']: i for i, n in enumerate(by_role['KC'])}
         # Output neurons without a compartment cannot be taught or read by valence, so they are left out.
-        mbons = [n for n in by_role['MBON'] if n['compartments_in']]
+        for n in by_role['MBON']: n['canonical_in'] = sorted({c for c in map(canonical, n['compartments_in']) if c})
+        for n in by_role['DAN']: n['canonical_out'] = sorted({c for c in map(canonical, n['compartments_out']) if c})
+        mbons = [n for n in by_role['MBON'] if n['canonical_in']]
         self.mbon = {n['bodyId']: i for i, n in enumerate(mbons)}
         self.mbon_nodes = mbons
-        dans = [n for n in by_role['DAN'] if n['compartments_out']]
+        dans = [n for n in by_role['DAN'] if n['canonical_out']]
         self.dan = {n['bodyId']: i for i, n in enumerate(dans)}
         self.dan_nodes = dans
-        self.compartments = sorted({c for n in mbons for c in n['compartments_in']} | {c for n in dans for c in n['compartments_out']})
+        self.compartments = sorted({c for n in mbons for c in n['canonical_in']} | {c for n in dans for c in n['canonical_out']})
         self.comp_index = {c: i for i, c in enumerate(self.compartments)}
 
         P, K, M = len(self.pn), len(self.kc), len(self.mbon)
@@ -92,11 +108,11 @@ class MushroomBody:
         self.family = np.array(['reward' if str(n['type']).startswith('PAM') else 'punishment' for n in dans])
         self.dan_comp = np.zeros((len(dans), len(self.compartments)))
         for i, n in enumerate(dans):
-            for c in n['compartments_out']: self.dan_comp[i, self.comp_index[c]] = 1.0
+            for c in n['canonical_out']: self.dan_comp[i, self.comp_index[c]] = 1.0
         # Each output neuron's teachers and the valence that follows from them.
         self.mbon_comp = np.zeros((M, len(self.compartments)))
         for i, n in enumerate(mbons):
-            for c in n['compartments_in']: self.mbon_comp[i, self.comp_index[c]] = 1.0 / len(n['compartments_in'])
+            for c in n['canonical_in']: self.mbon_comp[i, self.comp_index[c]] = 1.0 / len(n['canonical_in'])
         punishment = self.dan_comp[self.family == 'punishment'].sum(0); reward = self.dan_comp[self.family == 'reward'].sum(0)
         teacher = self.mbon_comp @ np.sign(punishment - reward)
         self.valence = np.where(teacher > 0, 1.0, np.where(teacher < 0, -1.0, 0.0))   # +1 approach, -1 avoid
@@ -135,7 +151,9 @@ class MushroomBody:
         if reinforcer in ('reward', 'punishment'): dopamine[self.family == reinforcer] = 1.0
         loop = self.mbon_dan @ self.outputs(name)
         dopamine = np.clip(dopamine + p['loop_gain'] * np.maximum(loop, 0) / max(np.abs(loop).max(), 1e-9) * 0.5, 0, 1)
-        compartment_signal = dopamine @ self.dan_comp                       # dopamine reaching each compartment
+        # Fraction of each compartment's dopamine cells that are active, in [0, 1]. Summing instead would scale
+        # the teaching signal with how many cells a compartment has (PAM08 alone is 50 cells) and saturate it.
+        compartment_signal = (dopamine @ self.dan_comp) / np.maximum(self.dan_comp.sum(0), 1.0)
         gate = self.mbon_comp @ compartment_signal                          # reaching each output neuron's synapses
         room = np.clip(1 - self.fast - self.slow, 0, 1)
         self.fast += p['fast_rate'] * gate[:, None] * code[None, :] * room
@@ -228,7 +246,8 @@ def extinction(data=None, condition='intact', exposures=6, recovery_hours=24, **
             'extinction_effect': round(effect_now, 4), 'extinction_effect_after_delay': round(effect_later, 4),
             'extinction_fraction': round(-sign * effect_now / max(abs(after_training), 1e-9), 3),
             'extinguished': bool(-sign * effect_now > 0.05 * abs(after_training)),
-            'spontaneous_recovery': bool(abs(effect_later) < 0.5 * abs(effect_now)) if abs(effect_now) > 1e-6 else False}
+            # Recovery only means something when there was extinction to recover from.
+            'spontaneous_recovery': bool(-sign * effect_now > 0.05 * abs(after_training) and abs(effect_later) < 0.5 * abs(effect_now))}
 
 
 def ablation(data=None, reinforcer='punishment', **options):
@@ -243,8 +262,8 @@ def ablation(data=None, reinforcer='punishment', **options):
         naive = snapshot(mb)
         train(mb, p, reinforcer, spaced=True)
         rows.append({'blocked': compartment or 'none', 'memory': round(preference(mb, naive), 4),
-                     'teachers': sorted({n['type'] for n in mb.dan_nodes if compartment in n['compartments_out']}) if compartment else [],
-                     'readers': sorted({n['type'] for n in mb.mbon_nodes if compartment in n['compartments_in']}) if compartment else []})
+                     'teachers': sorted({n['type'] for n in mb.dan_nodes if compartment in n['canonical_out']}) if compartment else [],
+                     'readers': sorted({n['type'] for n in mb.mbon_nodes if compartment in n['canonical_in']}) if compartment else []})
     full = rows[0]['memory']
     for row in rows[1:]: row['share_lost'] = round(1 - row['memory'] / full, 3) if abs(full) > 1e-9 else None
     return {'reinforcer': reinforcer, 'rows': rows}

@@ -473,7 +473,31 @@ Some cells carry no compartment in their name (PPL107 and PPL108 among the avers
 
 Experiments: forgetting after massed and spaced training for both reinforcers, extinction with and without the loops, compartment-by-compartment ablation (the direct test of "is memory everywhere?"), and controls with the loops cut, Kenyon-cell-to-output destinations permuted (which scrambles compartment membership) and no consolidation.
 
-The model is validated on a small synthetic mushroom body with the published layout (`tests_support/mbsynth.py`): punishment teaches avoidance and reward approach; spaced training leaves a trace at 96 hours where massed training leaves none; blocking a punishment-taught compartment weakens aversive memory while blocking a reward-taught one does not; extinction happens only with the loops intact and fades back after a day, as a separate memory should. Those are checks that the model behaves correctly, not findings about the fly; the results on the measured circuit come from `data/mushroom-body.json`.
+The model is validated on a small synthetic mushroom body with the published layout (`tests_support/mbsynth.py`): punishment teaches avoidance and reward approach; spaced training leaves a trace at 96 hours where massed training leaves none; blocking a punishment-taught compartment weakens aversive memory while blocking a reward-taught one does not; extinction happens only with the loops intact and fades back after a day, as a separate memory should. Those are checks that the model behaves correctly, not findings about the fly.
+
+### Results on the measured circuit
+
+The measured mushroom body has all fifteen compartments once sub-compartment labels are merged (γ1, γ1p and γ1pedc are all γ1; β′2a, β′2m and β′2p are all β′2), with 326 dopamine cells teaching in them and 87 of 93 output neurons assigned a valence from their compartment's teachers: 50 approach-promoting and 37 avoidance-promoting. PPL107 and PPL108 make only 13 and 1 synapses onto Kenyon cells, so they are not compartment teachers at all, and the calyx-innervating PPL2 cells are excluded by design.
+
+**Is memory everywhere?** No, and not in one place either. Blocking plasticity one compartment at a time after spaced training:
+
+| Aversive memory, lost when blocked | | Appetitive memory, lost when blocked | |
+|---|---|---|---|
+| α2 (PPL105) | 21% | β′1 (PAM13, PAM14) | 39% |
+| α′1 (PPL103) | 19% | β′2 (PAM02, 03, 05, 06, 15) | 22% |
+| γ2 (PPL103) | 17% | α1 (PAM11) | 17% |
+| α′3 (PPL104) | 14% | γ5 (PAM01, PAM15) | 12% |
+| α′2 (PPL105) | 9% | γ4 (PAM07, PAM08) | 11% |
+| γ1 (PPL101, PPL102) | 8% | β2 (PAM03, PAM04) | 6% |
+| | | β1 (PAM09, PAM10) | 4% |
+
+Each memory is spread across a handful of compartments set by where its teachers innervate, no single compartment holds more than 39%, and the two sets do not overlap: aversive memory lives in the six compartments the PPL1 cells teach, appetitive memory in the seven the PAM cells teach. That separation comes from the measured innervation, not from the model.
+
+Blocking some aversive compartments strengthens appetitive memory (α′3 by 20%, α2 by 11%): during reward training the output neurons drive the PPL1 cells through the measured loops, writing an opposing trace, and removing it helps. Cutting the loops entirely raises appetitive memory from 0.22 to 0.30 while leaving aversive memory unchanged.
+
+**Where the model and the fly disagree.** γ1, taught by PPL101, is the compartment most strongly required for short-term aversive memory in fly experiments, but here it carries only 8%. And with the measured loops, this model produces no extinction (effect −0.001), where flies extinguish readily; the synthetic circuit extinguished only because its loop was built to. Both point at the same limitation: output neurons are weighted only by their Kenyon-cell input, loop effects are reduced to excitation onto dopamine cells, and the real extinction pathways, which involve specific output-to-dopamine connections and their signs, are not captured by that simplification.
+
+**Spacing works for both reinforcers:** aversive memory from spaced training is −0.033 at 96 hours against 0 after massed training, and appetitive +0.018 against 0. Scrambling compartment membership (Kenyon-cell-to-output destinations permuted) changes memory only modestly (aversive −0.40 against −0.43), because the teaching signal is gated by the output neuron's compartment rather than the Kenyon cell's.
 
 Assumed throughout: the learning rule, rates and time constants, the consolidation rule, PAM as rewarding and PPL1 as punishing (the real fly has exceptions), the valence rule, random odour codes and the readout.
 
