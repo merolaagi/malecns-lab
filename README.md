@@ -443,6 +443,50 @@ Rescaled to a common spectral radius, every placement scores the same (memory 8.
 .venv/bin/python -m unittest -v test_inhibition.py
 ```
 
+## Object memory: seeing, remembering, recognising a variant (new)
+
+Open `/objects`. The question: can the measured circuit take a sensation (a cup under some light), store it, and use the memory to recognise a slightly different sensation (another cup, other light, another distance)? This is the fly's version of what tbp.monty attempts, and the page says plainly where it differs.
+
+The route is measured. About 7% of Kenyon cells take visual rather than olfactory input: in `data/mushroom-body.json`, 252 of 4,064 get no olfactory projection-neuron input and 51 more get under ten synapses, almost all KCg-d (173 of 206) and KCab-p (70 of 129). They feed the same compartments and dopamine teachers as the olfactory memory.
+
+Pipeline (`objects.py`):
+
+1. **Scene.** Paper cup, mug, bottle, wine glass and can as shaded surfaces of revolution (the mug with a handle that turns with rotation, the glass mostly see-through), under varied light level, light direction, distance, gaze and per-instance shape.
+2. **Eye.** 721 hexagonal columns at 5°, the lab's eye-model layout, each averaging the scene over its acceptance angle, with photoreceptor noise.
+3. **Lamina.** Contrast against the local and global mean (L1/L2-style adaptation), split into ON, OFF and three edge orientations.
+4. **Visual projection neurons.** Each pools one channel over a receptive field, then rectifies and saturates. Measured optic-lobe hex coordinates set the centre when annotated.
+5. **Kenyon cells.** Measured input wiring onto visual Kenyon cells, top-k sparse (APL).
+6. **Memory.** `memory.py` unchanged: reward depresses active Kenyon-cell synapses in the compartments PAM cells reach; the readout is the change in approach drive.
+7. **Tests.** Held-out views per factor (dim, bright, side light, nearer or farther, new kinds), pairwise discrimination, a continuous cup-to-bottle morph, 1–8 glimpses averaged, and a differential protocol (cup rewarded, mug punished).
+
+Step 1 needs the raw tables:
+
+```sh
+.venv/bin/python build_visualmemory.py raw-data --probe   # who feeds visual vs olfactory Kenyon cells, and ring neurons
+.venv/bin/python build_visualmemory.py raw-data           # writes data/visual-memory.json
+.venv/bin/python objects.py --benchmark                   # five seeds, five circuits, plus the differential protocol
+```
+
+Until `data/visual-memory.json` exists, a **synthetic stand-in** (120 random inputs, 6 per visual Kenyon cell) replaces the visual wiring and the page flags it. With the stand-in, the shuffled and random controls compare random against random, so they say nothing about the measured wiring yet; the other results do not depend on it.
+
+First results (synthetic visual inputs, measured everything downstream, five seeds, AUC for the trained cup against the other four objects, one look):
+
+| | familiar | dim | bright | side light | nearer/farther | new kinds |
+|---|---|---|---|---|---|---|
+| Adapting eye | 0.90 | 0.85 | 0.81 | 0.78 | 0.58 | 0.83 |
+| No adaptation | 0.78 | 0.58 | 0.80 | 0.60 | 0.66 | 0.76 |
+
+- **Lighting invariance comes from the eye, not the memory.** Without lamina adaptation, dim light collapses recognition (paired −0.27, 0 of 5 seeds better) and side light costs −0.18. With adaptation, halving the light leaves visual-input codes 0.998 alike; without it they fall to 0.08.
+- **Size is not invariant.** Recognition falls to near chance when the object is nearer or farther than in training. Nothing in this pathway rescales the image; the model sees a cup at another distance as a different object.
+- **Similar shapes share a memory.** Kenyon-cell codes for cup, mug and can overlap about as much as two cups do; bottle and wine glass separate. The expansion decorrelates: along the cup-to-bottle morph, visual-input overlap stays above 0.83 while Kenyon-cell overlap falls to 0.30.
+- **Glimpses do not help here.** Averaging up to eight re-fixations leaves AUC flat, because the errors come from the object and its lighting, not from per-look noise.
+- **Differential training sharpens the contrast and shifts the peak.** Rewarding cups and punishing mugs raises cup-vs-mug discrimination in dim and bright light (0.72 → 0.81, 0.65 → 0.81), but untrained bottles and glasses then score as high as cups. The memory becomes "not a mug" more than "a cup". Along the cup-to-bottle morph the response peaks away from the punished mug (1.15 at a quarter of the way), the peak shift seen in animal discrimination learning.
+- **Moving the same wiring onto olfactory Kenyon cells** lowers familiar recognition (−0.10, 0 of 5), so the measured outputs of the visual Kenyon cells carry it somewhat better than the olfactory ones.
+
+**Not Monty.** Monty learns features at locations in an object-centred reference frame and moves its sensors to build that model. Nothing here builds an object frame: glimpses add evidence, they do not assemble a model. The fly's closest mechanism, ring neurons whose synapses onto the compass neurons bind a visual scene to heading, works in an egocentric frame and is probed but not modelled here.
+
+Assumed: the objects and renderer, monochrome vision, the lamina model, each input's channel (shared within a type) and receptive field, the input nonlinearity, 10% Kenyon-cell sparseness among receiving cells, the viewing distances (10–14 cm in training), and everything `memory.py` assumes.
+
 ## Memory: the mushroom body, rebuilt for it (new, in progress)
 
 Olfactory associative memory in the fly lives in the mushroom body, and its mechanism is well enough known to model honestly. An odour activates a sparse set of Kenyon cells; their axons run through about fifteen compartments, each with its own dopamine neurons delivering a teaching signal and its own output neurons reading out. When an odour's Kenyon cells fire together with a compartment's dopamine neurons, the Kenyon-cell-to-output synapses in that compartment weaken, and that weakened set of synapses is the memory. Presenting the odour again drives that compartment's output neuron less, tipping the balance of the output population toward approach or avoidance. The wiring decides where a memory can be written; the weights decide what it says. A connectome cannot show memory contents, since short-term memory changes synaptic strength rather than synapse count, but it can show exactly where memory can be written.

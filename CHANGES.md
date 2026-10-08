@@ -2,6 +2,14 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Object memory: perceive, remember, recognise a variant
+
+- `build_visualmemory.py` (probe and build): the visual inputs onto the visual Kenyon cells (KCg-d, KCab-p) with synapse counts, types, sides and optic-lobe hex coordinates; the probe also compares inputs to olfactory Kenyon cells and lists what reaches the ring neurons.
+- `objects.py` and `/objects`: rendered cups, mugs, bottles, wine glasses and cans under varied light, distance, rotation and shape; a 721-column eye with lamina contrast adaptation; visual projection neurons; the measured Kenyon-cell and compartment memory. Experiments: held-out lighting, distance and instance tests, pairwise discrimination, a cup-to-bottle morph with code overlaps at each stage, glimpse averaging, and differential training. Controls: no adaptation, shuffled and random visual inputs, and the wiring moved onto olfactory Kenyon cells.
+- Live view: the scene, the photoreceptor mosaic and the adapted contrast, with the trained memory's response, as you move the sliders.
+- Results (synthetic visual inputs until the builder runs): lighting invariance comes from the eye's adaptation (dim light −0.27 AUC without it); there is no size invariance; the expansion decorrelates similar objects; glimpses don't help; differential training sharpens cup against mug and produces a peak shift.
+- `data/objects-benchmark.json`: five seeds, five circuits, plus the differential protocol. Tests in `test_objects.py`.
+
 ## Draw the arena agents as flies
 
 - Arena agents are drawn to scale (2.5 mm body) with abdomen, thorax, head, antennae, six legs animated by each agent's own leg oscillators, and wings that fold back except when a male extends one while singing, reusing the motion lab's fly drawing.

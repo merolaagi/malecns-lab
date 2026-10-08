@@ -20,6 +20,7 @@ import navigation
 import spectral
 import inhibition
 import memory
+import objects
 from neuron_inputs import NeuronIndex
 from urllib.parse import urlparse, parse_qs
 import gcs
@@ -92,7 +93,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, LEARNING.data)
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
-        files = {'/memory': ('memory.html', 'text/html; charset=utf-8'),
+        files = {'/objects': ('objects.html', 'text/html; charset=utf-8'),
+                 '/objects.js': ('objects.js', 'text/javascript; charset=utf-8'),
+                 '/api/objects-benchmark': ('data/objects-benchmark.json', 'application/json; charset=utf-8'),
+                 '/memory': ('memory.html', 'text/html; charset=utf-8'),
                  '/memory.js': ('memory.js', 'text/javascript; charset=utf-8'),
                  '/inhibition': ('inhibition.html', 'text/html; charset=utf-8'),
                  '/inhibition.js': ('inhibition.js', 'text/javascript; charset=utf-8'),
@@ -164,7 +168,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send(200, file.read_bytes(), mime)
 
     def do_POST(self):
-        if self.path not in ['/api/run', '/api/learn', '/api/numerosity', '/api/math', '/api/membrane', '/api/sdr', '/api/vision', '/api/expansion', '/api/theory', '/api/arena', '/api/synapse', '/api/synapse-shunting', '/api/navigation', '/api/spectral', '/api/inhibition', '/api/memory']: return self.send(404, {'error': 'Not found'})
+        if self.path not in ['/api/run', '/api/learn', '/api/numerosity', '/api/math', '/api/membrane', '/api/sdr', '/api/vision', '/api/expansion', '/api/theory', '/api/arena', '/api/synapse', '/api/synapse-shunting', '/api/navigation', '/api/spectral', '/api/inhibition', '/api/memory', '/api/objects', '/api/objects-view']: return self.send(404, {'error': 'Not found'})
         # The app is same-origin. Reject browser requests originating elsewhere.
         # Behind an HTTPS proxy such as a Cloudflare tunnel the page origin is https://<host>,
         # so both schemes are accepted for the same Host; other sites are still refused.
@@ -191,7 +195,9 @@ class Handler(BaseHTTPRequestHandler):
                        '/api/navigation': {'seed','outbound_s','homing_s','speed','connectivity','condition','turn_noise','gain','compass_noise'},
                        '/api/spectral': {'name','normalisation','seed'},
                        '/api/inhibition': {'placement','scaling','cells','seed','radius','steps','delays','leak','noise'},
-                       '/api/memory': {'seed'}}[self.path]
+                       '/api/memory': {'seed'},
+                       '/api/objects': {'seed','condition','trained','sparsity','train_views','exemplars','glimpses','morph_to','noise','protocol','contrast'},
+                       '/api/objects-view': {'cls','light','light_az','distance','rotation','morph','morph_to','seed','trained','condition','protocol','contrast'}}[self.path]
             if set(options) - allowed: raise ValueError('Unknown parameter')
         except (ValueError, TypeError) as e: return self.send(400, {'error': str(e)})
         if not LOCK.acquire(blocking=False): return self.send(409, {'error': 'An experiment is already running'})
@@ -207,7 +213,7 @@ class Handler(BaseHTTPRequestHandler):
                        '/api/synapse': SYNAPSES.run, '/api/synapse-shunting': SYNAPSES.shunting,
                        '/api/navigation': navigation.run, '/api/spectral': spectral.compare,
                        '/api/inhibition': (lambda **o: inhibition.run(o.pop('placement', 'measured'), **o)),
-                       '/api/memory': memory.report}[self.path]
+                       '/api/memory': memory.report, '/api/objects': objects.run, '/api/objects-view': objects.view}[self.path]
                 result = run(**options)
             self.send(200, result)
         except (ValueError, TypeError, OverflowError) as e:

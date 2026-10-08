@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Object memory</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>
+main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}
+.views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.views figure{margin:0}.views figcaption{font-size:11px;color:var(--muted);margin-top:6px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:14px;font-size:12px}
+.controls label{display:flex;flex-direction:column;gap:4px;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--muted);margin-top:12px}.stats b{color:var(--text);font-weight:500}
+.badge{display:inline-block;padding:2px 8px;border:1px solid var(--line);font-size:11px;margin-left:8px}
+.badge.synthetic{color:#f2c46f;border-color:#6d5a2c}.badge.measured{color:#c2e899;border-color:#46602f}
+@media(max-width:900px){.views{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ object memory</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/memory">Memory</a><a href="/vision">Vision network</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a><a href="/navigation">Navigation</a><a href="/inhibition">Inhibition</a><a href="/spectrum">Spectra</a><a href="/arena3d">3D arena</a><a href="/body">Body studio</a><a href="/synapse">Synapses</a><a href="/explore">Neuron explorer</a></nav></header>
+<main class="wb">
+<h1>Seeing a cup, remembering it, recognising a different one <span id="source" class="badge"></span></h1>
+<p class="sub">An object is rendered, sampled by 721 eye columns, contrast-adapted as in the lamina, pooled by visual projection neurons, sparsely coded by the visual Kenyon cells (KCg-d, KCab-p), and stored by dopamine in mushroom-body compartments. Then the fly sees new lighting, new distances and new kinds of cup.</p>
+<div class="notice"><strong>Measured:</strong> Kenyon cells, output and dopamine neurons, compartments and their edges; the visual inputs onto Kenyon cells once <code>build_visualmemory.py</code> has run (until then a random stand-in, flagged above). <strong>Assumed:</strong> the objects and renderer, the lamina model, each input's feature channel and receptive field, the sparseness, and the memory model's rules. Vision is monochrome here. <strong>Not Monty:</strong> nothing builds an object-centred reference frame. Extra glimpses add evidence; they don't assemble a model of the object.</div>
+
+<div class="wb-card" style="margin-top:20px"><h2>What the fly sees</h2>
+<div class="controls">
+<label>Object<select id="cls"></select></label>
+<label>Light level <input id="light" type="range" min="0.2" max="2.4" step="0.05" value="1"><span id="lightv">1.00</span></label>
+<label>Light direction <input id="light_az" type="range" min="-85" max="85" step="5" value="0"><span id="azv">0°</span></label>
+<label>Distance <input id="distance" type="range" min="5" max="30" step="0.5" value="12"><span id="distv">12 cm</span></label>
+<label>Rotation <input id="rotation" type="range" min="0" max="360" step="10" value="90"><span id="rotv">90°</span></label>
+<label>Morph toward <select id="morph_to"></select></label>
+<label>Morph <input id="morph" type="range" min="0" max="1" step="0.05" value="0"><span id="morphv">0.00</span></label>
+</div>
+<div class="views">
+<figure><canvas id="human" style="height:260px"></canvas><figcaption>Rendered scene, 0.6° pixels (roughly what you would see)</figcaption></figure>
+<figure><canvas id="fly" style="height:260px"></canvas><figcaption>Photoreceptors: 721 columns at 5°, one eye</figcaption></figure>
+<figure><canvas id="lamina" style="height:260px"></canvas><figcaption>After lamina adaptation: green brighter, red darker than the surround</figcaption></figure>
+</div>
+<div class="stats" id="viewstats"></div>
+</div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Remember one object, test on variants</h2>
+<div class="wb-bar"><label>Seed<input id="seed" type="number" min="0" max="999999" value="7"></label>
+<label>Trained<select id="trained"></select></label>
+<label>Protocol<select id="protocol"><option value="absolute">Rewarded object only</option><option value="differential">Reward vs punished contrast</option></select></label>
+<label>Contrast<select id="contrast"></select></label>
+<label>Circuit<select id="condition"></select></label>
+<button id="run">Run experiment</button><span class="wb-status" id="status" role="status"></span></div>
+<div id="result" style="margin-top:14px"><p class="hint">Run an experiment, or read the saved five-seed benchmark below.</p></div>
+<div class="num-grid" style="margin-top:16px">
+  <div><h3 style="font-size:12px;margin:0 0 6px">Morph from the trained object</h3><canvas id="morphplot" style="height:240px"></canvas>
+  <p class="hint">Green: memory response relative to the trained object. Grey: overlap of visual-input codes (cosine). Gold: overlap of Kenyon-cell codes (Jaccard).</p></div>
+  <div><h3 style="font-size:12px;margin:0 0 6px">More glimpses</h3><canvas id="glimpseplot" style="height:240px"></canvas>
+  <p class="hint">Recognition (AUC, trained object against the others) when the responses of 1 to 8 re-fixations are averaged.</p></div>
+</div>
+</div>
+
+<div class="wb-card" style="margin-top:20px"><h2>How alike objects look at each stage</h2>
+<div class="num-grid"><div><h3 style="font-size:12px;margin:0 0 6px">Visual projection neurons (cosine)</h3><canvas id="simvpn" style="height:250px"></canvas></div>
+<div><h3 style="font-size:12px;margin:0 0 6px">Kenyon cells (Jaccard)</h3><canvas id="simkc" style="height:250px"></canvas></div></div>
+<p class="hint" id="lightnote"></p></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Saved benchmark: five seeds, every circuit</h2><div id="bench"><p class="hint">Loading…</p></div></div>
+</main>
+<script src="/objects.js"></script>
+</body></html>
