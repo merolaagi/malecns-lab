@@ -78,9 +78,30 @@ class ObjectMemoryTest(unittest.TestCase):
         lab = objects.Lab(3, 'intact', 0.1, 0.01, self.mb)
         name, _, vpn = lab.sense(objects.spec('can'), dict(light=1, light_az=0, distance=12, rotation=0, gaze=(0, 0)))
         code = lab.mb.kenyon(name)
-        self.assertEqual(int(code.sum()), max(1, round(0.1 * len(lab.mb.receivers))))
+        drive = lab.mb.pn_kc @ vpn
+        self.assertEqual(lab.mb.k, max(1, round(0.1 * len(lab.mb.visual_kcs))))
+        self.assertTrue(0 < code.sum() <= lab.mb.k)
+        self.assertTrue(np.all(drive[code > 0] > 0))                 # a cell with no drive never fires
         self.assertTrue(set(np.flatnonzero(code)) <= set(lab.mb.receivers))
         self.assertTrue(np.all((vpn >= 0) & (vpn <= 1)))
+
+    def test_visual_input_is_normalised_by_total_input(self):
+        mb = small_mb()
+        kcs = [n['bodyId'] for n in mb['nodes'] if n['role'] == 'KC']
+        pns = {n['bodyId'] for n in mb['nodes'] if n['role'] == 'PN'}
+        mb['edges'] = [e for e in mb['edges'] if not (e[0] in pns and e[1] % 3 == 0)]   # visual KCs: no olfactory input
+        olfactory = next(b for b in kcs if b % 3)                     # has six projection-neuron inputs
+        nodes = [{'bodyId': 9_000_001, 'type': 'v', 'somaSide': 'R', 'hex': None, 'role': 'VPN'}]
+        edges = [[9_000_001, b, 5] for b in kcs if b % 3 == 0] + [[9_000_001, olfactory, 5]]
+        saved = objects.visual_inputs
+        objects.visual_inputs = lambda data: (nodes, edges, 'measured')
+        try:
+            lab = objects.Lab(1, 'intact', 0.1, 0.0, mb)
+        finally:
+            objects.visual_inputs = saved
+        visual_row = lab.mb.pn_kc[lab.mb.visual_kcs[0]].sum(); olf_row = lab.mb.pn_kc[lab.mb.kc[olfactory]].sum()
+        self.assertAlmostEqual(visual_row, 1.0)
+        self.assertLess(olf_row, 0.3)
 
     def test_run_reports_every_test_set(self):
         r = objects.run(mb_data=self.mb, exemplars=3, glimpses=2, train_views=4)

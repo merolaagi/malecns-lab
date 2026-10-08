@@ -91,7 +91,7 @@ function showSimilarity(sim) {
 function showRun(r) {
   setSource(r.source);
   const sets = Object.entries(r.test_sets), others = Object.keys(sets[0][1].pairwise_auc);
-  let h = `<p class="note">${esc(r.condition_text)}. ${esc(r.protocol_text)}. ${r.circuit.visual_inputs} inputs onto ${r.circuit.receiving_kcs} Kenyon cells, ${r.circuit.active_kcs} active per view. Measured feature mix for ${r.circuit.measured_features ?? 0}, measured receptive field for ${r.circuit.measured_positions}; mean visual share ${f2(r.circuit.mean_visual_share)}.</p>`;
+  let h = `<p class="note">${esc(r.condition_text)}. ${esc(r.protocol_text)}. ${r.circuit.visual_inputs} inputs onto ${r.circuit.receiving_kcs} Kenyon cells, ${r.circuit.active_kcs} active per view, ${Math.round((r.circuit.active_visual_kc_share || 0) * 100)}% of them visual Kenyon cells. Measured feature mix for ${r.circuit.measured_features ?? 0}, measured receptive field for ${r.circuit.measured_positions}; mean visual share ${f2(r.circuit.mean_visual_share)}.</p>`;
   h += `<table class="bench"><tr><th>Test views</th><th>Recognised, one look (AUC)</th><th>Eight glimpses</th>${others.map(c => `<th>vs ${esc(c)}</th>`).join('')}</tr>`;
   for (const [k, v] of sets) h += `<tr><td>${esc(k)}</td><td class="${v.auc_one_look > 0.8 ? 'hi' : v.auc_one_look < 0.6 ? 'lo' : ''}">${f2(v.auc_one_look)}</td><td>${f2(v.auc_all_glimpses)}</td>${others.map(c => `<td>${f2(v.pairwise_auc[c])}</td>`).join('')}</tr>`;
   $('result').innerHTML = h + '</table><p class="hint">AUC: chance that a test view of the trained object gets a stronger memory response than a view of another object. 0.5 is chance, 1 is perfect. Familiar views use the training ranges with new draws; each other row moves one factor outside them.</p>';

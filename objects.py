@@ -294,11 +294,25 @@ def rewire(edges, condition, mb_nodes, rng):
 
 
 class VisualMushroomBody(memory.MushroomBody):
-    """The compartment memory model with visual projection neurons in place of olfactory ones."""
+    """The compartment memory model with visual inputs in place of olfactory projection neurons.
 
-    def __init__(self, data, sparsity=0.10, **options):
+    Each Kenyon cell's visual input is normalised by its total input, olfactory projection neurons included, so
+    a few visual synapses onto an olfactory Kenyon cell stay a small share of what drives it. APL keeps the code
+    sparse: the k most driven cells fire, k set by the number of visual Kenyon cells, and a cell with no drive
+    never fires."""
+
+    def __init__(self, data, sparsity=0.10, kc_total=None, visual_kcs=(), **options):
         super().__init__(data, sparsity=sparsity, **options)
+        if kc_total:
+            raw = np.zeros_like(self.pn_kc)
+            for pre, post, w in data['edges']:
+                if pre in self.pn and post in self.kc: raw[self.kc[post], self.pn[pre]] += w
+            raw = np.log1p(raw)
+            denominators = np.array([kc_total.get(b, 0.0) for b in sorted(self.kc, key=self.kc.get)])
+            self.pn_kc = raw / np.maximum(np.maximum(denominators, raw.sum(1)), 1e-9)[:, None]
         self.receivers = np.flatnonzero(self.pn_kc.sum(1) > 0)
+        self.visual_kcs = np.array(sorted(self.kc[b] for b in visual_kcs if b in self.kc), int)
+        self.k = max(1, int(round(sparsity * (len(self.visual_kcs) or len(self.receivers)))))
         self.stimuli, self.codes = {}, {}
 
     def present(self, name, vpn):
@@ -310,9 +324,9 @@ class VisualMushroomBody(memory.MushroomBody):
     def kenyon(self, name):
         if name not in self.codes:
             drive = self.pn_kc[self.receivers] @ self.stimuli[name]
-            k = max(1, int(round(self.sparsity * len(self.receivers))))
+            k = min(self.k, int(np.sum(drive > 0)))
             code = np.zeros(self.pn_kc.shape[0])
-            if drive.max() > 0: code[self.receivers[np.argsort(-drive)[:k]]] = 1.0
+            if k: code[self.receivers[np.argsort(-drive)[:k]]] = 1.0
             self.codes[name] = code
         return self.codes[name]
 
@@ -334,7 +348,15 @@ class Lab:
         nodes += [dict(n) for n in mb['nodes'] if n['role'] in ('KC', 'MBON', 'DAN')]
         roles = {n['bodyId']: n['role'] for n in mb['nodes']}
         edges = [e for e in mb['edges'] if roles.get(e[0]) != 'PN'] + vpn_edges
-        self.mb = VisualMushroomBody({'nodes': nodes, 'edges': edges}, sparsity=sparsity, seed=seed)
+        # Each Kenyon cell's total input, olfactory projection neurons included, for normalisation.
+        kc_total = {}
+        pairs = {}
+        for pre, post, w in [e for e in mb['edges'] if roles.get(e[0]) == 'PN' and roles.get(e[1]) == 'KC'] + vpn_edges:
+            pairs[(pre, post)] = pairs.get((pre, post), 0) + w
+        for (pre, post), w in pairs.items(): kc_total[post] = kc_total.get(post, 0.0) + math.log1p(w)
+        visual = [n['bodyId'] for n in mb['nodes'] if n['role'] == 'KC' and str(n['type']).startswith(VISUAL_KC_TYPES)]
+        self.mb = VisualMushroomBody({'nodes': nodes, 'edges': edges}, sparsity=sparsity, seed=seed,
+                                     kc_total=kc_total, visual_kcs=visual)
         self.eye = EYE()
         self.vpn = Projection(vpn_nodes, self.eye, seed=seed, use_measured=condition != 'assumed_features')
         self.adapt = condition != 'raw_pixels'
@@ -437,12 +459,26 @@ def run(mb_data=None, **options):
         v['relative_score'] = {c: s / fam for c, s in v['mean_score'].items()}
     return {'parameters': p, 'source': lab.source, 'condition_text': CONDITIONS[p['condition']], 'protocol_text': PROTOCOLS[p['protocol']],
             'circuit': {'visual_inputs': lab.vpn_count, 'receiving_kcs': int(len(lab.mb.receivers)),
-                        'active_kcs': int(max(1, round(p['sparsity'] * len(lab.mb.receivers)))),
+                        **code_stats(lab, p),
                         'measured_positions': lab.vpn.measured_positions, 'measured_features': lab.vpn.measured_features,
                         'mean_visual_share': round(lab.vpn.mean_share, 3)},
             'test_sets': sets,
             'glimpses': [{'glimpses': g, 'auc': float(np.mean(v))} for g, v in glimpse_curve.items()],
             'morph': morph_curve(lab, p), 'similarity': similarity(lab, p)}
+
+
+def code_stats(lab, p, n=10):
+    """How many Kenyon cells fire per view, and what share of them are visual Kenyon cells."""
+    rng = np.random.default_rng(p['seed'] + 404)
+    sizes, visual = [], []
+    vset = set(lab.mb.visual_kcs.tolist())
+    for _ in range(n):
+        view, jitter = draw(rng, {})
+        code = lab.mb.kenyon(lab.sense(spec(rng.choice(list(CLASSES)), rng, jitter), view)[0])
+        active = np.flatnonzero(code)
+        sizes.append(len(active)); visual.append(np.mean([a in vset for a in active]) if len(active) else 0.0)
+    return {'active_kcs': round(float(np.mean(sizes)), 1), 'active_visual_kc_share': round(float(np.mean(visual)), 3),
+            'visual_kcs': int(len(lab.mb.visual_kcs))}
 
 
 def morph_curve(lab, p, steps=9):

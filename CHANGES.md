@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Fix the visual Kenyon-cell code
+
+- Visual input onto each Kenyon cell is now normalised by the cell's total input, olfactory projection neurons included. Before, it was normalised by the visual input alone, so a few synapses from these cells onto an olfactory Kenyon cell counted as its entire input, and most of the code sat in olfactory cells (the inputs make 97,911 synapses onto olfactory Kenyon cells and 23,083 onto visual ones).
+- The number of active Kenyon cells is set from the visual Kenyon cells (335), not from every cell the inputs touch (3,925), and a cell with no drive never fires. Before, about a hundred undriven cells were switched on in a fixed order for every object, which is what pushed recognition below chance in the first upstream run.
+- Results report the active cells per view and the share of them that are visual Kenyon cells.
+- Tests: a cell without drive never fires; visual input onto an olfactory Kenyon cell stays a small share of its input.
+
 ## Measure what each visual input actually carries
 
 - First measured build: 345 inputs onto 335 visual Kenyon cells, but only about 29% of their outside synapses come from optic-lobe projection neurons; the rest come from central-brain, lateral-horn and olfactory cells, and none carry optic-lobe coordinates. The previous model drove all of them with the image using invented features, so its wiring comparison (shuffled 0.90 against measured 0.81) did not test the wiring. Lamina adaptation held on measured wiring: without it dim and bright light fall to chance (0.54, 0.51).
