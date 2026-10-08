@@ -68,6 +68,7 @@ CONDITIONS = {
     'shuffled': 'Visual-input destinations permuted among Kenyon cells (source weights and in-degree kept)',
     'random': 'Each visual edge given a random source and a random visual Kenyon cell (weights kept)',
     'olfactory_kcs': 'Same wiring pattern moved onto olfactory Kenyon cells of the same lobe class',
+    'assumed_features': 'Measured wiring, but upstream measures ignored: every input fully visual, hashed feature, random field',
 }
 PROTOCOLS = {
     'absolute': 'Only the trained object, paired with reward',
@@ -191,43 +192,61 @@ def stable(text, salt=''):
     return zlib.crc32(f'{salt}{text}'.encode())
 
 
-class Projection:
-    """Each VPN pools one lamina channel over a Gaussian receptive field, then rectifies and saturates.
-    Cells of one type share a channel. A measured optic-lobe hex coordinate fixes the receptive-field centre;
-    otherwise it is random. Left-side cells see the mirror image (the other eye)."""
+MIX_TO_CHANNELS = {'ON': [1, 0, 0, 0, 0], 'OFF': [0, 1, 0, 0, 0], 'luminance': [0.5, 0.5, 0, 0, 0],
+                   'form': [0, 0, 1 / 3, 1 / 3, 1 / 3]}
 
-    def __init__(self, nodes, eye, seed=0):
+
+class Projection:
+    """Each visual input pools the lamina channels over a Gaussian receptive field, then rectifies and saturates.
+
+    Measured, when build_visualmemory.py has added upstream measures:
+      visual_share  scales the image-driven response; inputs that carry no optic-lobe signal stay silent
+      channel_mix   how the cell weighs ON, OFF, luminance and form channels
+      rf            receptive-field centre, size and eye, from the columnar cells one or two hops up
+    Assumed otherwise (or with use_measured=False): one channel per type chosen by a hash of the type name, a random
+    centre, a 10-30 degree field, full visual drive. Left-eye cells see the mirror image."""
+
+    def __init__(self, nodes, eye, seed=0, use_measured=True):
         self.eye = eye
         V = len(nodes)
-        self.channel = np.array([stable(n.get('type'), 'ch') % len(CHANNELS) for n in nodes])
-        self.left = np.array([str(n.get('somaSide')) == 'L' for n in nodes])
-        hexes = [n.get('hex') for n in nodes]
-        centres = np.zeros((V, 2)); sigma = np.zeros(V)
-        measured = [i for i, h in enumerate(hexes) if h]
-        if measured:
-            q = np.array([hexes[i][0] for i in measured], float); r = np.array([hexes[i][1] for i in measured], float)
-            px = np.stack([q - 0.5 * r, r * math.sqrt(3) / 2], 1)       # axial coordinates, (1,1) a neighbour
-            px -= px.mean(0); px /= max(np.abs(px).max(), 1e-9)
-            centres[measured] = px * np.abs(eye.xy).max(0) * 0.9
-            sigma[measured] = 5.0 * 1.2
         rng = np.random.default_rng(seed)
+        self.weights = np.zeros((V, len(CHANNELS))); self.gain = np.ones(V)
+        centres = np.zeros((V, 2)); sigma = np.zeros(V); self.left = np.zeros(V, bool)
+        extent = np.abs(eye.xy).max(0)
+        self.measured_positions = self.measured_features = 0
         for i, n in enumerate(nodes):
-            if hexes[i]: continue
-            centres[i] = eye.xy[rng.integers(eye.n)]
-            sigma[i] = 5.0 * (2 + stable(n.get('type'), 'rf') % 5)       # 10 to 30 degrees, shared within a type
+            mix = n.get('channel_mix') if use_measured else None
+            if mix:
+                self.weights[i] = sum(np.array(MIX_TO_CHANNELS[k]) * float(v) for k, v in mix.items() if k in MIX_TO_CHANNELS)
+                self.measured_features += 1
+            else:
+                self.weights[i, stable(n.get('type'), 'ch') % len(CHANNELS)] = 1.0
+            if use_measured and 'visual_share' in n: self.gain[i] = float(n['visual_share'])
+            rf = n.get('rf') if use_measured else None
+            side = (rf or {}).get('side') or n.get('somaSide')
+            self.left[i] = str(side) == 'L'
+            if rf:
+                centres[i] = np.array([rf['x'], rf['y']]) * extent * 0.9
+                sigma[i] = math.hypot(float(rf['spread']) * float(extent.mean()), 5.0)
+                self.measured_positions += 1
+            elif n.get('hex'):
+                h = n['hex']; px = np.array([h[0] - 0.5 * h[1], h[1] * math.sqrt(3) / 2])
+                centres[i] = np.clip(px / 30, -1, 1) * extent * 0.9; sigma[i] = 6.0; self.measured_positions += 1
+            else:
+                centres[i] = eye.xy[rng.integers(eye.n)]
+                sigma[i] = 5.0 * (2 + stable(n.get('type'), 'rf') % 5)   # 10 to 30 degrees, shared within a type
         d2 = np.sum((centres[:, None, :] - eye.xy[None, :, :]) ** 2, 2)
         rf = np.exp(-d2 / (2 * sigma[:, None] ** 2)); self.rf = rf / rf.sum(1, keepdims=True)
-        mirror = eye._nearest(eye.xy * np.array([-1, 1]))
-        self.mirror = mirror
-        self.measured_positions = len(measured)
+        self.mirror = eye._nearest(eye.xy * np.array([-1, 1]))
+        self.mean_share = float(self.gain.mean())
 
     def respond(self, channels):
-        mirrored = channels[:, self.mirror]
-        out = np.empty(len(self.channel))
-        for side, chans in ((False, channels), (True, mirrored)):
+        out = np.empty(len(self.gain))
+        for side, chans in ((False, channels), (True, channels[:, self.mirror])):
             m = self.left == side
-            out[m] = np.einsum('ij,ij->i', self.rf[m], chans[self.channel[m]])
-        return np.tanh(np.maximum(out - 0.02, 0) / 0.25)
+            pooled = self.rf[m] @ chans.T                         # cells x channels
+            out[m] = np.sum(pooled * self.weights[m], 1)
+        return self.gain * np.tanh(np.maximum(out - 0.02, 0) / 0.25)
 
 
 # --- circuit --------------------------------------------------------------------------------------------------------
@@ -252,7 +271,7 @@ def synthetic_inputs(mb_data, seed=0, cells=120, types=12, inputs_per_kc=6):
 
 
 def rewire(edges, condition, mb_nodes, rng):
-    if condition in ('intact', 'raw_pixels'): return edges
+    if condition in ('intact', 'raw_pixels', 'assumed_features'): return edges
     if condition == 'shuffled':
         targets = rng.permutation([e[1] for e in edges])
         return [[a, int(t), w] for (a, _, w), t in zip(edges, targets)]
@@ -317,7 +336,7 @@ class Lab:
         edges = [e for e in mb['edges'] if roles.get(e[0]) != 'PN'] + vpn_edges
         self.mb = VisualMushroomBody({'nodes': nodes, 'edges': edges}, sparsity=sparsity, seed=seed)
         self.eye = EYE()
-        self.vpn = Projection(vpn_nodes, self.eye, seed=seed)
+        self.vpn = Projection(vpn_nodes, self.eye, seed=seed, use_measured=condition != 'assumed_features')
         self.adapt = condition != 'raw_pixels'
         self.noise, self.condition, self.counter = noise, condition, 0
         self.vpn_count = len(vpn_nodes)
@@ -419,7 +438,8 @@ def run(mb_data=None, **options):
     return {'parameters': p, 'source': lab.source, 'condition_text': CONDITIONS[p['condition']], 'protocol_text': PROTOCOLS[p['protocol']],
             'circuit': {'visual_inputs': lab.vpn_count, 'receiving_kcs': int(len(lab.mb.receivers)),
                         'active_kcs': int(max(1, round(p['sparsity'] * len(lab.mb.receivers)))),
-                        'measured_positions': lab.vpn.measured_positions},
+                        'measured_positions': lab.vpn.measured_positions, 'measured_features': lab.vpn.measured_features,
+                        'mean_visual_share': round(lab.vpn.mean_share, 3)},
             'test_sets': sets,
             'glimpses': [{'glimpses': g, 'auc': float(np.mean(v))} for g, v in glimpse_curve.items()],
             'morph': morph_curve(lab, p), 'similarity': similarity(lab, p)}

@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Measure what each visual input actually carries
+
+- First measured build: 345 inputs onto 335 visual Kenyon cells, but only about 29% of their outside synapses come from optic-lobe projection neurons; the rest come from central-brain, lateral-horn and olfactory cells, and none carry optic-lobe coordinates. The previous model drove all of them with the image using invented features, so its wiring comparison (shuffled 0.90 against measured 0.81) did not test the wiring. Lamina adaptation held on measured wiring: without it dim and bright light fall to chance (0.54, 0.51).
+- `build_visualmemory.py --upstream` (also run by the full build): visual share, channel mix (ON, OFF, colour/luminance, form, from optic-lobe cell types) and receptive field (from columnar cells with hex coordinates, one or two hops up) for every input.
+- `objects.py`: inputs are driven by the image in proportion to their visual share, with their measured channel mix and receptive field. New control `assumed_features`: measured wiring with the old invented features.
+- Tests for the upstream measures, the type-to-channel table, and measured features in the projection layer.
+
 ## Object memory: perceive, remember, recognise a variant
 
 - `build_visualmemory.py` (probe and build): the visual inputs onto the visual Kenyon cells (KCg-d, KCab-p) with synapse counts, types, sides and optic-lobe hex coordinates; the probe also compares inputs to olfactory Kenyon cells and lists what reaches the ring neurons.

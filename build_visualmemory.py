@@ -13,9 +13,17 @@ Selected, by anatomy only:
 
 Run on a machine with the raw tables:
     .venv/bin/python build_visualmemory.py raw-data --probe     # who feeds visual vs olfactory Kenyon cells
-    .venv/bin/python build_visualmemory.py raw-data             # writes data/visual-memory.json
+    .venv/bin/python build_visualmemory.py raw-data             # writes data/visual-memory.json, then --upstream
+    .venv/bin/python build_visualmemory.py raw-data --upstream  # only add upstream measures to an existing file
+
+Upstream measures, per input (one and two hops up):
+  visual_share   fraction of its annotated input synapses that come from optic-lobe cells
+  channel_mix    which kinds of optic-lobe cell feed it: ON, OFF, colour/luminance, or form
+  rf             where in the eye: synapse-weighted position of columnar cells with optic-lobe hex coordinates
 """
 import json
+import math
+import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -107,6 +115,132 @@ def probe(raw):
         print(f'\ninputs onto {len(ring)} ring neurons by type:', by_type.most_common(12))
 
 
+# --- one and two hops upstream: does an input carry vision, which kind, and from where in the eye -----------------
+OPTIC = {'visual_projection', 'ol_intrinsic'}       # superclasses whose output is optic-lobe processed vision
+FAMILY = re.compile(r'^([A-Za-z]+?)(\d+)')
+# Optic-lobe cell types with a well-established contrast polarity. Everything else from the optic lobe is "form":
+# lobula and medulla projection cells, Li, LC, TmY and the like, which respond to shapes, edges and objects.
+CHANNEL_OF_TYPE = {
+    'ON':  ['L1', 'Mi1', 'Mi4', 'Tm3', 'T4', 'C3'],
+    'OFF': ['L2', 'L3', 'Tm1', 'Tm2', 'Tm4', 'Tm9', 'Mi9', 'T5', 'T3'],
+    'luminance': ['R7', 'R8', 'Dm8', 'Dm9', 'Tm5', 'Tm20'],          # colour/UV pathway; monochrome here
+}
+TYPE_CHANNEL = {t: c for c, ts in CHANNEL_OF_TYPE.items() for t in ts}
+MIX_KEYS = ('ON', 'OFF', 'luminance', 'form')
+MIN_UPSTREAM = 3
+
+
+def channel_of(type_name, superclass):
+    m = FAMILY.match(str(type_name or ''))
+    if m and f'{m.group(1)}{m.group(2)}' in TYPE_CHANNEL: return TYPE_CHANNEL[f'{m.group(1)}{m.group(2)}']
+    return 'form' if superclass in OPTIC else None
+
+
+def hex_xy(h):
+    """Axial optic-lobe hex coordinates (neighbours differ by (1,0), (0,1) or (1,1)) to plane coordinates."""
+    return (h[0] - 0.5 * h[1], h[1] * math.sqrt(3) / 2)
+
+
+def weighted_position(points):
+    """points: [(x, y, spread, weight)] -> (x, y, spread, total weight) or None."""
+    w = sum(p[3] for p in points)
+    if not w: return None
+    x = sum(p[0] * p[3] for p in points) / w; y = sum(p[1] * p[3] for p in points) / w
+    var = sum(p[3] * ((p[0] - x) ** 2 + (p[1] - y) ** 2 + p[2] ** 2) for p in points) / w
+    return x, y, math.sqrt(var / 2), w
+
+
+def upstream(raw, rows, sources):
+    """For each source cell: visual share, channel mix and receptive field, from one and two hops upstream."""
+    info = {int(r['bodyId']): r for r in rows}
+    sup = lambda b: info.get(b, {}).get('superclass')
+    hexes = {b: hex_of(r) for b, r in info.items() if hex_of(r)}
+    pts = np.array([hex_xy(h) for h in hexes.values()]) if hexes else np.zeros((1, 2))
+    centre, scale = pts.mean(0), max(float(np.abs(pts - pts.mean(0)).max()), 1e-9)
+    norm = lambda h: tuple((np.array(hex_xy(h)) - centre) / scale)
+
+    _, hop1 = inputs_onto(raw, sources)
+    into = defaultdict(Counter)
+    for x, y, z in hop1: into[y][x] += z
+    # Optic-lobe cells one hop up without coordinates (LC, LoVP, MeVP...): their own inputs give position and kind.
+    second = {x for c in into.values() for x, z in c.items() if z >= MIN_UPSTREAM and sup(x) in OPTIC and x not in hexes}
+    _, hop2 = inputs_onto(raw, second) if second else (None, [])
+    into2 = defaultdict(Counter)
+    for x, y, z in hop2: into2[y][x] += z
+
+    def describe(counter):
+        """Channel mix and position of the optic-lobe input in one cell's input counter (single hop)."""
+        mix, points = Counter(), []
+        for pre, z in counter.items():
+            channel = channel_of(info.get(pre, {}).get('type'), sup(pre))
+            if channel: mix[channel] += z
+            if pre in hexes:
+                x, y = norm(hexes[pre]); points.append((x, y, 0.0, z, info[pre].get('somaSide')))
+        return mix, points
+
+    derived = {}
+    for cell in second:
+        mix, points = describe(into2[cell])
+        pos = weighted_position([p[:4] for p in points])
+        side = Counter()
+        for p in points: side[p[4]] += p[3]
+        derived[cell] = (mix, pos, side)
+
+    out = {}
+    for cell in sources:
+        counter = into[cell]
+        annotated = sum(z for x, z in counter.items() if sup(x))
+        optic = sum(z for x, z in counter.items() if sup(x) in OPTIC)
+        mix, points = describe(counter)
+        side = Counter()
+        for p in points: side[p[4]] += p[3]
+        # Optic-lobe inputs without coordinates contribute their own derived mix and position, by synapse weight.
+        for pre, z in counter.items():
+            if pre in derived and z >= MIN_UPSTREAM:
+                dmix, dpos, dside = derived[pre]
+                dtotal = sum(dmix.values())
+                if dtotal:
+                    for k, v in dmix.items(): mix[k] += 0.5 * z * v / dtotal       # half own label, half derived
+                    mix['form'] -= 0.5 * z if channel_of(info.get(pre, {}).get('type'), sup(pre)) == 'form' else 0
+                if dpos:
+                    points.append((dpos[0], dpos[1], dpos[2], z, None))
+                    for s, v in dside.items(): side[s] += z * v / max(sum(dside.values()), 1)
+        total_mix = sum(max(v, 0) for v in mix.values())
+        pos = weighted_position([p[:4] for p in points])
+        out[cell] = {
+            'visual_share': round(optic / annotated, 4) if annotated else 0.0,
+            'channel_mix': {k: round(max(mix.get(k, 0), 0) / total_mix, 4) for k in MIX_KEYS} if total_mix else None,
+            'rf': {'x': round(pos[0], 4), 'y': round(pos[1], 4), 'spread': round(pos[2], 4),
+                   'side': side.most_common(1)[0][0] if side else None, 'weight': int(pos[3])} if pos else None,
+            'upstream_types': Counter({str(info.get(x, {}).get('type')): z for x, z in counter.items()}).most_common(8),
+        }
+    return out
+
+
+def add_upstream(raw):
+    """Add visual share, channel mix and receptive fields to an existing data/visual-memory.json."""
+    path = BASE / 'data/visual-memory.json'
+    d = json.loads(path.read_text())
+    rows = annotations(raw)
+    found = upstream(raw, rows, {n['bodyId'] for n in d['nodes']})
+    for n in d['nodes']: n.update(found.get(n['bodyId'], {}))
+    d['upstream'] = {'optic_superclasses': sorted(OPTIC), 'channels': CHANNEL_OF_TYPE, 'min_synapses': MIN_UPSTREAM,
+                     'method': 'visual_share: fraction of annotated input synapses from optic-lobe superclasses. channel_mix: '
+                               'input synapses by optic-lobe cell type (known ON, OFF and colour types; other optic-lobe '
+                               'cells count as form), with coordinate-less optic-lobe inputs contributing half their own '
+                               'derived mix. rf: synapse-weighted position of columnar inputs with optic-lobe hex '
+                               'coordinates, one or two hops up, normalised to the whole lattice.'}
+    path.write_text(json.dumps(d, separators=(',', ':')))
+    shares = [n['visual_share'] for n in d['nodes']]
+    print('UPSTREAM', json.dumps({
+        'inputs': len(shares), 'mostly_visual(>0.5)': sum(s > 0.5 for s in shares), 'some_visual(0.1-0.5)': sum(0.1 < s <= 0.5 for s in shares),
+        'not_visual(<=0.1)': sum(s <= 0.1 for s in shares), 'with_rf': sum(1 for n in d['nodes'] if n.get('rf')),
+        'synapse_weighted_visual_share': round(sum(n['visual_share'] * n['synapses_to_visual_kcs'] for n in d['nodes'])
+                                               / max(sum(n['synapses_to_visual_kcs'] for n in d['nodes']), 1), 3),
+        'mean_mix': {k: round(float(np.mean([n['channel_mix'][k] for n in d['nodes'] if n.get('channel_mix')] or [0])), 3) for k in MIX_KEYS},
+        'most_visual_types': Counter({n['type']: n['visual_share'] for n in d['nodes']}).most_common(8)}), flush=True)
+
+
 def build(raw):
     rows = annotations(raw)
     info = {int(r['bodyId']): r for r in rows}
@@ -133,8 +267,11 @@ def build(raw):
     print('DONE', json.dumps({'inputs': len(nodes), 'edges': len(kept), 'visual_kcs': len(visual),
                               'with_hex': sum(1 for n in nodes if n['hex']),
                               'types': Counter(n['type'] for n in nodes).most_common(10)}), flush=True)
+    add_upstream(raw)
 
 
 if __name__ == '__main__':
     if len(sys.argv) < 2: sys.exit(__doc__)
-    probe(sys.argv[1]) if '--probe' in sys.argv else build(sys.argv[1])
+    if '--probe' in sys.argv: probe(sys.argv[1])
+    elif '--upstream' in sys.argv: add_upstream(sys.argv[1])
+    else: build(sys.argv[1])

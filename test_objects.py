@@ -110,6 +110,22 @@ class ObjectMemoryTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             objects.run(mb_data=self.mb, protocol='differential', contrast='paper cup', train_views=1, exemplars=2)
 
+    def test_measured_features_drive_projection(self):
+        eye = objects.EYE()
+        nodes = [{'type': 'a', 'somaSide': 'R', 'visual_share': 1.0, 'channel_mix': {'ON': 1, 'OFF': 0, 'luminance': 0, 'form': 0},
+                  'rf': {'x': 0, 'y': 0, 'spread': 0.05, 'side': 'R'}},
+                 {'type': 'b', 'somaSide': 'R', 'visual_share': 1.0, 'channel_mix': {'ON': 0, 'OFF': 1, 'luminance': 0, 'form': 0},
+                  'rf': {'x': 0, 'y': 0, 'spread': 0.05, 'side': 'R'}},
+                 {'type': 'c', 'somaSide': 'R', 'visual_share': 0.0, 'channel_mix': {'ON': 1, 'OFF': 0, 'luminance': 0, 'form': 0},
+                  'rf': {'x': 0, 'y': 0, 'spread': 0.05, 'side': 'R'}}]
+        p = objects.Projection(nodes, eye)
+        self.assertEqual((p.measured_features, p.measured_positions), (3, 3))
+        view = dict(light=1, light_az=0, distance=8, rotation=0, gaze=(0, 0))
+        bright = p.respond(eye.lamina(eye.photoreceptors(objects.spec('paper cup'), view, noise=0)))   # pale cup on grey
+        self.assertGreater(bright[0], 0.1); self.assertLess(bright[1], 0.02); self.assertEqual(bright[2], 0)
+        assumed = objects.Projection(nodes, eye, use_measured=False)
+        self.assertEqual(assumed.measured_features, 0); self.assertTrue(np.all(assumed.gain == 1))
+
     def test_view(self):
         v = objects.view(mb_data=self.mb, cls='mug', light=0.6, distance=10)
         self.assertEqual(len(v['columns']), 721)

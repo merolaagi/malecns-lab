@@ -463,8 +463,9 @@ Step 1 needs the raw tables:
 
 ```sh
 .venv/bin/python build_visualmemory.py raw-data --probe   # who feeds visual vs olfactory Kenyon cells, and ring neurons
-.venv/bin/python build_visualmemory.py raw-data           # writes data/visual-memory.json
-.venv/bin/python objects.py --benchmark                   # five seeds, five circuits, plus the differential protocol
+.venv/bin/python build_visualmemory.py raw-data           # writes data/visual-memory.json, with upstream measures
+.venv/bin/python build_visualmemory.py raw-data --upstream  # add upstream measures to an existing file only
+.venv/bin/python objects.py --benchmark                   # five seeds, six circuits, plus the differential protocol
 ```
 
 Until `data/visual-memory.json` exists, a **synthetic stand-in** (120 random inputs, 6 per visual Kenyon cell) replaces the visual wiring and the page flags it. With the stand-in, the shuffled and random controls compare random against random, so they say nothing about the measured wiring yet; the other results do not depend on it.
@@ -482,6 +483,19 @@ First results (synthetic visual inputs, measured everything downstream, five see
 - **Glimpses do not help here.** Averaging up to eight re-fixations leaves AUC flat, because the errors come from the object and its lighting, not from per-look noise.
 - **Differential training sharpens the contrast and shifts the peak.** Rewarding cups and punishing mugs raises cup-vs-mug discrimination in dim and bright light (0.72 → 0.81, 0.65 → 0.81), but untrained bottles and glasses then score as high as cups. The memory becomes "not a mug" more than "a cup". Along the cup-to-bottle morph the response peaks away from the punished mug (1.15 at a quarter of the way), the peak shift seen in animal discrimination learning.
 - **Moving the same wiring onto olfactory Kenyon cells** lowers familiar recognition (−0.10, 0 of 5), so the measured outputs of the visual Kenyon cells carry it somewhat better than the olfactory ones.
+
+**With the measured visual inputs (first build).** `build_visualmemory.py` found 345 Traced inputs (15,068 edges) onto the 335 visual Kenyon cells. Only about 29% of their outside input comes from optic-lobe projection neurons (9,736 of 33,771 synapses); the rest comes from central-brain cells (PLP, SLP, lateral horn types such as LHPV3c1), olfactory projection neurons (1,840) and unlabelled fragments. None of the inputs carry optic-lobe hex coordinates. Five seeds, one look:
+
+| | familiar | dim | bright | side light | nearer/farther | new kinds |
+|---|---|---|---|---|---|---|
+| Measured inputs | 0.81 | 0.87 | 0.85 | 0.77 | 0.76 | 0.84 |
+| No adaptation | 0.70 | 0.54 | 0.51 | 0.56 | 0.70 | 0.66 |
+| Shuffled | 0.90 | 0.90 | 0.89 | 0.76 | 0.77 | 0.89 |
+| Random | 0.91 | 0.85 | 0.83 | 0.84 | 0.73 | 0.84 |
+
+The adaptation result holds on measured wiring: without it, dim and bright light fall to chance. The wiring comparison was not a fair test, because every input, olfactory and lateral-horn cells included, was driven by the image with an invented feature and receptive field.
+
+**Upstream measures (second build).** `build_visualmemory.py raw-data --upstream` now looks one and two hops up from each input and measures its *visual share* (fraction of annotated input synapses from optic-lobe cells), its *channel mix* (ON, OFF, colour/luminance or form, by the optic-lobe cell types feeding it), and its *receptive field* (synapse-weighted position of the columnar cells with optic-lobe hex coordinates). `objects.py` uses them: an input is driven by the image only in proportion to its visual share, weighs channels by its measured mix, and pools from its measured position. The `assumed_features` control keeps the measured wiring but ignores these measures, so the comparison with the shuffled and random wiring now asks whether the measured pairing of visual features onto Kenyon cells matters. Still assumed: the type-to-channel table (well-established polarity types only; every other optic-lobe cell counts as form), half-weighting of second-hop evidence, and that non-visual inputs stay silent during a purely visual task.
 
 **Not Monty.** Monty learns features at locations in an object-centred reference frame and moves its sensors to build that model. Nothing here builds an object frame: glimpses add evidence, they do not assemble a model. The fly's closest mechanism, ring neurons whose synapses onto the compass neurons bind a visual scene to heading, works in an egocentric frame and is probed but not modelled here.
 
