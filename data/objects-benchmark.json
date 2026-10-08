@@ -11,14 +11,17 @@
   "raw_pixels": "Same inputs, no lamina adaptation: contrast against a fixed reference",
   "shuffled": "Visual-input destinations permuted among Kenyon cells (source weights and in-degree kept)",
   "random": "Each visual edge given a random source and a random visual Kenyon cell (weights kept)",
-  "olfactory_kcs": "Same wiring pattern moved onto olfactory Kenyon cells of the same lobe class"
+  "olfactory_kcs": "Same wiring pattern moved onto olfactory Kenyon cells of the same lobe class",
+  "assumed_features": "Measured wiring, but upstream measures ignored: every input fully visual, hashed feature, random field"
  },
  "source": "measured",
  "circuit": {
   "visual_inputs": 345,
   "receiving_kcs": 3925,
   "active_kcs": 392,
-  "measured_positions": 0
+  "measured_positions": 269,
+  "measured_features": 297,
+  "mean_visual_share": 0.366
  },
  "parameters": {
   "seed": 7,
@@ -35,6 +38,1271 @@
  },
  "summary": {
   "intact": {
+   "test_sets": {
+    "familiar": {
+     "auc_one_look": 0.37265625,
+     "auc_one_look_sd": 0.09521479366985862,
+     "auc_all_glimpses": 0.31875,
+     "pairwise_auc": {
+      "mug": 0.484375,
+      "bottle": 0.35625,
+      "wine glass": 0.2640625,
+      "can": 0.3859375
+     }
+    },
+    "dim light": {
+     "auc_one_look": 0.36171875,
+     "auc_one_look_sd": 0.19659888872238063,
+     "auc_all_glimpses": 0.2296875,
+     "pairwise_auc": {
+      "mug": 0.4015625,
+      "bottle": 0.328125,
+      "wine glass": 0.29375,
+      "can": 0.4234375
+     }
+    },
+    "bright light": {
+     "auc_one_look": 0.495703125,
+     "auc_one_look_sd": 0.06197779891698116,
+     "auc_all_glimpses": 0.44453125,
+     "pairwise_auc": {
+      "mug": 0.690625,
+      "bottle": 0.44375,
+      "wine glass": 0.209375,
+      "can": 0.6390625
+     }
+    },
+    "side light": {
+     "auc_one_look": 0.43984375,
+     "auc_one_look_sd": 0.0896856625465088,
+     "auc_all_glimpses": 0.44296875,
+     "pairwise_auc": {
+      "mug": 0.55,
+      "bottle": 0.4375,
+      "wine glass": 0.3125,
+      "can": 0.459375
+     }
+    },
+    "nearer or farther": {
+     "auc_one_look": 0.34375,
+     "auc_one_look_sd": 0.07611676692445134,
+     "auc_all_glimpses": 0.428125,
+     "pairwise_auc": {
+      "mug": 0.3234375,
+      "bottle": 0.421875,
+      "wine glass": 0.2546875,
+      "can": 0.375
+     }
+    },
+    "new kinds": {
+     "auc_one_look": 0.433984375,
+     "auc_one_look_sd": 0.12682024295607347,
+     "auc_all_glimpses": 0.3921875,
+     "pairwise_auc": {
+      "mug": 0.4671875,
+      "bottle": 0.390625,
+      "wine glass": 0.3375,
+      "can": 0.540625
+     }
+    }
+   },
+   "glimpses": [
+    {
+     "glimpses": 1,
+     "auc": 0.4079427083333333
+    },
+    {
+     "glimpses": 2,
+     "auc": 0.410546875
+    },
+    {
+     "glimpses": 3,
+     "auc": 0.39674479166666665
+    },
+    {
+     "glimpses": 4,
+     "auc": 0.38984375
+    },
+    {
+     "glimpses": 5,
+     "auc": 0.37499999999999994
+    },
+    {
+     "glimpses": 6,
+     "auc": 0.3764322916666667
+    },
+    {
+     "glimpses": 7,
+     "auc": 0.38138020833333336
+    },
+    {
+     "glimpses": 8,
+     "auc": 0.37604166666666666
+    }
+   ],
+   "morph": [
+    {
+     "morph": 0.0,
+     "relative": 1.0,
+     "vpn_overlap": 0.9999820022862412,
+     "kc_overlap": 0.9987315907163236
+    },
+    {
+     "morph": 0.125,
+     "relative": 0.9987799769124803,
+     "vpn_overlap": 0.9988550962820915,
+     "kc_overlap": 0.9956826860994605
+    },
+    {
+     "morph": 0.25,
+     "relative": 0.9984687544483591,
+     "vpn_overlap": 0.9961621590294598,
+     "kc_overlap": 0.9929004267002248
+    },
+    {
+     "morph": 0.375,
+     "relative": 0.9986576974900718,
+     "vpn_overlap": 0.9924407114404943,
+     "kc_overlap": 0.991386518365508
+    },
+    {
+     "morph": 0.5,
+     "relative": 0.9983776965169462,
+     "vpn_overlap": 0.9877494829656737,
+     "kc_overlap": 0.9883670049922264
+    },
+    {
+     "morph": 0.625,
+     "relative": 1.0004972922536592,
+     "vpn_overlap": 0.9829664462921107,
+     "kc_overlap": 0.9850987265596938
+    },
+    {
+     "morph": 0.75,
+     "relative": 1.0021732279722264,
+     "vpn_overlap": 0.977866599149011,
+     "kc_overlap": 0.9822153500680868
+    },
+    {
+     "morph": 0.875,
+     "relative": 1.003216145738826,
+     "vpn_overlap": 0.9727918542958307,
+     "kc_overlap": 0.9785996549314033
+    },
+    {
+     "morph": 1.0,
+     "relative": 0.9997209293856383,
+     "vpn_overlap": 0.9674420880871482,
+     "kc_overlap": 0.9740245465563306
+    }
+   ],
+   "similarity": {
+    "classes": [
+     "paper cup",
+     "mug",
+     "bottle",
+     "wine glass",
+     "can"
+    ],
+    "vpn": [
+     [
+      0.9843,
+      0.9851,
+      0.9615,
+      0.9475,
+      0.9829
+     ],
+     [
+      0.9851,
+      0.9869,
+      0.9651,
+      0.9439,
+      0.9847
+     ],
+     [
+      0.9615,
+      0.9651,
+      0.995,
+      0.918,
+      0.9818
+     ],
+     [
+      0.9475,
+      0.9439,
+      0.918,
+      0.9803,
+      0.9435
+     ],
+     [
+      0.9829,
+      0.9847,
+      0.9818,
+      0.9435,
+      0.9898
+     ]
+    ],
+    "kc": [
+     [
+      0.9698,
+      0.9705,
+      0.9679,
+      0.9314,
+      0.9722
+     ],
+     [
+      0.9705,
+      0.9704,
+      0.9682,
+      0.9291,
+      0.9699
+     ],
+     [
+      0.9679,
+      0.9682,
+      0.978,
+      0.9224,
+      0.9699
+     ],
+     [
+      0.9314,
+      0.9291,
+      0.9224,
+      0.9453,
+      0.9288
+     ],
+     [
+      0.9722,
+      0.9699,
+      0.9699,
+      0.9288,
+      0.971
+     ]
+    ],
+    "light_change": {
+     "0.4 vs 1.0": {
+      "vpn": 0.9998219131733206,
+      "kc": 0.9959415979629236
+     },
+     "2.0 vs 1.0": {
+      "vpn": 0.9999479953992768,
+      "kc": 0.9977956023990047
+     }
+    }
+   }
+  },
+  "raw_pixels": {
+   "test_sets": {
+    "familiar": {
+     "auc_one_look": 0.400390625,
+     "auc_one_look_sd": 0.09985799243097045,
+     "auc_all_glimpses": 0.35078125,
+     "pairwise_auc": {
+      "mug": 0.44375,
+      "bottle": 0.421875,
+      "wine glass": 0.29375,
+      "can": 0.4421875
+     }
+    },
+    "dim light": {
+     "auc_one_look": 0.587109375,
+     "auc_one_look_sd": 0.09327352878429657,
+     "auc_all_glimpses": 0.58125,
+     "pairwise_auc": {
+      "mug": 0.4359375,
+      "bottle": 0.846875,
+      "wine glass": 0.209375,
+      "can": 0.85625
+     }
+    },
+    "bright light": {
+     "auc_one_look": 0.33203125,
+     "auc_one_look_sd": 0.05539442643866574,
+     "auc_all_glimpses": 0.325,
+     "pairwise_auc": {
+      "mug": 0.5640625,
+      "bottle": 0.2953125,
+      "wine glass": 0.2265625,
+      "can": 0.2421875
+     }
+    },
+    "side light": {
+     "auc_one_look": 0.437890625,
+     "auc_one_look_sd": 0.0658802698912011,
+     "auc_all_glimpses": 0.4421875,
+     "pairwise_auc": {
+      "mug": 0.5609375,
+      "bottle": 0.421875,
+      "wine glass": 0.3375,
+      "can": 0.43125
+     }
+    },
+    "nearer or farther": {
+     "auc_one_look": 0.414453125,
+     "auc_one_look_sd": 0.02771511214854181,
+     "auc_all_glimpses": 0.453125,
+     "pairwise_auc": {
+      "mug": 0.48125,
+      "bottle": 0.45625,
+      "wine glass": 0.284375,
+      "can": 0.4359375
+     }
+    },
+    "new kinds": {
+     "auc_one_look": 0.489453125,
+     "auc_one_look_sd": 0.10668139673887031,
+     "auc_all_glimpses": 0.4125,
+     "pairwise_auc": {
+      "mug": 0.5546875,
+      "bottle": 0.484375,
+      "wine glass": 0.3703125,
+      "can": 0.5484375
+     }
+    }
+   },
+   "glimpses": [
+    {
+     "glimpses": 1,
+     "auc": 0.4435546875
+    },
+    {
+     "glimpses": 2,
+     "auc": 0.4546875
+    },
+    {
+     "glimpses": 3,
+     "auc": 0.4330078125
+    },
+    {
+     "glimpses": 4,
+     "auc": 0.4317708333333333
+    },
+    {
+     "glimpses": 5,
+     "auc": 0.42734375
+    },
+    {
+     "glimpses": 6,
+     "auc": 0.427734375
+    },
+    {
+     "glimpses": 7,
+     "auc": 0.4321614583333334
+    },
+    {
+     "glimpses": 8,
+     "auc": 0.4274739583333333
+    }
+   ],
+   "morph": [
+    {
+     "morph": 0.0,
+     "relative": 1.0,
+     "vpn_overlap": 0.9999902826548407,
+     "kc_overlap": 0.9983460559796438
+    },
+    {
+     "morph": 0.125,
+     "relative": 0.9988492287661199,
+     "vpn_overlap": 0.9991907857585337,
+     "kc_overlap": 0.9970763746270391
+    },
+    {
+     "morph": 0.25,
+     "relative": 0.9985673921640844,
+     "vpn_overlap": 0.997165701481437,
+     "kc_overlap": 0.995425649894813
+    },
+    {
+     "morph": 0.375,
+     "relative": 0.9987766935210678,
+     "vpn_overlap": 0.99416679738159,
+     "kc_overlap": 0.9937813540280194
+    },
+    {
+     "morph": 0.5,
+     "relative": 0.9993570149901629,
+     "vpn_overlap": 0.990244591417414,
+     "kc_overlap": 0.991881342926462
+    },
+    {
+     "morph": 0.625,
+     "relative": 0.9997697076071432,
+     "vpn_overlap": 0.9859300933579191,
+     "kc_overlap": 0.9892333555416408
+    },
+    {
+     "morph": 0.75,
+     "relative": 1.0019952363298232,
+     "vpn_overlap": 0.981313492901321,
+     "kc_overlap": 0.9864645170473928
+    },
+    {
+     "morph": 0.875,
+     "relative": 1.001954927782047,
+     "vpn_overlap": 0.9765703863116251,
+     "kc_overlap": 0.9837114946790827
+    },
+    {
+     "morph": 1.0,
+     "relative": 1.0001206597541221,
+     "vpn_overlap": 0.9715939581992838,
+     "kc_overlap": 0.9777294162105017
+    }
+   ],
+   "similarity": {
+    "classes": [
+     "paper cup",
+     "mug",
+     "bottle",
+     "wine glass",
+     "can"
+    ],
+    "vpn": [
+     [
+      0.9861,
+      0.9869,
+      0.9662,
+      0.9588,
+      0.9835
+     ],
+     [
+      0.9869,
+      0.9869,
+      0.9699,
+      0.9534,
+      0.9841
+     ],
+     [
+      0.9662,
+      0.9699,
+      0.9951,
+      0.9284,
+      0.9841
+     ],
+     [
+      0.9588,
+      0.9534,
+      0.9284,
+      0.9746,
+      0.9506
+     ],
+     [
+      0.9835,
+      0.9841,
+      0.9841,
+      0.9506,
+      0.9909
+     ]
+    ],
+    "kc": [
+     [
+      0.9743,
+      0.975,
+      0.9709,
+      0.9401,
+      0.9775
+     ],
+     [
+      0.975,
+      0.9748,
+      0.9711,
+      0.9388,
+      0.9751
+     ],
+     [
+      0.9709,
+      0.9711,
+      0.9773,
+      0.9283,
+      0.9726
+     ],
+     [
+      0.9401,
+      0.9388,
+      0.9283,
+      0.9487,
+      0.9382
+     ],
+     [
+      0.9775,
+      0.9751,
+      0.9726,
+      0.9382,
+      0.9768
+     ]
+    ],
+    "light_change": {
+     "0.4 vs 1.0": {
+      "vpn": 0.8507429743639001,
+      "kc": 0.9753440032705057
+     },
+     "2.0 vs 1.0": {
+      "vpn": 0.9759892820113574,
+      "kc": 0.9902157840934317
+     }
+    }
+   }
+  },
+  "shuffled": {
+   "test_sets": {
+    "familiar": {
+     "auc_one_look": 0.68515625,
+     "auc_one_look_sd": 0.16388755553541887,
+     "auc_all_glimpses": 0.7484375,
+     "pairwise_auc": {
+      "mug": 0.503125,
+      "bottle": 0.896875,
+      "wine glass": 0.79375,
+      "can": 0.546875
+     }
+    },
+    "dim light": {
+     "auc_one_look": 0.79296875,
+     "auc_one_look_sd": 0.09120905545435168,
+     "auc_all_glimpses": 0.80234375,
+     "pairwise_auc": {
+      "mug": 0.671875,
+      "bottle": 0.909375,
+      "wine glass": 0.9125,
+      "can": 0.678125
+     }
+    },
+    "bright light": {
+     "auc_one_look": 0.76328125,
+     "auc_one_look_sd": 0.03150288305258743,
+     "auc_all_glimpses": 0.80546875,
+     "pairwise_auc": {
+      "mug": 0.5875,
+      "bottle": 0.94375,
+      "wine glass": 0.84375,
+      "can": 0.678125
+     }
+    },
+    "side light": {
+     "auc_one_look": 0.6328125,
+     "auc_one_look_sd": 0.14247909660279995,
+     "auc_all_glimpses": 0.64296875,
+     "pairwise_auc": {
+      "mug": 0.45625,
+      "bottle": 0.68125,
+      "wine glass": 0.884375,
+      "can": 0.509375
+     }
+    },
+    "nearer or farther": {
+     "auc_one_look": 0.63984375,
+     "auc_one_look_sd": 0.05879652413195868,
+     "auc_all_glimpses": 0.6609375,
+     "pairwise_auc": {
+      "mug": 0.646875,
+      "bottle": 0.734375,
+      "wine glass": 0.69375,
+      "can": 0.484375
+     }
+    },
+    "new kinds": {
+     "auc_one_look": 0.76015625,
+     "auc_one_look_sd": 0.10781816108325629,
+     "auc_all_glimpses": 0.8015625,
+     "pairwise_auc": {
+      "mug": 0.609375,
+      "bottle": 0.859375,
+      "wine glass": 0.903125,
+      "can": 0.66875
+     }
+    }
+   },
+   "glimpses": [
+    {
+     "glimpses": 1,
+     "auc": 0.7123697916666667
+    },
+    {
+     "glimpses": 2,
+     "auc": 0.7266927083333333
+    },
+    {
+     "glimpses": 3,
+     "auc": 0.7313802083333334
+    },
+    {
+     "glimpses": 4,
+     "auc": 0.7298177083333333
+    },
+    {
+     "glimpses": 5,
+     "auc": 0.7359375
+    },
+    {
+     "glimpses": 6,
+     "auc": 0.7420572916666666
+    },
+    {
+     "glimpses": 7,
+     "auc": 0.7442708333333333
+    },
+    {
+     "glimpses": 8,
+     "auc": 0.7436197916666666
+    }
+   ],
+   "morph": [
+    {
+     "morph": 0.0,
+     "relative": 1.0,
+     "vpn_overlap": 0.9999820022862412,
+     "kc_overlap": 0.9932763279486743
+    },
+    {
+     "morph": 0.125,
+     "relative": 1.003420675140018,
+     "vpn_overlap": 0.9988550962820915,
+     "kc_overlap": 0.9524417063176583
+    },
+    {
+     "morph": 0.25,
+     "relative": 1.0004882922671001,
+     "vpn_overlap": 0.9961621590294598,
+     "kc_overlap": 0.9159654049320611
+    },
+    {
+     "morph": 0.375,
+     "relative": 1.001066103444264,
+     "vpn_overlap": 0.9924407114404943,
+     "kc_overlap": 0.8810074509040898
+    },
+    {
+     "morph": 0.5,
+     "relative": 0.9950888971326691,
+     "vpn_overlap": 0.9877494829656737,
+     "kc_overlap": 0.8489987859493947
+    },
+    {
+     "morph": 0.625,
+     "relative": 0.9819790478781553,
+     "vpn_overlap": 0.9829664462921107,
+     "kc_overlap": 0.8225815748270204
+    },
+    {
+     "morph": 0.75,
+     "relative": 0.9669886392433517,
+     "vpn_overlap": 0.977866599149011,
+     "kc_overlap": 0.7998423772699068
+    },
+    {
+     "morph": 0.875,
+     "relative": 0.9580841561616985,
+     "vpn_overlap": 0.9727918542958307,
+     "kc_overlap": 0.782554086900554
+    },
+    {
+     "morph": 1.0,
+     "relative": 0.9476848163872009,
+     "vpn_overlap": 0.9674420880871482,
+     "kc_overlap": 0.7648861925310497
+    }
+   ],
+   "similarity": {
+    "classes": [
+     "paper cup",
+     "mug",
+     "bottle",
+     "wine glass",
+     "can"
+    ],
+    "vpn": [
+     [
+      0.9843,
+      0.9851,
+      0.9615,
+      0.9475,
+      0.9829
+     ],
+     [
+      0.9851,
+      0.9869,
+      0.9651,
+      0.9439,
+      0.9847
+     ],
+     [
+      0.9615,
+      0.9651,
+      0.995,
+      0.918,
+      0.9818
+     ],
+     [
+      0.9475,
+      0.9439,
+      0.918,
+      0.9803,
+      0.9435
+     ],
+     [
+      0.9829,
+      0.9847,
+      0.9818,
+      0.9435,
+      0.9898
+     ]
+    ],
+    "kc": [
+     [
+      0.8325,
+      0.8256,
+      0.7465,
+      0.684,
+      0.8186
+     ],
+     [
+      0.8256,
+      0.8533,
+      0.7647,
+      0.6733,
+      0.8422
+     ],
+     [
+      0.7465,
+      0.7647,
+      0.9232,
+      0.5888,
+      0.8263
+     ],
+     [
+      0.684,
+      0.6733,
+      0.5888,
+      0.8324,
+      0.6617
+     ],
+     [
+      0.8186,
+      0.8422,
+      0.8263,
+      0.6617,
+      0.8776
+     ]
+    ],
+    "light_change": {
+     "0.4 vs 1.0": {
+      "vpn": 0.9998219131733206,
+      "kc": 0.9765001449974671
+     },
+     "2.0 vs 1.0": {
+      "vpn": 0.9999479953992768,
+      "kc": 0.9866700156471992
+     }
+    }
+   }
+  },
+  "random": {
+   "test_sets": {
+    "familiar": {
+     "auc_one_look": 0.76953125,
+     "auc_one_look_sd": 0.08013050878098803,
+     "auc_all_glimpses": 0.77109375,
+     "pairwise_auc": {
+      "mug": 0.54375,
+      "bottle": 0.9875,
+      "wine glass": 0.96875,
+      "can": 0.578125
+     }
+    },
+    "dim light": {
+     "auc_one_look": 0.72890625,
+     "auc_one_look_sd": 0.09557469060569854,
+     "auc_all_glimpses": 0.7359375,
+     "pairwise_auc": {
+      "mug": 0.46875,
+      "bottle": 0.96875,
+      "wine glass": 0.946875,
+      "can": 0.53125
+     }
+    },
+    "bright light": {
+     "auc_one_look": 0.72890625,
+     "auc_one_look_sd": 0.06764019006847927,
+     "auc_all_glimpses": 0.77734375,
+     "pairwise_auc": {
+      "mug": 0.48125,
+      "bottle": 0.984375,
+      "wine glass": 0.99375,
+      "can": 0.45625
+     }
+    },
+    "side light": {
+     "auc_one_look": 0.60625,
+     "auc_one_look_sd": 0.108377144586624,
+     "auc_all_glimpses": 0.6109375,
+     "pairwise_auc": {
+      "mug": 0.33125,
+      "bottle": 0.709375,
+      "wine glass": 0.971875,
+      "can": 0.4125
+     }
+    },
+    "nearer or farther": {
+     "auc_one_look": 0.6484375,
+     "auc_one_look_sd": 0.07190047103027211,
+     "auc_all_glimpses": 0.646875,
+     "pairwise_auc": {
+      "mug": 0.575,
+      "bottle": 0.728125,
+      "wine glass": 0.796875,
+      "can": 0.49375
+     }
+    },
+    "new kinds": {
+     "auc_one_look": 0.69140625,
+     "auc_one_look_sd": 0.06921892635417715,
+     "auc_all_glimpses": 0.7046875,
+     "pairwise_auc": {
+      "mug": 0.421875,
+      "bottle": 0.9625,
+      "wine glass": 0.984375,
+      "can": 0.396875
+     }
+    }
+   },
+   "glimpses": [
+    {
+     "glimpses": 1,
+     "auc": 0.6955729166666667
+    },
+    {
+     "glimpses": 2,
+     "auc": 0.703125
+    },
+    {
+     "glimpses": 3,
+     "auc": 0.7169270833333333
+    },
+    {
+     "glimpses": 4,
+     "auc": 0.71875
+    },
+    {
+     "glimpses": 5,
+     "auc": 0.7095052083333333
+    },
+    {
+     "glimpses": 6,
+     "auc": 0.7157552083333333
+    },
+    {
+     "glimpses": 7,
+     "auc": 0.7087239583333333
+    },
+    {
+     "glimpses": 8,
+     "auc": 0.7078125
+    }
+   ],
+   "morph": [
+    {
+     "morph": 0.0,
+     "relative": 1.0,
+     "vpn_overlap": 0.9999820022862412,
+     "kc_overlap": 0.9903036332011899
+    },
+    {
+     "morph": 0.125,
+     "relative": 0.9911074716520046,
+     "vpn_overlap": 0.9988550962820915,
+     "kc_overlap": 0.9094272507338548
+    },
+    {
+     "morph": 0.25,
+     "relative": 0.9852642483935566,
+     "vpn_overlap": 0.9961621590294598,
+     "kc_overlap": 0.8399020730013103
+    },
+    {
+     "morph": 0.375,
+     "relative": 0.9809096811956609,
+     "vpn_overlap": 0.9924407114404943,
+     "kc_overlap": 0.7800408561835162
+    },
+    {
+     "morph": 0.5,
+     "relative": 0.9676812269709505,
+     "vpn_overlap": 0.9877494829656737,
+     "kc_overlap": 0.72313098098975
+    },
+    {
+     "morph": 0.625,
+     "relative": 0.956853298855768,
+     "vpn_overlap": 0.9829664462921107,
+     "kc_overlap": 0.677661001305389
+    },
+    {
+     "morph": 0.75,
+     "relative": 0.9303927009230314,
+     "vpn_overlap": 0.977866599149011,
+     "kc_overlap": 0.636490052593631
+    },
+    {
+     "morph": 0.875,
+     "relative": 0.913373327983259,
+     "vpn_overlap": 0.9727918542958307,
+     "kc_overlap": 0.6016505132884655
+    },
+    {
+     "morph": 1.0,
+     "relative": 0.8967595174736575,
+     "vpn_overlap": 0.9674420880871482,
+     "kc_overlap": 0.5688889145373928
+    }
+   ],
+   "similarity": {
+    "classes": [
+     "paper cup",
+     "mug",
+     "bottle",
+     "wine glass",
+     "can"
+    ],
+    "vpn": [
+     [
+      0.9843,
+      0.9851,
+      0.9615,
+      0.9475,
+      0.9829
+     ],
+     [
+      0.9851,
+      0.9869,
+      0.9651,
+      0.9439,
+      0.9847
+     ],
+     [
+      0.9615,
+      0.9651,
+      0.995,
+      0.918,
+      0.9818
+     ],
+     [
+      0.9475,
+      0.9439,
+      0.918,
+      0.9803,
+      0.9435
+     ],
+     [
+      0.9829,
+      0.9847,
+      0.9818,
+      0.9435,
+      0.9898
+     ]
+    ],
+    "kc": [
+     [
+      0.7079,
+      0.7067,
+      0.5472,
+      0.5031,
+      0.6878
+     ],
+     [
+      0.7067,
+      0.7443,
+      0.5547,
+      0.4853,
+      0.7063
+     ],
+     [
+      0.5472,
+      0.5547,
+      0.8153,
+      0.3723,
+      0.6464
+     ],
+     [
+      0.5031,
+      0.4853,
+      0.3723,
+      0.7119,
+      0.4739
+     ],
+     [
+      0.6878,
+      0.7063,
+      0.6464,
+      0.4739,
+      0.7466
+     ]
+    ],
+    "light_change": {
+     "0.4 vs 1.0": {
+      "vpn": 0.9998219131733206,
+      "kc": 0.9648193620603376
+     },
+     "2.0 vs 1.0": {
+      "vpn": 0.9999479953992768,
+      "kc": 0.9806184386812813
+     }
+    }
+   }
+  },
+  "olfactory_kcs": {
+   "test_sets": {
+    "familiar": {
+     "auc_one_look": 0.51953125,
+     "auc_one_look_sd": 0.05887951150442741,
+     "auc_all_glimpses": 0.53359375,
+     "pairwise_auc": {
+      "mug": 0.503125,
+      "bottle": 0.4671875,
+      "wine glass": 0.603125,
+      "can": 0.5046875
+     }
+    },
+    "dim light": {
+     "auc_one_look": 0.412109375,
+     "auc_one_look_sd": 0.05664735951342966,
+     "auc_all_glimpses": 0.42734375,
+     "pairwise_auc": {
+      "mug": 0.3046875,
+      "bottle": 0.353125,
+      "wine glass": 0.6,
+      "can": 0.390625
+     }
+    },
+    "bright light": {
+     "auc_one_look": 0.4734375,
+     "auc_one_look_sd": 0.1244715391665902,
+     "auc_all_glimpses": 0.403125,
+     "pairwise_auc": {
+      "mug": 0.425,
+      "bottle": 0.36875,
+      "wine glass": 0.671875,
+      "can": 0.428125
+     }
+    },
+    "side light": {
+     "auc_one_look": 0.549609375,
+     "auc_one_look_sd": 0.13690612160459628,
+     "auc_all_glimpses": 0.54296875,
+     "pairwise_auc": {
+      "mug": 0.50625,
+      "bottle": 0.4203125,
+      "wine glass": 0.653125,
+      "can": 0.61875
+     }
+    },
+    "nearer or farther": {
+     "auc_one_look": 0.4515625,
+     "auc_one_look_sd": 0.060305719340343254,
+     "auc_all_glimpses": 0.4359375,
+     "pairwise_auc": {
+      "mug": 0.4921875,
+      "bottle": 0.371875,
+      "wine glass": 0.4546875,
+      "can": 0.4875
+     }
+    },
+    "new kinds": {
+     "auc_one_look": 0.49765625,
+     "auc_one_look_sd": 0.10273066176749521,
+     "auc_all_glimpses": 0.4578125,
+     "pairwise_auc": {
+      "mug": 0.4734375,
+      "bottle": 0.44375,
+      "wine glass": 0.60625,
+      "can": 0.4671875
+     }
+    }
+   },
+   "glimpses": [
+    {
+     "glimpses": 1,
+     "auc": 0.483984375
+    },
+    {
+     "glimpses": 2,
+     "auc": 0.4960286458333333
+    },
+    {
+     "glimpses": 3,
+     "auc": 0.4766927083333333
+    },
+    {
+     "glimpses": 4,
+     "auc": 0.4860026041666667
+    },
+    {
+     "glimpses": 5,
+     "auc": 0.4860677083333333
+    },
+    {
+     "glimpses": 6,
+     "auc": 0.4821614583333334
+    },
+    {
+     "glimpses": 7,
+     "auc": 0.4686197916666667
+    },
+    {
+     "glimpses": 8,
+     "auc": 0.466796875
+    }
+   ],
+   "morph": [
+    {
+     "morph": 0.0,
+     "relative": 1.0,
+     "vpn_overlap": 0.9999820022862412,
+     "kc_overlap": 0.9974825584051557
+    },
+    {
+     "morph": 0.125,
+     "relative": 1.0016655739080158,
+     "vpn_overlap": 0.9988550962820915,
+     "kc_overlap": 0.9964257107605865
+    },
+    {
+     "morph": 0.25,
+     "relative": 1.004549009821282,
+     "vpn_overlap": 0.9961621590294598,
+     "kc_overlap": 0.9948278886639722
+    },
+    {
+     "morph": 0.375,
+     "relative": 1.0066302367501554,
+     "vpn_overlap": 0.9924407114404943,
+     "kc_overlap": 0.9923125189451136
+    },
+    {
+     "morph": 0.5,
+     "relative": 1.006480276711592,
+     "vpn_overlap": 0.9877494829656737,
+     "kc_overlap": 0.9915195516822599
+    },
+    {
+     "morph": 0.625,
+     "relative": 1.0068128917325538,
+     "vpn_overlap": 0.9829664462921107,
+     "kc_overlap": 0.9907279949835732
+    },
+    {
+     "morph": 0.75,
+     "relative": 1.00702803960858,
+     "vpn_overlap": 0.977866599149011,
+     "kc_overlap": 0.9888796573547882
+    },
+    {
+     "morph": 0.875,
+     "relative": 1.0053652150742787,
+     "vpn_overlap": 0.9727918542958307,
+     "kc_overlap": 0.9862550939077087
+    },
+    {
+     "morph": 1.0,
+     "relative": 1.0067802541619966,
+     "vpn_overlap": 0.9674420880871482,
+     "kc_overlap": 0.9835058510212991
+    }
+   ],
+   "similarity": {
+    "classes": [
+     "paper cup",
+     "mug",
+     "bottle",
+     "wine glass",
+     "can"
+    ],
+    "vpn": [
+     [
+      0.9843,
+      0.9851,
+      0.9615,
+      0.9475,
+      0.9829
+     ],
+     [
+      0.9851,
+      0.9869,
+      0.9651,
+      0.9439,
+      0.9847
+     ],
+     [
+      0.9615,
+      0.9651,
+      0.995,
+      0.918,
+      0.9818
+     ],
+     [
+      0.9475,
+      0.9439,
+      0.918,
+      0.9803,
+      0.9435
+     ],
+     [
+      0.9829,
+      0.9847,
+      0.9818,
+      0.9435,
+      0.9898
+     ]
+    ],
+    "kc": [
+     [
+      0.9774,
+      0.9804,
+      0.981,
+      0.9473,
+      0.9798
+     ],
+     [
+      0.9804,
+      0.9835,
+      0.9831,
+      0.9473,
+      0.9824
+     ],
+     [
+      0.981,
+      0.9831,
+      0.989,
+      0.9442,
+      0.9826
+     ],
+     [
+      0.9473,
+      0.9473,
+      0.9442,
+      0.9585,
+      0.9471
+     ],
+     [
+      0.9798,
+      0.9824,
+      0.9826,
+      0.9471,
+      0.9816
+     ]
+    ],
+    "light_change": {
+     "0.4 vs 1.0": {
+      "vpn": 0.9998219131733206,
+      "kc": 0.9973423067516979
+     },
+     "2.0 vs 1.0": {
+      "vpn": 0.9999479953992768,
+      "kc": 0.9975280029465843
+     }
+    }
+   }
+  },
+  "assumed_features": {
    "test_sets": {
     "familiar": {
      "auc_one_look": 0.81171875,
@@ -159,7 +1427,7 @@
     {
      "morph": 0.375,
      "relative": 0.9038903653528525,
-     "vpn_overlap": 0.9425283587847556,
+     "vpn_overlap": 0.9425283587847554,
      "kc_overlap": 0.614947121466408
     },
     {
@@ -281,1020 +1549,8 @@
       "kc": 0.9103463928018778
      },
      "2.0 vs 1.0": {
-      "vpn": 0.9996035660602424,
+      "vpn": 0.9996035660602425,
       "kc": 0.958829286526757
-     }
-    }
-   }
-  },
-  "raw_pixels": {
-   "test_sets": {
-    "familiar": {
-     "auc_one_look": 0.6984375,
-     "auc_one_look_sd": 0.06256832203179977,
-     "auc_all_glimpses": 0.6859375,
-     "pairwise_auc": {
-      "mug": 0.559375,
-      "bottle": 0.828125,
-      "wine glass": 0.834375,
-      "can": 0.571875
-     }
-    },
-    "dim light": {
-     "auc_one_look": 0.541796875,
-     "auc_one_look_sd": 0.06726920903634144,
-     "auc_all_glimpses": 0.57734375,
-     "pairwise_auc": {
-      "mug": 0.509375,
-      "bottle": 0.809375,
-      "wine glass": 0.7703125,
-      "can": 0.078125
-     }
-    },
-    "bright light": {
-     "auc_one_look": 0.512109375,
-     "auc_one_look_sd": 0.154563160254352,
-     "auc_all_glimpses": 0.4734375,
-     "pairwise_auc": {
-      "mug": 0.5359375,
-      "bottle": 0.534375,
-      "wine glass": 0.696875,
-      "can": 0.28125
-     }
-    },
-    "side light": {
-     "auc_one_look": 0.55859375,
-     "auc_one_look_sd": 0.13533902020712651,
-     "auc_all_glimpses": 0.571875,
-     "pairwise_auc": {
-      "mug": 0.615625,
-      "bottle": 0.6125,
-      "wine glass": 0.584375,
-      "can": 0.421875
-     }
-    },
-    "nearer or farther": {
-     "auc_one_look": 0.70078125,
-     "auc_one_look_sd": 0.07111520967328297,
-     "auc_all_glimpses": 0.7265625,
-     "pairwise_auc": {
-      "mug": 0.625,
-      "bottle": 0.74375,
-      "wine glass": 0.7875,
-      "can": 0.646875
-     }
-    },
-    "new kinds": {
-     "auc_one_look": 0.66015625,
-     "auc_one_look_sd": 0.07674563556401758,
-     "auc_all_glimpses": 0.6609375,
-     "pairwise_auc": {
-      "mug": 0.5,
-      "bottle": 0.721875,
-      "wine glass": 0.784375,
-      "can": 0.634375
-     }
-    }
-   },
-   "glimpses": [
-    {
-     "glimpses": 1,
-     "auc": 0.6119791666666667
-    },
-    {
-     "glimpses": 2,
-     "auc": 0.6152343750000001
-    },
-    {
-     "glimpses": 3,
-     "auc": 0.6205729166666667
-    },
-    {
-     "glimpses": 4,
-     "auc": 0.6194010416666667
-    },
-    {
-     "glimpses": 5,
-     "auc": 0.6194010416666667
-    },
-    {
-     "glimpses": 6,
-     "auc": 0.6196614583333333
-    },
-    {
-     "glimpses": 7,
-     "auc": 0.6151041666666667
-    },
-    {
-     "glimpses": 8,
-     "auc": 0.616015625
-    }
-   ],
-   "morph": [
-    {
-     "morph": 0.0,
-     "relative": 1.0,
-     "vpn_overlap": 0.9998817827060021,
-     "kc_overlap": 0.974444163556943
-    },
-    {
-     "morph": 0.125,
-     "relative": 0.9975742569869505,
-     "vpn_overlap": 0.9944505943048197,
-     "kc_overlap": 0.8966939619823602
-    },
-    {
-     "morph": 0.25,
-     "relative": 0.9863067068160284,
-     "vpn_overlap": 0.9813692742811788,
-     "kc_overlap": 0.8224536649889893
-    },
-    {
-     "morph": 0.375,
-     "relative": 0.9558489220258976,
-     "vpn_overlap": 0.9635762522677315,
-     "kc_overlap": 0.7555640013498667
-    },
-    {
-     "morph": 0.5,
-     "relative": 0.9114716261066758,
-     "vpn_overlap": 0.9418000144623317,
-     "kc_overlap": 0.6850861989156145
-    },
-    {
-     "morph": 0.625,
-     "relative": 0.86793806192962,
-     "vpn_overlap": 0.9200325353233947,
-     "kc_overlap": 0.6259914581799658
-    },
-    {
-     "morph": 0.75,
-     "relative": 0.8297286748304253,
-     "vpn_overlap": 0.8967272145017281,
-     "kc_overlap": 0.5741469059636353
-    },
-    {
-     "morph": 0.875,
-     "relative": 0.7923543458354902,
-     "vpn_overlap": 0.8739801032600413,
-     "kc_overlap": 0.5253763131743817
-    },
-    {
-     "morph": 1.0,
-     "relative": 0.7560548644676791,
-     "vpn_overlap": 0.8519628083499249,
-     "kc_overlap": 0.47840893427822595
-    }
-   ],
-   "similarity": {
-    "classes": [
-     "paper cup",
-     "mug",
-     "bottle",
-     "wine glass",
-     "can"
-    ],
-    "vpn": [
-     [
-      0.7893,
-      0.7404,
-      0.7245,
-      0.6421,
-      0.8083
-     ],
-     [
-      0.7404,
-      0.7212,
-      0.6889,
-      0.6229,
-      0.7303
-     ],
-     [
-      0.7245,
-      0.6889,
-      0.8659,
-      0.6157,
-      0.8024
-     ],
-     [
-      0.6421,
-      0.6229,
-      0.6157,
-      0.6456,
-      0.6355
-     ],
-     [
-      0.8083,
-      0.7303,
-      0.8024,
-      0.6355,
-      0.8564
-     ]
-    ],
-    "kc": [
-     [
-      0.3738,
-      0.3319,
-      0.2915,
-      0.258,
-      0.3724
-     ],
-     [
-      0.3319,
-      0.3131,
-      0.2589,
-      0.2382,
-      0.3113
-     ],
-     [
-      0.2915,
-      0.2589,
-      0.4161,
-      0.1799,
-      0.3347
-     ],
-     [
-      0.258,
-      0.2382,
-      0.1799,
-      0.301,
-      0.2207
-     ],
-     [
-      0.3724,
-      0.3113,
-      0.3347,
-      0.2207,
-      0.4123
-     ]
-    ],
-    "light_change": {
-     "0.4 vs 1.0": {
-      "vpn": 0.07874374833509208,
-      "kc": 0.002564775204066984
-     },
-     "2.0 vs 1.0": {
-      "vpn": 0.784361353552359,
-      "kc": 0.25999852429998255
-     }
-    }
-   }
-  },
-  "shuffled": {
-   "test_sets": {
-    "familiar": {
-     "auc_one_look": 0.9015625,
-     "auc_one_look_sd": 0.03262595784034547,
-     "auc_all_glimpses": 0.9375,
-     "pairwise_auc": {
-      "mug": 0.771875,
-      "bottle": 1.0,
-      "wine glass": 0.990625,
-      "can": 0.84375
-     }
-    },
-    "dim light": {
-     "auc_one_look": 0.896875,
-     "auc_one_look_sd": 0.06613455448458846,
-     "auc_all_glimpses": 0.9484375,
-     "pairwise_auc": {
-      "mug": 0.771875,
-      "bottle": 1.0,
-      "wine glass": 0.996875,
-      "can": 0.81875
-     }
-    },
-    "bright light": {
-     "auc_one_look": 0.890625,
-     "auc_one_look_sd": 0.059805185028139494,
-     "auc_all_glimpses": 0.93046875,
-     "pairwise_auc": {
-      "mug": 0.746875,
-      "bottle": 0.990625,
-      "wine glass": 0.996875,
-      "can": 0.828125
-     }
-    },
-    "side light": {
-     "auc_one_look": 0.76328125,
-     "auc_one_look_sd": 0.10416145820311849,
-     "auc_all_glimpses": 0.76953125,
-     "pairwise_auc": {
-      "mug": 0.65,
-      "bottle": 0.95625,
-      "wine glass": 0.890625,
-      "can": 0.55625
-     }
-    },
-    "nearer or farther": {
-     "auc_one_look": 0.77265625,
-     "auc_one_look_sd": 0.081654641440337,
-     "auc_all_glimpses": 0.8,
-     "pairwise_auc": {
-      "mug": 0.65625,
-      "bottle": 0.928125,
-      "wine glass": 0.9,
-      "can": 0.60625
-     }
-    },
-    "new kinds": {
-     "auc_one_look": 0.89453125,
-     "auc_one_look_sd": 0.03095564493149836,
-     "auc_all_glimpses": 0.8875,
-     "pairwise_auc": {
-      "mug": 0.784375,
-      "bottle": 1.0,
-      "wine glass": 0.9875,
-      "can": 0.80625
-     }
-    }
-   },
-   "glimpses": [
-    {
-     "glimpses": 1,
-     "auc": 0.8532552083333333
-    },
-    {
-     "glimpses": 2,
-     "auc": 0.8708333333333333
-    },
-    {
-     "glimpses": 3,
-     "auc": 0.8723958333333334
-    },
-    {
-     "glimpses": 4,
-     "auc": 0.8768229166666668
-    },
-    {
-     "glimpses": 5,
-     "auc": 0.878515625
-    },
-    {
-     "glimpses": 6,
-     "auc": 0.8786458333333333
-    },
-    {
-     "glimpses": 7,
-     "auc": 0.8802083333333333
-    },
-    {
-     "glimpses": 8,
-     "auc": 0.87890625
-    }
-   ],
-   "morph": [
-    {
-     "morph": 0.0,
-     "relative": 1.0,
-     "vpn_overlap": 0.999815333422289,
-     "kc_overlap": 0.9695091371381533
-    },
-    {
-     "morph": 0.125,
-     "relative": 0.9908906197306513,
-     "vpn_overlap": 0.9910407272246324,
-     "kc_overlap": 0.8384917467622663
-    },
-    {
-     "morph": 0.25,
-     "relative": 0.9512391319763452,
-     "vpn_overlap": 0.9700275419482404,
-     "kc_overlap": 0.7223547168729463
-    },
-    {
-     "morph": 0.375,
-     "relative": 0.8928991746570816,
-     "vpn_overlap": 0.9425283587847556,
-     "kc_overlap": 0.6197163754719242
-    },
-    {
-     "morph": 0.5,
-     "relative": 0.8212327835849121,
-     "vpn_overlap": 0.9105901206921757,
-     "kc_overlap": 0.5254619124336612
-    },
-    {
-     "morph": 0.625,
-     "relative": 0.730139351947801,
-     "vpn_overlap": 0.8793343624590918,
-     "kc_overlap": 0.4435495576476474
-    },
-    {
-     "morph": 0.75,
-     "relative": 0.6495650182850975,
-     "vpn_overlap": 0.8470146905461127,
-     "kc_overlap": 0.3793552042916857
-    },
-    {
-     "morph": 0.875,
-     "relative": 0.5903749456311932,
-     "vpn_overlap": 0.8179509470220037,
-     "kc_overlap": 0.33261493032305134
-    },
-    {
-     "morph": 1.0,
-     "relative": 0.5369830939337438,
-     "vpn_overlap": 0.791868242175615,
-     "kc_overlap": 0.29932087410930674
-    }
-   ],
-   "similarity": {
-    "classes": [
-     "paper cup",
-     "mug",
-     "bottle",
-     "wine glass",
-     "can"
-    ],
-    "vpn": [
-     [
-      0.9339,
-      0.9163,
-      0.77,
-      0.741,
-      0.9115
-     ],
-     [
-      0.9163,
-      0.9312,
-      0.7814,
-      0.7317,
-      0.9034
-     ],
-     [
-      0.77,
-      0.7814,
-      0.9625,
-      0.7302,
-      0.8725
-     ],
-     [
-      0.741,
-      0.7317,
-      0.7302,
-      0.9054,
-      0.7677
-     ],
-     [
-      0.9115,
-      0.9034,
-      0.8725,
-      0.7677,
-      0.9536
-     ]
-    ],
-    "kc": [
-     [
-      0.5649,
-      0.5435,
-      0.2806,
-      0.2523,
-      0.5112
-     ],
-     [
-      0.5435,
-      0.6213,
-      0.3369,
-      0.2625,
-      0.5817
-     ],
-     [
-      0.2806,
-      0.3369,
-      0.6492,
-      0.204,
-      0.3905
-     ],
-     [
-      0.2523,
-      0.2625,
-      0.204,
-      0.579,
-      0.2616
-     ],
-     [
-      0.5112,
-      0.5817,
-      0.3905,
-      0.2616,
-      0.6275
-     ]
-    ],
-    "light_change": {
-     "0.4 vs 1.0": {
-      "vpn": 0.998417143761255,
-      "kc": 0.9165625655455916
-     },
-     "2.0 vs 1.0": {
-      "vpn": 0.9996035660602424,
-      "kc": 0.9609561397291584
-     }
-    }
-   }
-  },
-  "random": {
-   "test_sets": {
-    "familiar": {
-     "auc_one_look": 0.9109375,
-     "auc_one_look_sd": 0.04761140307872684,
-     "auc_all_glimpses": 0.93125,
-     "pairwise_auc": {
-      "mug": 0.778125,
-      "bottle": 1.0,
-      "wine glass": 1.0,
-      "can": 0.865625
-     }
-    },
-    "dim light": {
-     "auc_one_look": 0.84609375,
-     "auc_one_look_sd": 0.07230678726354117,
-     "auc_all_glimpses": 0.92265625,
-     "pairwise_auc": {
-      "mug": 0.60625,
-      "bottle": 1.0,
-      "wine glass": 1.0,
-      "can": 0.778125
-     }
-    },
-    "bright light": {
-     "auc_one_look": 0.82890625,
-     "auc_one_look_sd": 0.10710250821351011,
-     "auc_all_glimpses": 0.90703125,
-     "pairwise_auc": {
-      "mug": 0.5875,
-      "bottle": 1.0,
-      "wine glass": 1.0,
-      "can": 0.728125
-     }
-    },
-    "side light": {
-     "auc_one_look": 0.83515625,
-     "auc_one_look_sd": 0.04188257860525065,
-     "auc_all_glimpses": 0.85,
-     "pairwise_auc": {
-      "mug": 0.678125,
-      "bottle": 1.0,
-      "wine glass": 0.9875,
-      "can": 0.675
-     }
-    },
-    "nearer or farther": {
-     "auc_one_look": 0.72578125,
-     "auc_one_look_sd": 0.06266579571923586,
-     "auc_all_glimpses": 0.7546875,
-     "pairwise_auc": {
-      "mug": 0.571875,
-      "bottle": 0.8625,
-      "wine glass": 0.8625,
-      "can": 0.60625
-     }
-    },
-    "new kinds": {
-     "auc_one_look": 0.83515625,
-     "auc_one_look_sd": 0.06295731130595555,
-     "auc_all_glimpses": 0.89140625,
-     "pairwise_auc": {
-      "mug": 0.64375,
-      "bottle": 1.0,
-      "wine glass": 0.984375,
-      "can": 0.7125
-     }
-    }
-   },
-   "glimpses": [
-    {
-     "glimpses": 1,
-     "auc": 0.8303385416666667
-    },
-    {
-     "glimpses": 2,
-     "auc": 0.8505208333333334
-    },
-    {
-     "glimpses": 3,
-     "auc": 0.8600260416666666
-    },
-    {
-     "glimpses": 4,
-     "auc": 0.8680989583333334
-    },
-    {
-     "glimpses": 5,
-     "auc": 0.8716145833333334
-    },
-    {
-     "glimpses": 6,
-     "auc": 0.8752604166666668
-    },
-    {
-     "glimpses": 7,
-     "auc": 0.8764322916666668
-    },
-    {
-     "glimpses": 8,
-     "auc": 0.876171875
-    }
-   ],
-   "morph": [
-    {
-     "morph": 0.0,
-     "relative": 1.0,
-     "vpn_overlap": 0.999815333422289,
-     "kc_overlap": 0.9723500406161264
-    },
-    {
-     "morph": 0.125,
-     "relative": 0.9935145172345241,
-     "vpn_overlap": 0.9910407272246324,
-     "kc_overlap": 0.8416359554243016
-    },
-    {
-     "morph": 0.25,
-     "relative": 0.9650934596561299,
-     "vpn_overlap": 0.9700275419482404,
-     "kc_overlap": 0.7213249599023179
-    },
-    {
-     "morph": 0.375,
-     "relative": 0.9238773015486081,
-     "vpn_overlap": 0.9425283587847556,
-     "kc_overlap": 0.6217736243614319
-    },
-    {
-     "morph": 0.5,
-     "relative": 0.8610132306218123,
-     "vpn_overlap": 0.9105901206921757,
-     "kc_overlap": 0.5331642575194828
-    },
-    {
-     "morph": 0.625,
-     "relative": 0.7984473479876097,
-     "vpn_overlap": 0.8793343624590918,
-     "kc_overlap": 0.4664470805183969
-    },
-    {
-     "morph": 0.75,
-     "relative": 0.72327935491459,
-     "vpn_overlap": 0.8470146905461127,
-     "kc_overlap": 0.4048326004436699
-    },
-    {
-     "morph": 0.875,
-     "relative": 0.6676526937353328,
-     "vpn_overlap": 0.8179509470220037,
-     "kc_overlap": 0.35646693543270536
-    },
-    {
-     "morph": 1.0,
-     "relative": 0.6143786985271503,
-     "vpn_overlap": 0.791868242175615,
-     "kc_overlap": 0.31707758614021475
-    }
-   ],
-   "similarity": {
-    "classes": [
-     "paper cup",
-     "mug",
-     "bottle",
-     "wine glass",
-     "can"
-    ],
-    "vpn": [
-     [
-      0.9339,
-      0.9163,
-      0.77,
-      0.741,
-      0.9115
-     ],
-     [
-      0.9163,
-      0.9312,
-      0.7814,
-      0.7317,
-      0.9034
-     ],
-     [
-      0.77,
-      0.7814,
-      0.9625,
-      0.7302,
-      0.8725
-     ],
-     [
-      0.741,
-      0.7317,
-      0.7302,
-      0.9054,
-      0.7677
-     ],
-     [
-      0.9115,
-      0.9034,
-      0.8725,
-      0.7677,
-      0.9536
-     ]
-    ],
-    "kc": [
-     [
-      0.5924,
-      0.5682,
-      0.2977,
-      0.3122,
-      0.5165
-     ],
-     [
-      0.5682,
-      0.6405,
-      0.3534,
-      0.3145,
-      0.5745
-     ],
-     [
-      0.2977,
-      0.3534,
-      0.6507,
-      0.2512,
-      0.4161
-     ],
-     [
-      0.3122,
-      0.3145,
-      0.2512,
-      0.5849,
-      0.3171
-     ],
-     [
-      0.5165,
-      0.5745,
-      0.4161,
-      0.3171,
-      0.627
-     ]
-    ],
-    "light_change": {
-     "0.4 vs 1.0": {
-      "vpn": 0.998417143761255,
-      "kc": 0.9289522595842495
-     },
-     "2.0 vs 1.0": {
-      "vpn": 0.9996035660602424,
-      "kc": 0.9659521241928852
-     }
-    }
-   }
-  },
-  "olfactory_kcs": {
-   "test_sets": {
-    "familiar": {
-     "auc_one_look": 0.86875,
-     "auc_one_look_sd": 0.09109522404467756,
-     "auc_all_glimpses": 0.91953125,
-     "pairwise_auc": {
-      "mug": 0.70625,
-      "bottle": 0.984375,
-      "wine glass": 1.0,
-      "can": 0.784375
-     }
-    },
-    "dim light": {
-     "auc_one_look": 0.92265625,
-     "auc_one_look_sd": 0.05266343608235224,
-     "auc_all_glimpses": 0.940625,
-     "pairwise_auc": {
-      "mug": 0.84375,
-      "bottle": 0.996875,
-      "wine glass": 0.990625,
-      "can": 0.859375
-     }
-    },
-    "bright light": {
-     "auc_one_look": 0.86953125,
-     "auc_one_look_sd": 0.06306386272065802,
-     "auc_all_glimpses": 0.92734375,
-     "pairwise_auc": {
-      "mug": 0.734375,
-      "bottle": 0.9875,
-      "wine glass": 1.0,
-      "can": 0.75625
-     }
-    },
-    "side light": {
-     "auc_one_look": 0.78203125,
-     "auc_one_look_sd": 0.15312101397873187,
-     "auc_all_glimpses": 0.7890625,
-     "pairwise_auc": {
-      "mug": 0.753125,
-      "bottle": 0.896875,
-      "wine glass": 0.815625,
-      "can": 0.6625
-     }
-    },
-    "nearer or farther": {
-     "auc_one_look": 0.78671875,
-     "auc_one_look_sd": 0.0622357695832951,
-     "auc_all_glimpses": 0.82265625,
-     "pairwise_auc": {
-      "mug": 0.64375,
-      "bottle": 0.94375,
-      "wine glass": 0.878125,
-      "can": 0.68125
-     }
-    },
-    "new kinds": {
-     "auc_one_look": 0.8453125,
-     "auc_one_look_sd": 0.07327108804808347,
-     "auc_all_glimpses": 0.85234375,
-     "pairwise_auc": {
-      "mug": 0.69375,
-      "bottle": 0.971875,
-      "wine glass": 0.978125,
-      "can": 0.7375
-     }
-    }
-   },
-   "glimpses": [
-    {
-     "glimpses": 1,
-     "auc": 0.8458333333333334
-    },
-    {
-     "glimpses": 2,
-     "auc": 0.865234375
-    },
-    {
-     "glimpses": 3,
-     "auc": 0.8674479166666667
-    },
-    {
-     "glimpses": 4,
-     "auc": 0.8688802083333333
-    },
-    {
-     "glimpses": 5,
-     "auc": 0.87109375
-    },
-    {
-     "glimpses": 6,
-     "auc": 0.8739583333333332
-    },
-    {
-     "glimpses": 7,
-     "auc": 0.8760416666666666
-    },
-    {
-     "glimpses": 8,
-     "auc": 0.8752604166666667
-    }
-   ],
-   "morph": [
-    {
-     "morph": 0.0,
-     "relative": 1.0,
-     "vpn_overlap": 0.999815333422289,
-     "kc_overlap": 0.9678255568940635
-    },
-    {
-     "morph": 0.125,
-     "relative": 0.9857737281694346,
-     "vpn_overlap": 0.9910407272246324,
-     "kc_overlap": 0.8329992930732761
-    },
-    {
-     "morph": 0.25,
-     "relative": 0.9445103144709412,
-     "vpn_overlap": 0.9700275419482404,
-     "kc_overlap": 0.7204446145713703
-    },
-    {
-     "morph": 0.375,
-     "relative": 0.8857477199674204,
-     "vpn_overlap": 0.9425283587847556,
-     "kc_overlap": 0.6142613704232718
-    },
-    {
-     "morph": 0.5,
-     "relative": 0.82074462105977,
-     "vpn_overlap": 0.9105901206921757,
-     "kc_overlap": 0.5166679794305533
-    },
-    {
-     "morph": 0.625,
-     "relative": 0.7609286224765334,
-     "vpn_overlap": 0.8793343624590918,
-     "kc_overlap": 0.4387537636646129
-    },
-    {
-     "morph": 0.75,
-     "relative": 0.6870401931821324,
-     "vpn_overlap": 0.8470146905461127,
-     "kc_overlap": 0.3717025357192608
-    },
-    {
-     "morph": 0.875,
-     "relative": 0.6243587118797752,
-     "vpn_overlap": 0.8179509470220037,
-     "kc_overlap": 0.3264480851835724
-    },
-    {
-     "morph": 1.0,
-     "relative": 0.5737917501517555,
-     "vpn_overlap": 0.791868242175615,
-     "kc_overlap": 0.29393448945399614
-    }
-   ],
-   "similarity": {
-    "classes": [
-     "paper cup",
-     "mug",
-     "bottle",
-     "wine glass",
-     "can"
-    ],
-    "vpn": [
-     [
-      0.9339,
-      0.9163,
-      0.77,
-      0.741,
-      0.9115
-     ],
-     [
-      0.9163,
-      0.9312,
-      0.7814,
-      0.7317,
-      0.9034
-     ],
-     [
-      0.77,
-      0.7814,
-      0.9625,
-      0.7302,
-      0.8725
-     ],
-     [
-      0.741,
-      0.7317,
-      0.7302,
-      0.9054,
-      0.7677
-     ],
-     [
-      0.9115,
-      0.9034,
-      0.8725,
-      0.7677,
-      0.9536
-     ]
-    ],
-    "kc": [
-     [
-      0.5568,
-      0.5342,
-      0.2714,
-      0.22,
-      0.501
-     ],
-     [
-      0.5342,
-      0.6132,
-      0.3429,
-      0.2307,
-      0.5748
-     ],
-     [
-      0.2714,
-      0.3429,
-      0.6274,
-      0.1814,
-      0.4026
-     ],
-     [
-      0.22,
-      0.2307,
-      0.1814,
-      0.5386,
-      0.2346
-     ],
-     [
-      0.501,
-      0.5748,
-      0.4026,
-      0.2346,
-      0.6273
-     ]
-    ],
-    "light_change": {
-     "0.4 vs 1.0": {
-      "vpn": 0.998417143761255,
-      "kc": 0.9098271037735138
-     },
-     "2.0 vs 1.0": {
-      "vpn": 0.9996035660602424,
-      "kc": 0.960913864131965
      }
     }
    }
@@ -1303,160 +1559,160 @@
  "differential": {
   "test_sets": {
    "familiar": {
-    "auc_one_look": 0.4859375,
-    "auc_one_look_sd": 0.24777574995472215,
-    "auc_all_glimpses": 0.5515625,
+    "auc_one_look": 0.386328125,
+    "auc_one_look_sd": 0.08929349156975971,
+    "auc_all_glimpses": 0.465625,
     "pairwise_auc": {
-     "mug": 0.671875,
-     "bottle": 0.4,
-     "wine glass": 0.2375,
-     "can": 0.634375
+     "mug": 0.5109375,
+     "bottle": 0.53125,
+     "wine glass": 0.034375,
+     "can": 0.46875
     }
    },
    "dim light": {
-    "auc_one_look": 0.57578125,
-    "auc_one_look_sd": 0.20876485257790642,
-    "auc_all_glimpses": 0.5734375,
+    "auc_one_look": 0.405078125,
+    "auc_one_look_sd": 0.12343131906993358,
+    "auc_all_glimpses": 0.48671875,
     "pairwise_auc": {
-     "mug": 0.725,
-     "bottle": 0.459375,
-     "wine glass": 0.321875,
-     "can": 0.796875
+     "mug": 0.49375,
+     "bottle": 0.546875,
+     "wine glass": 0.034375,
+     "can": 0.5453125
     }
    },
    "bright light": {
-    "auc_one_look": 0.56484375,
-    "auc_one_look_sd": 0.20036587627388053,
-    "auc_all_glimpses": 0.57421875,
+    "auc_one_look": 0.517578125,
+    "auc_one_look_sd": 0.1026459636208665,
+    "auc_all_glimpses": 0.56484375,
     "pairwise_auc": {
-     "mug": 0.8125,
-     "bottle": 0.425,
-     "wine glass": 0.246875,
-     "can": 0.775
+     "mug": 0.725,
+     "bottle": 0.653125,
+     "wine glass": 0.0125,
+     "can": 0.6796875
     }
    },
    "side light": {
-    "auc_one_look": 0.4609375,
-    "auc_one_look_sd": 0.11736965010438175,
-    "auc_all_glimpses": 0.49453125,
+    "auc_one_look": 0.413671875,
+    "auc_one_look_sd": 0.06555520842436931,
+    "auc_all_glimpses": 0.521875,
     "pairwise_auc": {
-     "mug": 0.3875,
-     "bottle": 0.4375,
-     "wine glass": 0.25625,
-     "can": 0.7625
+     "mug": 0.6484375,
+     "bottle": 0.61875,
+     "wine glass": 0.0125,
+     "can": 0.375
     }
    },
    "nearer or farther": {
-    "auc_one_look": 0.5703125,
-    "auc_one_look_sd": 0.17599813009482515,
-    "auc_all_glimpses": 0.59453125,
+    "auc_one_look": 0.393359375,
+    "auc_one_look_sd": 0.0788985144723112,
+    "auc_all_glimpses": 0.45546875,
     "pairwise_auc": {
-     "mug": 0.609375,
-     "bottle": 0.565625,
-     "wine glass": 0.4125,
-     "can": 0.69375
+     "mug": 0.40625,
+     "bottle": 0.590625,
+     "wine glass": 0.03125,
+     "can": 0.5453125
     }
    },
    "new kinds": {
-    "auc_one_look": 0.46328125,
-    "auc_one_look_sd": 0.21600679514051171,
-    "auc_all_glimpses": 0.45546875,
+    "auc_one_look": 0.497265625,
+    "auc_one_look_sd": 0.02927342811749249,
+    "auc_all_glimpses": 0.55390625,
     "pairwise_auc": {
-     "mug": 0.675,
-     "bottle": 0.36875,
-     "wine glass": 0.24375,
-     "can": 0.565625
+     "mug": 0.6453125,
+     "bottle": 0.63125,
+     "wine glass": 0.028125,
+     "can": 0.684375
     }
    }
   },
   "glimpses": [
    {
     "glimpses": 1,
-    "auc": 0.5201822916666667
+    "auc": 0.435546875
    },
    {
     "glimpses": 2,
-    "auc": 0.5295572916666667
+    "auc": 0.4567057291666667
    },
    {
     "glimpses": 3,
-    "auc": 0.5304687499999999
+    "auc": 0.465234375
    },
    {
     "glimpses": 4,
-    "auc": 0.5307291666666666
+    "auc": 0.472265625
    },
    {
     "glimpses": 5,
-    "auc": 0.5350260416666666
+    "auc": 0.4798177083333333
    },
    {
     "glimpses": 6,
-    "auc": 0.5390625000000001
+    "auc": 0.48671875
    },
    {
     "glimpses": 7,
-    "auc": 0.5389322916666667
+    "auc": 0.501171875
    },
    {
     "glimpses": 8,
-    "auc": 0.540625
+    "auc": 0.5080729166666667
    }
   ],
   "morph": [
    {
     "morph": 0.0,
     "relative": 1.0,
-    "vpn_overlap": 0.9998098972788207,
-    "kc_overlap": 0.9662874808746625
+    "vpn_overlap": 0.9999809945322685,
+    "kc_overlap": 0.9983486343531233
    },
    {
     "morph": 0.125,
-    "relative": 1.7180622654513804,
-    "vpn_overlap": 0.9910651420996691,
-    "kc_overlap": 0.8343840039794822
+    "relative": 1.0027136281867726,
+    "vpn_overlap": 0.9989082554002099,
+    "kc_overlap": 0.9956826811945014
    },
    {
     "morph": 0.25,
-    "relative": 2.0791664560327394,
-    "vpn_overlap": 0.9699012543357662,
-    "kc_overlap": 0.7219328990152173
+    "relative": 1.0039334330877685,
+    "vpn_overlap": 0.9961148957752333,
+    "kc_overlap": 0.9932801540638427
    },
    {
     "morph": 0.375,
-    "relative": 2.3393184010009165,
-    "vpn_overlap": 0.9421753442195342,
-    "kc_overlap": 0.6158258060924936
+    "relative": 1.0059576040225136,
+    "vpn_overlap": 0.9924708476064273,
+    "kc_overlap": 0.99163838325633
    },
    {
     "morph": 0.5,
-    "relative": 2.3181403827547777,
-    "vpn_overlap": 0.9103210067394952,
-    "kc_overlap": 0.5138558530226288
+    "relative": 1.0070841024116817,
+    "vpn_overlap": 0.9877993837161521,
+    "kc_overlap": 0.988743494470415
    },
    {
     "morph": 0.625,
-    "relative": 2.380636703683047,
-    "vpn_overlap": 0.8786354656971769,
-    "kc_overlap": 0.4345146944464872
+    "relative": 1.0078313598897775,
+    "vpn_overlap": 0.9829106028059069,
+    "kc_overlap": 0.9853499603934658
    },
    {
     "morph": 0.75,
-    "relative": 2.392491503361167,
-    "vpn_overlap": 0.8465516465098453,
-    "kc_overlap": 0.3704707673918232
+    "relative": 1.0086970720312292,
+    "vpn_overlap": 0.977943130780005,
+    "kc_overlap": 0.9823374877637626
    },
    {
     "morph": 0.875,
-    "relative": 2.4062940969071906,
-    "vpn_overlap": 0.8171422903220356,
-    "kc_overlap": 0.32584999676977305
+    "relative": 1.0074876640169248,
+    "vpn_overlap": 0.9725469624114342,
+    "kc_overlap": 0.9784768527692738
    },
    {
     "morph": 1.0,
-    "relative": 2.136304956430871,
-    "vpn_overlap": 0.7914223095186774,
-    "kc_overlap": 0.2925917378149703
+    "relative": 1.0133960619173794,
+    "vpn_overlap": 0.9674300756412595,
+    "kc_overlap": 0.9738973869560752
    }
   ],
   "similarity": {
@@ -1469,86 +1725,86 @@
    ],
    "vpn": [
     [
-     0.9337,
-     0.9161,
-     0.7692,
-     0.7412,
-     0.9112
+     0.9842,
+     0.985,
+     0.9613,
+     0.9478,
+     0.9827
     ],
     [
-     0.9161,
-     0.9311,
-     0.7809,
-     0.7315,
-     0.9034
+     0.985,
+     0.9868,
+     0.9652,
+     0.9442,
+     0.9847
     ],
     [
-     0.7692,
-     0.7809,
-     0.9623,
-     0.7302,
-     0.8727
+     0.9613,
+     0.9652,
+     0.995,
+     0.9188,
+     0.982
     ],
     [
-     0.7412,
-     0.7315,
-     0.7302,
-     0.9056,
-     0.7676
+     0.9478,
+     0.9442,
+     0.9188,
+     0.9805,
+     0.9438
     ],
     [
-     0.9112,
-     0.9034,
-     0.8727,
-     0.7676,
-     0.9537
+     0.9827,
+     0.9847,
+     0.982,
+     0.9438,
+     0.9898
     ]
    ],
    "kc": [
     [
-     0.5601,
-     0.5355,
-     0.2721,
-     0.2173,
-     0.5001
+     0.9704,
+     0.9714,
+     0.9677,
+     0.9318,
+     0.973
     ],
     [
-     0.5355,
-     0.6173,
-     0.3456,
-     0.2302,
-     0.578
+     0.9714,
+     0.9712,
+     0.9685,
+     0.9298,
+     0.9712
     ],
     [
-     0.2721,
-     0.3456,
-     0.633,
-     0.1814,
-     0.4048
+     0.9677,
+     0.9685,
+     0.9775,
+     0.9226,
+     0.9698
     ],
     [
-     0.2173,
-     0.2302,
-     0.1814,
-     0.5413,
-     0.2339
+     0.9318,
+     0.9298,
+     0.9226,
+     0.9457,
+     0.9292
     ],
     [
-     0.5001,
-     0.578,
-     0.4048,
-     0.2339,
-     0.629
+     0.973,
+     0.9712,
+     0.9698,
+     0.9292,
+     0.9721
     ]
    ],
    "light_change": {
     "0.4 vs 1.0": {
-     "vpn": 0.9983350448793844,
-     "kc": 0.8982522536741836
+     "vpn": 0.9998048353836134,
+     "kc": 0.9961061317601713
     },
     "2.0 vs 1.0": {
-     "vpn": 0.9996040754334331,
-     "kc": 0.9549812495436024
+     "vpn": 0.9999509081437795,
+     "kc": 0.9986437788197001
     }
    }
   }
@@ -1560,153 +1816,191 @@
  "paired_vs_intact": {
   "raw_pixels": {
    "familiar": {
-    "mean": -0.11328125,
-    "sd": 0.17128806032346505,
-    "better": 1,
+    "mean": 0.027734375,
+    "sd": 0.0485916147038895,
+    "better": 3,
     "n": 5
    },
    "dim light": {
-    "mean": -0.326171875,
-    "sd": 0.08238391454040042,
-    "better": 0,
+    "mean": 0.225390625,
+    "sd": 0.15303130105165574,
+    "better": 4,
     "n": 5
    },
    "bright light": {
-    "mean": -0.337890625,
-    "sd": 0.16964102148912863,
+    "mean": -0.163671875,
+    "sd": 0.0916463193563304,
     "better": 0,
     "n": 5
    },
    "side light": {
-    "mean": -0.2078125,
-    "sd": 0.142144567694302,
-    "better": 0,
-    "n": 5
-   },
-   "nearer or farther": {
-    "mean": -0.0609375,
-    "sd": 0.15004475243864746,
+    "mean": -0.001953125,
+    "sd": 0.05621472418187027,
     "better": 2,
     "n": 5
    },
+   "nearer or farther": {
+    "mean": 0.070703125,
+    "sd": 0.08562977575641402,
+    "better": 4,
+    "n": 5
+   },
    "new kinds": {
-    "mean": -0.18046875,
-    "sd": 0.10690286551935826,
-    "better": 0,
+    "mean": 0.05546875,
+    "sd": 0.058353674838758016,
+    "better": 4,
     "n": 5
    }
   },
   "shuffled": {
    "familiar": {
-    "mean": 0.08984375,
-    "sd": 0.15452169143845146,
-    "better": 3,
+    "mean": 0.3125,
+    "sd": 0.17303849796315196,
+    "better": 5,
     "n": 5
    },
    "dim light": {
-    "mean": 0.02890625,
-    "sd": 0.10838277617719062,
-    "better": 3,
+    "mean": 0.43125,
+    "sd": 0.1951812058703399,
+    "better": 5,
     "n": 5
    },
    "bright light": {
-    "mean": 0.040625,
-    "sd": 0.10301248596954157,
-    "better": 2,
+    "mean": 0.267578125,
+    "sd": 0.051274646322220015,
+    "better": 5,
     "n": 5
    },
    "side light": {
-    "mean": -0.003125,
-    "sd": 0.05972348391755122,
-    "better": 1,
+    "mean": 0.19296875,
+    "sd": 0.19915516754962384,
+    "better": 4,
     "n": 5
    },
    "nearer or farther": {
-    "mean": 0.0109375,
-    "sd": 0.11055170594567956,
-    "better": 3,
+    "mean": 0.29609375,
+    "sd": 0.030871734075748808,
+    "better": 5,
     "n": 5
    },
    "new kinds": {
-    "mean": 0.05390625,
-    "sd": 0.059055472465513306,
-    "better": 3,
+    "mean": 0.326171875,
+    "sd": 0.15109665845184167,
+    "better": 5,
     "n": 5
    }
   },
   "random": {
    "familiar": {
-    "mean": 0.09921875,
-    "sd": 0.1615620466628069,
-    "better": 2,
+    "mean": 0.396875,
+    "sd": 0.1319098461811371,
+    "better": 5,
     "n": 5
    },
    "dim light": {
-    "mean": -0.021875,
-    "sd": 0.09557469060569855,
-    "better": 1,
+    "mean": 0.3671875,
+    "sd": 0.23243992839548888,
+    "better": 4,
     "n": 5
    },
    "bright light": {
-    "mean": -0.02109375,
-    "sd": 0.12388664331002355,
-    "better": 1,
+    "mean": 0.233203125,
+    "sd": 0.09064351912074987,
+    "better": 5,
     "n": 5
    },
    "side light": {
-    "mean": 0.06875,
-    "sd": 0.12508785974765896,
-    "better": 2,
+    "mean": 0.16640625,
+    "sd": 0.19149949896923685,
+    "better": 4,
     "n": 5
    },
    "nearer or farther": {
-    "mean": -0.0359375,
-    "sd": 0.13787236511534862,
-    "better": 2,
+    "mean": 0.3046875,
+    "sd": 0.05637735149613495,
+    "better": 5,
     "n": 5
    },
    "new kinds": {
-    "mean": -0.00546875,
-    "sd": 0.045994331342296954,
-    "better": 2,
+    "mean": 0.257421875,
+    "sd": 0.16101333164912154,
+    "better": 5,
     "n": 5
    }
   },
   "olfactory_kcs": {
    "familiar": {
-    "mean": 0.05703125,
-    "sd": 0.07020825605831553,
+    "mean": 0.146875,
+    "sd": 0.08339088995414157,
     "better": 5,
     "n": 5
    },
    "dim light": {
-    "mean": 0.0546875,
-    "sd": 0.04535289148031248,
-    "better": 4,
-    "n": 5
-   },
-   "bright light": {
-    "mean": 0.01953125,
-    "sd": 0.05606523474377861,
+    "mean": 0.050390625,
+    "sd": 0.2107616454467137,
     "better": 3,
     "n": 5
    },
+   "bright light": {
+    "mean": -0.022265625,
+    "sd": 0.08153308557247635,
+    "better": 1,
+    "n": 5
+   },
    "side light": {
-    "mean": 0.015625,
-    "sd": 0.055408197582803576,
-    "better": 2,
+    "mean": 0.109765625,
+    "sd": 0.1929679592595135,
+    "better": 3,
     "n": 5
    },
    "nearer or farther": {
-    "mean": 0.025,
-    "sd": 0.09750300476139184,
-    "better": 2,
+    "mean": 0.1078125,
+    "sd": 0.08262803748198912,
+    "better": 4,
     "n": 5
    },
    "new kinds": {
-    "mean": 0.0046875,
-    "sd": 0.04812144873260779,
+    "mean": 0.063671875,
+    "sd": 0.12365363790834764,
     "better": 2,
+    "n": 5
+   }
+  },
+  "assumed_features": {
+   "familiar": {
+    "mean": 0.4390625,
+    "sd": 0.173119605906491,
+    "better": 5,
+    "n": 5
+   },
+   "dim light": {
+    "mean": 0.50625,
+    "sd": 0.1856286826234028,
+    "better": 5,
+    "n": 5
+   },
+   "bright light": {
+    "mean": 0.354296875,
+    "sd": 0.0679350670850022,
+    "better": 5,
+    "n": 5
+   },
+   "side light": {
+    "mean": 0.3265625,
+    "sd": 0.07870294042811393,
+    "better": 5,
+    "n": 5
+   },
+   "nearer or farther": {
+    "mean": 0.41796875,
+    "sd": 0.1608549925034385,
+    "better": 5,
+    "n": 5
+   },
+   "new kinds": {
+    "mean": 0.406640625,
+    "sd": 0.1819088241743649,
+    "better": 5,
     "n": 5
    }
   }
