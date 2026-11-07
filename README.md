@@ -499,6 +499,19 @@ The adaptation result holds on measured wiring: without it, dim and bright light
 
 **Bug found by the upstream run, and fixed.** With measured visual shares, recognition fell below chance (familiar 0.37) while shuffled and random wiring scored 0.69–0.77. Two errors in the Kenyon-cell code caused it. (1) Each Kenyon cell's visual input was normalised by its visual input alone, so an olfactory Kenyon cell with one small synapse from these cells counted it as its whole input. These inputs make 97,911 synapses onto olfactory Kenyon cells against 23,083 onto visual ones, so most of the code sat in olfactory cells. (2) The number of active cells was set from all 3,925 receiving cells (k = 392) while only about 300 had any drive, so the rest were filled by a fixed set of undriven cells, the same for every object. Now each cell's visual input is normalised by its total input, olfactory projection neurons included; k is set from the 335 visual Kenyon cells; and an undriven cell never fires. With an approximation of the measured shares, about 93% of active cells are then visual Kenyon cells, and the measured, shuffled and random wirings all give similar, structured codes (cup, mug and can nearly identical; bottle and glass distinct). Both earlier measured tables used the faulty code and should be read with that in mind.
 
+**After the fix (measured inputs, measured visual shares, features and receptive fields; five seeds, one look).** 297 of 345 inputs have a measured feature mix, 269 a measured receptive field, and 94% of active Kenyon cells are visual ones.
+
+| | familiar | dim | bright | side light | nearer/farther | new kinds |
+|---|---|---|---|---|---|---|
+| Measured | 0.90 | 0.90 | 0.86 | 0.56 | 0.69 | 0.81 |
+| No adaptation | 0.87 | 0.41 | 0.86 | 0.66 | 0.83 | 0.81 |
+| Shuffled | 0.72 | 0.72 | 0.74 | 0.69 | 0.49 | 0.71 |
+| Random | 0.79 | 0.77 | 0.81 | 0.66 | 0.56 | 0.84 |
+| Onto olfactory KCs | 0.57 | 0.48 | 0.54 | 0.54 | 0.55 | 0.55 |
+| Measured wiring, assumed features | 0.90 | 0.85 | 0.81 | 0.81 | 0.68 | 0.83 |
+
+With real features the measured wiring beats shuffled and random wiring for familiar views and changes in light level, the first place in this lab where specific wiring outperforms matched controls. It does worse under side lighting, and adaptation again rescues dim light. Moving the same inputs onto olfactory Kenyon cells, where they are a small share of each cell's input, drops recognition to near chance. These are model results with assumed rendering, channel table and memory rules.
+
 **Not Monty.** Monty learns features at locations in an object-centred reference frame and moves its sensors to build that model. Nothing here builds an object frame: glimpses add evidence, they do not assemble a model. The fly's closest mechanism, ring neurons whose synapses onto the compass neurons bind a visual scene to heading, works in an egocentric frame and is probed but not modelled here.
 
 Assumed: the objects and renderer, monochrome vision, the lamina model, each input's channel (shared within a type) and receptive field, the input nonlinearity, 10% Kenyon-cell sparseness among receiving cells, the viewing distances (10–14 cm in training), and everything `memory.py` assumes.

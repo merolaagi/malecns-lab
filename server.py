@@ -225,10 +225,23 @@ if __name__ == '__main__':
     runtime = BASE / '.runtime.json'
     old = json.loads(runtime.read_text()) if runtime.exists() else {}
     # bind itself is the atomic port check; never kill another listener.
-    try:
-        server = ThreadingHTTPServer(('127.0.0.1', old.get('port', 0)), Handler)
-    except OSError:
-        server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+    fixed = os.environ.get('MALECNS_PORT')
+    if fixed:
+        # Run as a login service with a fixed port (a tunnel points at it): wait for the port rather than move.
+        # If it never frees up, exit with an error and let launchd try again later.
+        import sys, time
+        for attempt in range(30):
+            try:
+                server = ThreadingHTTPServer(('127.0.0.1', int(fixed)), Handler); break
+            except OSError:
+                time.sleep(1)
+        else:
+            print(f'Port {fixed} stayed busy; not starting.', flush=True); sys.exit(1)
+    else:
+        try:
+            server = ThreadingHTTPServer(('127.0.0.1', old.get('port', 0)), Handler)
+        except OSError:
+            server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
     port = server.server_address[1]
     runtime.write_text(json.dumps({'pid': os.getpid(), 'port': port, 'project': str(BASE)}))
     print(f'MaleCNS Lab: http://127.0.0.1:{port}', flush=True)

@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Start the lab at login and restart it on failure
+
+- `tools/lab.sh install-autostart` registers the lab as a macOS LaunchAgent: it starts at login and launchd restarts it within ten seconds whenever it exits or crashes. `remove-autostart` undoes it. Once installed, `start`, `stop`, `restart` and `status` (and the restart at the end of `tools/sync.sh`) go through launchd.
+- Under the service the server always uses the same port (`MALECNS_PORT`, taken from `.runtime.json` at install). If the port is busy it waits up to 30 seconds and then exits for launchd to retry, instead of moving to a random port the Cloudflare tunnel doesn't know.
+- README: object-memory results after the Kenyon-code fix.
+
 ## Fix the visual Kenyon-cell code
 
 - Visual input onto each Kenyon cell is now normalised by the cell's total input, olfactory projection neurons included. Before, it was normalised by the visual input alone, so a few synapses from these cells onto an olfactory Kenyon cell counted as its entire input, and most of the code sat in olfactory cells (the inputs make 97,911 synapses onto olfactory Kenyon cells and 23,083 onto visual ones).
