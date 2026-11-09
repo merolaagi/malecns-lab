@@ -61,8 +61,14 @@ class OptogeneticsTest(unittest.TestCase):
         r['both'] = [base | {'turn_deg': 0, 'ttm_cells': 2, 'ttm_hz': 80.0, 'ttm_latency_s': 0.004}]
         self.assertEqual(og.verdict('Giant fiber', r)['result'], 'match')
 
+    def test_resting_alone_does_not_make_cells_fire(self):
+        m = self.lab.stimulate(experiment='DNa02', side='both', light=0, duration=1.5, seed=1, resting=0.5)['metrics']
+        self.assertEqual(m['speed_mm_s'], 0.0)
+        self.assertEqual(sum(m['leg_motor_hz'].values()), 0.0)
+
     def test_validation(self):
-        for bad in ({'experiment': 'x'}, {'side': 'up'}, {'condition': 'x'}, {'light': 9}, {'duration': 0.2}):
+        for bad in ({'experiment': 'x'}, {'side': 'up'}, {'condition': 'x'}, {'light': 9}, {'duration': 0.2},
+                    {'resting': 1.2}, {'gap_junctions': 'yes'}):
             with self.assertRaises(ValueError): og.validate(bad)
 
 
@@ -105,6 +111,10 @@ class BuildOptogeneticsTest(unittest.TestCase):
             lab = og.Optogenetics(out / 'data/optogenetics-circuit.json')
             self.assertEqual(lab.source, 'optogenetics')
             self.assertEqual(int(lab.ttm.sum()), 1)
+            self.assertEqual(len(lab.gaps), 1)                         # giant fiber -> TTMn contact
+            gf = lambda gaps: lab.stimulate(experiment='Giant fiber', side='both', light=3, duration=1.5, seed=1,
+                                            gap_junctions=gaps)['metrics']
+            self.assertGreater(gf(True)['ttm_hz'], gf(False)['ttm_hz'])
             buffer = io.StringIO()
             with contextlib.redirect_stdout(buffer): bo.probe(raw)
             self.assertIn('TTM motor neurons', buffer.getvalue())

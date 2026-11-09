@@ -123,6 +123,10 @@ class Circuit:
             if not math.isfinite(p[key]) or not lo <= p[key] <= hi: raise ValueError(f'{key} must be between {lo} and {hi}')
         p['seed'] = int(p['seed'])
         rng = np.random.default_rng(p['seed'])
+        # Optional physiology used by optogenetics.py (not exposed through /api/run): a constant resting
+        # current per cell, and electrical synapses as (pre index, post index, voltage kick) for the LIF model.
+        resting = None if p.get('resting') is None else np.asarray(p['resting'], float)
+        gaps = list(p.get('gaps') or [])
         w = self.matrix(p['condition'], p['seed'])
         w_exc, w_inh = self.conductance_matrices(p['condition'], p['seed']) if p['neuron'] == 'adex' else (None, None)
         v = (ADEX['E_L'] + rng.uniform(0, 3, self.n)) if p['neuron'] == 'adex' else rng.uniform(0, .3, self.n)
@@ -144,7 +148,7 @@ class Circuit:
         target_drive = p['drive']
         for step in range(round(p['duration'] / DT)):
             t = step * DT
-            external = np.zeros(self.n)
+            external = np.zeros(self.n) if resting is None else resting.copy()
             bias = p['bias']
             stimulus = t >= .5 and (p['mode'] != 'pulse' or t < 1.5)
             if p['condition'] == 'no_stimulus': stimulus = False
@@ -182,6 +186,10 @@ class Circuit:
                 v[silenced] = 0
                 spikes = (v >= 1) & active
                 v[spikes] = 0
+                # Electrical synapses (optional): a presynaptic spike kicks the coupled cell's voltage, so it can
+                # follow one-to-one on the next step. Chemical synapses go through the 10 ms trace instead.
+                for a, b, kick in gaps:
+                    if spikes[a] and active[b]: v[b] += kick
             refractory[spikes] = 2
             # 10 ms exponentially decaying synaptic trace, unit increment per spike.
             syn *= math.exp(-DT / .010)

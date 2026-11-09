@@ -464,9 +464,22 @@ Controls: shuffled wiring, and a sham that lights the same number of random VNC 
 .venv/bin/python optogenetics.py                          # scorecard, data/optogenetics-benchmark.json
 ```
 
-**First result, on the original steering circuit (DNa01, DNa02, DNg13 only).** Lighting DNa02 on one side sends 79% of leg motor activity to that side's legs (shuffled 51%, sham 50%), almost all of it to the front leg: coxa retraction, tibia extension and tarsus levation. The wiring routes the command to the correct side. But the model then turns *away* from the lit side (right lit +230°, left lit −26°), and the shuffled circuit does too. That turn comes from the engineered leg readout, which treats any extra motor activity as faster stepping on that side and so turns away from it. What a retracting, extending front leg actually does to the body is biomechanics the lab does not have. DNa01 gives no consistent turn and less lateralised output (45%).
+**Results on the optogenetics circuit** (1,138 neurons, 40,793 edges; all six types found; six jump-muscle motor neurons; five seeds per side). Each column adds one piece of physiology the connectome does not contain:
 
-So the first physiology to add for controlling movement is a body: muscles and leg mechanics (for example NeuroMechFly) in place of the stride readout, before more neuron parameters. The giant fiber is a second, known gap: its synapse onto the jump-muscle motor neuron is mainly electrical, which the connectome does not record, so a chemical-only model is expected to miss it.
+| Cell type | Real flies | Connectome only | + electrical synapses | + resting excitability | + both |
+|---|---|---|---|---|---|
+| DNa02 | turn toward lit side | opposite | opposite | no clear turn | no clear turn |
+| DNa01 | turn toward lit side | opposite | opposite | no clear turn | no clear turn |
+| P9 | forward walking | silent legs | silent legs | walks 7.6 mm/s, but spins | same |
+| MDN | backward walking | proxy mismatch | proxy mismatch | proxy mismatch | proxy mismatch |
+| Giant fiber | jump muscle fires in ms | never fires | **match**, 10 ms | never fires | **match** |
+
+- **Giant fiber: one missing synapse explains the failure.** It fires at 50–80 Hz and has 70 and 20 chemical synapses onto the jump-muscle motor neurons, yet those never fire, because in the model a chemical input is one share among about twenty. Adding the known electrical synapse on the same measured contacts makes the motor neuron fire 10 ms after light. It also works on the shuffled circuit, because the fix is the gap junction itself, not the chemical wiring.
+- **P9 needs a network that is awake.** With every cell silent at rest, P9 drives nothing: its outputs are mostly onto interneurons, about half of them inhibitory, and inhibiting a silent cell does nothing. A resting current at half of threshold (no cell fires on its own) lets P9 drive walking at 7.6 mm/s, but the model spins instead of walking straight. The leg readout turns small left-right differences (65 against 69 Hz summed) into large rotations.
+- **DNa02 routes its command to the correct legs** (96% of leg motor activity on the lit side, mostly the front leg), and the leg readout still turns the model the wrong way. With resting excitability, everything spins to one side.
+- **MDN drives front and hind legs about equally.** The readout cannot walk backwards, so this is only a proxy.
+
+So adding physiology works where the missing piece is a known mechanism (the electrical synapse). For walking and turning, every remaining failure runs through the engineered leg readout. The next piece of physiology to add is a body: muscles and leg mechanics, for example NeuroMechFly, driven by these motor neurons.
 
 Assumed: everything `model.py` assumes, light as a constant current into every targeted cell, and the verdict thresholds (turns over ±20°, forward walking over 2 mm/s within ±60°, hindleg over 1.2× foreleg drive as the backward-walking proxy, TTM firing within 20 ms for escape).
 

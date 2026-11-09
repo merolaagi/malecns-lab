@@ -23,6 +23,8 @@ main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--l
 <label>Light intensity <input id="light" type="range" min="0.5" max="5" step="0.1" value="2.5"><span id="lightv">2.5</span></label>
 <label>Duration (s)<input id="duration" type="number" min="1" max="10" step="0.5" value="3"></label>
 <label>Circuit<select id="condition"></select></label>
+<label>Resting excitability <input id="resting" type="range" min="0" max="0.95" step="0.05" value="0"><span id="restv">0.00 of threshold</span></label>
+<label style="flex-direction:row;align-items:center;gap:6px"><input id="gaps" type="checkbox"> Electrical synapses</label>
 <label>Seed<input id="seed" type="number" min="0" max="99999" value="1"></label>
 <button id="run">Shine light</button><span class="wb-status" id="status" role="status"></span>
 </div>
@@ -36,7 +38,7 @@ main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--l
 </div>
 
 <div class="wb-card" style="margin-top:20px"><h2>Scorecard: model against real flies</h2><div id="score"><p class="hint">Loading…</p></div>
-<p class="hint">Five seeds per side. Turning needs the right-lit and left-lit runs to turn in opposite directions by more than 20°. “Share on the lit side” is how much of the leg motor activity lands on the legs of the lit side: it reads the wiring directly, without the leg readout.</p></div>
+<p class="hint">Each column adds one piece of physiology the connectome doesn't contain. Electrical synapses: the giant fiber's known gap junction onto the jump-muscle motor neuron, placed on their measured contacts. Resting excitability: a constant current into every VNC interneuron at half of spike threshold, so no cell fires on its own but the network is no longer silent at rest. Small text under each verdict: shuffled-wiring and sham controls. Five seeds per side. Turning needs the right-lit and left-lit runs to turn in opposite directions by more than 20°. “Share on the lit side” is how much of the leg motor activity lands on the legs of the lit side: it reads the wiring directly, without the leg readout.</p></div>
 </main>
 <script src="/optogenetics.js"></script>
 </body></html>

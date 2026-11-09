@@ -18,6 +18,7 @@ async function loadMeta() {
 function showExpect() { const e = meta.experiments[$('experiment').value]; $('expect').innerHTML = `Real flies: <b>${esc(e.expect)}</b>${e.reference ? ` <span class="muted">(${esc(e.reference)})</span>` : ''}`; }
 $('experiment').addEventListener('change', showExpect);
 $('light').addEventListener('input', () => { $('lightv').textContent = (+$('light').value).toFixed(1); });
+$('resting').addEventListener('input', () => { $('restv').textContent = (+$('resting').value).toFixed(2) + ' of threshold'; });
 
 function drawPath(trace) {
   const [g, w, h] = ctx('path');
@@ -45,7 +46,7 @@ function drawLegs(legs) {
 $('run').addEventListener('click', async () => {
   $('run').disabled = true; $('status').textContent = 'Simulating…'; $('status').className = 'wb-status';
   try {
-    const body = { experiment: $('experiment').value, side: $('side').value, light: +$('light').value, duration: +$('duration').value, seed: +$('seed').value, condition: $('condition').value };
+    const body = { experiment: $('experiment').value, side: $('side').value, light: +$('light').value, duration: +$('duration').value, seed: +$('seed').value, condition: $('condition').value, resting: +$('resting').value, gap_junctions: $('gaps').checked };
     const r = await fetch('/api/optogenetics', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const d = await r.json(); if (!r.ok) throw new Error(d.error);
     const m = d.metrics;
@@ -66,14 +67,18 @@ $('run').addEventListener('click', async () => {
 async function score() {
   try {
     const r = await fetch('/api/optogenetics-benchmark'); if (!r.ok) throw new Error('No scorecard yet: python3 optogenetics.py');
-    const b = await r.json(); const conds = Object.keys(b.conditions);
-    let h = `<table class="bench"><tr><th>Cell type</th><th>Real flies</th>${conds.map(c => `<th>${esc(c)}</th>`).join('')}<th>Share on the lit side (intact / shuffled / sham)</th></tr>`;
+    const b = await r.json();
+    const variants = b.physiology_variants ? Object.keys(b.physiology_variants) : null;
+    if (!variants) throw new Error('This scorecard predates the physiology variants; rerun python3 optogenetics.py');
+    let h = `<table class="bench"><tr><th>Cell type</th><th>Real flies</th>${variants.map(v => `<th>${esc(b.physiology_variants[v])}</th>`).join('')}</tr>`;
     for (const [name, row] of Object.entries(b.experiments)) {
-      if (!row.available) { h += `<tr><td>${esc(name)}</td><td colspan="${conds.length + 2}" class="muted">not in this circuit yet</td></tr>`; continue; }
-      const c = row.conditions;
-      h += `<tr><td>${esc(name)}</td><td>${esc(row.expect)}</td>${conds.map(k => `<td><span class="tag ${tagClass(c[k].result)}">${esc(c[k].result)}</span></td>`).join('')}`
-        + `<td>${conds.map(k => c[k].lit_side_share == null ? '–' : Math.round(c[k].lit_side_share * 100) + '%').join(' / ')}</td></tr>`;
-      h += `<tr><td></td><td colspan="${conds.length + 2}" class="muted" style="text-align:left">${esc(c.intact.detail)}</td></tr>`;
+      if (!row.available) { h += `<tr><td>${esc(name)}</td><td colspan="${variants.length + 1}" class="muted">not in this circuit yet</td></tr>`; continue; }
+      h += `<tr><td>${esc(name)}</td><td>${esc(row.expect)}</td>` + variants.map(v => {
+        const c = row.physiology[v];
+        return `<td><span class="tag ${tagClass(c.intact.result)}">${esc(c.intact.result)}</span><br><span class="muted" style="font-size:10px">shuffled: ${esc(c.shuffled.result)}; sham: ${esc(c.sham.result)}</span></td>`;
+      }).join('') + '</tr>';
+      const last = row.physiology[variants[variants.length - 1]].intact, first = row.physiology[variants[0]].intact;
+      h += `<tr><td></td><td colspan="${variants.length + 1}" class="muted" style="text-align:left">Connectome only: ${esc(first.detail)}${last.detail !== first.detail ? `<br>With both: ${esc(last.detail)}` : ''}</td></tr>`;
     }
     $('score').innerHTML = h + '</table>';
   } catch (e) { $('score').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }

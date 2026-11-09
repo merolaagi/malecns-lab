@@ -42,7 +42,20 @@ CONDITIONS = {
     'shuffled': 'Wiring shuffled (destinations permuted, source weights and in-degree kept)',
     'sham': 'Light on the same number of random VNC interneurons instead (same sides)',
 }
-DEFAULT = dict(experiment='DNa02', side='right', light=2.5, duration=3.0, seed=1, condition='intact')
+DEFAULT = dict(experiment='DNa02', side='right', light=2.5, duration=3.0, seed=1, condition='intact', resting=0.0, gap_junctions=False)
+# Physiology the connectome does not contain, added one piece at a time to see what each one fixes.
+#   resting        constant current into every VNC interneuron, as a fraction of spike threshold: below 1 no cell
+#                  fires on its own, but the network becomes excitable, as real VNC circuits with ongoing activity are
+#   gap_junctions  known electrical synapses, placed on the measured chemical contacts between the same partners:
+#                  giant fiber -> jump-muscle (TTM) motor neuron. A presynaptic spike kicks the partner's voltage.
+GAPS = [('DNp01', 'TTMn')]
+GAP_KICK = 1.2                  # in units of spike threshold: enough to make the partner follow one-to-one
+PHYSIOLOGY = {
+    'connectome': dict(resting=0.0, gap_junctions=False, text='Connectome only'),
+    'electrical': dict(resting=0.0, gap_junctions=True, text='+ electrical synapses'),
+    'resting': dict(resting=0.5, gap_junctions=False, text='+ resting excitability (0.5 of threshold)'),
+    'both': dict(resting=0.5, gap_junctions=True, text='+ both'),
+}
 LIGHT_ON = 0.5                 # model.simulate switches the stimulus on at 0.5 s
 TURN_DEG = 20.0                # verdict thresholds over the light period
 FORWARD_MM_S = 2.0
@@ -62,6 +75,9 @@ class Optogenetics:
         self.ttm = np.array([bool(n.get('ttm')) for n in nodes])
         self.interneurons = np.flatnonzero(self.circuit.vnc)
         self.available = {k: int(np.isin(self.types, e['types']).sum()) for k, e in EXPERIMENTS.items()}
+        c = self.circuit
+        self.gaps = [(int(a), int(b)) for a, b in sorted(set(zip(c.pre.tolist(), c.post.tolist())))
+                     if any(self.types[a] == x and self.types[b] == y for x, y in GAPS)]
         # Motor neurons grouped by leg and muscle (bodyplan), to see what a lit cell type does to each joint.
         self.muscle_groups = {}
         for i, n in enumerate(nodes):
@@ -88,7 +104,9 @@ class Optogenetics:
         saved = c.dn
         try:
             c.dn = self.targets(p['experiment'], p['condition'], p['seed'])
-            r = c.simulate(duration=p['duration'], drive=p['light'], bias=SIDES[p['side']], seed=p['seed'],
+            resting = np.where(c.vnc, p['resting'], 0.0).tolist() if p['resting'] else None
+            gaps = [(a, b, GAP_KICK) for a, b in self.gaps] if p['gap_junctions'] else []
+            r = c.simulate(duration=p['duration'], drive=p['light'], bias=SIDES[p['side']], seed=p['seed'], resting=resting, gaps=gaps,
                            condition='shuffled' if p['condition'] == 'shuffled' else 'intact', mode='tonic')
             lit = int(c.dn.sum())
         finally:
@@ -127,6 +145,9 @@ def validate(options):
     p['light'] = float(p['light']); p['duration'] = float(p['duration']); p['seed'] = int(p['seed'])
     if not 0 <= p['light'] <= 5: raise ValueError('light must be between 0 and 5')
     if not 1 <= p['duration'] <= 10: raise ValueError('duration must be between 1 and 10 s')
+    p['resting'] = float(p['resting'])
+    if not 0 <= p['resting'] <= 0.95: raise ValueError('resting must be between 0 and 0.95 of threshold')
+    if not isinstance(p['gap_junctions'], bool): raise ValueError('gap_junctions must be true or false')
     return p
 
 
@@ -186,8 +207,9 @@ def verdict(experiment, runs):
     raise ValueError('Unknown test')
 
 
-def experiment(lab, name, light=2.5, seeds=(1, 2, 3, 4, 5), condition='intact', duration=3.0):
-    runs = {side: [lab.stimulate(experiment=name, side=side, light=light, seed=s, condition=condition, duration=duration)['metrics']
+def experiment(lab, name, light=2.5, seeds=(1, 2, 3, 4, 5), condition='intact', duration=3.0, physiology='connectome'):
+    extra = {k: v for k, v in PHYSIOLOGY[physiology].items() if k != 'text'}
+    runs = {side: [lab.stimulate(experiment=name, side=side, light=light, seed=s, condition=condition, duration=duration, **extra)['metrics']
                    for s in seeds] for side in SIDES}
     return verdict(name, runs) | {'runs': len(seeds)}
 
@@ -199,8 +221,12 @@ def scorecard(path=None, light=2.5, seeds=(1, 2, 3, 4, 5), out=None):
         if not lab.available[name]:
             rows[name] = {'available': 0}; continue
         rows[name] = {'available': lab.available[name], 'expect': e['expect'], 'reference': e['reference'],
-                      'conditions': {c: experiment(lab, name, light, seeds, c) for c in CONDITIONS}}
-    result = {'source': lab.source, 'circuit': {'neurons': lab.circuit.n, 'ttm_motor_neurons': int(lab.ttm.sum())},
+                      'physiology': {v: {c: experiment(lab, name, light, seeds, c, physiology=v) for c in CONDITIONS}
+                                     for v in PHYSIOLOGY}}
+        rows[name]['conditions'] = rows[name]['physiology']['connectome']
+    result = {'source': lab.source, 'circuit': {'neurons': lab.circuit.n, 'ttm_motor_neurons': int(lab.ttm.sum()),
+                                                'electrical_synapses': len(lab.gaps)},
+              'physiology_variants': {k: v['text'] for k, v in PHYSIOLOGY.items()},
               'light': light, 'seeds': list(seeds), 'conditions': CONDITIONS, 'experiments': rows,
               'thresholds': {'turn_deg': TURN_DEG, 'forward_mm_s': FORWARD_MM_S, 'straight_deg': STRAIGHT_DEG,
                              'hind_over_front': HIND_OVER_FRONT, 'escape_s': ESCAPE_S}}
@@ -210,7 +236,8 @@ def scorecard(path=None, light=2.5, seeds=(1, 2, 3, 4, 5), out=None):
 
 def summary(lab=None):
     lab = lab or Optogenetics()
-    return {'source': lab.source, 'available': lab.available, 'conditions': CONDITIONS,
+    return {'source': lab.source, 'available': lab.available, 'conditions': CONDITIONS, 'electrical_synapses': len(lab.gaps),
+            'physiology': {k: v['text'] for k, v in PHYSIOLOGY.items()},
             'experiments': {k: {kk: v[kk] for kk in ('expect', 'reference', 'test')} for k, v in EXPERIMENTS.items()}}
 
 
@@ -219,5 +246,6 @@ if __name__ == '__main__':
     print('circuit:', r['source'], r['circuit'])
     for name, row in r['experiments'].items():
         if not row['available']: print(f'{name:12} not in circuit'); continue
-        print(f'{name:12}', ' | '.join(f"{c}: {v['result']}" for c, v in row['conditions'].items()))
-        print(' ' * 13, row['conditions']['intact']['detail'])
+        for variant, conds in row['physiology'].items():
+            print(f'{name:12} {variant:10}', ' | '.join(f"{c}: {v['result']}" for c, v in conds.items()))
+            print(' ' * 24, conds['intact']['detail'])

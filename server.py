@@ -204,7 +204,7 @@ class Handler(BaseHTTPRequestHandler):
                        '/api/memory': {'seed'},
                        '/api/objects': {'seed','condition','trained','sparsity','train_views','exemplars','glimpses','morph_to','noise','protocol','contrast'},
                        '/api/objects-view': {'cls','light','light_az','distance','rotation','morph','morph_to','seed','trained','condition','protocol','contrast'},
-                       '/api/optogenetics': {'experiment','side','light','duration','seed','condition'}}[self.path]
+                       '/api/optogenetics': {'experiment','side','light','duration','seed','condition','resting','gap_junctions'}}[self.path]
             if set(options) - allowed: raise ValueError('Unknown parameter')
         except (ValueError, TypeError) as e: return self.send(400, {'error': str(e)})
         if not LOCK.acquire(blocking=False): return self.send(409, {'error': 'An experiment is already running'})

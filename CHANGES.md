@@ -2,6 +2,14 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add physiology to virtual optogenetics, one piece at a time
+
+- Results on the built optogenetics circuit (1,138 neurons, all six target types).
+- Electrical synapses: the giant fiber's known gap junction onto the jump-muscle (TTM) motor neuron, placed on their measured chemical contacts. With it the escape test passes (TTM fires 10 ms after light); without it the motor neuron never fires.
+- Resting excitability: a constant current into VNC interneurons below spike threshold. With it P9 drives walking (7.6 mm/s) where the silent network gave none, though the leg readout makes the model spin.
+- `model.simulate` accepts optional `resting` and `gaps` (electrical synapses, LIF only); `/api/run` is unchanged.
+- The page has controls for both, and the scorecard compares connectome only, + electrical synapses, + resting excitability, and both, each with shuffled and sham controls.
+
 ## Virtual optogenetics
 
 - `build_optogenetics.py` (probe and build): a circuit around descending neurons whose light activation has a known effect in real flies (MDN, P9/DNp09, DNa02, DNa01, giant fiber/DNp01, plus DNg13), with their VNC targets, leg motor neurons, the jump-muscle (TTM) motor neurons and leg proprioceptors.
