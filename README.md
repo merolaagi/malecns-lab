@@ -443,6 +443,33 @@ Rescaled to a common spectral radius, every placement scores the same (memory 8.
 .venv/bin/python -m unittest -v test_inhibition.py
 ```
 
+## Virtual optogenetics: can the model do what real flies do? (new)
+
+Open `/optogenetics`. In real flies a light-gated channel is put into one genetically targeted cell type and switched on with light; that is how flies are "controlled" today. Several such experiments have well-known outcomes. `optogenetics.py` drives the same cell type in the lab's spiking model (both sides, or one side) and scores the legs against them:
+
+| Cell type | Real flies |
+|---|---|
+| MDN (moonwalker) | backward walking (Bidaye et al. 2014) |
+| DNp09 (P9) | forward walking; turning toward the lit side when one side is lit (Bidaye et al. 2020) |
+| DNa02 | turning toward the lit side (Rayshubskiy et al.) |
+| DNa01 | smaller, slower ipsilateral steering |
+| DNp01 (giant fiber) | escape take-off through the jump-muscle (TTM) motor neuron, within milliseconds |
+| DNg13 | exploratory, no single published effect |
+
+Controls: shuffled wiring, and a sham that lights the same number of random VNC interneurons on the same sides. The page also breaks the motor output down by leg and muscle group (from `bodyplan.py`) and reports how much of it lands on the lit side, which reads the wiring without going through the leg readout.
+
+```sh
+.venv/bin/python build_optogenetics.py raw-data --probe   # which target types and TTM motor neurons exist
+.venv/bin/python build_optogenetics.py raw-data           # writes data/optogenetics-circuit.json
+.venv/bin/python optogenetics.py                          # scorecard, data/optogenetics-benchmark.json
+```
+
+**First result, on the original steering circuit (DNa01, DNa02, DNg13 only).** Lighting DNa02 on one side sends 79% of leg motor activity to that side's legs (shuffled 51%, sham 50%), almost all of it to the front leg: coxa retraction, tibia extension and tarsus levation. The wiring routes the command to the correct side. But the model then turns *away* from the lit side (right lit +230°, left lit −26°), and the shuffled circuit does too. That turn comes from the engineered leg readout, which treats any extra motor activity as faster stepping on that side and so turns away from it. What a retracting, extending front leg actually does to the body is biomechanics the lab does not have. DNa01 gives no consistent turn and less lateralised output (45%).
+
+So the first physiology to add for controlling movement is a body: muscles and leg mechanics (for example NeuroMechFly) in place of the stride readout, before more neuron parameters. The giant fiber is a second, known gap: its synapse onto the jump-muscle motor neuron is mainly electrical, which the connectome does not record, so a chemical-only model is expected to miss it.
+
+Assumed: everything `model.py` assumes, light as a constant current into every targeted cell, and the verdict thresholds (turns over ±20°, forward walking over 2 mm/s within ±60°, hindleg over 1.2× foreleg drive as the backward-walking proxy, TTM firing within 20 ms for escape).
+
 ## Object memory: seeing, remembering, recognising a variant (new)
 
 Open `/objects`. The question: can the measured circuit take a sensation (a cup under some light), store it, and use the memory to recognise a slightly different sensation (another cup, other light, another distance)? This is the fly's version of what tbp.monty attempts, and the page says plainly where it differs.

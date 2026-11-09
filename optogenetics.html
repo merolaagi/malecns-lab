@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Virtual optogenetics</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>
+main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:12px;align-items:flex-end}
+.controls label{display:flex;flex-direction:column;gap:4px;color:var(--muted)}
+.verdict{font-size:13px;margin:12px 0 0}.verdict b{font-weight:500}
+.tag{display:inline-block;padding:1px 7px;border:1px solid var(--line);font-size:11px}
+.tag.match{color:#c2e899;border-color:#46602f}.tag.opposite,.tag.mismatch,.tag.no-tta{color:#f28b82;border-color:#6d2f2b}
+.tag.other{color:#f2c46f;border-color:#6d5a2c}
+</style></head>
+<body>
+<header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ virtual optogenetics</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/arena3d">3D arena</a><a href="/body">Body studio</a><a href="/synapse">Synapses</a><a href="/neuron">Neuron workbench</a><a href="/memory">Memory</a><a href="/objects">Object memory</a><a href="/navigation">Navigation</a><a href="/explore">Neuron explorer</a></nav></header>
+<main class="wb">
+<h1>Switch on one cell type with light</h1>
+<p class="sub">In real flies, a light-gated channel is put into one genetically targeted cell type and switched on with light. Several of these experiments have well-known results: backward walking, forward walking, turning, escape. Here the same cell type is driven in the lab's model and the legs are scored against what real flies do. Matching these is the minimum before the model could plan experiments on a real fly.</p>
+<div class="notice"><strong>Measured:</strong> the cells, their chemical synapses and transmitter predictions. <strong>Assumed:</strong> identical simple spiking cells, synapse strength from synapse counts, glutamate as inhibitory, light as a constant current, an engineered leg readout that turns away from the side whose legs are more active and cannot walk backwards, and the verdict thresholds. <strong>Missing:</strong> electrical synapses, neuromodulation, muscles and body mechanics. <span id="sourcenote"></span></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Experiment</h2>
+<div class="controls">
+<label>Cell type<select id="experiment"></select></label>
+<label>Light on<select id="side"><option value="right">Right side</option><option value="left">Left side</option><option value="both">Both sides</option></select></label>
+<label>Light intensity <input id="light" type="range" min="0.5" max="5" step="0.1" value="2.5"><span id="lightv">2.5</span></label>
+<label>Duration (s)<input id="duration" type="number" min="1" max="10" step="0.5" value="3"></label>
+<label>Circuit<select id="condition"></select></label>
+<label>Seed<input id="seed" type="number" min="0" max="99999" value="1"></label>
+<button id="run">Shine light</button><span class="wb-status" id="status" role="status"></span>
+</div>
+<p class="hint" id="expect"></p>
+<div class="num-grid" style="margin-top:14px">
+  <div><h3 style="font-size:12px;margin:0 0 6px">Path, seen from above (light on from 0.5 s)</h3><canvas id="path" style="height:300px"></canvas></div>
+  <div><h3 style="font-size:12px;margin:0 0 6px">Leg motor neurons while the light is on</h3><canvas id="legs" style="height:300px"></canvas></div>
+</div>
+<div class="verdict" id="verdict"></div>
+<div id="muscles" style="margin-top:12px"></div>
+</div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Scorecard: model against real flies</h2><div id="score"><p class="hint">Loading…</p></div>
+<p class="hint">Five seeds per side. Turning needs the right-lit and left-lit runs to turn in opposite directions by more than 20°. “Share on the lit side” is how much of the leg motor activity lands on the legs of the lit side: it reads the wiring directly, without the leg readout.</p></div>
+</main>
+<script src="/optogenetics.js"></script>
+</body></html>

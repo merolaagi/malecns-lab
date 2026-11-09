@@ -1,0 +1,203 @@
+{
+ "source": "original",
+ "circuit": {
+  "neurons": 807,
+  "ttm_motor_neurons": 0
+ },
+ "light": 2.5,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "conditions": {
+  "intact": "Measured wiring",
+  "shuffled": "Wiring shuffled (destinations permuted, source weights and in-degree kept)",
+  "sham": "Light on the same number of random VNC interneurons instead (same sides)"
+ },
+ "experiments": {
+  "DNa02": {
+   "available": 2,
+   "expect": "Turning toward the lit side (ipsilateral)",
+   "reference": "Rayshubskiy et al., DNa02 activity predicts and drives ipsilateral turning",
+   "conditions": {
+    "intact": {
+     "turn_deg": {
+      "both": 44.19340673595526,
+      "right": 229.61880427103983,
+      "left": -25.54059252506855
+     },
+     "speed_mm_s": {
+      "both": 0.0361267962901483,
+      "right": 0.7838655348672002,
+      "left": 0.39195815392610717
+     },
+     "lit_side_share": 0.7918496222220994,
+     "result": "opposite",
+     "detail": "turns away from the lit side (right +230\u00b0, left -26\u00b0); 79% of leg motor activity on the lit side",
+     "runs": 5
+    },
+    "shuffled": {
+     "turn_deg": {
+      "both": -53.03115173923476,
+      "right": 35.693861788535024,
+      "left": -63.01406595631245
+     },
+     "speed_mm_s": {
+      "both": 8.135466381884198,
+      "right": 10.541642496957264,
+      "left": 8.45175716048365
+     },
+     "lit_side_share": 0.5074646760944687,
+     "result": "opposite",
+     "detail": "turns away from the lit side (right +36\u00b0, left -63\u00b0); 51% of leg motor activity on the lit side",
+     "runs": 5
+    },
+    "sham": {
+     "turn_deg": {
+      "both": 10.056455447265495,
+      "right": 73.53632926007114,
+      "left": -11.153431728623538
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.23918162427495404,
+      "left": 0.0
+     },
+     "lit_side_share": 0.5,
+     "result": "no clear turn",
+     "detail": "right +74\u00b0, left -11\u00b0 (threshold \u00b120\u00b0); 50% of leg motor activity on the lit side",
+     "runs": 5
+    }
+   }
+  },
+  "DNa01": {
+   "available": 2,
+   "expect": "Ipsilateral steering, smaller and slower than DNa02",
+   "reference": "Rayshubskiy et al.",
+   "conditions": {
+    "intact": {
+     "turn_deg": {
+      "both": 38.94425910873968,
+      "right": 18.609065655765537,
+      "left": 227.97910592521347
+     },
+     "speed_mm_s": {
+      "both": 0.49773827477858756,
+      "right": 21.635361804723424,
+      "left": 2.3836412976334325
+     },
+     "lit_side_share": 0.4462931651121235,
+     "result": "no clear turn",
+     "detail": "right +19\u00b0, left +228\u00b0 (threshold \u00b120\u00b0); 45% of leg motor activity on the lit side",
+     "runs": 5
+    },
+    "shuffled": {
+     "turn_deg": {
+      "both": -0.694101212742791,
+      "right": 19.050773470250725,
+      "left": -94.73411598927058
+     },
+     "speed_mm_s": {
+      "both": 9.917334653501484,
+      "right": 13.351432833946117,
+      "left": 12.502783028329064
+     },
+     "lit_side_share": 0.5153865287919908,
+     "result": "no clear turn",
+     "detail": "right +19\u00b0, left -95\u00b0 (threshold \u00b120\u00b0); 52% of leg motor activity on the lit side",
+     "runs": 5
+    },
+    "sham": {
+     "turn_deg": {
+      "both": 10.056455447265495,
+      "right": 73.53632926007114,
+      "left": -11.153431728623538
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.23918162427495404,
+      "left": 0.0
+     },
+     "lit_side_share": 0.5,
+     "result": "no clear turn",
+     "detail": "right +74\u00b0, left -11\u00b0 (threshold \u00b120\u00b0); 50% of leg motor activity on the lit side",
+     "runs": 5
+    }
+   }
+  },
+  "P9": {
+   "available": 0
+  },
+  "MDN": {
+   "available": 0
+  },
+  "Giant fiber": {
+   "available": 0
+  },
+  "DNg13": {
+   "available": 2,
+   "expect": "No single published activation effect; exploratory",
+   "reference": null,
+   "conditions": {
+    "intact": {
+     "turn_deg": {
+      "both": -308.6385305648536,
+      "right": 796.4755876141814,
+      "left": 0.09453032787652352
+     },
+     "speed_mm_s": {
+      "both": 2.1898218728600436,
+      "right": 19.030330968170926,
+      "left": 0.0
+     },
+     "lit_side_share": 0.3104733157861558,
+     "result": "exploratory",
+     "detail": "both sides: 2.2 mm/s, -309\u00b0",
+     "runs": 5
+    },
+    "shuffled": {
+     "turn_deg": {
+      "both": 8.64277761341794,
+      "right": -80.52751233670304,
+      "left": 13.956185041500898
+     },
+     "speed_mm_s": {
+      "both": 5.238974885722902,
+      "right": 5.1333616453299875,
+      "left": 10.206855762234913
+     },
+     "lit_side_share": 0.4839865334837702,
+     "result": "exploratory",
+     "detail": "both sides: 5.2 mm/s, +9\u00b0",
+     "runs": 5
+    },
+    "sham": {
+     "turn_deg": {
+      "both": 10.056455447265495,
+      "right": 73.53632926007114,
+      "left": -11.153431728623538
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.23918162427495404,
+      "left": 0.0
+     },
+     "lit_side_share": 0.5,
+     "result": "exploratory",
+     "detail": "both sides: 0.0 mm/s, +10\u00b0",
+     "runs": 5
+    }
+   }
+  }
+ },
+ "thresholds": {
+  "turn_deg": 20.0,
+  "forward_mm_s": 2.0,
+  "straight_deg": 60.0,
+  "hind_over_front": 1.2,
+  "escape_s": 0.02
+ }
+}

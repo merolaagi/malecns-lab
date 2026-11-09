@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Virtual optogenetics
+
+- `build_optogenetics.py` (probe and build): a circuit around descending neurons whose light activation has a known effect in real flies (MDN, P9/DNp09, DNa02, DNa01, giant fiber/DNp01, plus DNg13), with their VNC targets, leg motor neurons, the jump-muscle (TTM) motor neurons and leg proprioceptors.
+- `optogenetics.py` and `/optogenetics`: light one cell type on both sides or one side, see the path, leg motor activity and active muscle groups, and score the result against the published behaviour, with shuffled-wiring and sham controls. Scorecard in `data/optogenetics-benchmark.json`.
+- First result on the original circuit: DNa02 sends 79% of leg motor drive to the lit side's legs (controls 50%), mostly the front leg, but the leg readout turns the model away from the lit side, and the shuffled circuit does too. The mismatch sits in the body model, not the wiring, so muscles and leg mechanics are the next physiology to add.
+- Tests for target selection, sham matching, verdict rules and the builder.
+
 ## Start the lab at login and restart it on failure
 
 - `tools/lab.sh install-autostart` registers the lab as a macOS LaunchAgent: it starts at login and launchd restarts it within ten seconds whenever it exits or crashes. `remove-autostart` undoes it. Once installed, `start`, `stop`, `restart` and `status` (and the restart at the end of `tools/sync.sh`) go through launchd.
