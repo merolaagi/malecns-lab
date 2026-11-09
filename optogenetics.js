@@ -83,4 +83,64 @@ async function score() {
     $('score').innerHTML = h + '</table>';
   } catch (e) { $('score').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
 }
-loadMeta(); score();
+// --- physics body --------------------------------------------------------------------------------------------
+function drawBody(trace, base) {
+  const [g, w, h] = ctx('bpath');
+  const pts = trace.concat(base || []);
+  const x0 = trace[0].x, y0 = trace[0].y;
+  const span = Math.max(3, ...pts.map(p => Math.abs(p.x - x0)), ...pts.map(p => Math.abs(p.y - y0))) * 1.15;
+  const k = Math.min(w, h) / (2 * span), X = x => w / 2 + (x - x0) * k, Y = y => h / 2 - (y - y0) * k;
+  g.strokeStyle = '#e9e9e7';
+  for (let v = -Math.floor(span / 5) * 5; v <= span; v += 5) { g.beginPath(); g.moveTo(X(x0 + v), 0); g.lineTo(X(x0 + v), h); g.stroke(); g.beginPath(); g.moveTo(0, Y(y0 + v)); g.lineTo(w, Y(y0 + v)); g.stroke(); }
+  for (const [tr, colour, width] of [[base, '#9a9a9a', 1.5], [trace, '#2f5fd0', 2.4]]) {
+    if (!tr) continue; g.strokeStyle = colour; g.lineWidth = width; g.beginPath();
+    tr.forEach((p, i) => i ? g.lineTo(X(p.x), Y(p.y)) : g.moveTo(X(p.x), Y(p.y))); g.stroke();
+  }
+  const on = trace.find(p => p.t >= 0.5); if (on) { g.fillStyle = '#e9a23b'; g.beginPath(); g.arc(X(on.x), Y(on.y), 4, 0, 7); g.fill(); }
+  g.fillStyle = '#6e6e6e'; g.lineWidth = 1; g.fillText('grid 5 mm · orange dot: light on', 8, h - 8);
+}
+let bodyBench = null;
+function showEffect(e, mode) {
+  $('beffect').innerHTML = `<table class="bench"><tr><th>Effect of the light (minus unlit body)</th><th></th><th>Value</th></tr>
+    <tr><td>Turn</td><td></td><td>${e.yaw_deg >= 0 ? '+' : ''}${e.yaw_deg.toFixed(0)}° ${Math.abs(e.yaw_deg) < 1 ? '' : e.yaw_deg > 0 ? '(left)' : '(right)'}</td></tr>
+    <tr><td>Forward travel</td><td></td><td>${e.forward_mm >= 0 ? '+' : ''}${e.forward_mm.toFixed(2)} mm</td></tr>
+    <tr><td>Sideways travel</td><td></td><td>${e.lateral_mm >= 0 ? '+' : ''}${e.lateral_mm.toFixed(2)} mm ${Math.abs(e.lateral_mm) < .05 ? '' : e.lateral_mm > 0 ? '(left)' : '(right)'}</td></tr>
+    <tr><td>Body rise</td><td></td><td>${e.rise_mm >= 0 ? '+' : ''}${e.rise_mm.toFixed(3)} mm</td></tr></table>
+    <p class="hint">Body mode: ${esc(mode)}.</p>`;
+}
+function showSaved() {
+  if (!bodyBench) return;
+  const key = `${$('bexp').value}|${$('bphys').value}|${$('bside').value}`, tr = bodyBench.traces[key];
+  const mode = bodyBench.experiments[$('bexp').value]?.mode || 'walking';
+  if (tr) drawBody(tr, bodyBench.baseline[mode]);
+}
+async function bodyScore() {
+  try {
+    const r = await fetch('/api/body-benchmark'); if (!r.ok) throw new Error('No physics scorecard yet: .venv/bin/python bodysim.py (needs flygym)');
+    const b = bodyBench = await r.json();
+    $('bexp').innerHTML = Object.keys(b.experiments).map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join('');
+    const phys = Object.keys(b.physiology);
+    let h = `<table class="bench"><tr><th>Cell type</th><th>Real flies</th><th>Body</th>${phys.map(p => `<th>${esc(b.physiology[p])}</th>`).join('')}</tr>`;
+    for (const [name, row] of Object.entries(b.experiments)) {
+      h += `<tr><td>${esc(name)}</td><td>${esc(row.expect)}</td><td>${esc(row.mode)}</td>` + phys.map(p => {
+        const c = row.physiology[p]; if (!c) return '<td>–</td>';
+        return `<td><span class="tag ${tagClass(c.intact.result)}">${esc(c.intact.result)}</span><br><span class="muted" style="font-size:10px">shuffled: ${esc(c.shuffled.result)}; sham: ${esc(c.sham.result)}</span></td>`;
+      }).join('') + '</tr>';
+      h += `<tr><td></td><td colspan="${phys.length + 2}" class="muted" style="text-align:left">${phys.map(p => row.physiology[p] ? `${esc(b.physiology[p])}: ${esc(row.physiology[p].intact.detail)}` : '').join('<br>')}</td></tr>`;
+    }
+    $('bscore').innerHTML = h + '</table>';
+    showSaved();
+  } catch (e) { $('bscore').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
+}
+for (const id of ['bexp', 'bside', 'bphys']) $(id).addEventListener('change', showSaved);
+$('brun').addEventListener('click', async () => {
+  $('brun').disabled = true; $('bstatus').textContent = 'Simulating circuit and body (about 10–20 s)…'; $('bstatus').className = 'wb-status';
+  try {
+    const body = { experiment: $('bexp').value, side: $('bside').value, physiology: $('bphys').value, seed: 1, condition: $('condition').value };
+    const r = await fetch('/api/body-run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const d = await r.json(); if (!r.ok) throw new Error(d.error);
+    drawBody(d.trace, d.baseline); showEffect(d.effect, d.mode); $('bstatus').textContent = '';
+  } catch (e) { $('bstatus').textContent = e.message; $('bstatus').className = 'wb-status err'; }
+  $('brun').disabled = false;
+});
+loadMeta(); score(); bodyScore();

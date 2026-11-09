@@ -2,6 +2,14 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Drive a physics fly body with the circuit's motor neurons
+
+- `bodysim.py`: NeuroMechFly v2 (flygym, MuJoCo) driven by the spiking model's leg motor neurons, grouped by muscle into joint-angle offsets; joint directions measured on the model at start-up; walking (supplied tripod rhythm) and standing modes; effects measured against the unlit body. Scorecard for every optogenetics experiment, with shuffled and sham controls, in `data/body-benchmark.json`.
+- `/optogenetics` gains a "Physics body" section: saved scorecard, body paths against the unlit body, and live runs when flygym is installed.
+- `model.simulate` can record muscle-group rates over time (`record_groups`).
+- Result: in the physics body DNa02 now turns toward the lit side, as in real flies, but shuffled and sham do too, so the direction comes from body mechanics. MDN slows walking but never reverses it; the giant fiber does not make the body jump. Next: a rhythm generator driven by the circuit, closed-loop leg feedback, a left-right matched circuit, muscles.
+- `requirements-body.txt` (flygym); tests in `test_bodysim.py` (the physics test runs only where flygym is installed).
+
 ## Ink look
 
 - Every page now uses the Ink look: a white header with the lab's name, ⌘K / Ctrl K page search and five section tabs (Motion & body, Cells & circuits, Learning & memory, Vision & navigation, Theory); a left rail with the current section's pages and line icons; "On this page" on wide screens; Inter throughout; one gold accent with soft-tint selection and outlined buttons; light tables and white figure panels.

@@ -127,6 +127,8 @@ class Circuit:
         # current per cell, and electrical synapses as (pre index, post index, voltage kick) for the LIF model.
         resting = None if p.get('resting') is None else np.asarray(p['resting'], float)
         gaps = list(p.get('gaps') or [])
+        # Optional: mean filtered rate of named groups of cells at every trace sample (used by bodysim.py).
+        groups = {k: np.asarray(v, int) for k, v in (p.get('record_groups') or {}).items()}
         w = self.matrix(p['condition'], p['seed'])
         w_exc, w_inh = self.conductance_matrices(p['condition'], p['seed']) if p['neuron'] == 'adex' else (None, None)
         v = (ADEX['E_L'] + rng.uniform(0, 3, self.n)) if p['neuron'] == 'adex' else rng.uniform(0, .3, self.n)
@@ -222,6 +224,8 @@ class Circuit:
                               'motor_hz': float(motor_hz.mean()), 'speed': float(speed),
                               'step_hz': float(np.mean([gait(s)[0] for s in strides])),
                               'stride_mm': float(np.mean([gait(s)[1] for s in strides]))})
+                if groups:
+                    trace[-1]['groups'] = {k: float(rates[idx].mean()) if len(idx) else 0.0 for k, idx in groups.items()}
         duration = round(p['duration'] / DT) * DT
         return {'parameters': p, 'trace': trace, 'raster': raster,
                 'neuron_hz': (total / duration).tolist(),

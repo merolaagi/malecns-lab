@@ -96,10 +96,8 @@ class Optogenetics:
             if len(pool): sham[rng.choice(pool, min(need, len(pool)), replace=False)] = True
         return sham
 
-    def stimulate(self, **options):
-        p = validate(options)
-        if not self.available[p['experiment']]:
-            raise ValueError(f"{p['experiment']} is not in this circuit; build data/optogenetics-circuit.json with build_optogenetics.py")
+    def simulate(self, p, **extra):
+        """Run the spiking model with the lit cells driven. Returns (raw model result, number of lit cells)."""
         c = self.circuit
         saved = c.dn
         try:
@@ -107,10 +105,16 @@ class Optogenetics:
             resting = np.where(c.vnc, p['resting'], 0.0).tolist() if p['resting'] else None
             gaps = [(a, b, GAP_KICK) for a, b in self.gaps] if p['gap_junctions'] else []
             r = c.simulate(duration=p['duration'], drive=p['light'], bias=SIDES[p['side']], seed=p['seed'], resting=resting, gaps=gaps,
-                           condition='shuffled' if p['condition'] == 'shuffled' else 'intact', mode='tonic')
-            lit = int(c.dn.sum())
+                           condition='shuffled' if p['condition'] == 'shuffled' else 'intact', mode='tonic', **extra)
+            return r, int(c.dn.sum())
         finally:
             c.dn = saved
+
+    def stimulate(self, **options):
+        p = validate(options)
+        if not self.available[p['experiment']]:
+            raise ValueError(f"{p['experiment']} is not in this circuit; build data/optogenetics-circuit.json with build_optogenetics.py")
+        r, lit = self.simulate(p)
         trace = r['trace']
         on = [t for t in trace if t['t'] >= LIGHT_ON]
         start = next((t['heading'] for t in trace if t['t'] >= LIGHT_ON), 0.0)
