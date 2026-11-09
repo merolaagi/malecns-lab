@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Memory</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
-<style>main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}</style></head>
+<style>main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--line)}</style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/ink-skin.css"><script src="/ink-skin.js"></script></head>
 <body>
 <header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ memory</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/objects">Object memory</a><a href="/optogenetics">Optogenetics</a><a href="/inhibition">Inhibition</a><a href="/spectrum">Spectra</a><a href="/navigation">Navigation</a><a href="/body">Body studio</a><a href="/synapse">Synapses</a><a href="/arena">Arena</a><a href="/arena3d">3D arena</a><a href="/neuron">Neuron workbench</a><a href="/atlas">Circuit atlas</a><a href="/learning">Odor learning</a><a href="/vision">Vision network</a><a href="/explore">Neuron explorer</a><a href="/regions">Brain regions</a><a href="/3d">3D</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a></nav></header>
 <main class="wb">
@@ -13,7 +13,7 @@
   <div class="wb-card"><h2>Forgetting: massed against spaced training</h2><canvas id="forget" style="height:290px"></canvas>
     <p class="hint">Change in approach toward the trained odour after five pairings. Below zero: avoidance. Spaced training builds a consolidated trace; massed training does not.</p></div>
   <div class="wb-card"><h2>Extinction</h2><canvas id="extinct" style="height:290px"></canvas>
-    <p class="hint">Green: re-exposed to the odour without punishment. Grey: the same fly never re-exposed. The gap is extinction; if it closes after the delay, extinction was a separate, faster-fading memory.</p></div>
+    <p class="hint">Blue: re-exposed to the odour without punishment. Grey: the same fly never re-exposed. The gap is extinction; if it closes after the delay, extinction was a separate, faster-fading memory.</p></div>
 </div>
 <div class="wb-card" style="margin-top:20px"><h2>Which compartments hold which memory</h2><div id="ablation"></div>
   <p class="hint">Plasticity blocked in one compartment at a time, after spaced training. This is the direct test of whether memory is everywhere or somewhere.</p></div>

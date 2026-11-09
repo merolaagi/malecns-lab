@@ -166,6 +166,8 @@ class Handler(BaseHTTPRequestHandler):
                  '/': ('index.html', 'text/html; charset=utf-8'),
                  '/app.js': ('app.js', 'text/javascript; charset=utf-8'),
                  '/style.css': ('style.css', 'text/css; charset=utf-8'),
+                 '/ink-skin.css': ('ink-skin.css', 'text/css; charset=utf-8'),
+                 '/ink-skin.js': ('ink-skin.js', 'text/javascript; charset=utf-8'),
                  '/api/benchmark': ('data/benchmark.json', 'application/json; charset=utf-8')}
         if path not in files: return self.send(404, {'error': 'Not found'})
         name, mime = files[path]

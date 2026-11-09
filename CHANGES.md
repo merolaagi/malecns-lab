@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Ink look
+
+- Every page now uses the Ink look: a white header with the lab's name, ⌘K / Ctrl K page search and five section tabs (Motion & body, Cells & circuits, Learning & memory, Vision & navigation, Theory); a left rail with the current section's pages and line icons; "On this page" on wide screens; Inter throughout; one gold accent with soft-tint selection and outlined buttons; light tables and white figure panels.
+- Layered on top, not rewritten: `ink-skin.css` and `ink-skin.js` load after each page's own styles. The old header is hidden; page code is unchanged. The figures' hard-coded dark-theme colours are remapped to the light palette as the pages draw them (the lead series becomes cobalt), and figure captions that named colours were updated. Pages where green means correct or positive (math, numerosity, vision) keep green.
+- The 3D viewports keep their dark backgrounds. Light only for now; a dark mode needs its own pass over the figures.
+
 ## Add physiology to virtual optogenetics, one piece at a time
 
 - Results on the built optogenetics circuit (1,138 neurons, all six target types).

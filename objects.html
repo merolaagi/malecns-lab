@@ -10,7 +10,7 @@ main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--l
 .badge{display:inline-block;padding:2px 8px;border:1px solid var(--line);font-size:11px;margin-left:8px}
 .badge.synthetic{color:#f2c46f;border-color:#6d5a2c}.badge.measured{color:#c2e899;border-color:#46602f}
 @media(max-width:900px){.views{grid-template-columns:1fr}}
-</style></head>
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/ink-skin.css"><script src="/ink-skin.js"></script></head>
 <body>
 <header><div class="brand"><span class="mark">m</span> MaleCNS <span class="muted">/ object memory</span></div><nav class="toplinks"><a href="/">Motion lab</a><a href="/memory">Memory</a><a href="/vision">Vision network</a><a href="/expansion">Sparse expansion</a><a href="/theory">Theory</a><a href="/navigation">Navigation</a><a href="/inhibition">Inhibition</a><a href="/spectrum">Spectra</a><a href="/arena3d">3D arena</a><a href="/body">Body studio</a><a href="/synapse">Synapses</a><a href="/explore">Neuron explorer</a></nav></header>
 <main class="wb">
@@ -31,7 +31,7 @@ main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--l
 <div class="views">
 <figure><canvas id="human" style="height:260px"></canvas><figcaption>Rendered scene, 0.6° pixels (roughly what you would see)</figcaption></figure>
 <figure><canvas id="fly" style="height:260px"></canvas><figcaption>Photoreceptors: 721 columns at 5°, one eye</figcaption></figure>
-<figure><canvas id="lamina" style="height:260px"></canvas><figcaption>After lamina adaptation: green brighter, red darker than the surround</figcaption></figure>
+<figure><canvas id="lamina" style="height:260px"></canvas><figcaption>After lamina adaptation: blue brighter, red darker than the surround</figcaption></figure>
 </div>
 <div class="stats" id="viewstats"></div>
 </div>
@@ -46,7 +46,7 @@ main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--l
 <div id="result" style="margin-top:14px"><p class="hint">Run an experiment, or read the saved five-seed benchmark below.</p></div>
 <div class="num-grid" style="margin-top:16px">
   <div><h3 style="font-size:12px;margin:0 0 6px">Morph from the trained object</h3><canvas id="morphplot" style="height:240px"></canvas>
-  <p class="hint">Green: memory response relative to the trained object. Grey: overlap of visual-input codes (cosine). Gold: overlap of Kenyon-cell codes (Jaccard).</p></div>
+  <p class="hint">Blue: memory response relative to the trained object. Grey: overlap of visual-input codes (cosine). Gold: overlap of Kenyon-cell codes (Jaccard).</p></div>
   <div><h3 style="font-size:12px;margin:0 0 6px">More glimpses</h3><canvas id="glimpseplot" style="height:240px"></canvas>
   <p class="hint">Recognition (AUC, trained object against the others) when the responses of 1 to 8 re-fixations are averaged.</p></div>
 </div>
