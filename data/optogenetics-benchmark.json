@@ -1,8 +1,8 @@
 {
- "source": "original",
+ "source": "optogenetics",
  "circuit": {
-  "neurons": 807,
-  "ttm_motor_neurons": 0
+  "neurons": 1138,
+  "ttm_motor_neurons": 6
  },
  "light": 2.5,
  "seeds": [
@@ -25,50 +25,50 @@
    "conditions": {
     "intact": {
      "turn_deg": {
-      "both": 44.19340673595526,
-      "right": 229.61880427103983,
-      "left": -25.54059252506855
+      "both": 3.9120845918251335,
+      "right": 148.1230117621273,
+      "left": -52.57607822995719
      },
      "speed_mm_s": {
-      "both": 0.0361267962901483,
-      "right": 0.7838655348672002,
-      "left": 0.39195815392610717
+      "both": 0.0,
+      "right": 0.5392683213130542,
+      "left": 0.0
      },
-     "lit_side_share": 0.7918496222220994,
+     "lit_side_share": 0.9646362778337743,
      "result": "opposite",
-     "detail": "turns away from the lit side (right +230\u00b0, left -26\u00b0); 79% of leg motor activity on the lit side",
+     "detail": "turns away from the lit side (right +148\u00b0, left -53\u00b0); 96% of leg motor activity on the lit side",
      "runs": 5
     },
     "shuffled": {
      "turn_deg": {
-      "both": -53.03115173923476,
-      "right": 35.693861788535024,
-      "left": -63.01406595631245
+      "both": 21.891663226634595,
+      "right": 28.25423828043757,
+      "left": -5.238470694193618
      },
      "speed_mm_s": {
-      "both": 8.135466381884198,
-      "right": 10.541642496957264,
-      "left": 8.45175716048365
+      "both": 0.5534067157574809,
+      "right": 1.058484286172201,
+      "left": 1.1297991800775251
      },
-     "lit_side_share": 0.5074646760944687,
-     "result": "opposite",
-     "detail": "turns away from the lit side (right +36\u00b0, left -63\u00b0); 51% of leg motor activity on the lit side",
+     "lit_side_share": 0.5139826905167875,
+     "result": "no clear turn",
+     "detail": "right +28\u00b0, left -5\u00b0 (threshold \u00b120\u00b0); 51% of leg motor activity on the lit side",
      "runs": 5
     },
     "sham": {
      "turn_deg": {
-      "both": 10.056455447265495,
-      "right": 73.53632926007114,
-      "left": -11.153431728623538
+      "both": 0.0,
+      "right": 34.79284406321328,
+      "left": -18.18178383209814
      },
      "speed_mm_s": {
       "both": 0.0,
-      "right": 0.23918162427495404,
-      "left": 0.0
+      "right": 0.7642857410259073,
+      "left": 0.061269874921972375
      },
-     "lit_side_share": 0.5,
+     "lit_side_share": 0.35920479921012555,
      "result": "no clear turn",
-     "detail": "right +74\u00b0, left -11\u00b0 (threshold \u00b120\u00b0); 50% of leg motor activity on the lit side",
+     "detail": "right +35\u00b0, left -18\u00b0 (threshold \u00b120\u00b0); 36% of leg motor activity on the lit side",
      "runs": 5
     }
    }
@@ -80,62 +80,230 @@
    "conditions": {
     "intact": {
      "turn_deg": {
-      "both": 38.94425910873968,
-      "right": 18.609065655765537,
-      "left": 227.97910592521347
+      "both": -31.254160020138734,
+      "right": 50.00047665076977,
+      "left": -61.636549175170764
      },
      "speed_mm_s": {
-      "both": 0.49773827477858756,
-      "right": 21.635361804723424,
-      "left": 2.3836412976334325
+      "both": 0.0,
+      "right": 0.44473595665920007,
+      "left": 0.6601854079463223
      },
-     "lit_side_share": 0.4462931651121235,
-     "result": "no clear turn",
-     "detail": "right +19\u00b0, left +228\u00b0 (threshold \u00b120\u00b0); 45% of leg motor activity on the lit side",
+     "lit_side_share": 0.6630702966755035,
+     "result": "opposite",
+     "detail": "turns away from the lit side (right +50\u00b0, left -62\u00b0); 66% of leg motor activity on the lit side",
      "runs": 5
     },
     "shuffled": {
      "turn_deg": {
-      "both": -0.694101212742791,
-      "right": 19.050773470250725,
-      "left": -94.73411598927058
+      "both": -2.5140102387547656,
+      "right": 26.006642295676677,
+      "left": -60.15048470917858
      },
      "speed_mm_s": {
-      "both": 9.917334653501484,
-      "right": 13.351432833946117,
-      "left": 12.502783028329064
+      "both": 0.7139706236247153,
+      "right": 1.706925520695109,
+      "left": 1.1171581390431702
      },
-     "lit_side_share": 0.5153865287919908,
-     "result": "no clear turn",
-     "detail": "right +19\u00b0, left -95\u00b0 (threshold \u00b120\u00b0); 52% of leg motor activity on the lit side",
+     "lit_side_share": 0.5761699419840304,
+     "result": "opposite",
+     "detail": "turns away from the lit side (right +26\u00b0, left -60\u00b0); 58% of leg motor activity on the lit side",
      "runs": 5
     },
     "sham": {
      "turn_deg": {
-      "both": 10.056455447265495,
-      "right": 73.53632926007114,
-      "left": -11.153431728623538
+      "both": 0.0,
+      "right": 34.79284406321328,
+      "left": -18.18178383209814
      },
      "speed_mm_s": {
       "both": 0.0,
-      "right": 0.23918162427495404,
-      "left": 0.0
+      "right": 0.7642857410259073,
+      "left": 0.061269874921972375
      },
-     "lit_side_share": 0.5,
+     "lit_side_share": 0.35920479921012555,
      "result": "no clear turn",
-     "detail": "right +74\u00b0, left -11\u00b0 (threshold \u00b120\u00b0); 50% of leg motor activity on the lit side",
+     "detail": "right +35\u00b0, left -18\u00b0 (threshold \u00b120\u00b0); 36% of leg motor activity on the lit side",
      "runs": 5
     }
    }
   },
   "P9": {
-   "available": 0
+   "available": 2,
+   "expect": "Forward walking; turning toward the lit side when one side is lit",
+   "reference": "Bidaye et al. 2020, Neuron",
+   "conditions": {
+    "intact": {
+     "turn_deg": {
+      "both": 0.0,
+      "right": 0.0,
+      "left": 0.0
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.0,
+      "left": 0.0
+     },
+     "lit_side_share": 0.34225544650912687,
+     "result": "mismatch",
+     "detail": "both sides: 0.0 mm/s, +0\u00b0 (not straight forward walking); one side: right +0\u00b0, left +0\u00b0 (threshold \u00b120\u00b0)",
+     "runs": 5
+    },
+    "shuffled": {
+     "turn_deg": {
+      "both": -0.014794638727449936,
+      "right": -48.412289309218735,
+      "left": -6.1055224018089715
+     },
+     "speed_mm_s": {
+      "both": 0.06274093276939471,
+      "right": 0.319355498135803,
+      "left": 0.27300382374999027
+     },
+     "lit_side_share": 0.4360002732567391,
+     "result": "mismatch",
+     "detail": "both sides: 0.1 mm/s, -0\u00b0 (not straight forward walking); one side: right -48\u00b0, left -6\u00b0 (threshold \u00b120\u00b0)",
+     "runs": 5
+    },
+    "sham": {
+     "turn_deg": {
+      "both": 0.0,
+      "right": 34.79284406321328,
+      "left": -18.18178383209814
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.7642857410259073,
+      "left": 0.061269874921972375
+     },
+     "lit_side_share": 0.35920479921012555,
+     "result": "mismatch",
+     "detail": "both sides: 0.0 mm/s, +0\u00b0 (not straight forward walking); one side: right +35\u00b0, left -18\u00b0 (threshold \u00b120\u00b0)",
+     "runs": 5
+    }
+   }
   },
   "MDN": {
-   "available": 0
+   "available": 4,
+   "expect": "Backward walking (\"moonwalking\")",
+   "reference": "Bidaye et al. 2014, Science; hindlegs lead backward stepping (Feng et al. 2020)",
+   "conditions": {
+    "intact": {
+     "turn_deg": {
+      "both": 552.7618411650982,
+      "right": 352.62660713229945,
+      "left": 1340.0541273009064
+     },
+     "speed_mm_s": {
+      "both": 14.591864571068939,
+      "right": 14.813605851080842,
+      "left": 15.21966745551567
+     },
+     "lit_side_share": 0.4313372976893697,
+     "front_hz": 78.37960966591145,
+     "hind_hz": 77.62627760829369,
+     "result": "proxy mismatch",
+     "detail": "the leg readout cannot walk backwards; proxy is hindleg motor drive above foreleg (77.6 vs 78.4 Hz)",
+     "runs": 5
+    },
+    "shuffled": {
+     "turn_deg": {
+      "both": 1.0607795170328103,
+      "right": 12.418248112054677,
+      "left": -18.060127426329057
+     },
+     "speed_mm_s": {
+      "both": 1.096418911374211,
+      "right": 1.3375716922294452,
+      "left": 1.7925972919185864
+     },
+     "lit_side_share": 0.5365668767565638,
+     "front_hz": 5.9477872780953955,
+     "hind_hz": 3.2077636267626937,
+     "result": "proxy mismatch",
+     "detail": "the leg readout cannot walk backwards; proxy is hindleg motor drive above foreleg (3.2 vs 5.9 Hz)",
+     "runs": 5
+    },
+    "sham": {
+     "turn_deg": {
+      "both": 0.0,
+      "right": -11.654315914862472,
+      "left": -32.50513263321
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.0,
+      "left": 0.07626256322429545
+     },
+     "lit_side_share": 0.3,
+     "front_hz": 0.13719401211396964,
+     "hind_hz": 0.06334964388799048,
+     "result": "no leg activity",
+     "detail": "the leg readout cannot walk backwards; proxy is hindleg motor drive above foreleg (0.1 vs 0.1 Hz)",
+     "runs": 5
+    }
+   }
   },
   "Giant fiber": {
-   "available": 0
+   "available": 2,
+   "expect": "Escape take-off: the jump-muscle (TTM) motor neuron fires within milliseconds",
+   "reference": "Giant-fiber escape pathway (e.g. von Reyn et al. 2014); mainly electrical synapses",
+   "conditions": {
+    "intact": {
+     "turn_deg": {
+      "both": 0.0,
+      "right": 0.0,
+      "left": 0.0
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.0,
+      "left": 0.0
+     },
+     "lit_side_share": 0.9756437793816974,
+     "ttm_hz": 0.0,
+     "ttm_latency_s": null,
+     "result": "no TTM activity",
+     "detail": "the jump-muscle motor neuron never fired. Expected without gap junctions: the real giant-fiber synapse onto it is mainly electrical, absent from the connectome",
+     "runs": 5
+    },
+    "shuffled": {
+     "turn_deg": {
+      "both": 7.020056084775513,
+      "right": 0.19304113072202256,
+      "left": -7.285397878361171
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.10596010646840351,
+      "left": 0.010095509251801475
+     },
+     "lit_side_share": 0.4580876989790865,
+     "ttm_hz": 0.0,
+     "ttm_latency_s": null,
+     "result": "no TTM activity",
+     "detail": "the jump-muscle motor neuron never fired. Expected without gap junctions: the real giant-fiber synapse onto it is mainly electrical, absent from the connectome",
+     "runs": 5
+    },
+    "sham": {
+     "turn_deg": {
+      "both": 0.0,
+      "right": 34.79284406321328,
+      "left": -18.18178383209814
+     },
+     "speed_mm_s": {
+      "both": 0.0,
+      "right": 0.7642857410259073,
+      "left": 0.061269874921972375
+     },
+     "lit_side_share": 0.35920479921012555,
+     "ttm_hz": 0.0,
+     "ttm_latency_s": null,
+     "result": "no TTM activity",
+     "detail": "the jump-muscle motor neuron never fired. Expected without gap junctions: the real giant-fiber synapse onto it is mainly electrical, absent from the connectome",
+     "runs": 5
+    }
+   }
   },
   "DNg13": {
    "available": 2,
@@ -144,50 +312,50 @@
    "conditions": {
     "intact": {
      "turn_deg": {
-      "both": -308.6385305648536,
-      "right": 796.4755876141814,
-      "left": 0.09453032787652352
+      "both": 0.0,
+      "right": -148.2970882519075,
+      "left": 63.03469463135025
      },
      "speed_mm_s": {
-      "both": 2.1898218728600436,
-      "right": 19.030330968170926,
-      "left": 0.0
+      "both": 0.0,
+      "right": 0.8713109449706898,
+      "left": 0.03650933648279417
      },
-     "lit_side_share": 0.3104733157861558,
+     "lit_side_share": 0.10905252599670442,
      "result": "exploratory",
-     "detail": "both sides: 2.2 mm/s, -309\u00b0",
+     "detail": "both sides: 0.0 mm/s, +0\u00b0",
      "runs": 5
     },
     "shuffled": {
      "turn_deg": {
-      "both": 8.64277761341794,
-      "right": -80.52751233670304,
-      "left": 13.956185041500898
+      "both": 5.965625684884816,
+      "right": -7.16867596799689,
+      "left": -7.569581425857143
      },
      "speed_mm_s": {
-      "both": 5.238974885722902,
-      "right": 5.1333616453299875,
-      "left": 10.206855762234913
+      "both": 0.37609839262529593,
+      "right": 0.5342320204694005,
+      "left": 1.0040686875340967
      },
-     "lit_side_share": 0.4839865334837702,
+     "lit_side_share": 0.48494252189125453,
      "result": "exploratory",
-     "detail": "both sides: 5.2 mm/s, +9\u00b0",
+     "detail": "both sides: 0.4 mm/s, +6\u00b0",
      "runs": 5
     },
     "sham": {
      "turn_deg": {
-      "both": 10.056455447265495,
-      "right": 73.53632926007114,
-      "left": -11.153431728623538
+      "both": 0.0,
+      "right": 34.79284406321328,
+      "left": -18.18178383209814
      },
      "speed_mm_s": {
       "both": 0.0,
-      "right": 0.23918162427495404,
-      "left": 0.0
+      "right": 0.7642857410259073,
+      "left": 0.061269874921972375
      },
-     "lit_side_share": 0.5,
+     "lit_side_share": 0.35920479921012555,
      "result": "exploratory",
-     "detail": "both sides: 0.0 mm/s, +10\u00b0",
+     "detail": "both sides: 0.0 mm/s, +0\u00b0",
      "runs": 5
     }
    }
