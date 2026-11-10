@@ -142,3 +142,6 @@ footer{border-color:var(--line);color:var(--dim)}
 /* selected tabs are a soft tint, never a solid block */
 .tabs button{background:var(--panel);border:1px solid var(--line);color:var(--dim);font-weight:500}
 .tabs button.active{background:var(--sel-bg)!important;border-color:var(--sel-line)!important;color:var(--sel-ink)!important;font-weight:600}
+
+/* wide tables scroll inside their card */
+.tw{overflow-x:auto;max-width:100%}

@@ -64,12 +64,47 @@ HIND_OVER_FRONT = 1.2
 ESCAPE_S = 0.02
 
 
+def side_of(n):
+    return n.get('rootSide') or n.get('somaSide')
+
+
+def symmetric(data):
+    """Left-right matched copy of a circuit: for every cell type (and leg, for motor and sensory cells), keep the
+    same number of cells on each side, dropping the cells with the fewest synapses inside the circuit. Cells without
+    a type or a side are kept. Returns (data, report)."""
+    nodes = data['nodes']
+    degree = {}
+    for a, b, w in data['edges']:
+        degree[a] = degree.get(a, 0) + w; degree[b] = degree.get(b, 0) + w
+    pools = {}
+    for n in nodes:
+        if n.get('type') and side_of(n) in ('L', 'R'):
+            key = (n['type'], n.get('subclass'), n.get('entryNerve'))
+            pools.setdefault(key, {'L': [], 'R': []})[side_of(n)].append(n)
+    drop = set()
+    for key, sides in pools.items():
+        k = min(len(sides['L']), len(sides['R']))
+        for s in ('L', 'R'):
+            ranked = sorted(sides[s], key=lambda n: (-degree.get(n['bodyId'], 0), n['bodyId']))
+            drop.update(n['bodyId'] for n in ranked[k:])
+    # never drop the lit cell types themselves
+    keep_types = {t for e in EXPERIMENTS.values() for t in e['types']}
+    drop = {b for b in drop if next(n for n in nodes if n['bodyId'] == b)['type'] not in keep_types}
+    out = dict(data, nodes=[n for n in nodes if n['bodyId'] not in drop],
+               edges=[e for e in data['edges'] if e[0] not in drop and e[1] not in drop])
+    unmatched = sum(1 for sides in pools.values() if len(sides['L']) != len(sides['R']))
+    return out, {'dropped': len(drop), 'kept': len(out['nodes']), 'unmatched_pools_before': unmatched}
+
+
 class Optogenetics:
-    def __init__(self, path=None):
+    def __init__(self, path=None, matched=False):
         default = BASE / 'data/optogenetics-circuit.json'
         self.path = Path(path) if path else (default if default.exists() else BASE / 'data/circuit.json')
         self.source = 'optogenetics' if self.path.name == 'optogenetics-circuit.json' else 'original'
-        self.circuit = model.Circuit(self.path)
+        data = json.loads(self.path.read_text())
+        self.matched, self.matching = matched, None
+        if matched: data, self.matching = symmetric(data)
+        self.circuit = model.Circuit(data=data)
         nodes = self.circuit.nodes
         self.types = np.array([str(n.get('type')) for n in nodes])
         self.ttm = np.array([bool(n.get('ttm')) for n in nodes])

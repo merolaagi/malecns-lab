@@ -82,6 +82,19 @@ def build(raw):
         selected.update(int(post[j]) for j in idx)
     mask = np.isin(pre, list(selected)) & np.isin(post, list(motors)) & (weight >= MIN_SYNAPSES)
     selected.update(int(i) for i in post[mask])
+    # Mirror completion: the strongest-target selection runs separately for the left and right seeds, so it picks
+    # different cells on the two sides, and the circuit ends up lopsided (with resting excitability, lighting one
+    # side recruited the opposite legs). Add every cell of the same type (and leg, for motor neurons) on the other
+    # side, so each selected type is present on both sides.
+    before = len(selected)
+    pools = {}
+    for i, r in ann.items():
+        if r['superclass'] in ('vnc_intrinsic', 'vnc_motor', 'descending_neuron') and r.get('type'):
+            pools.setdefault((r['type'], r.get('subclass')), set()).add(i)
+    for i in list(selected):
+        r = ann.get(i)
+        if r and r.get('type'): selected |= pools.get((r['type'], r.get('subclass')), set())
+    mirrored = len(selected) - before
     sensory = {i for i, r in ann.items() if r['superclass'] == 'vnc_sensory'
                and r['subclass'] in ['chordotonal organ', 'campaniform sensilla']
                and r['entryNerve'] in ['ProLN', 'MesoLN', 'MetaLN']}
@@ -106,12 +119,13 @@ def build(raw):
     out = {'dataset': 'male-cns:v1.0', 'license': 'CC-BY-4.0', 'built_at': datetime.now(timezone.utc).isoformat(),
            'source': 'https://male-cns.janelia.org/download/', 'target_types': TARGET_TYPES, 'found': dict(found),
            'selection': f'Traced cells of {", ".join(TARGET_TYPES)}; top {PER_SEED} VNC targets per seed (>= {MIN_SYNAPSES} synapses); '
-                        f'their leg motor targets; TTM motor neurons; top 20 connected leg proprioceptive cells per nerve and side. '
+                        f'their leg motor targets; every cell of the same type (and leg) on the other side; TTM motor neurons; '
+                        'top 20 connected leg proprioceptive cells per nerve and side. '
                         'All positive edges among selected cells. Chemical synapses only.',
-           'nodes': nodes, 'edges': edges}
+           'mirror_added': mirrored, 'nodes': nodes, 'edges': edges}
     (BASE / 'data/optogenetics-circuit.json').write_text(json.dumps(out, separators=(',', ':')))
     print('DONE', json.dumps({'neurons': len(nodes), 'edges': len(edges), 'synapses': int(sum(e[2] for e in edges)),
-                              'targets': dict(found), 'ttm_motor_neurons': len(ttm),
+                              'targets': dict(found), 'ttm_motor_neurons': len(ttm), 'mirror_added': mirrored,
                               'missing': [t for t in TARGET_TYPES if t not in found]}), flush=True)
 
 

@@ -77,8 +77,8 @@ def leg_for(n):
     return LEGS.index(label) if label in LEGS else -1
 
 class Circuit:
-    def __init__(self, path=None):
-        self.data = json.loads(Path(path or BASE / 'data/circuit.json').read_text())
+    def __init__(self, path=None, data=None):
+        self.data = data if data is not None else json.loads(Path(path or BASE / 'data/circuit.json').read_text())
         self.nodes = self.data['nodes']
         self.n = len(self.nodes)
         index = {n['bodyId']: i for i, n in enumerate(self.nodes)}
@@ -239,3 +239,42 @@ class Circuit:
                             'mean_stride_mm': float(np.mean([t['stride_mm'] for t in trace])) if trace else 0.0,
                             'reported_ranges': {'speed_mm_s': [5, 25], 'step_hz': [5, 15], 'stride_mm': [1, 2]}},
                 'interpretation': 'Model output, not biological validation. Motor pools drive an engineered 2D gait proxy. Target mode injects a hand-designed bearing signal into descending neurons.'}
+
+
+class Stepper:
+    """The LIF network advanced one 1 ms step at a time, for closed-loop coupling to a physics body (bodysim.py).
+
+    Same dynamics as Circuit.simulate with the leaky integrate-and-fire model: 20 ms membrane, threshold 1, reset 0,
+    two-step refractory period, 10 ms synaptic trace, 50 ms rate filter, Gaussian current noise. Inputs each step:
+    a constant drive vector (lit cells, resting current) plus whatever current the caller injects (sensory feedback).
+    """
+
+    def __init__(self, circuit, drive, gain=DEFAULT['gain'], condition='intact', seed=1, gaps=()):
+        self.c, self.gain = circuit, float(gain)
+        self.w = circuit.matrix(condition, seed)
+        self.rng = np.random.default_rng(seed)
+        n = circuit.n
+        self.v = self.rng.uniform(0, .3, n)
+        self.syn = np.zeros(n); self.rates = np.zeros(n)
+        self.refractory = np.zeros(n, dtype=int)
+        self.drive = np.asarray(drive, float)
+        self.gaps = list(gaps)
+        self.total = np.zeros(n, dtype=int)
+        self.t = 0.0
+
+    def step(self, injected=None):
+        current = self.drive + self.gain * self.w.dot(self.syn) + self.rng.normal(0, .015, self.c.n)
+        if injected is not None: current = current + injected
+        self.refractory = np.maximum(self.refractory - 1, 0)
+        active = self.refractory == 0
+        self.v[active] += DT / .020 * (-self.v[active] + current[active])
+        spikes = (self.v >= 1) & active
+        self.v[spikes] = 0
+        for a, b, kick in self.gaps:
+            if spikes[a] and active[b]: self.v[b] += kick
+        self.refractory[spikes] = 2
+        self.syn *= math.exp(-DT / .010); self.syn[spikes] += 1
+        self.rates *= math.exp(-DT / .050); self.rates[spikes] += 1 / .050
+        self.total += spikes
+        self.t += DT
+        return spikes

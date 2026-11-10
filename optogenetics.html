@@ -39,19 +39,21 @@ main canvas{width:100%;display:block;background:#0d130f;border:1px solid var(--l
 
 <div class="wb-card" style="margin-top:20px"><h2>Scorecard: model against real flies</h2><div id="score"><p class="hint">Loading…</p></div>
 <p class="hint">Each column adds one piece of physiology the connectome doesn't contain. Electrical synapses: the giant fiber's known gap junction onto the jump-muscle motor neuron, placed on their measured contacts. Resting excitability: a constant current into every VNC interneuron at half of spike threshold, so no cell fires on its own but the network is no longer silent at rest. Small text under each verdict: shuffled-wiring and sham controls. Five seeds per side. Turning needs the right-lit and left-lit runs to turn in opposite directions by more than 20°. “Share on the lit side” is how much of the leg motor activity lands on the legs of the lit side: it reads the wiring directly, without the leg readout.</p></div>
-<div class="wb-card" style="margin-top:20px"><h2>Physics body: the same motor neurons driving NeuroMechFly</h2>
-<p class="sub" style="font-size:14px">The engineered leg readout above is replaced by NeuroMechFly v2, a physics model of the fly's body (MuJoCo, from flygym). Each joint's angle is offset by the balance of its motor neurons: protractors against retractors, levators against depressors, extensors against flexors. Physics then decides which way the body goes. Turning and backward walking are tested while the body walks with a supplied tripod rhythm (the lab's circuit has no rhythm generator); the escape is tested standing. Every effect is measured against the same body without light.</p>
+<div class="wb-card" style="margin-top:20px"><h2>Physics body in closed loop: the circuit driving NeuroMechFly</h2>
+<p class="sub" style="font-size:14px">NeuroMechFly v2 (flygym, MuJoCo) is driven by the circuit every millisecond, and the body feeds back. Motor neurons offset each joint by the balance of opposing muscles. Each leg's stepping rhythm is switched on, sped up and turned forward or backward by the circuit: its motor drive sets amplitude and frequency, and coxa retractors against protractors set the direction. Foot load and joint movement drive the leg's sensory neurons. The jump-muscle motor neurons drive a twitching muscle on the middle legs. The circuit builder adds every selected cell type's partners on the other side, so neither side is favoured by extraction. Turning cells are lit while the fly walks under its own forward command (P9 on both sides); everything else is lit on a standing fly.</p>
 <div class="controls" style="margin:12px 0">
 <label>Cell type<select id="bexp"></select></label>
 <label>Light on<select id="bside"><option value="right">Right side</option><option value="left">Left side</option><option value="both">Both sides</option></select></label>
-<label>Physiology<select id="bphys"><option value="connectome">Connectome only</option><option value="both">+ electrical synapses and resting excitability</option></select></label>
+<label>Model<select id="babl"></select></label>
 <button id="brun">Run in the physics body</button><span class="wb-status" id="bstatus" role="status"></span>
 </div>
 <div class="num-grid"><div><h3 style="font-size:12px;margin:0 0 6px">Body path, seen from above</h3><canvas id="bpath" style="height:300px"></canvas>
-<p class="hint">Grey: the same body without light. Blue: with light (from 0.5 s). The fly starts at the centre facing right.</p></div>
-<div id="beffect"><p class="hint">Saved results below; run one live if flygym is installed on this machine.</p></div></div>
+<p class="hint">Grey: the comparison run (no light, or P9 alone for turning cells). Blue: with light from 0.5 s (orange dot). The fly starts at the centre facing right.</p></div>
+<div><h3 style="font-size:12px;margin:0 0 6px">Each leg's rhythm, set by the circuit</h3><canvas id="blegs" style="height:300px"></canvas>
+<p class="hint">Bars: step amplitude (0 to 1) at the end of the light. Blue: stepping forward; red: backward.</p></div></div>
+<div id="beffect" style="margin-top:12px"></div>
 <div id="bscore" style="margin-top:16px"><p class="hint">Loading…</p></div>
-<p class="hint">Turning: right-lit and left-lit runs must turn toward their own side by more than 10° (relative to the unlit body) for a match; smaller turns in the right direction are “weak, right direction”. Backward: forward travel during light must go negative for a match; slowing by over 30% is partial. Escape: the standing body must rise more than 0.05 mm. Open loop: the body's foot contacts do not yet feed back into the circuit.</p></div>
+<p class="hint">Turning: right-lit and left-lit runs must turn toward their own side by more than 10° against the comparison run. Forward walking: more than 2 mm forward within ±45°. Backward: more than 2 mm backward. Escape: the body rises more than 0.05 mm. Each model column switches one piece off.</p></div>
 </main>
 <script src="/optogenetics.js"></script>
 </body></html>

@@ -483,34 +483,38 @@ So adding physiology works where the missing piece is a known mechanism (the ele
 
 Assumed: everything `model.py` assumes, light as a constant current into every targeted cell, and the verdict thresholds (turns over ±20°, forward walking over 2 mm/s within ±60°, hindleg over 1.2× foreleg drive as the backward-walking proxy, TTM firing within 20 ms for escape).
 
-### Physics body: NeuroMechFly v2 (new)
+### Physics body in closed loop (new)
 
-`bodysim.py` replaces the engineered leg readout with NeuroMechFly v2, the physics model of the adult fly body from flygym (MuJoCo), so physics, not a hand rule, decides where the body goes. The page's "Physics body" section shows saved results and, when flygym is installed, runs live.
+`bodysim.py` drives NeuroMechFly v2 (flygym, MuJoCo) with the circuit every millisecond, and the body feeds back. Four pieces were added after the open-loop version showed what was missing:
 
-How the motor neurons drive it: the spiking model's motor neurons are grouped by leg and muscle (`bodyplan.py`; the jump-muscle TTM motor neurons count as middle-leg femur depressors). Each joint's angle is offset by `span × tanh((agonist − antagonist rate) / 12 Hz)` on the matching NeuroMechFly degree of freedom (coxa pitch, coxa–femur pitch, femur–tibia pitch, tibia–tarsus pitch). Which direction of each degree of freedom means forward, up or reach is measured on the model at start-up by moving the joint and watching the foot, not assumed. Spans are 0.35 rad (0.25 for the tarsus), set once and never tuned per experiment.
+1. **A rhythm the circuit controls.** Each leg has a stepping oscillator (recorded fly steps). The circuit decides whether it steps, how fast and which way: amplitude and frequency rise with the leg's motor-neuron drive (no drive, the leg stands), and the step cycle runs forward when the coxa retractors (forward-walking stance muscles) are driven harder than the protractors, and backward when the protractors are. Legs are coupled into a tripod. The oscillator shape and coupling are assumed; the circuit has no rhythm-generating interneurons.
+2. **Closed-loop feedback.** Foot load drives each leg's campaniform sensilla; femur–tibia joint speed drives its chordotonal neurons (`model.Stepper` runs the network one millisecond at a time against the physics).
+3. **A jump muscle.** The jump-muscle (TTM) motor neurons drive a twitching muscle on each middle leg: each motor spike raises activation by 80% of what is left, decaying in 5 ms, with maximum torque assumed to push at ten times body weight.
+4. **A left-right complete circuit.** `build_optogenetics.py` now adds every cell of a selected type on the other side. The previous extract chose strongest targets separately for left and right seeds, so the sides differed (145 of 321 cell types unequal). Pruning to exact counts per side (`optogenetics.symmetric`) is kept as an ablation: on the old extract it dropped 220 cells, including the ones P9 drives through.
 
-Two body modes: **walking**, where a recorded tripod stepping pattern runs at 12 Hz and the motor-neuron offsets bend it (the lab's circuit has no rhythm generator, so the rhythm is supplied), and **standing**, the neutral pose plus offsets with the feet adhered. Every effect is measured against the same body without light; the physics is deterministic.
+Tests mirror real optogenetics. Turning cells are lit on one side while the fly walks under its own forward command (P9 on both sides), compared with P9 alone; everything else is lit on a standing fly, compared with no light. Each piece is switched off in turn.
 
-Results on the optogenetics circuit (two seeds per side; shuffled-wiring and sham controls):
+First results on the old (not yet left-right complete) circuit, three seeds, all pieces on:
 
-| Cell type | Real flies | Physics body, connectome only | + electrical synapses and resting excitability |
+| Cell type | Real flies | Result | Controls |
 |---|---|---|---|
-| DNa02 | turn toward lit side | **toward lit side**, small (right −10°, left +9°) | spins one way (right +35°, left +84°) |
-| DNa01 | smaller ipsilateral turns | wrong direction (+5°, −35°) | opposite |
-| P9 | starts forward walking | not testable (rhythm supplied) | not testable |
-| MDN | backward walking | slows 22 → 17 mm, never backward | slows to 12.7 mm (partial) |
-| Giant fiber | escape jump | no rise | rises 0.03 mm (below 0.05 mm) |
+| Giant fiber | escape jump | **jumps**, body rises 0.52 mm (3 of 3 seeds) | shuffled and sham also jump |
+| MDN | backward walking | **walks backward**, 3.2 mm (2 of 3 seeds) | shuffled: no; sham: partial |
+| P9 | forward walking | no: drifts back 1.4 mm and spins | |
+| DNa02, DNa01 | turn toward the lit side | no clear turn (seeds disagree) | |
 
-- **The body reverses DNa02's turn to the correct side.** With the engineered readout DNa02 turned away from the lit side; in the physics body it turns toward it, as real flies do. But shuffled wiring (−30°, +45°) and the sham (−14°, 0°) also turn toward the lit side: in this body, tonic motor activity on one side bends the walk toward that side whatever its pattern. The direction comes from body mechanics, not from DNa02's specific wiring.
-- **No backward walking.** MDN slows the walk but the supplied rhythm always steps forward, and shuffled wiring slows it too. Reversing the step cycle is done by VNC rhythm circuits the model does not have.
-- **No jump.** The body's position-controlled joints, limited in force, cannot produce the giant fiber's take-off; that needs a muscle model (flygym has a musculoskeletal one).
-- **Resting excitability makes everything spin one way**, from a left-right imbalance in the extracted circuit.
+What each piece contributes: without the muscle, no jump; without the electrical synapse and resting excitability, no jump either. With the rhythm supplied (always forward), MDN cannot walk backward (+7.9 mm). Without feedback, MDN does not walk backward (+0.2 mm).
 
-What this says about controlling a fly: a physics body is necessary (it fixed the turning direction) but not sufficient. The next pieces are a rhythm generator driven by the circuit instead of a supplied one, closed-loop sensory feedback from the body's legs, a left-right matched circuit, and muscles for fast actions such as the jump.
+Caveats, plainly:
+- **The jump is not specific.** Sham light on random interneurons also triggers it: with resting excitability, any network activity can make the jump-muscle neuron spike once, and one spike is a full twitch here. Real jump-muscle motor neurons have high thresholds, which this model does not have.
+- **P9 does not walk forward.** Under P9 the front legs' coxa protractors outdrive their retractors, so the rule runs the front legs backward while the others step forward, and the fly spins. The front coxa moves differently from the others, so the "retractor = stance" rule may be wrong for front legs. That is the next thing to check, against muscle anatomy rather than by tuning.
+- **Turning cannot be judged yet,** because the fly does not walk under P9.
+- **Results are sensitive.** One seed can flip a turn, and switching off the jump muscle changed DNa02 runs it should not affect. Verdicts use seed means and report how many seeds agree. Use more seeds on a machine with more cores.
 
 ```sh
 .venv/bin/pip install -r requirements-body.txt   # flygym, needs Python 3.12
-.venv/bin/python bodysim.py                      # physics scorecard, data/body-benchmark.json (about 15 min on 2 cores)
+.venv/bin/python build_optogenetics.py raw-data  # rebuild: left-right complete circuit
+.venv/bin/python bodysim.py                      # closed-loop scorecard -> data/body-benchmark.json
 ```
 
 ## Object memory: seeing, remembering, recognising a variant (new)

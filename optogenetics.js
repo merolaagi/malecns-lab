@@ -91,55 +91,63 @@ function drawBody(trace, base) {
   const span = Math.max(3, ...pts.map(p => Math.abs(p.x - x0)), ...pts.map(p => Math.abs(p.y - y0))) * 1.15;
   const k = Math.min(w, h) / (2 * span), X = x => w / 2 + (x - x0) * k, Y = y => h / 2 - (y - y0) * k;
   g.strokeStyle = '#e9e9e7';
-  for (let v = -Math.floor(span / 5) * 5; v <= span; v += 5) { g.beginPath(); g.moveTo(X(x0 + v), 0); g.lineTo(X(x0 + v), h); g.stroke(); g.beginPath(); g.moveTo(0, Y(y0 + v)); g.lineTo(w, Y(y0 + v)); g.stroke(); }
+  const grid = span > 12 ? 5 : 1;
+  for (let v = -Math.floor(span / grid) * grid; v <= span; v += grid) { g.beginPath(); g.moveTo(X(x0 + v), 0); g.lineTo(X(x0 + v), h); g.stroke(); g.beginPath(); g.moveTo(0, Y(y0 + v)); g.lineTo(w, Y(y0 + v)); g.stroke(); }
   for (const [tr, colour, width] of [[base, '#9a9a9a', 1.5], [trace, '#2f5fd0', 2.4]]) {
     if (!tr) continue; g.strokeStyle = colour; g.lineWidth = width; g.beginPath();
     tr.forEach((p, i) => i ? g.lineTo(X(p.x), Y(p.y)) : g.moveTo(X(p.x), Y(p.y))); g.stroke();
   }
   const on = trace.find(p => p.t >= 0.5); if (on) { g.fillStyle = '#e9a23b'; g.beginPath(); g.arc(X(on.x), Y(on.y), 4, 0, 7); g.fill(); }
-  g.fillStyle = '#6e6e6e'; g.lineWidth = 1; g.fillText('grid 5 mm · orange dot: light on', 8, h - 8);
+  g.fillStyle = '#6e6e6e'; g.lineWidth = 1; g.fillText(`grid ${grid} mm`, 8, h - 8);
+}
+function drawLegs2(legs) {
+  const [g, w, h] = ctx('blegs'); if (!legs || !legs.length) return;
+  const last = legs[legs.length - 1], names = ['LF', 'LM', 'LH', 'RF', 'RM', 'RH'], bw = (w - 60) / 6;
+  names.forEach((n, i) => {
+    const a = last.amp[i], d = last.dir[i], bh = (h - 50) * a, x = 40 + i * bw;
+    g.fillStyle = d >= 0 ? '#2f5fd0' : '#d0524a'; g.fillRect(x + 8, h - 26 - bh, bw - 16, bh);
+    g.fillStyle = '#6e6e6e'; g.fillText(n, x + bw / 2 - 7, h - 8);
+    g.fillText(`${(last.freq[i] || 0).toFixed(0)} Hz`, x + bw / 2 - 12, h - 30 - bh);
+  });
 }
 let bodyBench = null;
-function showEffect(e, mode) {
-  $('beffect').innerHTML = `<table class="bench"><tr><th>Effect of the light (minus unlit body)</th><th></th><th>Value</th></tr>
-    <tr><td>Turn</td><td></td><td>${e.yaw_deg >= 0 ? '+' : ''}${e.yaw_deg.toFixed(0)}° ${Math.abs(e.yaw_deg) < 1 ? '' : e.yaw_deg > 0 ? '(left)' : '(right)'}</td></tr>
-    <tr><td>Forward travel</td><td></td><td>${e.forward_mm >= 0 ? '+' : ''}${e.forward_mm.toFixed(2)} mm</td></tr>
-    <tr><td>Sideways travel</td><td></td><td>${e.lateral_mm >= 0 ? '+' : ''}${e.lateral_mm.toFixed(2)} mm ${Math.abs(e.lateral_mm) < .05 ? '' : e.lateral_mm > 0 ? '(left)' : '(right)'}</td></tr>
-    <tr><td>Body rise</td><td></td><td>${e.rise_mm >= 0 ? '+' : ''}${e.rise_mm.toFixed(3)} mm</td></tr></table>
-    <p class="hint">Body mode: ${esc(mode)}.</p>`;
+function showEffect(e, setup) {
+  $('beffect').innerHTML = `<p class="note">Setup: ${esc(setup)}. Against the comparison run: turns ${e.yaw_deg >= 0 ? '+' : ''}${e.yaw_deg.toFixed(0)}° ${Math.abs(e.yaw_deg) < 1 ? '' : e.yaw_deg > 0 ? '(left)' : '(right)'}, forward ${e.forward_mm >= 0 ? '+' : ''}${e.forward_mm.toFixed(2)} mm (travel during light ${e.forward_mm_lit.toFixed(2)} mm), sideways ${e.lateral_mm >= 0 ? '+' : ''}${e.lateral_mm.toFixed(2)} mm, rises ${e.rise_mm >= 0 ? '+' : ''}${e.rise_mm.toFixed(3)} mm.</p>`;
 }
 function showSaved() {
   if (!bodyBench) return;
-  const key = `${$('bexp').value}|${$('bphys').value}|${$('bside').value}`, tr = bodyBench.traces[key];
-  const mode = bodyBench.experiments[$('bexp').value]?.mode || 'walking';
-  if (tr) drawBody(tr, bodyBench.baseline[mode]);
+  const name = $('bexp').value, saved = bodyBench.traces[`${name}|${$('bside').value}`];
+  if (saved) { drawBody(saved.trace, bodyBench.comparisons[name]); drawLegs2(saved.legs); }
 }
 async function bodyScore() {
   try {
     const r = await fetch('/api/body-benchmark'); if (!r.ok) throw new Error('No physics scorecard yet: .venv/bin/python bodysim.py (needs flygym)');
     const b = bodyBench = await r.json();
+    if (!b.ablations) throw new Error('This physics scorecard predates the closed-loop model; rerun .venv/bin/python bodysim.py');
     $('bexp').innerHTML = Object.keys(b.experiments).map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join('');
-    const phys = Object.keys(b.physiology);
-    let h = `<table class="bench"><tr><th>Cell type</th><th>Real flies</th><th>Body</th>${phys.map(p => `<th>${esc(b.physiology[p])}</th>`).join('')}</tr>`;
+    $('babl').innerHTML = Object.entries(b.ablations).map(([k, v]) => `<option value="${esc(k)}">${esc(v)}</option>`).join('');
+    const abl = Object.keys(b.ablations);
+    let h = `<table class="bench"><tr><th>Cell type</th><th>Real flies</th><th>Setup</th>${abl.map(a => `<th>${esc(b.ablations[a])}</th>`).join('')}</tr>`;
     for (const [name, row] of Object.entries(b.experiments)) {
-      h += `<tr><td>${esc(name)}</td><td>${esc(row.expect)}</td><td>${esc(row.mode)}</td>` + phys.map(p => {
-        const c = row.physiology[p]; if (!c) return '<td>–</td>';
-        return `<td><span class="tag ${tagClass(c.intact.result)}">${esc(c.intact.result)}</span><br><span class="muted" style="font-size:10px">shuffled: ${esc(c.shuffled.result)}; sham: ${esc(c.sham.result)}</span></td>`;
+      h += `<tr><td>${esc(name)}</td><td>${esc(row.expect)}</td><td>${esc(row.setup)}</td>` + abl.map(a => {
+        const c = row.ablations[a]; if (!c) return '<td>–</td>';
+        const ctl = c.shuffled ? `<br><span class="muted" style="font-size:10px">shuffled: ${esc(c.shuffled.result)}; sham: ${esc(c.sham.result)}</span>` : '';
+        return `<td><span class="tag ${tagClass(c.intact.result)}">${esc(c.intact.result)}</span>${ctl}</td>`;
       }).join('') + '</tr>';
-      h += `<tr><td></td><td colspan="${phys.length + 2}" class="muted" style="text-align:left">${phys.map(p => row.physiology[p] ? `${esc(b.physiology[p])}: ${esc(row.physiology[p].intact.detail)}` : '').join('<br>')}</td></tr>`;
+      h += `<tr><td></td><td colspan="${abl.length + 2}" class="muted" style="text-align:left">Everything on: ${esc(row.ablations.full.intact.detail)}</td></tr>`;
     }
-    $('bscore').innerHTML = h + '</table>';
+    $('bscore').innerHTML = `<div class="tw">${h}</table></div>` + `<p class="hint">${b.mirror_added == null ? 'This circuit was built before left-right completion; rebuild it with build_optogenetics.py.' : `Left-right completion added ${b.mirror_added} cells.`} Pruning to exact counts per side would drop ${b.matching ? b.matching.dropped : '–'} cells (the “pruned” column). Verdicts use the mean of ${b.seeds.length} seeds; the detail line says how many seeds agree.</p>`;
     showSaved();
   } catch (e) { $('bscore').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
 }
-for (const id of ['bexp', 'bside', 'bphys']) $(id).addEventListener('change', showSaved);
+for (const id of ['bexp', 'bside']) $(id).addEventListener('change', showSaved);
 $('brun').addEventListener('click', async () => {
-  $('brun').disabled = true; $('bstatus').textContent = 'Simulating circuit and body (about 10–20 s)…'; $('bstatus').className = 'wb-status';
+  $('brun').disabled = true; $('bstatus').textContent = 'Simulating circuit and body in closed loop (10–30 s)…'; $('bstatus').className = 'wb-status';
   try {
-    const body = { experiment: $('bexp').value, side: $('bside').value, physiology: $('bphys').value, seed: 1, condition: $('condition').value };
+    const body = { experiment: $('bexp').value, side: $('bside').value, ablation: $('babl').value, seed: 1, condition: $('condition').value };
     const r = await fetch('/api/body-run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const d = await r.json(); if (!r.ok) throw new Error(d.error);
-    drawBody(d.trace, d.baseline); showEffect(d.effect, d.mode); $('bstatus').textContent = '';
+    drawBody(d.trace, d.comparison); drawLegs2(d.legs); showEffect(d.effect, d.setup); $('bstatus').textContent = '';
   } catch (e) { $('bstatus').textContent = e.message; $('bstatus').className = 'wb-status err'; }
   $('brun').disabled = false;
 });

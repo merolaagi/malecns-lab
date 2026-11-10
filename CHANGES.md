@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Close the loop: circuit rhythm, leg feedback, jump muscle, left-right complete circuit
+
+- `bodysim.py` rewritten as a closed-loop co-simulation: `model.Stepper` advances the network each millisecond, each leg's stepping oscillator takes its amplitude, frequency and direction from the circuit (coxa retractors against protractors set forward or backward), foot load and joint speed feed the legs' sensory neurons, and the jump-muscle motor neurons drive a twitching middle-leg muscle.
+- `build_optogenetics.py` adds every selected cell type's partners on the other side (left-right completion). `optogenetics.symmetric` prunes to exact counts as an ablation.
+- Scorecard with all pieces on and each switched off, three seeds, verdicts with seed agreement, shuffled and sham controls. On the old circuit: the giant fiber jumps (but sham does too), MDN walks backward 3.2 mm (2 of 3 seeds; shuffled does not), P9 does not walk forward (the front legs step backward under it), and turning cannot be judged without walking.
+- The optogenetics page shows each leg's rhythm (amplitude, frequency, direction) alongside the path.
+
 ## Drive a physics fly body with the circuit's motor neurons
 
 - `bodysim.py`: NeuroMechFly v2 (flygym, MuJoCo) driven by the spiking model's leg motor neurons, grouped by muscle into joint-angle offsets; joint directions measured on the model at start-up; walking (supplied tripod rhythm) and standing modes; effects measured against the unlit body. Scorecard for every optogenetics experiment, with shuffled and sham controls, in `data/body-benchmark.json`.
