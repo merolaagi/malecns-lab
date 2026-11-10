@@ -1,11 +1,12 @@
 """The lab guide: tours, explanations, questions and model proposals for every page.
 
-Works in two modes. Without a key it answers from its own knowledge (helper_kb.py) and the saved
-benchmarks: page purpose, measured against assumed, findings, glossary, ranked proposals. With an
-Anthropic API key it hands the same material to Claude, which answers free-form and drafts new proposals.
+Works in two modes. Without a language model it answers from its own knowledge (helper_kb.py) and the saved
+benchmarks: page purpose, measured against assumed, findings, glossary, ranked proposals. With a model
+(Anthropic, OpenAI, Gemini, OpenRouter, Ollama or any OpenAI-compatible server; see llm.py) it hands the same
+material to that model, which answers free-form and drafts new proposals.
 
-The key is read from ANTHROPIC_API_KEY, or from ~/.config/malecns-lab/anthropic-key (never from the repo).
-Because the lab may be public through a tunnel, Claude calls are rate-limited per visitor and per day.
+Because the lab may be public through a tunnel, the lab's own model is rate-limited per visitor and per day
+(not for requests from the Mac itself). Visitors can bring their own key, used only for their request.
 """
 import json
 import math
@@ -13,17 +14,13 @@ import os
 import re
 import threading
 import time
-import urllib.request
-import urllib.error
 from collections import Counter, defaultdict, deque
 from pathlib import Path
 
 import helper_kb as kb
+import llm
 
 BASE = Path(__file__).resolve().parent
-KEY_FILE = Path.home() / '.config' / 'malecns-lab' / 'anthropic-key'
-MODEL = os.environ.get('MALECNS_HELPER_MODEL', 'claude-sonnet-5-5')
-API = 'https://api.anthropic.com/v1/messages'
 PER_IP_HOUR = int(os.environ.get('MALECNS_HELPER_PER_HOUR', '40'))
 PER_DAY = int(os.environ.get('MALECNS_HELPER_PER_DAY', '300'))
 
@@ -34,12 +31,9 @@ def words(text):
     return [w for w in re.findall(r"[a-z0-9][a-z0-9\-']*", str(text).lower()) if w not in STOP and len(w) > 1]
 
 
-def key():
-    k = os.environ.get('ANTHROPIC_API_KEY', '').strip()
-    if not k and KEY_FILE.exists():
-        try: k = KEY_FILE.read_text().strip()
-        except OSError: k = ''
-    return k or None
+def llm_status():
+    cfg = llm.active()
+    return dict(provider=cfg['provider'], label=cfg['label'], model=cfg['model']) if cfg else None
 
 
 def page_entry(path):
@@ -133,13 +127,13 @@ def guide(path):
     path, p = page_entry(path)
     if not p:
         return dict(path=path, known=False, title='This page', purpose='The guide has no notes for this page yet. Ask a question and it will search what it knows.',
-                    steps=[], findings=[], measured='', assumed='', terms=[], suggestions=suggestions(path), llm=bool(key()))
+                    steps=[], findings=[], measured='', assumed='', terms=[], suggestions=suggestions(path), llm=llm_status())
     text = ' '.join([p['purpose'], p['measured'], p['assumed']] + p['findings'] + [s[2] for s in p['steps']])
     return dict(path=path, known=True, title=p['title'], purpose=p['purpose'], measured=p['measured'], assumed=p['assumed'],
                 findings=p['findings'], steps=[dict(selector=s, title=t, text=x) for s, t, x in p['steps']],
                 terms=[dict(term=t, text=kb.GLOSSARY[t]) for t in terms_in(text)][:20],
                 problems=[dict(title=t, text=x) for t, l, x in kb.OPEN_PROBLEMS if l == path],
-                suggestions=suggestions(path), llm=bool(key()))
+                suggestions=suggestions(path), llm=llm_status())
 
 
 def suggestions(path):
@@ -248,13 +242,26 @@ class Limiter:
 LIMIT = Limiter()
 
 
-def call_claude(system, messages, max_tokens=900, timeout=60):
-    body = json.dumps(dict(model=MODEL, max_tokens=max_tokens, system=system, messages=messages)).encode()
-    req = urllib.request.Request(API, data=body, method='POST', headers={
-        'x-api-key': key(), 'anthropic-version': '2023-06-01', 'content-type': 'application/json'})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        out = json.loads(r.read())
-    return ''.join(b.get('text', '') for b in out.get('content', []) if b.get('type') == 'text').strip()
+VISITOR_LIMIT = Limiter(per_hour=int(os.environ.get('MALECNS_HELPER_VISITOR_PER_HOUR', '120')), per_day=10 ** 9)
+
+
+def pick_model(override=None, who='local', local=False):
+    """(config, None) when a model may answer, or (None, reason) when the guide must use its notes.
+    A visitor's own key wins for that request; otherwise the lab's model, rate-limited unless asked from the Mac itself."""
+    try:
+        cfg = llm.visitor(override)
+    except llm.LLMError as e:
+        return None, str(e)
+    if cfg:
+        return (cfg, None) if VISITOR_LIMIT.allow(who) else (None, 'Too many questions from here for now')
+    cfg = llm.active()
+    if not cfg: return None, None
+    if local or LIMIT.allow(who): return cfg, None
+    return None, 'Question limit reached for now'
+
+
+def tag(cfg):
+    return dict(mode='llm', provider=cfg['provider'], model=cfg['model'], label=cfg['label'])
 
 
 def clean_history(history):
@@ -266,28 +273,26 @@ def clean_history(history):
     return msgs
 
 
-def ask(question, path='/', history=None, selection=None, who='local'):
+def ask(question, path='/', history=None, selection=None, who='local', override=None, local=False):
     question = str(question or '').strip()[:1500]
     if not question and not selection: raise ValueError('Ask a question')
     if not question: question = 'Explain this part of the page in plain language: what it shows and what it means.'
     selection = str(selection)[:1500] if selection else None
-    note = None
-    if key():
-        if LIMIT.allow(who):
-            msgs = clean_history(history) + [dict(role='user', content=question)]
-            # Consecutive same-role messages are not allowed: merge them.
-            merged = []
-            for m in msgs:
-                if merged and merged[-1]['role'] == m['role']: merged[-1]['content'] += '\n\n' + m['content']
-                else: merged.append(m)
-            try:
-                text = call_claude(system_prompt(path, selection), merged)
-                if text: return dict(answer=text, mode='claude', model=MODEL, sources=[])
-                note = 'Claude returned nothing; answered from the lab notes.'
-            except (urllib.error.URLError, TimeoutError, OSError, ValueError) as e:
-                note = f'Claude is unreachable ({type(e).__name__}); answered from the lab notes.'
-        else:
-            note = 'Question limit reached for now; answered from the lab notes.'
+    cfg, note = pick_model(override, who, local)
+    if note: note += '; answered from the lab notes.'
+    if cfg:
+        msgs = clean_history(history) + [dict(role='user', content=question)]
+        # Consecutive same-role messages are not allowed: merge them.
+        merged = []
+        for m in msgs:
+            if merged and merged[-1]['role'] == m['role']: merged[-1]['content'] += '\n\n' + m['content']
+            else: merged.append(m)
+        try:
+            text = llm.chat(cfg, system_prompt(path, selection), merged)
+            if text: return dict(answer=text, sources=[], **tag(cfg))
+            note = f"{cfg['label']} returned nothing; answered from the lab notes."
+        except llm.LLMError as e:
+            note = f"{cfg['label']}: {e}; answered from the lab notes."
     text, sources = local_answer(question, path, selection)
     return dict(answer=text, mode='local', sources=sources, note=note)
 
@@ -308,28 +313,26 @@ def rank_proposals(goal='', path='/', k=4):
 FIELDS = ['title', 'idea', 'uses', 'hypothesis', 'test', 'controls', 'success', 'files', 'effort']
 
 
-def propose(goal='', path='/', who='local'):
+def propose(goal='', path='/', who='local', override=None, local=False):
     goal = str(goal or '').strip()[:800]
     picks = rank_proposals(goal, path)
-    note = None
-    if key() and goal:
-        if LIMIT.allow(who):
-            ask_ = (f'Goal: {goal}\n\nPropose 3 new models or experiments for this lab that serve the goal. Build on what exists; '
-                    'you may refine one of the catalogue proposals below or invent new ones. Reply with only a JSON array of objects with keys '
-                    + ', '.join(FIELDS) + ' (effort is S, M or L). Catalogue:\n'
-                    + '\n'.join(f"- {p['title']}: {p['idea']}" for p in kb.PROPOSALS))
-            try:
-                text = call_claude(system_prompt(path), [dict(role='user', content=ask_)], max_tokens=1800, timeout=90)
-                m = re.search(r'\[.*\]', text, re.S)
-                items = json.loads(m.group(0)) if m else []
-                items = [dict({f: str(it.get(f, '')) for f in FIELDS}, id=f'claude-{i}', pages=[path], source='claude')
-                         for i, it in enumerate(items) if isinstance(it, dict) and it.get('title')][:3]
-                if items: return dict(proposals=items + picks[:2], mode='claude', model=MODEL)
-                note = 'Claude\'s reply could not be read; showing the catalogue.'
-            except (urllib.error.URLError, TimeoutError, OSError, ValueError) as e:
-                note = f'Claude is unreachable ({type(e).__name__}); showing the catalogue.'
-        else:
-            note = 'Request limit reached for now; showing the catalogue.'
+    cfg, note = pick_model(override, who, local) if goal else (None, None)
+    if note: note += '; showing the catalogue.'
+    if cfg:
+        ask_ = (f'Goal: {goal}\n\nPropose 3 new models or experiments for this lab that serve the goal. Build on what exists; '
+                'you may refine one of the catalogue proposals below or invent new ones. Reply with only a JSON array of objects with keys '
+                + ', '.join(FIELDS) + ' (effort is S, M or L). Catalogue:\n'
+                + '\n'.join(f"- {p['title']}: {p['idea']}" for p in kb.PROPOSALS))
+        try:
+            text = llm.chat(cfg, system_prompt(path), [dict(role='user', content=ask_)], max_tokens=1800, timeout=90)
+            m = re.search(r'\[.*\]', text, re.S)
+            items = json.loads(m.group(0)) if m else []
+            items = [dict({f: str(it.get(f, '')) for f in FIELDS}, id=f'llm-{i}', pages=[path], source='llm')
+                     for i, it in enumerate(items) if isinstance(it, dict) and it.get('title')][:3]
+            if items: return dict(proposals=items + [dict(p, source='catalogue') for p in picks[:2]], **tag(cfg))
+            note = f"{cfg['label']}'s reply could not be read; showing the catalogue."
+        except (llm.LLMError, ValueError) as e:
+            note = f"{cfg['label']}: {e}; showing the catalogue."
     return dict(proposals=[dict(p, source='catalogue') for p in picks], mode='local', note=note)
 
 
@@ -339,3 +342,37 @@ def build_request(proposal):
     return (f"MaleCNS Lab: build \"{p['title']}\".\n\nIdea: {p['idea']}\nUses (measured): {p['uses']}\nHypothesis: {p['hypothesis']}\n"
             f"Test: {p['test']}\nControls: {p['controls']}\nSuccess: {p['success']}\nFiles: {p['files']}\n\n"
             'Keep measured and assumed separate on the page, run three or more seeds with the controls, add tests, and report honestly if it fails.')
+
+
+# --- settings tab: try a provider, list its models --------------------------------------------------
+def candidate(o, local, who):
+    """A provider config to test or list models for: a visitor's own key, or (local only) the lab's settings with edits."""
+    provider = str(o.get('provider', ''))
+    if provider not in llm.PROVIDERS: raise ValueError('Unknown provider')
+    if o.get('own') or not local:
+        cfg = llm.visitor(dict(provider=provider, key=o.get('key'), model=o.get('model') or 'x'))
+        if not cfg: raise ValueError('Enter a key first')
+        if not VISITOR_LIMIT.allow(who): raise ValueError('Too many requests from here for now')
+        return cfg
+    s = llm.load()
+    cfg = llm.config_for(s, provider)
+    if o.get('key'): cfg['key'] = str(o['key']).strip()
+    if o.get('model'): cfg['model'] = str(o['model']).strip()
+    if o.get('base_url'): cfg['base'] = llm.check_base(str(o['base_url']).strip())
+    if llm.PROVIDERS[provider]['key'] and not cfg['key']: raise ValueError('Enter a key first')
+    if not cfg['base']: raise ValueError('Enter the server URL')
+    return cfg
+
+
+def list_models(o, local=False, who='local'):
+    cfg = candidate(o, local, who)
+    try: return dict(models=llm.models(cfg)[:300])
+    except (llm.LLMError, KeyError, TypeError) as e: raise ValueError(f"{cfg['label']}: {e}")
+
+
+def test(o, local=False, who='local'):
+    cfg = candidate(o, local, who)
+    if not cfg['model'] or cfg['model'] == 'x': raise ValueError('Choose a model first')
+    try: text = llm.chat(cfg, 'You are a connection test.', [dict(role='user', content='Reply with the single word: ready')], max_tokens=20, timeout=30)
+    except llm.LLMError as e: raise ValueError(f"{cfg['label']}: {e}")
+    return dict(ok=True, reply=text[:80], label=cfg['label'], model=cfg['model'])

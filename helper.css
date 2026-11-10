@@ -13,8 +13,9 @@
 .hx-win[hidden]{display:none}
 .hx-top{display:flex;align-items:center;gap:10px;padding:10px 12px 0 16px;cursor:move;user-select:none}
 .hx-top b{font-size:15px;flex:1}.hx-top b small{display:block;font:400 12px var(--sans);color:var(--dim,#6e6e6e)}
-.hx-badge{font:500 11px var(--sans);border-radius:10px;padding:2px 8px;background:var(--panel2,#f3f3f1);color:var(--dim)}
+.hx-badge{border:0;cursor:pointer;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:500 11px var(--sans);border-radius:10px;padding:2px 8px;background:var(--panel2,#f3f3f1);color:var(--dim)}
 .hx-badge.on{background:var(--ok-bg,#e6f4ec);color:var(--green,#1f8a4c)}
+.hx-x .hx-ic{width:16px;height:16px;vertical-align:-3px}
 .hx-x{border:0;background:none;color:var(--dim);cursor:pointer;width:28px;height:28px;border-radius:5px;font-size:18px;line-height:28px;padding:0}
 .hx-x:hover{background:var(--hover,#f6f6f4)}
 .hx-tabs{display:flex;gap:2px;padding:8px 12px 0;border-bottom:1px solid var(--line)}
@@ -84,3 +85,13 @@ body.hx-pointing,body.hx-pointing *{cursor:crosshair!important}
   .hx-launch{right:12px;bottom:12px}.hx-launch kbd{display:none}
 }
 @media print{.hx-launch,.hx-win,.hx-ring,.hx-tip{display:none!important}}
+
+/* settings */
+.hx-form{display:grid;gap:10px;margin:6px 0 4px}
+.hx-form label{display:grid;gap:4px;font:500 13px var(--sans);color:var(--head,#3a3a3a)}
+.hx-form label a{font-weight:400;font-size:12px;margin-left:6px}
+.hx-form .hx-check{display:flex;align-items:center;gap:8px;font-weight:400}
+.hx-row2{display:flex;gap:6px}.hx-row2 .hx-in{flex:1}
+.hx-small{font-size:12.5px}.hx-msgline{font-size:12.5px;min-height:1em}
+.hx-pf{display:grid;gap:10px}
+.hx-win .hx-btn.pri,.hx-win .hx-btn.pri:hover,.hx-win .hx-btn.pri:focus{background:var(--accent,#b07a1e)!important;border-color:var(--accent,#b07a1e)!important;color:#fff!important}

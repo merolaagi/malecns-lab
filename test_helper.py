@@ -39,16 +39,20 @@ class KnowledgeTest(unittest.TestCase):
             for pg in pr['pages']: self.assertIn(pg, kb.PAGES)
 
 
+NO_MODEL = dict(target='llm.active', return_value=None)
+CFG = dict(provider='anthropic', kind='anthropic', label='Anthropic (Claude)', base='https://api.anthropic.com', model='m', key='k')
+
+
 class LocalModeTest(unittest.TestCase):
     def setUp(self):
-        self.p = mock.patch.object(helper, 'key', return_value=None); self.p.start()
+        self.p = mock.patch('llm.active', return_value=None); self.p.start()
 
     def tearDown(self): self.p.stop()
 
     def test_guide(self):
         g = helper.guide('/optogenetics/')
         self.assertEqual(g['title'], 'Virtual optogenetics')
-        self.assertFalse(g['llm'])
+        self.assertIsNone(g['llm'])
         self.assertTrue(any(t['term'] == 'MDN' for t in g['terms']))
         self.assertFalse(helper.guide('/nowhere')['known'])
         json.dumps(g, allow_nan=False)
@@ -84,34 +88,50 @@ class LocalModeTest(unittest.TestCase):
         with self.assertRaises(ValueError): helper.ask('', '/')
 
 
-class ClaudeModeTest(unittest.TestCase):
-    def test_claude_answer_with_page_context(self):
+class ModelModeTest(unittest.TestCase):
+    def patches(self, chat, per_hour=5):
+        return [mock.patch('llm.active', return_value=dict(CFG)), mock.patch('llm.chat', chat),
+                mock.patch.object(helper, 'LIMIT', helper.Limiter(per_hour, 5)), mock.patch.object(helper, 'VISITOR_LIMIT', helper.Limiter(5, 5))]
+
+    def run_with(self, chat, fn, per_hour=5):
+        ps = self.patches(chat, per_hour)
+        for p in ps: p.start()
+        try: return fn()
+        finally:
+            for p in ps: p.stop()
+
+    def test_answer_with_page_context(self):
         seen = {}
-        def fake(system, messages, **kw):
-            seen['system'], seen['messages'] = system, messages; return 'An answer.'
-        with mock.patch.object(helper, 'key', return_value='k'), mock.patch.object(helper, 'call_claude', fake), \
-             mock.patch.object(helper, 'LIMIT', helper.Limiter(5, 5)):
-            r = helper.ask('Why?', '/scaffold', history=[{'role': 'assistant', 'text': 'hi'}, {'role': 'user', 'text': 'a'}, {'role': 'assistant', 'text': 'b'}])
-        self.assertEqual(r['mode'], 'claude')
-        self.assertIn('Scaffold learner', seen['system'])
-        self.assertIn('LIVE NUMBERS', seen['system'])
+        def fake(cfg, system, messages, **kw):
+            seen.update(cfg=cfg, system=system, messages=messages); return 'An answer.'
+        r = self.run_with(fake, lambda: helper.ask('Why?', '/scaffold', history=[{'role': 'assistant', 'text': 'hi'}, {'role': 'user', 'text': 'a'}, {'role': 'assistant', 'text': 'b'}]))
+        self.assertEqual((r['mode'], r['model']), ('llm', 'm'))
+        self.assertIn('Scaffold learner', seen['system']); self.assertIn('LIVE NUMBERS', seen['system'])
         self.assertEqual([m['role'] for m in seen['messages']], ['user', 'assistant', 'user'])
 
-    def test_falls_back_when_unreachable_or_limited(self):
-        def boom(*a, **k): raise helper.urllib.error.URLError('down')
-        with mock.patch.object(helper, 'key', return_value='k'), mock.patch.object(helper, 'call_claude', boom), \
-             mock.patch.object(helper, 'LIMIT', helper.Limiter(5, 5)):
-            r = helper.ask('What is MDN?', '/optogenetics')
-        self.assertEqual(r['mode'], 'local'); self.assertIn('unreachable', r['note']); self.assertIn('backward', r['answer'])
-        with mock.patch.object(helper, 'key', return_value='k'), mock.patch.object(helper, 'LIMIT', helper.Limiter(0, 5)):
-            self.assertIn('limit', helper.ask('What is MDN?', '/')['note'])
+    def test_visitor_key_is_used_for_that_request(self):
+        seen = {}
+        def fake(cfg, system, messages, **kw): seen.update(cfg); return 'ok'
+        r = self.run_with(fake, lambda: helper.ask('Why?', '/', override={'provider': 'openai', 'model': 'gpt-x', 'key': 'sk-v'}, who='1.2.3.4'))
+        self.assertEqual((seen['provider'], seen['key'], seen['base']), ('openai', 'sk-v', 'https://api.openai.com/v1'))
+        self.assertEqual(r['mode'], 'llm')
+        r = self.run_with(fake, lambda: helper.ask('Why?', '/', override={'provider': 'custom', 'model': 'x', 'key': 'k'}))
+        self.assertEqual(r['mode'], 'local')            # no local or custom URLs from a browser key
+        self.assertIn('cannot be used', r['note'])
 
-    def test_claude_proposals_parsed(self):
+    def test_falls_back_when_unreachable_or_limited(self):
+        def boom(*a, **k): raise helper.llm.LLMError('unreachable (down)')
+        r = self.run_with(boom, lambda: helper.ask('What is MDN?', '/optogenetics'))
+        self.assertEqual(r['mode'], 'local'); self.assertIn('unreachable', r['note']); self.assertIn('backward', r['answer'])
+        r = self.run_with(lambda *a, **k: 'x', lambda: helper.ask('What is MDN?', '/', who='9.9.9.9'), per_hour=0)
+        self.assertIn('limit', r['note'])
+        r = self.run_with(lambda *a, **k: 'x', lambda: helper.ask('What is MDN?', '/', local=True), per_hour=0)
+        self.assertEqual(r['mode'], 'llm')              # the owner on the Mac is not rate-limited
+
+    def test_proposals_parsed(self):
         reply = 'Here: [{"title": "T", "idea": "I", "hypothesis": "H", "effort": "S"}]'
-        with mock.patch.object(helper, 'key', return_value='k'), mock.patch.object(helper, 'call_claude', return_value=reply), \
-             mock.patch.object(helper, 'LIMIT', helper.Limiter(5, 5)):
-            r = helper.propose('anything', '/scaffold')
-        self.assertEqual(r['mode'], 'claude'); self.assertEqual(r['proposals'][0]['title'], 'T')
+        r = self.run_with(lambda *a, **k: reply, lambda: helper.propose('anything', '/scaffold'))
+        self.assertEqual(r['mode'], 'llm'); self.assertEqual(r['proposals'][0]['title'], 'T')
 
     def test_limiter(self):
         lim = helper.Limiter(2, 3)

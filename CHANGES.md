@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Lab guide: choose the language model in the app
+
+- Gear (or the model badge) in the guide opens Settings. Pick a provider: Anthropic, OpenAI, Google Gemini, OpenRouter, Ollama (local, no key) or any OpenAI-compatible server (LM Studio, vLLM). Paste a key, load the provider's model list, test the connection, save.
+- Lab settings are saved on the Mac in `~/.config/malecns-lab/llm.json` (mode 600), editable only from the Mac itself (or with `MALECNS_ADMIN_TOKEN`); the public site sees only which model is active. Keys are never sent back to a browser, only their last 4 characters.
+- Visitors can use their own key for hosted providers; it stays in their browser and is used only for their requests. Local and custom URLs cannot be used from the internet.
+- `llm.py` (providers, settings, wire formats), tests in `test_llm.py`; the old `anthropic-key` file and `*_API_KEY` environment variables still work.
+
 ## Lab guide: tours, explanations, questions and model proposals on every page
 
 - `helper.js`/`helper.css` (loaded by `ink-skin.js`, so every page has it): a floating, draggable guide window, opened with the Guide button or `?`. Tour steps through the page and rings each part. Explain shows what the page measures and assumes, what it found, its open problems, a glossary, terms marked on the page with definitions on hover, and "point at something" to explain any chart, number or control. Ask answers questions; Propose ranks model proposals for a goal, each with hypothesis, test, controls and success criterion, and copies a build request.

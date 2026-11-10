@@ -13,6 +13,7 @@
     set(k, v) { try { localStorage.setItem('hx-' + k, JSON.stringify(v)); } catch (_) {} },
   };
   const IC = {
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',
     guide: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.7-2.5 2.3-2.5 4"/><circle cx="12" cy="17.2" r=".6"/>',
   };
   const svg = n => `<svg class="hx-ic" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
@@ -59,8 +60,8 @@
     launch.onclick = () => toggle();
     win = document.createElement('div');
     win.className = 'hx-win'; win.hidden = true; win.setAttribute('role', 'dialog'); win.setAttribute('aria-label', 'Lab guide');
-    win.innerHTML = `<div class="hx-top"><b>Lab guide<small class="hx-sub">Loading…</small></b><span class="hx-badge" title="">notes</span>
-        <button class="hx-x" data-a="min" title="Close (Esc)">×</button></div>
+    win.innerHTML = `<div class="hx-top"><b>Lab guide<small class="hx-sub">Loading…</small></b><button class="hx-badge" data-a="settings" title="">notes</button>
+        <button class="hx-x" data-a="settings" title="Model settings">${svg('gear')}</button><button class="hx-x" data-a="min" title="Close (Esc)">×</button></div>
       <div class="hx-tabs" role="tablist">${['tour', 'explain', 'ask', 'propose'].map(t =>
         `<button role="tab" data-t="${t}">${t[0].toUpperCase() + t.slice(1)}</button>`).join('')}</div>
       <div class="hx-body"></div>
@@ -75,6 +76,7 @@
     drag(win.querySelector('.hx-top'));
     win.querySelectorAll('.hx-tabs button').forEach(b => b.onclick = () => show(b.dataset.t));
     win.querySelector('[data-a=min]').onclick = () => toggle(false);
+    win.querySelectorAll('[data-a=settings]').forEach(b => b.onclick = () => show(tab === 'settings' ? 'ask' : 'settings'));
     const ta = foot.querySelector('textarea');
     ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(ta.value); } });
     ta.addEventListener('input', () => { ta.style.height = '40px'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; });
@@ -109,10 +111,7 @@
     try { G = await api('/api/helper/guide?path=' + encodeURIComponent(PATH)); }
     catch (e) { G = { title: 'This page', known: false, steps: [], findings: [], terms: [], suggestions: [], llm: false, error: e.message }; }
     win.querySelector('.hx-sub').textContent = G.title;
-    const badge = win.querySelector('.hx-badge');
-    badge.textContent = G.llm ? 'Claude' : 'lab notes'; badge.classList.toggle('on', !!G.llm);
-    badge.title = G.llm ? 'Questions and proposals are answered by Claude, grounded in the lab\'s notes and saved results.'
-      : 'Answers come from the lab\'s own notes and saved results. Put an Anthropic API key in ~/.config/malecns-lab/anthropic-key for free-form answers.';
+    badgeUpdate();
     return G;
   }
 
@@ -128,7 +127,7 @@
     win.querySelectorAll('.hx-tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.t === t));
     foot.hidden = t !== 'ask';
     if (t !== 'tour' && tourOn) endTour();
-    ({ tour: renderTour, explain: renderExplain, ask: renderAsk, propose: renderPropose })[t]();
+    ({ tour: renderTour, explain: renderExplain, ask: renderAsk, propose: renderPropose, settings: renderSettings })[t]();
   }
 
   // ---------- tour ----------
@@ -279,7 +278,7 @@
     body.innerHTML = (mine.length ? '' : `<p>Ask what anything on this page means, how to use it, what the results say, or what to build next.</p>`)
       + mine.map(m => m.role === 'user'
         ? `<div class="hx-msg u"><div>${m.sel ? `<div class="sel">${esc(m.sel)}</div>` : ''}${esc(m.text || 'Explain this')}</div></div>`
-        : `<div class="hx-msg a"><div>${md(m.text)}</div><small>${m.mode === 'claude' ? 'Claude' : 'Lab notes'}${m.note ? ' · ' + esc(m.note) : ''}${m.path && m.path !== PATH ? ' · asked on ' + esc(m.path) : ''}</small></div>`).join('')
+        : `<div class="hx-msg a"><div>${md(m.text)}</div><small>${m.mode === 'llm' ? esc(m.label + ' · ' + m.model) : 'Lab notes'}${m.note ? ' · ' + esc(m.note) : ''}${m.path && m.path !== PATH ? ' · asked on ' + esc(m.path) : ''}</small></div>`).join('')
       + (busy ? '<div class="hx-msg a"><div class="hx-dim hx-dots">Thinking</div></div>' : '')
       + `<div class="hx-chips">${(G?.suggestions || []).map(s => `<button class="hx-chip">${esc(s)}</button>`).join('')}${mine.length ? '<button class="hx-chip" data-a="clear">Clear</button>' : ''}</div>`;
     body.querySelectorAll('.hx-chip').forEach(c => c.onclick = () => c.dataset.a === 'clear' ? (history.length = 0, store.set('history', history), renderAsk()) : send(c.textContent));
@@ -294,8 +293,8 @@
     const prior = history.slice(-8).map(m => ({ role: m.role, text: m.text }));
     history.push({ role: 'user', text, sel, path: PATH }); busy = true; renderAsk();
     try {
-      const r = await api('/api/helper/ask', { question: text, path: PATH, history: prior, selection: sel || null });
-      history.push({ role: 'assistant', text: r.answer, mode: r.mode, note: r.note, path: PATH });
+      const r = await api('/api/helper/ask', { question: text, path: PATH, history: prior, selection: sel || null, own: ownKey() });
+      history.push({ role: 'assistant', text: r.answer, mode: r.mode, label: r.label, model: r.model, note: r.note, path: PATH });
     } catch (e) { history.push({ role: 'assistant', text: 'Could not reach the lab server: ' + e.message, mode: 'local', path: PATH }); }
     busy = false; while (history.length > 40) history.shift(); store.set('history', history); renderAsk();
   }
@@ -307,7 +306,7 @@
     body.innerHTML = `<p>Describe what you want the lab to do next. Proposals build on what the lab already has, each with a hypothesis, a test and controls.</p>
       <input class="hx-in" placeholder="Goal, e.g. recognise objects from a few looks" value="${esc(goalText)}" aria-label="Goal">
       <div class="hx-chips">${GOALS.map(g => `<button class="hx-chip">${esc(g)}</button>`).join('')}</div>
-      <div class="hx-nav"><button class="hx-btn pri" data-a="go">Propose models</button><span class="hx-dim" style="font-size:12.5px">${G?.llm ? 'Claude drafts new ones' : 'From the lab\'s catalogue, ranked for your goal and this page'}</span></div>
+      <div class="hx-nav"><button class="hx-btn pri" data-a="go">Propose models</button><span class="hx-dim" style="font-size:12.5px">${who() ? esc(who()) + ' drafts new ones' : 'From the lab\'s catalogue, ranked for your goal and this page'}</span></div>
       <div class="hx-props" style="margin-top:12px">${busy ? '<p class="hx-dim hx-dots">Drafting</p>' : ''}</div>`;
     const input = body.querySelector('.hx-in');
     body.querySelectorAll('.hx-chip').forEach(c => c.onclick = () => { input.value = c.textContent; run(); });
@@ -315,7 +314,7 @@
     body.querySelector('[data-a=go]').onclick = run;
     async function run() {
       if (busy) return; goalText = input.value.trim(); store.set('goal', goalText); busy = true; renderPropose();
-      try { proposals = await api('/api/helper/propose', { goal: goalText, path: PATH }); }
+      try { proposals = await api('/api/helper/propose', { goal: goalText, path: PATH, own: ownKey() }); }
       catch (e) { proposals = { proposals: [], note: 'Could not reach the lab server: ' + e.message }; }
       busy = false; renderPropose();
     }
@@ -325,7 +324,7 @@
   function drawCards(box) {
     const ps = proposals.proposals || [];
     box.innerHTML = (proposals.note ? `<p class="hx-dim">${esc(proposals.note)}</p>` : '') + (ps.length ? '' : '<p class="hx-dim">No proposals.</p>')
-      + ps.map((p, i) => `<div class="hx-card${i === 0 ? ' open' : ''}" data-i="${i}"><h4>${esc(p.title)}<em>${p.source === 'claude' ? 'new · ' : ''}effort ${esc(p.effort || '?')}</em></h4>
+      + ps.map((p, i) => `<div class="hx-card${i === 0 ? ' open' : ''}" data-i="${i}"><h4>${esc(p.title)}<em>${p.source === 'llm' ? 'new · ' : ''}effort ${esc(p.effort || '?')}</em></h4>
         <p class="hx-dim" style="margin:0">${esc(p.hypothesis)}</p>
         <dl>${Object.entries(LABELS).map(([k, l]) => p[k] ? `<dt>${l}</dt><dd>${esc(p[k])}</dd>` : '').join('')}</dl>
         <div class="row"><button class="hx-btn" data-a="more">${i === 0 ? 'Less' : 'Details'}</button><button class="hx-btn" data-a="ask">Discuss</button><button class="hx-btn" data-a="copy">Copy build request</button>
@@ -341,6 +340,109 @@
         setTimeout(() => { b.textContent = 'Copy build request'; }, 1600);
       };
     });
+  }
+
+  // ---------- settings: which model answers ----------
+  // A visitor's own key lives only in this browser (localStorage) and goes to the lab server with each question.
+  const ownKey = () => { const o = store.get('own', null); return o && o.on && o.key ? { provider: o.provider, model: o.model, key: o.key } : null; };
+  let S = null;
+  const PNAME = id => (S?.providers || []).find(p => p.id === id)?.label || id;
+  function who() {
+    const o = ownKey(); if (o) return `${PNAME(o.provider).replace(/ \(.*/, '')} (your key)`;
+    const a = G?.llm; return a ? a.label.replace(/ \(.*/, '') : '';
+  }
+  function badgeUpdate() {
+    const badge = win.querySelector('.hx-badge'), o = ownKey(), a = G?.llm;
+    badge.textContent = o ? (o.model || PNAME(o.provider)) : a ? a.model : 'lab notes';
+    badge.classList.toggle('on', !!(o || a));
+    badge.title = o ? `Answered by ${PNAME(o.provider)} ${o.model} with your own key. Click to change.`
+      : a ? `Answered by ${a.label} ${a.model}, grounded in the lab's notes and saved results. Click to change.`
+      : 'Answers come from the lab\'s own notes and saved results. Click to choose a language model.';
+  }
+  async function renderSettings() {
+    body.innerHTML = '<p class="hx-dim hx-dots">Loading</p>';
+    try { S = await api('/api/helper/settings'); } catch (e) { body.innerHTML = `<p>${esc(e.message)}</p>`; return; }
+    const own = store.get('own', { on: false, provider: 'anthropic', model: '', key: '' });
+    const prov = S.providers, st = S.settings;
+    const opt = (list, sel) => list.map(p => `<option value="${p.id}"${p.id === sel ? ' selected' : ''}>${esc(p.label)}</option>`).join('');
+    body.innerHTML = `<p>Choose which language model answers questions and drafts proposals. Without one, the guide answers from the lab's own notes.</p>
+      <h3>Lab model${S.editable ? ' (everyone using this lab)' : ''}</h3>
+      ${S.editable ? `<form class="hx-form" data-f="lab">
+        <label>Provider<select class="hx-in" name="provider"><option value="">None: lab notes only</option>${opt(prov, st.provider)}</select></label>
+        <div class="hx-pf"></div>
+        <div class="hx-nav"><button type="button" class="hx-btn" data-a="test">Test</button><span class="sp hx-msgline"></span><button class="hx-btn pri">Save</button></div>
+        <p class="hx-dim hx-small">Saved on this Mac in ~/.config/malecns-lab/llm.json (only you can read it), never in the repo. Keys are never shown again, only their last 4 characters. Visitors through the public site are limited to 40 questions an hour each.</p></form>`
+      : `<p>${S.active ? `<b>${esc(S.active.label)}</b> · ${esc(S.active.model)}` : 'None: answers come from the lab notes.'}</p>
+         <p class="hx-dim hx-small">The lab's model is chosen on the Mac running the lab (open the guide at http://127.0.0.1…). You can use your own key below instead.</p>`}
+      <h3>Your own key (this browser only)</h3>
+      <form class="hx-form" data-f="own">
+        <label class="hx-check"><input type="checkbox" name="on"${own.on ? ' checked' : ''}> Use my own key for my questions</label>
+        <label>Provider<select class="hx-in" name="provider">${opt(prov.filter(p => p.visitor), own.provider)}</select></label>
+        <label><span>API key <a class="hx-getkey" target="_blank" rel="noopener">get one</a></span><input class="hx-in" name="key" type="password" autocomplete="off" value="${esc(own.key)}" placeholder="Paste your key"></label>
+        <label>Model<div class="hx-row2"><input class="hx-in" name="model" list="hx-models-own" value="${esc(own.model)}" placeholder="Model name"><button type="button" class="hx-btn" data-a="load">Load models</button></div><datalist id="hx-models-own"></datalist></label>
+        <div class="hx-nav"><button type="button" class="hx-btn" data-a="test">Test</button><span class="sp hx-msgline"></span><button type="button" class="hx-btn" data-a="forget">Forget</button><button class="hx-btn pri">Save</button></div>
+        <p class="hx-dim hx-small">Kept in this browser. Sent to the lab server with each question and passed straight to the provider; not saved on the server. You pay the provider for what you use.</p></form>`;
+
+    const line = (f, text, bad) => { const l = f.querySelector('.hx-msgline'); l.textContent = text; l.style.color = bad ? 'var(--red)' : 'var(--green)'; };
+    const keyLink = f => { const p = prov.find(x => x.id === f.provider.value), a = f.querySelector('.hx-getkey'); if (a) { a.href = p?.keys_url || '#'; a.hidden = !p?.keys_url; } };
+
+    // lab form: fields depend on the provider
+    const lab = body.querySelector('[data-f=lab]');
+    if (lab) {
+      const fields = () => {
+        const id = lab.provider.value, p = prov.find(x => x.id === id), box = lab.querySelector('.hx-pf');
+        if (!p) { box.innerHTML = ''; return; }
+        const masked = st.keys[id], src = st.key_source[id];
+        box.innerHTML = `${p.needs_key ? `<label><span>API key ${p.keys_url ? `<a target="_blank" rel="noopener" href="${esc(p.keys_url)}">get one</a>` : ''}</span><input class="hx-in" name="key" type="password" autocomplete="off" placeholder="${masked ? esc(`Saved ${masked} (${src}); paste to replace`) : 'Paste the key'}"></label>
+            ${src === 'lab settings' ? '<label class="hx-check"><input type="checkbox" name="clear"> Remove the saved key</label>' : ''}` : ''}
+          ${!p.needs_key ? `<label>Server URL<input class="hx-in" name="base_url" value="${esc(st.base_urls[id] || p.base)}" placeholder="http://127.0.0.1:1234/v1"></label>` : ''}
+          <label>Model<div class="hx-row2"><input class="hx-in" name="model" list="hx-models-lab" value="${esc(st.models[id] || p.default_model)}" placeholder="Model name"><button type="button" class="hx-btn" data-a="load">Load models</button></div><datalist id="hx-models-lab"></datalist></label>`;
+        box.querySelector('[data-a=load]').onclick = () => loadModels(lab, false);
+      };
+      lab.provider.onchange = fields; fields();
+      lab.querySelector('[data-a=test]').onclick = () => testIt(lab, false);
+      lab.onsubmit = async e => {
+        e.preventDefault(); const id = lab.provider.value, ch = { provider: id };
+        if (id) {
+          ch.models = { [id]: lab.model.value };
+          if (lab.base_url) ch.base_urls = { [id]: lab.base_url.value };
+          if (lab.key && lab.key.value.trim()) ch.keys = { [id]: lab.key.value.trim() };
+          else if (lab.clear && lab.clear.checked) ch.keys = { [id]: '' };
+        }
+        try { await api('/api/helper/settings', ch); G = null; await load(); line(lab, 'Saved'); setTimeout(renderSettings, 900); } catch (err) { line(lab, err.message, true); }
+      };
+    }
+    const own_ = body.querySelector('[data-f=own]');
+    keyLink(own_); own_.provider.onchange = () => { keyLink(own_); own_.model.value = prov.find(x => x.id === own_.provider.value)?.default_model || ''; };
+    own_.querySelector('[data-a=load]').onclick = () => loadModels(own_, true);
+    own_.querySelector('[data-a=test]').onclick = () => testIt(own_, true);
+    own_.querySelector('[data-a=forget]').onclick = () => { store.set('own', null); badgeUpdate(); renderSettings(); };
+    own_.onsubmit = e => {
+      e.preventDefault();
+      if (own_.on.checked && !own_.key.value.trim()) return line(own_, 'Paste a key first', true);
+      store.set('own', { on: own_.on.checked, provider: own_.provider.value, key: own_.key.value.trim(), model: own_.model.value.trim() });
+      badgeUpdate(); line(own_, own_.on.checked ? 'Saved: your questions use your key' : 'Saved (off)');
+    };
+
+    function req(f, own) {
+      const o = { provider: f.provider.value, model: f.model?.value || '', own };
+      if (f.key?.value.trim()) o.key = f.key.value.trim();
+      if (f.base_url) o.base_url = f.base_url.value;
+      return o;
+    }
+    async function loadModels(f, own) {
+      line(f, 'Loading…');
+      try { const r = await api('/api/helper/models', req(f, own));
+        f.querySelector('datalist').innerHTML = r.models.map(m => `<option value="${esc(m)}">`).join('');
+        line(f, `${r.models.length} models: click the Model box to pick`);
+        if (!f.model.value && r.models.length) f.model.value = r.models[0];
+      } catch (e) { line(f, e.message, true); }
+    }
+    async function testIt(f, own) {
+      line(f, 'Testing…');
+      try { const r = await api('/api/helper/test', req(f, own)); line(f, `Works: ${r.model} replied "${r.reply}"`); }
+      catch (e) { line(f, e.message, true); }
+    }
   }
 
   window.labGuide = { open: () => toggle(true), ask: q => { toggle(true); send(q); }, tour: () => { toggle(true); load().then(() => { show('tour'); go(0); }); } };

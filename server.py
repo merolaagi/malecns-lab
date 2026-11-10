@@ -1,4 +1,5 @@
 """Local-only research UI. Uses an OS-assigned port and persists its assignment."""
+import hmac
 import json
 import os
 import threading
@@ -100,6 +101,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == '/api/optogenetics-summary': return self.send(200, optogenetics.summary(OPTO) | {'physics_body': bodysim.available()})
         if path == '/api/helper/guide': return self.send(200, helper.guide(parse_qs(url.query).get('path', ['/'])[0]))
         if path == '/api/helper/glossary': return self.send(200, helper.glossary())
+        if path == '/api/helper/settings': return self.send(200, helper.llm.view(self.is_owner()))
         files = {'/helper.js': ('helper.js', 'text/javascript; charset=utf-8'),
                  '/helper.css': ('helper.css', 'text/css; charset=utf-8'),
                  '/scaffold': ('scaffold.html', 'text/html; charset=utf-8'),
@@ -244,25 +246,41 @@ class Handler(BaseHTTPRequestHandler):
         finally:
             LOCK.release()
 
+    def is_owner(self):
+        """True on the Mac itself (not through the tunnel), or with the admin token if one is set."""
+        token = os.environ.get('MALECNS_ADMIN_TOKEN', '')
+        if token and hmac.compare_digest(self.headers.get('X-Admin-Token', ''), token): return True
+        if self.headers.get('CF-Connecting-IP') or self.headers.get('X-Forwarded-For'): return False
+        host = self.headers.get('Host', '').rsplit(':', 1)[0].strip('[]')
+        return self.client_address[0] in ('127.0.0.1', '::1') and host in ('127.0.0.1', 'localhost', '::1')
+
     def helper_post(self):
         # The guide answers questions alongside experiments, so it does not take the experiment lock.
         origin = self.headers.get('Origin'); host = self.headers.get('Host', '')
         if origin and origin not in ('http://' + host, 'https://' + host): return self.send(403, {'error': 'Origin not allowed'})
         who = self.headers.get('CF-Connecting-IP') or self.client_address[0]
+        owner = self.is_owner()
         try:
             size = int(self.headers.get('Content-Length', 0))
             if not 0 < size <= 32768: raise ValueError('Invalid request size')
             o = json.loads(self.rfile.read(size))
             if not isinstance(o, dict): raise ValueError('Expected JSON object')
+            own = o.get('own') if isinstance(o.get('own'), dict) else None
             if self.path == '/api/helper/ask':
-                return self.send(200, helper.ask(o.get('question', ''), o.get('path', '/'), o.get('history'), o.get('selection'), who))
+                return self.send(200, helper.ask(o.get('question', ''), o.get('path', '/'), o.get('history'), o.get('selection'), who, own, owner))
             if self.path == '/api/helper/propose':
-                return self.send(200, helper.propose(o.get('goal', ''), o.get('path', '/'), who))
+                return self.send(200, helper.propose(o.get('goal', ''), o.get('path', '/'), who, own, owner))
             if self.path == '/api/helper/build-request':
                 if not isinstance(o.get('proposal'), dict): raise ValueError('Expected a proposal')
                 return self.send(200, {'text': helper.build_request(o['proposal'])})
+            if self.path == '/api/helper/settings':
+                if not owner: return self.send(403, {'error': 'Lab settings can be changed only on the Mac running the lab (http://127.0.0.1)'})
+                helper.llm.update(o)
+                return self.send(200, helper.llm.view(True))
+            if self.path == '/api/helper/models': return self.send(200, helper.list_models(o, owner, who))
+            if self.path == '/api/helper/test': return self.send(200, helper.test(o, owner, who))
             return self.send(404, {'error': 'Not found'})
-        except (ValueError, TypeError) as e: return self.send(400, {'error': str(e)})
+        except (ValueError, TypeError, helper.llm.LLMError) as e: return self.send(400, {'error': str(e)})
 
 if __name__ == '__main__':
     runtime = BASE / '.runtime.json'
