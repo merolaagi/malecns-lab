@@ -6,6 +6,17 @@ Written by hand from the pages and their saved benchmarks. The guide reads the l
 
 # Each page: purpose, what is measured, what is assumed, what came out, and a tour.
 # A tour step is (CSS selector or None, title, text). Selectors that are missing on the page are skipped.
+FINDINGS_BACKBONE = [
+    'Learning inside the wiring beats a frozen backbone: on the central complex, digits from 50 examples per class go from 21% (readout only) to 91% with one teacher signal per output and local updates, against 93% for backpropagation in the same wiring. A single scalar reward reaches 31%.',
+    'The measured wiring is a worse backbone than the same wiring shuffled, at every learning rule: digits 91% against 96%, aiming 22% against 63%. Its connections are organised for the fly\'s own job (a compass), not as a general-purpose network.',
+    'No unit-level biology helped on these tasks: dendritic branches, cell-size excitability and time constants changed little, removing fixed signs cost about 9 points and winner-take-most inhibition about 13.',
+    'Reward and punishment alone (mushroom body, 4,000 trials): with dopamine delivered to each output neuron separately the network learns digits to 72% (aiming 39%); told the answer, backpropagation on the same synapses reaches 94% (65%). Reward-only learning works but is slower.',
+    'The measured dopamine loops, as modelled, do not deliver that signal: 17% against 13% with shuffled loops (chance 10–12%). Only about a quarter of the dopamine reaching an output neuron comes from dopamine neurons listening to its own compartment.',
+    'A frozen backbone with a learned readout does better with shuffled wiring than measured (digits 91% against 75%): the measured output neurons see overlapping groups of Kenyon cells.',
+    'Sparse coding is the biology that matters: without it digits fall from 72% to 30%. Dendritic branches and depression-only synapses, as modelled, hurt.',
+    'Learning inside the wiring forgets: digits two classes at a time end at 21–23% whether by dopamine or backpropagation; the frozen backbone with a readout keeps 47–77%.',
+]
+
 PAGES = {
     '/': dict(
         title='Motion lab', data='data/benchmark.json',
@@ -276,6 +287,20 @@ PAGES = {
                ('#run', 'Run', 'Reservoir test.'),
                ('#memory', 'Memory by delay', 'How far back the readout can recall.'),
                ('#paired', 'Paired comparison', 'Same seeds, different placement.')]),
+    '/backbone': dict(
+        title='Connectome backbone', data='data/dopamine-loops.json',
+        purpose='Learning inside the connectome instead of on top of it: a network with exactly the measured connections whose strengths are learned, each cell keeping its transmitter\'s sign. Varies the learning rule (from reward and punishment only, up to backpropagation), the wiring (measured, shuffled, random) and the biology of the units, on aiming, digits and continual learning.',
+        measured='Which cells connect, synapse counts, transmitter signs, cell types, input counts, the dopamine neurons\' inputs and targets.',
+        assumed='The unit model, update steps, how inputs reach the input cells, every learning rule and rate, the action votes, the tasks.',
+        findings=FINDINGS_BACKBONE,
+        steps=[(None, 'What this page is', 'The connectome as the architecture of a learning network, with reward and punishment as the teacher.'),
+               ('.notice', 'Measured against assumed', 'The wiring is measured; the learning rules are ours.'),
+               ('#summary', 'What came out', 'The headline numbers, computed from the saved results.'),
+               ('#rules', 'Rule against wiring', 'Each learning rule on measured, shuffled and random wiring.'),
+               ('#biology', 'Neuron biology', 'One ingredient at a time, as a change from the plain unit.'),
+               ('#motor', 'A second backbone', 'The same test on the leg motor circuit.'),
+               ('#dcurve', 'Reward only', 'The mushroom body learning from right or wrong alone, with dopamine delivered in different ways.'),
+               ('#dbiology', 'Biology in the dopamine model', 'Sparse coding is the ingredient that matters most.')]),
     '/scaffold': dict(
         title='Scaffold learner', data='data/scaffold-benchmark.json',
         purpose='A learner from the fly\'s design (sparse expansion, one-shot memory), HTM (sparse distributed representations, prediction-assisted pooling) and Monty (features at locations, modules voting), tested on how little data it needs.',

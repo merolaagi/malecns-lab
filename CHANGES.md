@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## The connectome as the backbone of a learning network
+
+- `backbone.py` and `/backbone` (Theory): a network with exactly the connectome's connections (central complex, 1,247 cells; leg motor circuit, 1,741), signs from transmitters, strengths learned. Compared: learning rule (readout only, scalar reward, one teacher per output along random or original pathways, backprop inside the wiring), wiring (measured, shuffled keeping each cell's inputs and outputs, random), and unit biology one at a time (inhibition, cell size, dendritic branches, time constants, free signs). Tasks: aiming with a decoy, digits from 50 per class, classes in sequence. Three seeds, 396 runs, resumable.
+- `dopamine_loops.py`: the mushroom body as measured (314 projection neurons, 4,064 Kenyon cells, 97 output neurons, 340 dopamine neurons) learning from reward and punishment only, with dopamine delivered globally, per output neuron, or through the measured output-to-dopamine loops.
+- Results. Learning inside the wiring beats a frozen backbone (central complex, digits: 21% readout, 91% teachers, 93% backprop). The measured wiring is a worse backbone than shuffled at every rule (digits 91% vs 96%, aiming 22% vs 63%). Reward only: ideal per-neuron dopamine learns digits to 72% (backprop told the answer: 94%); the measured dopamine loops as modelled do not carry the signal (17%). Sparse coding is the one ingredient that matters in the mushroom body (72% to 30% without); no unit-level biology helped in the recurrent backbones. Everything that learns inside the wiring forgets earlier classes.
+- Guide notes for the page; tests in `test_backbone.py`, `test_dopamine_loops.py`.
+
 ## Frame discovery, the fly's compass as a location signal, and walking coordination
 
 - `frames.py` (Scaffold page): the reference frame is computed from relations instead of being given. Relation types are movements; relations that close loops are constraints; diagonalising them (Smith normal form) gives the frame. Found from data, three seeds: line (numbers), loop of 12 (clock), grid (room, 30 of 40 relations), line (two redundant relations), cylinder of 7 (rota); a family tree is reported as having no such frame. Held-out relations 80–90% (lookup table and backprop network: 0%), multi-step questions 94–97% (lookup 55–68%, network 26–39%). Limits measured: with every relation given a lookup table does as well; one wrong relation breaks it.

@@ -559,6 +559,23 @@ The coordination circuit is built from the raw tables:
 .venv/bin/python coordination.py                          # both circuits, both couplings -> data/coordination.json
 ```
 
+## Connectome as backbone (new)
+
+Can the connectome be the architecture of a learning network, trained by reward and punishment instead of backpropagation? `/backbone` (Theory) reports two experiments.
+
+`backbone.py`: the network has exactly the measured connections (central complex or leg motor circuit); signs come from transmitters; strengths are learned. Varied: the learning rule, the wiring (measured, shuffled, random) and unit biology one ingredient at a time. `dopamine_loops.py`: the mushroom body learning from reward and punishment only, with dopamine routed in different ways including through the measured loops.
+
+What came out, three seeds:
+
+- Learning inside the wiring is far better than freezing it and training a readout (digits: 21% to 91%), and a local rule with one teacher signal per output nearly matches backpropagation in the same wiring (93%). A single scalar reward learns slowly (31%).
+- The measured wiring is a worse general-purpose backbone than the same wiring shuffled, at every rule (digits 91% vs 96%, aiming 22% vs 63%).
+- Reward and punishment alone work when dopamine reaches each output neuron separately (digits 72%); the measured dopamine loops, as modelled, do not deliver that (17%).
+- Sparse coding is the biology that matters in the mushroom body (72% to 30% without it). In the recurrent backbones none of the unit-level ingredients helped.
+- Anything that learns inside the wiring forgets earlier classes; the sparse one-shot memory on the Sparse expansion page remains the lab's answer to forgetting.
+
+    python3 dopamine_loops.py    # data/dopamine-loops.json
+    python3 backbone.py          # data/backbone-benchmark.json (about 50 minutes on two cores; resumes if interrupted)
+
 ## Frames, compass and walking (new)
 
 Three follow-ups to the scaffold and the body, each with its controls and its failures.
