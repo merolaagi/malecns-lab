@@ -102,6 +102,7 @@ class Handler(BaseHTTPRequestHandler):
                  '/api/optogenetics-benchmark': ('data/optogenetics-benchmark.json', 'application/json; charset=utf-8'),
                  '/api/body-benchmark': ('data/body-benchmark.json', 'application/json; charset=utf-8'),
                  '/api/diagnosis': ('data/diagnosis.json', 'application/json; charset=utf-8'),
+                 '/api/coordination': ('data/coordination.json', 'application/json; charset=utf-8'),
                  '/objects': ('objects.html', 'text/html; charset=utf-8'),
                  '/objects.js': ('objects.js', 'text/javascript; charset=utf-8'),
                  '/api/objects-benchmark': ('data/objects-benchmark.json', 'application/json; charset=utf-8'),

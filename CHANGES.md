@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Add the interneurons that coordinate the legs
+
+- `build_coordination.py` (probe and build): the optogenetics circuit plus each leg's premotor interneurons, interneurons reaching two or more leg segments, and P9's route to the front legs, with mirror completion and a measured 6 × 6 leg-link matrix (excitatory and inhibitory). Writes `data/coordination-circuit.json`.
+- `bodysim.py`: `coupling='measured'` scales the coupling between leg rhythms by the leg-link matrix (from the build, or measured inside the loaded circuit); the default stays uniform.
+- `coordination.py`: compares circuits and couplings, on the circuit alone (reach and evenness of leg drive) and in the body (P9, MDN, DNa02 with shuffled and sham controls). The baseline on the optogenetics circuit is in `data/coordination.json`; measured coupling alone does not rescue walking there.
+- `/optogenetics` gains a "Coordinating the legs" section. Tests for the builder, the coupling and the experiment helpers.
+
 ## Diagnose why the fly doesn't walk
 
 - `diagnose.py`: light-strength sweep, glutamate inhibitory versus excitatory, and front-leg direction rules, first on the circuit alone, then in the body with shuffled and sham controls, then a coordination test. Results in `data/diagnosis.json` and a new section on `/optogenetics`.

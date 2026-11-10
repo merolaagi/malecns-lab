@@ -89,6 +89,25 @@ class CircuitSideTest(unittest.TestCase):
         self.assertGreater(sum(len(a) + len(b) for a, b in sens), 20)
 
 
+class CouplingTest(unittest.TestCase):
+    def test_uniform_and_measured_coupling(self):
+        lab = og.Optogenetics(og.BASE / 'data/circuit.json')
+        self.assertTrue(np.all(bs.coupling_matrix(lab, 'uniform') == bs.COUPLING))
+        K = bs.coupling_matrix(lab, 'measured')
+        off = ~np.eye(6, dtype=bool)
+        self.assertTrue(np.all(np.diag(K) == 0))
+        self.assertAlmostEqual(K[off].mean(), bs.COUPLING, places=6)
+        links = bs.leg_links_from_circuit(lab)
+        self.assertEqual(np.array(links['excitatory']).shape, (6, 6))
+
+    def test_measured_coupling_uses_build_links(self):
+        lab = og.Optogenetics(og.BASE / 'data/circuit.json')
+        M = np.ones((6, 6)); M[0, 1] = 7.0                    # leg 0 (LF) reaches leg 1 (LM) strongly
+        lab.leg_links = {'excitatory': M.tolist(), 'inhibitory': np.zeros((6, 6)).tolist()}
+        K = bs.coupling_matrix(lab, 'measured')
+        self.assertGreater(K[1, 0], K[0, 1])                    # LM is pulled by LF more than the reverse
+
+
 @unittest.skipUnless(bs.available(), 'flygym not installed')
 class PhysicsTest(unittest.TestCase):
     def test_body_calibration_and_offsets(self):

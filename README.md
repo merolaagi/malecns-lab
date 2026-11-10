@@ -532,6 +532,33 @@ What this points to: the circuit extract reaches the legs unevenly (P9 misses th
 .venv/bin/python diagnose.py      # about 10 minutes with 8 cores; needs flygym for stages 2 and 3
 ```
 
+### Coordinating the legs (new)
+
+The diagnosis found that the extract reaches the legs unevenly (P9 misses the front legs entirely) and that nothing in it coordinates the legs. `build_coordination.py` adds, by anatomy only:
+
+- **premotor interneurons:** for each leg, the 60 with the most synapses onto its motor neurons (at least 10);
+- **linking interneurons:** the 200 that reach premotor cells or motor neurons of two or more leg segments (at least 10 synapses into each);
+- **P9's route to the front legs:** cells taking at least 5 synapses from P9 and making at least 5 onto front-leg premotor cells or motor neurons;
+- **mirror completion:** each added type's cells on the other side.
+
+It also measures a 6 × 6 **leg-link matrix**: how strongly each leg's premotor pool reaches each other leg's, directly or through one interneuron, separately for excitatory and inhibitory paths. `bodysim.py` can use it to scale the coupling between leg rhythms (`coupling='measured'`) instead of one constant. Without a build, the matrix is measured inside the loaded circuit.
+
+`coordination.py` compares the two circuits and the two couplings:
+- **Stage A, circuit alone:** does the drive reach every leg, and are the stepping frequencies even?
+- **Stage B, physics body:** does bilateral P9 walk the fly forward, MDN backward, and DNa02 turn it, against shuffled and sham controls (three seeds)?
+
+Baseline, on the optogenetics circuit:
+- **Circuit alone:** bilateral P9 at light 5.0 drives the middle and hind legs forward (step size 0.87, direction +0.97). The front legs step (0.68) but get no direction (0.00), and the legs' frequencies spread by 29%.
+- **Coupling measured inside this circuit** shows the front legs as the weakest-linked (row and column LF, RF in the page's matrix). Using it in the body does not rescue walking: P9 still travels −0.75 mm, and MDN only reaches "partial" (−0.6 mm, all 3 seeds).
+
+The coordination circuit is built from the raw tables:
+
+```sh
+.venv/bin/python build_coordination.py raw-data --probe   # sizes
+.venv/bin/python build_coordination.py raw-data           # writes data/coordination-circuit.json (with the leg-link matrix)
+.venv/bin/python coordination.py                          # both circuits, both couplings -> data/coordination.json
+```
+
 ## Object memory: seeing, remembering, recognising a variant (new)
 
 Open `/objects`. The question: can the measured circuit take a sensation (a cup under some light), store it, and use the memory to recognise a slightly different sensation (another cup, other light, another distance)? This is the fly's version of what tbp.monty attempts, and the page says plainly where it differs.

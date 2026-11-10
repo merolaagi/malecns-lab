@@ -181,4 +181,31 @@ async function diagnosis() {
     $('diag').innerHTML = h;
   } catch (e) { $('diag').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
 }
-loadMeta(); score(); bodyScore(); diagnosis();
+async function coordination() {
+  try {
+    const r = await fetch('/api/coordination'); if (!r.ok) throw new Error('No coordination results yet: .venv/bin/python coordination.py');
+    const d = await r.json();
+    const circuits = Object.keys(d.circuits);
+    let h = `<p class="note">${circuits.map(c => `${esc(c)} circuit: ${d.circuits[c].neurons.toLocaleString()} neurons${d.circuits[c].added ? ' (added: ' + Object.entries(d.circuits[c].added).map(([k, v]) => `${v} ${esc(k)}`).join(', ') + ')' : ''}`).join(' · ')}${circuits.includes('coordination') ? '' : ' · The coordination circuit has not been built yet: build_coordination.py.'}</p>`;
+    h += `<h3 style="font-size:13px;margin:10px 0 6px">1. The circuit alone: does the drive reach every leg, evenly?</h3><div class="tw"><table class="bench"><tr><th>Circuit</th><th>Light on</th><th>Light</th><th>Front-leg step size</th><th>Middle and hind</th><th>Front direction</th><th>Middle and hind direction</th><th>Frequency spread</th></tr>`;
+    for (const x of d.stage_a) h += `<tr><td>${esc(x.circuit)}</td><td>${esc(x.experiment)}, ${esc(x.side)}</td><td>${x.light}</td><td>${x.front_amp.toFixed(2)}</td><td>${x.rear_amp.toFixed(2)}</td><td>${x.front_dir >= 0 ? '+' : ''}${x.front_dir.toFixed(2)}</td><td>${x.rear_dir >= 0 ? '+' : ''}${x.rear_dir.toFixed(2)}</td><td>${x.frequency_spread == null ? '–' : x.frequency_spread.toFixed(2)}</td></tr>`;
+    h += '</table></div><p class="hint">Step size 0 to 1; direction −1 backward to +1 forward; frequency spread is the standard deviation over the mean of the stepping legs\' frequencies (0 = all legs at one speed).</p>';
+    const names = ['LF', 'LM', 'LH', 'RF', 'RM', 'RH'];
+    for (const [c, K] of Object.entries(d.coupling_matrices)) {
+      const max = Math.max(...K.flat());
+      h += `<h3 style="font-size:13px;margin:12px 0 6px">Measured coupling, ${esc(c)} circuit (row: receiving leg; mean = uniform strength)</h3><table class="bench" style="width:auto"><tr><th></th>${names.map(n => `<th>${n}</th>`).join('')}</tr>${K.map((row, i) => `<tr><td>${names[i]}</td>${row.map(v => `<td style="background:rgba(47,95,208,${(0.08 + 0.5 * v / max).toFixed(2)})">${v.toFixed(1)}</td>`).join('')}</tr>`).join('')}</table>`;
+    }
+    if (d.stage_b) {
+      h += `<h3 style="font-size:13px;margin:14px 0 6px">2. In the body (light: ${Object.entries(d.chosen_light).map(([c, l]) => `${esc(c)} ${l}`).join(', ')})</h3><div class="tw"><table class="bench"><tr><th>Circuit</th><th>Coupling</th><th>Cell type</th><th>Measured wiring</th><th>Shuffled</th><th>Sham</th></tr>`;
+      const by = {}; d.stage_b.forEach(x => { (by[`${x.circuit}|${x.coupling}|${x.experiment}`] ||= {})[x.condition] = x; });
+      for (const [k, c] of Object.entries(by)) {
+        const [circ, coup, e] = k.split('|');
+        h += `<tr><td>${esc(circ)}</td><td>${esc(coup)}</td><td>${esc(e)}</td>${['intact', 'shuffled', 'sham'].map(cn => c[cn] ? `<td><span class="tag ${tagClass(c[cn].result)}">${esc(c[cn].result)}</span></td>` : '<td>–</td>').join('')}</tr>`;
+        h += `<tr><td></td><td colspan="5" class="muted" style="text-align:left">${esc(c.intact.detail)}</td></tr>`;
+      }
+      h += '</table></div>';
+    }
+    $('coord').innerHTML = h;
+  } catch (e) { $('coord').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
+}
+loadMeta(); score(); bodyScore(); diagnosis(); coordination();

@@ -1,0 +1,986 @@
+{
+ "circuits": {
+  "optogenetics": {
+   "neurons": 1741,
+   "added": null,
+   "leg_links_measured_in_build": false
+  }
+ },
+ "couplings": {
+  "uniform": "Same coupling between every pair of legs",
+  "measured": "Coupling scaled by the measured leg links"
+ },
+ "lights": [
+  2.5,
+  3.5,
+  5.0
+ ],
+ "stage_a": [
+  {
+   "circuit": "optogenetics",
+   "experiment": "P9",
+   "side": "both",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 0.0,
+   "rear_amp": 0.0,
+   "front_dir": 0.0,
+   "rear_dir": 0.0,
+   "frequency_spread": null
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "P9",
+   "side": "both",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 0.0,
+   "rear_amp": 0.0,
+   "front_dir": 0.0,
+   "rear_dir": 0.0,
+   "frequency_spread": null
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "P9",
+   "side": "both",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.575,
+     "amp": 0.506,
+     "freq_hz": 4.265000000000001,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.299999999999997,
+     "amp": 0.9724999999999999,
+     "freq_hz": 10.675,
+     "dir": 0.984,
+     "retract_hz": 60.394999999999996,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 8.395,
+     "amp": 0.686,
+     "freq_hz": 6.09,
+     "dir": 0.9515,
+     "retract_hz": 19.59,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.645,
+     "amp": 0.852,
+     "freq_hz": 8.25,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 22.07,
+     "amp": 0.976,
+     "freq_hz": 10.8,
+     "dir": 0.984,
+     "retract_hz": 61.885000000000005,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 12.245000000000001,
+     "amp": 0.841,
+     "freq_hz": 8.075,
+     "dir": 0.97,
+     "retract_hz": 31.96,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 0.679,
+   "rear_amp": 0.869,
+   "front_dir": 0.0,
+   "rear_dir": 0.972,
+   "frequency_spread": 0.291
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "P9",
+   "side": "right",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.42,
+     "amp": 0.494,
+     "freq_hz": 4.155,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.08,
+     "amp": 0.971,
+     "freq_hz": 10.64,
+     "dir": 0.984,
+     "retract_hz": 60.175,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 7.665,
+     "amp": 0.645,
+     "freq_hz": 5.65,
+     "dir": 0.952,
+     "retract_hz": 19.835,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.615,
+     "amp": 0.8514999999999999,
+     "freq_hz": 8.235,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 21.87,
+     "amp": 0.975,
+     "freq_hz": 10.77,
+     "dir": 0.984,
+     "retract_hz": 62.394999999999996,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.885,
+     "amp": 0.83,
+     "freq_hz": 7.915,
+     "dir": 0.97,
+     "retract_hz": 31.945,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 0.673,
+   "rear_amp": 0.855,
+   "front_dir": 0.0,
+   "rear_dir": 0.972,
+   "frequency_spread": 0.306
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "P9",
+   "side": "right",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.455,
+     "amp": 0.497,
+     "freq_hz": 4.18,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.435000000000002,
+     "amp": 0.973,
+     "freq_hz": 10.7,
+     "dir": 0.984,
+     "retract_hz": 60.370000000000005,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 7.7,
+     "amp": 0.647,
+     "freq_hz": 5.67,
+     "dir": 0.952,
+     "retract_hz": 19.855,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.7,
+     "amp": 0.854,
+     "freq_hz": 8.27,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 21.93,
+     "amp": 0.975,
+     "freq_hz": 10.774999999999999,
+     "dir": 0.984,
+     "retract_hz": 62.42,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.94,
+     "amp": 0.832,
+     "freq_hz": 7.94,
+     "dir": 0.97,
+     "retract_hz": 32.0,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 0.675,
+   "rear_amp": 0.857,
+   "front_dir": 0.0,
+   "rear_dir": 0.972,
+   "frequency_spread": 0.305
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "P9",
+   "side": "right",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.535,
+     "amp": 0.503,
+     "freq_hz": 4.235,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.295,
+     "amp": 0.972,
+     "freq_hz": 10.675,
+     "dir": 0.984,
+     "retract_hz": 60.555,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 8.129999999999999,
+     "amp": 0.671,
+     "freq_hz": 5.93,
+     "dir": 0.9535,
+     "retract_hz": 20.48,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.77,
+     "amp": 0.8554999999999999,
+     "freq_hz": 8.3,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 22.4,
+     "amp": 0.9775,
+     "freq_hz": 10.85,
+     "dir": 0.985,
+     "retract_hz": 65.505,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 12.16,
+     "amp": 0.8385,
+     "freq_hz": 8.04,
+     "dir": 0.97,
+     "retract_hz": 32.125,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 0.679,
+   "rear_amp": 0.865,
+   "front_dir": 0.0,
+   "rear_dir": 0.973,
+   "frequency_spread": 0.297
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 60.22,
+     "amp": 1.0,
+     "freq_hz": 11.99,
+     "dir": -0.8614999999999999,
+     "retract_hz": 4.13,
+     "protract_hz": 61.665
+    },
+    "LM": {
+     "drive_hz": 24.6,
+     "amp": 0.9855,
+     "freq_hz": 11.13,
+     "dir": 0.1555,
+     "retract_hz": 45.32,
+     "protract_hz": 33.004999999999995
+    },
+    "LH": {
+     "drive_hz": 17.695,
+     "amp": 0.9435,
+     "freq_hz": 9.93,
+     "dir": 0.946,
+     "retract_hz": 19.36,
+     "protract_hz": 0.05
+    },
+    "RF": {
+     "drive_hz": 35.465,
+     "amp": 0.998,
+     "freq_hz": 11.79,
+     "dir": -0.9624999999999999,
+     "retract_hz": 0.0,
+     "protract_hz": 25.58
+    },
+    "RM": {
+     "drive_hz": 20.6,
+     "amp": 0.968,
+     "freq_hz": 10.555,
+     "dir": -0.11699999999999999,
+     "retract_hz": 22.515,
+     "protract_hz": 28.625
+    },
+    "RH": {
+     "drive_hz": 84.42,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.989,
+     "retract_hz": 88.255,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 0.999,
+   "rear_amp": 0.974,
+   "front_dir": -0.912,
+   "rear_dir": 0.493,
+   "frequency_spread": 0.069
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 62.67,
+     "amp": 1.0,
+     "freq_hz": 11.99,
+     "dir": -0.8634999999999999,
+     "retract_hz": 4.23,
+     "protract_hz": 64.075
+    },
+    "LM": {
+     "drive_hz": 27.335,
+     "amp": 0.992,
+     "freq_hz": 11.39,
+     "dir": -0.0755,
+     "retract_hz": 41.239999999999995,
+     "protract_hz": 48.084999999999994
+    },
+    "LH": {
+     "drive_hz": 20.185000000000002,
+     "amp": 0.965,
+     "freq_hz": 10.475000000000001,
+     "dir": 0.923,
+     "retract_hz": 18.295,
+     "protract_hz": 0.255
+    },
+    "RF": {
+     "drive_hz": 40.835,
+     "amp": 0.999,
+     "freq_hz": 11.9,
+     "dir": -0.966,
+     "retract_hz": 0.0,
+     "protract_hz": 28.31
+    },
+    "RM": {
+     "drive_hz": 21.424999999999997,
+     "amp": 0.9724999999999999,
+     "freq_hz": 10.695,
+     "dir": -0.356,
+     "retract_hz": 17.425,
+     "protract_hz": 37.22
+    },
+    "RH": {
+     "drive_hz": 82.44999999999999,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.987,
+     "retract_hz": 78.465,
+     "protract_hz": 0.0
+    }
+   },
+   "front_amp": 1.0,
+   "rear_amp": 0.982,
+   "front_dir": -0.915,
+   "rear_dir": 0.37,
+   "frequency_spread": 0.054
+  },
+  {
+   "circuit": "optogenetics",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 68.425,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.8665,
+     "retract_hz": 4.48,
+     "protract_hz": 68.825
+    },
+    "LM": {
+     "drive_hz": 55.935,
+     "amp": 0.998,
+     "freq_hz": 11.805,
+     "dir": 0.2585,
+     "retract_hz": 90.94999999999999,
+     "protract_hz": 42.865
+    },
+    "LH": {
+     "drive_hz": 32.45,
+     "amp": 0.993,
+     "freq_hz": 11.54,
+     "dir": 0.6174999999999999,
+     "retract_hz": 39.215,
+     "protract_hz": 6.215
+    },
+    "RF": {
+     "drive_hz": 47.97,
+     "amp": 1.0,
+     "freq_hz": 11.96,
+     "dir": -0.9735,
+     "retract_hz": 0.0,
+     "protract_hz": 37.115
+    },
+    "RM": {
+     "drive_hz": 23.975,
+     "amp": 0.984,
+     "freq_hz": 11.055,
+     "dir": -0.34850000000000003,
+     "retract_hz": 20.425,
+     "protract_hz": 42.870000000000005
+    },
+    "RH": {
+     "drive_hz": 83.17500000000001,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.9575,
+     "retract_hz": 81.805,
+     "protract_hz": 1.3900000000000001
+    }
+   },
+   "front_amp": 1.0,
+   "rear_amp": 0.994,
+   "front_dir": -0.92,
+   "rear_dir": 0.371,
+   "frequency_spread": 0.029
+  }
+ ],
+ "chosen_light": {
+  "optogenetics": 5.0
+ },
+ "coupling_matrices": {
+  "optogenetics": [
+   [
+    0.0,
+    8.62,
+    5.3,
+    2.94,
+    3.89,
+    3.99
+   ],
+   [
+    8.27,
+    0.0,
+    18.51,
+    4.91,
+    10.63,
+    10.68
+   ],
+   [
+    7.63,
+    19.7,
+    0.0,
+    6.55,
+    14.79,
+    28.65
+   ],
+   [
+    2.27,
+    3.38,
+    2.97,
+    0.0,
+    5.37,
+    3.54
+   ],
+   [
+    5.79,
+    11.21,
+    10.6,
+    5.98,
+    0.0,
+    15.6
+   ],
+   [
+    7.19,
+    15.8,
+    29.47,
+    6.91,
+    18.88,
+    0.0
+   ]
+  ]
+ },
+ "stage_b": [
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "intact",
+   "result": "mismatch",
+   "detail": "both sides: travels -0.76 mm, turns +13\u00b0 (no straight forward walking); one side: turns away from the lit side (right +131\u00b0, left -54\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.7582238317041865,
+    "right": -0.38975843329195986,
+    "left": -1.3572286583074475
+   },
+   "yaw_deg": {
+    "both": 13.154285318490642,
+    "right": 130.9273457559522,
+    "left": -53.540428907803765
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.02 mm, turns +1\u00b0 (no straight forward walking); one side: turns away from the lit side, below \u00b110\u00b0 (right +0\u00b0, left -0\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.018464321200518927,
+    "right": 0.03308217010204306,
+    "left": 0.001291036337249794
+   },
+   "yaw_deg": {
+    "both": 0.9884331017523967,
+    "right": 0.23062042194049834,
+    "left": -0.14094129677677628
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "sham",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.48 mm, turns +17\u00b0 (no straight forward walking); one side: right +4\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.4837365101636439,
+    "right": 0.8259896041188942,
+    "left": -1.6283962644997104e-12
+   },
+   "yaw_deg": {
+    "both": 17.45607542329402,
+    "right": 4.464891697820989,
+    "left": 0.0
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "intact",
+   "result": "partial",
+   "detail": "travels -0.15 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.1516011097717155,
+    "right": 0.9138806210751239,
+    "left": -1.0144183467742
+   },
+   "yaw_deg": {
+    "both": -6.311476326642513,
+    "right": -180.62189350763708,
+    "left": 1.2458535376110689
+   },
+   "agreement": "2 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "travels +1.52 mm during light (backward walking: below \u22122.0 mm); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.5170486620255106,
+    "right": 0.38963295231598144,
+    "left": -0.13653906759510553
+   },
+   "yaw_deg": {
+    "both": -29.5575410758571,
+    "right": 36.950907275917935,
+    "left": 37.65801255420296
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "sham",
+   "result": "partial",
+   "detail": "travels -1.22 mm during light (backward walking: below \u22122.0 mm); 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.2185528400426697,
+    "right": 1.3660036652012373,
+    "left": -0.0975902837814253
+   },
+   "yaw_deg": {
+    "both": -51.98301703797633,
+    "right": -3.385909312819145,
+    "left": 11.382743457039211
+   },
+   "agreement": "1 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "intact",
+   "result": "no clear turn",
+   "detail": "right +71\u00b0, left +21\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.5792097005964667,
+    "right": -1.659056451394301,
+    "left": -1.6609588021975759
+   },
+   "yaw_deg": {
+    "both": 15.871774029979088,
+    "right": 71.41868464653648,
+    "left": 21.230267580303742
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "shuffled",
+   "result": "no clear turn",
+   "detail": "right -24\u00b0, left -78\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.003089686290098,
+    "right": -0.5174458707686108,
+    "left": 2.42081207349197
+   },
+   "yaw_deg": {
+    "both": -27.19525017699944,
+    "right": -23.867374409807514,
+    "left": -77.52815976425995
+   },
+   "agreement": "2 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "sham",
+   "result": "no clear turn",
+   "detail": "right -9\u00b0, left -22\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.3168919690619256,
+    "right": -1.5027319686508316,
+    "left": -1.6635543596973157
+   },
+   "yaw_deg": {
+    "both": 2.9356007549677705,
+    "right": -9.485312494573881,
+    "left": -21.566861609823988
+   },
+   "agreement": "2 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "intact",
+   "result": "mismatch",
+   "detail": "both sides: travels -0.75 mm, turns -5\u00b0 (no straight forward walking); one side: turns away from the lit side (right +43\u00b0, left -113\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.7543652844127857,
+    "right": -0.4572147061477751,
+    "left": -2.496681982549726
+   },
+   "yaw_deg": {
+    "both": -4.642639042161098,
+    "right": 42.719616033058095,
+    "left": -113.1964218668221
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.02 mm, turns +1\u00b0 (no straight forward walking); one side: turns away from the lit side, below \u00b110\u00b0 (right +0\u00b0, left -0\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.018594988433337862,
+    "right": 0.03308217010204306,
+    "left": 0.004666983049026603
+   },
+   "yaw_deg": {
+    "both": 0.9626002847227143,
+    "right": 0.23062042194049834,
+    "left": -0.154681354456746
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "sham",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.35 mm, turns -21\u00b0 (no straight forward walking); one side: right -33\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.3491122645426792,
+    "right": 0.49956619065208474,
+    "left": -1.6283962644997104e-12
+   },
+   "yaw_deg": {
+    "both": -21.211952105937183,
+    "right": -33.2550062907395,
+    "left": 0.0
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "intact",
+   "result": "partial",
+   "detail": "travels -0.63 mm during light (backward walking: below \u22122.0 mm); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.6316955158538201,
+    "right": -1.2094634216058613,
+    "left": -4.539701661191274
+   },
+   "yaw_deg": {
+    "both": -14.945713548539368,
+    "right": -153.65000073076575,
+    "left": 63.26752549230813
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "travels +0.98 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.9828294128554235,
+    "right": 0.5161064869690423,
+    "left": 1.3292059138911763
+   },
+   "yaw_deg": {
+    "both": -66.01677599996081,
+    "right": 24.299949532539227,
+    "left": -14.62015933422677
+   },
+   "agreement": "2 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "sham",
+   "result": "mismatch",
+   "detail": "travels +1.08 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.0846646662487256,
+    "right": 0.8293338263021516,
+    "left": -0.20164615693694524
+   },
+   "yaw_deg": {
+    "both": -21.409289221583915,
+    "right": -18.50927911750472,
+    "left": 69.98456357004339
+   },
+   "agreement": "2 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "intact",
+   "result": "no clear turn",
+   "detail": "right +35\u00b0, left +45\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.3997106169596358,
+    "right": -1.125953269827351,
+    "left": -1.5386733959319399
+   },
+   "yaw_deg": {
+    "both": 9.931191176728873,
+    "right": 34.55731982874079,
+    "left": 44.73245942744486
+   },
+   "agreement": "1 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "shuffled",
+   "result": "no clear turn",
+   "detail": "right -19\u00b0, left -23\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.4706014688473645,
+    "right": 0.7494184621944978,
+    "left": 3.2874189595492407
+   },
+   "yaw_deg": {
+    "both": -11.994378769362314,
+    "right": -19.391220012732443,
+    "left": -22.906205739088715
+   },
+   "agreement": "2 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "sham",
+   "result": "no clear turn",
+   "detail": "right +33\u00b0, left +36\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.4009797259835697,
+    "right": -1.5914171794090883,
+    "left": -0.8765708794195123
+   },
+   "yaw_deg": {
+    "both": 51.87197637037216,
+    "right": 32.75051540133128,
+    "left": 36.09841678225252
+   },
+   "agreement": "1 of 3 seeds"
+  }
+ ]
+}

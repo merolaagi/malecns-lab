@@ -100,8 +100,9 @@ class Optogenetics:
     def __init__(self, path=None, matched=False):
         default = BASE / 'data/optogenetics-circuit.json'
         self.path = Path(path) if path else (default if default.exists() else BASE / 'data/circuit.json')
-        self.source = 'optogenetics' if self.path.name == 'optogenetics-circuit.json' else 'original'
+        self.source = {'optogenetics-circuit.json': 'optogenetics', 'coordination-circuit.json': 'coordination'}.get(self.path.name, 'original')
         data = json.loads(self.path.read_text())
+        self.leg_links = data.get('leg_links')
         self.matched, self.matching = matched, None
         if matched: data, self.matching = symmetric(data)
         self.circuit = model.Circuit(data=data)

@@ -75,7 +75,7 @@ TURN_DEG, WALK_MM, STRAIGHT_DEG, RISE_MM = 10.0, 2.0, 45.0, 0.05
 
 OFFSET_SCALE = 1.0              # scales the posture offsets (diagnose.py tests 0: rhythm only)
 FRONT_RULE = 'own'               # 'follow': front legs take the mean direction of the middle and hind legs (diagnose.py)
-FULL = dict(matched=False, rhythm='circuit', feedback=True, muscle=True, physiology='both')
+FULL = dict(matched=False, rhythm='circuit', feedback=True, muscle=True, physiology='both', coupling='uniform')
 ABLATIONS = {
     'full': ('Everything on', {}),
     'pruned': ('Circuit pruned to exact left-right match', {'matched': True}),
@@ -236,6 +236,7 @@ def run_once(experiment, side='both', seed=1, condition='intact', config=None, b
     sens = sensory_cells(lab)
     mean = lambda idx: float(net.rates[idx].mean()) if len(idx) else 0.0
 
+    kmat = coupling_matrix(lab, cfg.get('coupling', 'uniform'))
     sim.reset()
     default = b.steps.default_pose_by_dof_order(b.order)
     sim.set_actuator_inputs('nmf', b.POS, default)
@@ -266,7 +267,7 @@ def run_once(experiment, side='both', seed=1, condition='intact', config=None, b
                 direction[[0, 3]] = direction[[1, 2, 4, 5]].mean()
         # tripod-coupled phase oscillators
         diff = phases[None, :] - phases[:, None] - (TRIPOD[None, :] - TRIPOD[:, None])
-        dphi = 2 * np.pi * freq * direction + COUPLING * (amp[None, :] * np.sin(diff)).sum(1) / 6
+        dphi = 2 * np.pi * freq * direction + (kmat * amp[None, :] * np.sin(diff)).sum(1) / 6
         phases = phases + dphi * NEURAL_DT
         target = b.steps.get_joint_angles_by_dof_order(phases, amp, b.order) + offsets
         adhesion = np.where(amp < 0.1, True, b.steps.get_adhesion_onoff_by_phase(phases))
@@ -295,6 +296,43 @@ def run_once(experiment, side='both', seed=1, condition='intact', config=None, b
             legs_log.append({'t': round(t, 3), 'amp': np.round(amp, 3).tolist(), 'dir': np.round(direction, 3).tolist(),
                              'freq': np.round(freq, 2).tolist()})
     return out, legs_log
+
+
+def leg_links_from_circuit(lab):
+    """The leg-link matrix measured inside the loaded circuit, when the build did not supply one: each leg's premotor
+    pool is the interneurons with at least 10 synapses onto its motor neurons; links count synapses from one pool onto
+    another, plus 0.1 x two-step paths through any interneuron in the circuit."""
+    c = lab.circuit
+    W = np.zeros((c.n, c.n))
+    np.add.at(W, (c.post, c.pre), c.count)
+    inter = c.vnc
+    pools = []
+    for k in range(6):
+        onto = W[c.motor[k]].sum(0) if len(c.motor[k]) else np.zeros(c.n)
+        pools.append(np.flatnonzero(inter & (onto >= 10)))
+    out = {}
+    for kind, s in (('excitatory', 1.0), ('inhibitory', -1.0)):
+        L = np.zeros((6, 6))
+        for i in range(6):
+            src = np.zeros(c.n); src[pools[i]] = (c.sign[pools[i]] == s)
+            one = W @ src; two = W @ (one * inter)
+            for j in range(6):
+                if i != j and len(pools[j]): L[i, j] = float(one[pools[j]].sum() + 0.1 * two[pools[j]].sum())
+        out[kind] = L.tolist()
+    out['legs'] = list(model.LEGS)
+    return out
+
+
+def coupling_matrix(lab, mode):
+    """Coupling between leg rhythms. 'uniform': COUPLING between every pair. 'measured': scaled by the leg-link
+    matrix (excitatory plus inhibitory synapses from leg j's premotor pool onto leg i's), to the same mean strength."""
+    if mode == 'uniform': return np.full((6, 6), COUPLING)
+    links = lab.leg_links or leg_links_from_circuit(lab)
+    M = np.array(links['excitatory']) + np.array(links['inhibitory'])      # rows: from, columns: to
+    K = M.T.copy()                                                           # rows: receiving leg
+    off = ~np.eye(6, dtype=bool)
+    mean = K[off].mean()
+    return np.where(off, COUPLING * K / mean, 0.0) if mean > 0 else np.full((6, 6), COUPLING)
 
 
 def summarise(traj, comparison):
