@@ -1,0 +1,921 @@
+{
+ "seeds": [
+  7,
+  8,
+  9
+ ],
+ "labels": {
+  "true_location": "True location (given)",
+  "compass_idealised": "Compass, published ring",
+  "compass_measured_bridge": "Compass, measured offsets, each bridge side a full circle",
+  "compass_measured_calibrated": "Compass, measured shift direction, gain calibrated",
+  "compass_measured": "Compass, measured offsets, bridge read as one ring of 16",
+  "compass_shuffled": "Compass, columns shuffled",
+  "compass_no_rotation": "Compass, rotation cells removed",
+  "bag_of_features": "No locations (bag of features)"
+ },
+ "main": {
+  "true_location": {
+   "source": "true_location",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.063,
+    0.163,
+    0.487,
+    0.727,
+    0.86,
+    0.923,
+    0.97,
+    0.983
+   ],
+   "three_modules": [
+    0.077,
+    0.757,
+    0.977,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "location_error_spacings": 0.0,
+   "features_lost_per_object": 0.0,
+   "chance": 0.05,
+   "objects": 20
+  },
+  "compass_idealised": {
+   "source": "compass_idealised",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.08,
+    0.207,
+    0.553,
+    0.783,
+    0.88,
+    0.94,
+    0.96,
+    0.973
+   ],
+   "three_modules": [
+    0.097,
+    0.763,
+    0.98,
+    0.997,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "location_error_spacings": 0.08089941158985821,
+   "features_lost_per_object": 0.0,
+   "chance": 0.05,
+   "objects": 20
+  },
+  "compass_measured_bridge": {
+   "source": "compass_measured_bridge",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.087,
+    0.127,
+    0.13,
+    0.11,
+    0.12,
+    0.087,
+    0.097,
+    0.07
+   ],
+   "three_modules": [
+    0.107,
+    0.147,
+    0.12,
+    0.117,
+    0.113,
+    0.1,
+    0.133,
+    0.11
+   ],
+   "location_error_spacings": 1.6711868353084818,
+   "features_lost_per_object": 9.216666666666667,
+   "chance": 0.05,
+   "objects": 20
+  },
+  "compass_measured_calibrated": {
+   "source": "compass_measured_calibrated",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.08,
+    0.207,
+    0.553,
+    0.783,
+    0.88,
+    0.94,
+    0.96,
+    0.973
+   ],
+   "three_modules": [
+    0.097,
+    0.763,
+    0.98,
+    0.997,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "location_error_spacings": 0.08089941158985821,
+   "features_lost_per_object": 0.0,
+   "chance": 0.05,
+   "objects": 20
+  },
+  "compass_measured": {
+   "source": "compass_measured",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.08,
+    0.12,
+    0.113,
+    0.09,
+    0.077,
+    0.1,
+    0.093,
+    0.073
+   ],
+   "three_modules": [
+    0.097,
+    0.137,
+    0.1,
+    0.09,
+    0.06,
+    0.077,
+    0.08,
+    0.08
+   ],
+   "location_error_spacings": 6.766339734380747,
+   "features_lost_per_object": 0.5666666666666667,
+   "chance": 0.05,
+   "objects": 20
+  },
+  "compass_shuffled": {
+   "source": "compass_shuffled",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.067,
+    0.083,
+    0.113,
+    0.103,
+    0.107,
+    0.12,
+    0.137,
+    0.14
+   ],
+   "three_modules": [
+    0.087,
+    0.19,
+    0.197,
+    0.193,
+    0.167,
+    0.173,
+    0.157,
+    0.16
+   ],
+   "location_error_spacings": 2.447628364391125,
+   "features_lost_per_object": 3.7000000000000006,
+   "chance": 0.05,
+   "objects": 20
+  },
+  "compass_no_rotation": {
+   "source": "compass_no_rotation",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.08,
+    0.117,
+    0.063,
+    0.047,
+    0.04,
+    0.027,
+    0.027,
+    0.03
+   ],
+   "three_modules": [
+    0.097,
+    0.127,
+    0.083,
+    0.077,
+    0.083,
+    0.087,
+    0.067,
+    0.063
+   ],
+   "location_error_spacings": 7.613965962036571,
+   "features_lost_per_object": 0.6666666666666666,
+   "chance": 0.05,
+   "objects": 20
+  },
+  "bag_of_features": {
+   "source": "bag_of_features",
+   "compass_noise": 0.15,
+   "gain": null,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.107,
+    0.173,
+    0.163,
+    0.21,
+    0.237,
+    0.257,
+    0.28,
+    0.273
+   ],
+   "three_modules": [
+    0.153,
+    0.263,
+    0.283,
+    0.343,
+    0.39,
+    0.423,
+    0.413,
+    0.483
+   ],
+   "location_error_spacings": 0.0,
+   "features_lost_per_object": 0.0,
+   "chance": 0.05,
+   "objects": 20
+  }
+ },
+ "noise_sweep": {
+  "compass_idealised": [
+   {
+    "source": "compass_idealised",
+    "compass_noise": 0.0,
+    "gain": null,
+    "glimpses": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "one_module": [
+     0.078,
+     0.217,
+     0.561,
+     0.772,
+     0.878,
+     0.933,
+     0.95,
+     0.972
+    ],
+    "three_modules": [
+     0.095,
+     0.756,
+     0.967,
+     0.994,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "location_error_spacings": 4.23601016293764e-05,
+    "features_lost_per_object": 0.0,
+    "chance": 0.05,
+    "objects": 20
+   },
+   {
+    "source": "compass_idealised",
+    "compass_noise": 0.15,
+    "gain": null,
+    "glimpses": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "one_module": [
+     0.078,
+     0.217,
+     0.561,
+     0.772,
+     0.878,
+     0.933,
+     0.95,
+     0.972
+    ],
+    "three_modules": [
+     0.095,
+     0.756,
+     0.967,
+     0.994,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "location_error_spacings": 0.08089941158985821,
+    "features_lost_per_object": 0.0,
+    "chance": 0.05,
+    "objects": 20
+   },
+   {
+    "source": "compass_idealised",
+    "compass_noise": 0.3,
+    "gain": null,
+    "glimpses": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "one_module": [
+     0.078,
+     0.206,
+     0.517,
+     0.717,
+     0.811,
+     0.861,
+     0.867,
+     0.878
+    ],
+    "three_modules": [
+     0.095,
+     0.694,
+     0.906,
+     0.961,
+     0.967,
+     0.961,
+     0.961,
+     0.955
+    ],
+    "location_error_spacings": 0.1618254957843462,
+    "features_lost_per_object": 0.13333333333333333,
+    "chance": 0.05,
+    "objects": 20
+   },
+   {
+    "source": "compass_idealised",
+    "compass_noise": 0.6,
+    "gain": null,
+    "glimpses": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "one_module": [
+     0.078,
+     0.211,
+     0.461,
+     0.583,
+     0.678,
+     0.7,
+     0.7,
+     0.694
+    ],
+    "three_modules": [
+     0.095,
+     0.578,
+     0.772,
+     0.783,
+     0.822,
+     0.811,
+     0.811,
+     0.833
+    ],
+    "location_error_spacings": 0.3232455492251082,
+    "features_lost_per_object": 0.5833333333333334,
+    "chance": 0.05,
+    "objects": 20
+   },
+   {
+    "source": "compass_idealised",
+    "compass_noise": 1.0,
+    "gain": null,
+    "glimpses": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "one_module": [
+     0.078,
+     0.205,
+     0.372,
+     0.389,
+     0.445,
+     0.445,
+     0.422,
+     0.422
+    ],
+    "three_modules": [
+     0.078,
+     0.428,
+     0.494,
+     0.539,
+     0.511,
+     0.472,
+     0.478,
+     0.489
+    ],
+    "location_error_spacings": 0.5361316709357707,
+    "features_lost_per_object": 1.5166666666666666,
+    "chance": 0.05,
+    "objects": 20
+   }
+  ]
+ },
+ "gain_sweep": [
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 0.25,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.078,
+    0.128,
+    0.1,
+    0.089,
+    0.072,
+    0.089,
+    0.072,
+    0.089
+   ],
+   "three_modules": [
+    0.095,
+    0.133,
+    0.111,
+    0.089,
+    0.061,
+    0.067,
+    0.083,
+    0.106
+   ],
+   "location_error_spacings": 6.780458736863078,
+   "features_lost_per_object": 0.6000000000000001,
+   "chance": 0.05,
+   "objects": 20
+  },
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 0.5,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.078,
+    0.184,
+    0.089,
+    0.072,
+    0.067,
+    0.083,
+    0.044,
+    0.05
+   ],
+   "three_modules": [
+    0.083,
+    0.2,
+    0.122,
+    0.111,
+    0.089,
+    0.089,
+    0.072,
+    0.089
+   ],
+   "location_error_spacings": 4.904787887838281,
+   "features_lost_per_object": 0.5833333333333334,
+   "chance": 0.05,
+   "objects": 20
+  },
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 0.8,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.078,
+    0.167,
+    0.133,
+    0.1,
+    0.094,
+    0.133,
+    0.1,
+    0.117
+   ],
+   "three_modules": [
+    0.095,
+    0.322,
+    0.161,
+    0.155,
+    0.144,
+    0.156,
+    0.144,
+    0.155
+   ],
+   "location_error_spacings": 1.9302267264963795,
+   "features_lost_per_object": 0.7999999999999999,
+   "chance": 0.05,
+   "objects": 20
+  },
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 0.9,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.078,
+    0.211,
+    0.333,
+    0.272,
+    0.206,
+    0.194,
+    0.233,
+    0.211
+   ],
+   "three_modules": [
+    0.095,
+    0.4,
+    0.322,
+    0.278,
+    0.283,
+    0.294,
+    0.272,
+    0.239
+   ],
+   "location_error_spacings": 0.9337598248339664,
+   "features_lost_per_object": 0.5,
+   "chance": 0.05,
+   "objects": 20
+  },
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 1.0,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.078,
+    0.217,
+    0.561,
+    0.772,
+    0.878,
+    0.933,
+    0.95,
+    0.972
+   ],
+   "three_modules": [
+    0.095,
+    0.756,
+    0.967,
+    0.994,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "location_error_spacings": 0.08089941158985821,
+   "features_lost_per_object": 0.0,
+   "chance": 0.05,
+   "objects": 20
+  },
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 1.1,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.083,
+    0.2,
+    0.233,
+    0.272,
+    0.222,
+    0.222,
+    0.206,
+    0.228
+   ],
+   "three_modules": [
+    0.095,
+    0.272,
+    0.345,
+    0.356,
+    0.328,
+    0.311,
+    0.333,
+    0.311
+   ],
+   "location_error_spacings": 0.8575139033592709,
+   "features_lost_per_object": 5.983333333333333,
+   "chance": 0.05,
+   "objects": 20
+  },
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 1.2,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.083,
+    0.117,
+    0.139,
+    0.117,
+    0.106,
+    0.083,
+    0.111,
+    0.117
+   ],
+   "three_modules": [
+    0.095,
+    0.184,
+    0.122,
+    0.122,
+    0.117,
+    0.111,
+    0.117,
+    0.117
+   ],
+   "location_error_spacings": 1.5911898072943724,
+   "features_lost_per_object": 9.116666666666665,
+   "chance": 0.05,
+   "objects": 20
+  },
+  {
+   "source": "compass_gain",
+   "compass_noise": 0.15,
+   "gain": 1.5,
+   "glimpses": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "one_module": [
+    0.089,
+    0.172,
+    0.106,
+    0.05,
+    0.039,
+    0.072,
+    0.1,
+    0.1
+   ],
+   "three_modules": [
+    0.111,
+    0.194,
+    0.167,
+    0.144,
+    0.133,
+    0.122,
+    0.139,
+    0.122
+   ],
+   "location_error_spacings": 3.201644928284504,
+   "features_lost_per_object": 3.3000000000000003,
+   "chance": 0.05,
+   "objects": 20
+  }
+ ],
+ "measured": {
+  "rotation_gain_columns": 0.25249999999999995,
+  "rotation_opposite_by_side": false,
+  "rotation_offsets_by_type": {
+   "PEN_a(PEN1) L": -1.69,
+   "PEN_a(PEN1) R": -2.02,
+   "PEN_b(PEN2) L": -1.89,
+   "PEN_b(PEN2) R": -2.57
+  },
+  "bridge": {
+   "step_in_glomeruli_by_type": {
+    "PEN_a(PEN1) L": -1.24,
+    "PEN_a(PEN1) R": -1.24,
+    "PEN_b(PEN2) L": -1.21,
+    "PEN_b(PEN2) R": -1.16
+   },
+   "synapses": {
+    "PEN_a(PEN1) L": 3681,
+    "PEN_a(PEN1) R": 3561,
+    "PEN_b(PEN2) L": 2494,
+    "PEN_b(PEN2) R": 2527
+   },
+   "profiles": {
+    "PEN_a(PEN1) L": [
+     0.1127,
+     0.0054,
+     0.0,
+     0.0,
+     0.0,
+     0.0198,
+     0.3219,
+     0.5401
+    ],
+    "PEN_a(PEN1) R": [
+     0.0988,
+     0.0003,
+     0.0,
+     0.0,
+     0.0,
+     0.0166,
+     0.3092,
+     0.5751
+    ],
+    "PEN_b(PEN2) L": [
+     0.0249,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0008,
+     0.2442,
+     0.7302
+    ],
+    "PEN_b(PEN2) R": [
+     0.0222,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0012,
+     0.1911,
+     0.7855
+    ]
+   },
+   "shift_left": 1.225,
+   "shift_right": -1.2,
+   "opposite_by_side": true,
+   "rotation_gain": 1.212,
+   "note": "One glomerulus is 45 degrees. The direction of the shift is measured; that a rotation cell's firing moves the bump by exactly its offset per unit of turning is the model's assumption (real flies calibrate this gain against vision)."
+  }
+ },
+ "setup": {
+  "step_mm": 4.0,
+  "speed_mm_s": 8.0,
+  "turn_rate_rad_s": 4.0,
+  "default_compass_noise_rad_s": 0.15
+ }
+}

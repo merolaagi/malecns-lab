@@ -18,6 +18,7 @@ descending output is the lab's own body readout, not a measurement.
 """
 import json
 import math
+import re
 from pathlib import Path
 
 import numpy as np
@@ -29,7 +30,8 @@ DEFAULT = dict(seed=7, outbound_s=12.0, homing_s=18.0, speed=8.0, connectivity='
                condition='intact', turn_noise=1.2, gain=1.0, compass_noise=0.15)
 # compass_noise: error in the turn signal reaching the ring, in rad/s. With none, integration is exact
 # and homing is trivially perfect; real compasses drift, so the default is deliberately not zero.
-CONNECTIVITY = {'idealised': 'Published ring offsets', 'measured': 'Offsets from data/central-complex.json'}
+CONNECTIVITY = {'idealised': 'Published ring offsets', 'measured': 'Offsets from data/central-complex.json, bridge read as one ring of 16',
+                'measured_bridge': 'Offsets from data/central-complex.json, each side of the bridge read as a full circle'}
 CONDITIONS = {
     'intact': 'Full circuit',
     'no_rotation': 'Rotation cells removed: the bump cannot follow turning',
@@ -111,11 +113,51 @@ def measured_report(path=None):
             rotation[f'{type_name} {side}'] = round(circular_mean_offset(profile), 2)
     lefts = [v for k, v in rotation.items() if k.endswith(' L')]
     rights = [v for k, v in rotation.items() if k.endswith(' R')]
+    try: bridge = bridge_rotation(path)
+    except ValueError: bridge = None
     return {'cells': data['cells'], 'columns_parsed': data['columns_parsed'], 'column_rules': data['column_rules'],
-            'group_pairs': pairs, 'rotation_offsets_by_type': rotation,
+            'group_pairs': pairs, 'rotation_offsets_by_type': rotation, 'bridge': bridge,
             'rotation_opposite_by_side': bool(lefts and rights and np.mean(lefts) * np.mean(rights) < 0),
             'note': 'Offsets are measured; the functional grouping and the claim that these offsets implement rotation are '
                     'assumptions from the literature.'}
+
+
+def bridge_rotation(path=None):
+    """The rotation offsets read with each side of the protocerebral bridge as its own full circle.
+
+    measured_offsets() treats the 16 bridge glomeruli (R1-R8, L1-L8) as one ring of 16 columns. Anatomically each
+    side maps the whole ellipsoid body once (8 glomeruli = 360 degrees), and the two sides are numbered as mirror
+    images. So the right comparison is within a side: for rotation (PEN) cells onto heading (EPG) cells of the same
+    side, by how many glomeruli does the target differ from the source? The same step on both sides, in mirrored
+    numbering, is a shift in opposite directions around the ellipsoid body, which is what turns the compass."""
+    path = Path(path or BASE / 'data/central-complex.json')
+    if not path.exists():
+        raise ValueError('data/central-complex.json is missing. Build it with build_centralcomplex.py on a machine with the raw tables.')
+    data = json.loads(path.read_text())
+    nodes = {n['bodyId']: n for n in data['nodes']}
+
+    def glomerulus(n):
+        m = re.search(r'_([LR])(\d)$', str(n.get('instance')))
+        return (m.group(1), int(m.group(2))) if m else None
+    profiles = {}
+    for pre, post, count in data['edges']:
+        a, b = nodes.get(pre), nodes.get(post)
+        if not a or not b or not str(a.get('type')).startswith('PEN') or b.get('type') != 'EPG': continue
+        ga, gb = glomerulus(a), glomerulus(b)
+        if not ga or not gb or ga[0] != gb[0]: continue
+        profiles.setdefault((a['type'], ga[0]), np.zeros(8))[(gb[1] - ga[1]) % 8] += count
+    if not profiles: raise ValueError('No rotation-to-heading connections with bridge glomeruli in the extract.')
+    step = {f'{t} {side}': round(circular_mean_offset(p / p.sum()), 2) for (t, side), p in sorted(profiles.items())}
+    left = float(np.mean([v for k, v in step.items() if k.endswith(' L')] or [0.0]))
+    right = float(np.mean([v for k, v in step.items() if k.endswith(' R')] or [0.0]))
+    # around the ellipsoid body: the right side's numbering runs one way, the left side's the other
+    shift_left, shift_right = -left, right
+    return {'step_in_glomeruli_by_type': step, 'synapses': {f'{t} {side}': int(p.sum()) for (t, side), p in sorted(profiles.items())},
+            'profiles': {f'{t} {side}': (p / p.sum()).round(4).tolist() for (t, side), p in sorted(profiles.items())},
+            'shift_left': round(shift_left, 3), 'shift_right': round(shift_right, 3),
+            'opposite_by_side': bool(shift_left * shift_right < 0), 'rotation_gain': round(abs(shift_left - shift_right) / 2, 3),
+            'note': "One glomerulus is 45 degrees. The direction of the shift is measured; that a rotation cell's firing moves the bump "
+                    'by exactly its offset per unit of turning is the model\'s assumption (real flies calibrate this gain against vision).'}
 
 
 class Navigator:
@@ -144,6 +186,11 @@ class Navigator:
                                      'rotation_gain_columns': round(self.rotation_gain, 3),
                                      'rotation_opposite_by_side': data['rotation_opposite_by_side'],
                                      'rotation_offsets_by_type': by_type}
+        if connectivity == 'measured_bridge':
+            data = offsets if offsets is not None else bridge_rotation()
+            self.rotation_gain = data['rotation_gain'] if data['opposite_by_side'] else 0.0
+            self.measured_summary = {'rotation_gain_columns': self.rotation_gain, 'rotation_opposite_by_side': data['opposite_by_side'],
+                                     'rotation_offsets_by_type': data['step_in_glomeruli_by_type'], 'reading': 'each side of the bridge as a full circle'}
         bump = np.exp(np.cos(angles() - 0.0) * 2.0)
         self.heading_cells = bump / bump.sum()
         self.vector_cells = np.zeros(len(PFN_OFFSETS))       # accumulated home vector, per population

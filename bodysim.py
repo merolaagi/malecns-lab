@@ -75,6 +75,7 @@ TURN_DEG, WALK_MM, STRAIGHT_DEG, RISE_MM = 10.0, 2.0, 45.0, 0.05
 
 OFFSET_SCALE = 1.0              # scales the posture offsets (diagnose.py tests 0: rhythm only)
 FRONT_RULE = 'own'               # 'follow': front legs take the mean direction of the middle and hind legs (diagnose.py)
+RHYTHM_HOOK = None               # test seam: f(t, amp, freq, direction) -> the same three, to probe what limits walking
 FULL = dict(matched=False, rhythm='circuit', feedback=True, muscle=True, physiology='both', coupling='uniform')
 ABLATIONS = {
     'full': ('Everything on', {}),
@@ -236,7 +237,11 @@ def run_once(experiment, side='both', seed=1, condition='intact', config=None, b
     sens = sensory_cells(lab)
     mean = lambda idx: float(net.rates[idx].mean()) if len(idx) else 0.0
 
-    kmat = coupling_matrix(lab, cfg.get('coupling', 'uniform'))
+    mode = cfg.get('coupling', 'uniform')
+    rules = coordination_rules(lab, mode, seed)          # None for the two original modes
+    kmat = rules['K'] if rules else coupling_matrix(lab, mode)
+    target_offset = rules['offset'] if rules else TRIPOD[None, :] - TRIPOD[:, None]
+    swing_end = np.array([b.steps.swing_period[l][1] for l in LEGS])
     sim.reset()
     default = b.steps.default_pose_by_dof_order(b.order)
     sim.set_actuator_inputs('nmf', b.POS, default)
@@ -265,9 +270,18 @@ def run_once(experiment, side='both', seed=1, condition='intact', config=None, b
             direction = (r_ - p_) / (r_ + p_ + 1.0)
             if FRONT_RULE == 'follow':
                 direction[[0, 3]] = direction[[1, 2, 4, 5]].mean()
+        if RHYTHM_HOOK: amp, freq, direction = RHYTHM_HOOK(t, amp, freq, direction)
         # tripod-coupled phase oscillators
-        diff = phases[None, :] - phases[:, None] - (TRIPOD[None, :] - TRIPOD[:, None])
-        dphi = 2 * np.pi * freq * direction + (kmat * amp[None, :] * np.sin(diff)).sum(1) / 6
+        speed = freq * direction
+        if rules and rules['share']:
+            # a leg with drive but no direction of its own takes it from the legs linked to it
+            direction = np.clip(direction + (1 - np.abs(direction)) * (rules['T'] * (amp * direction)[None, :]).sum(1) / 5, -1, 1)
+            speed = freq * direction
+            # feet on the ground move together: stance legs share one speed (the mean of their own)
+            stance = (np.mod(phases, 2 * np.pi) >= swing_end) & (amp > 0.1)
+            if stance.sum() >= 2: speed = np.where(stance, speed[stance].mean(), speed)
+        diff = phases[None, :] - phases[:, None] - target_offset
+        dphi = 2 * np.pi * speed + (kmat * amp[None, :] * np.sin(diff)).sum(1) / 6
         phases = phases + dphi * NEURAL_DT
         target = b.steps.get_joint_angles_by_dof_order(phases, amp, b.order) + offsets
         adhesion = np.where(amp < 0.1, True, b.steps.get_adhesion_onoff_by_phase(phases))
@@ -321,6 +335,39 @@ def leg_links_from_circuit(lab):
         out[kind] = L.tolist()
     out['legs'] = list(model.LEGS)
     return out
+
+
+COORDINATION_MODES = {
+    'uniform': 'Tripod assumed, same coupling between every pair of legs (the original)',
+    'measured': 'Tripod assumed, coupling scaled by the measured leg links',
+    'independent': 'No coupling between legs',
+    'tripod_sync': 'Tripod assumed, plus shared stance speed and stepping direction passed between legs',
+    'signed': 'Phase relations from the measured links (net excitatory: in step; net inhibitory: out of step), plus shared stance speed and direction passed along measured links',
+    'signed_shuffled': 'The same rule with the measured links shuffled between leg pairs',
+}
+
+
+def coordination_rules(lab, mode, seed=0):
+    """Rule-based coordination (None for 'uniform' and 'measured', which keep the original coupling).
+    K: coupling strength onto the receiving leg (rows); offset: the phase difference each pair is pulled to;
+    T: how strongly stepping direction passes from leg to leg (mean 1); share: stance speed and direction sharing."""
+    if mode in ('uniform', 'measured'): return None
+    if mode not in COORDINATION_MODES: raise ValueError('Unknown coupling')
+    off = ~np.eye(6, dtype=bool)
+    if mode == 'independent':
+        return {'K': np.zeros((6, 6)), 'offset': np.zeros((6, 6)), 'T': np.zeros((6, 6)), 'share': False}
+    if mode == 'tripod_sync':
+        return {'K': np.full((6, 6), COUPLING), 'offset': TRIPOD[None, :] - TRIPOD[:, None], 'T': np.where(off, 1.0, 0.0), 'share': True}
+    links = lab.leg_links or leg_links_from_circuit(lab)
+    E, I = np.array(links['excitatory']).T, np.array(links['inhibitory']).T        # rows: receiving leg
+    if mode == 'signed_shuffled':
+        perm = np.random.default_rng(1000 + seed).permutation(30)
+        E, I = E.copy(), I.copy()
+        E[off], I[off] = E[off][perm], I[off][perm]
+    total = E + I
+    net = np.where(off, (E - I) / np.maximum(total, 1e-9), 0.0)
+    strength = np.abs(net) / max(np.abs(net[off]).mean(), 1e-9)
+    return {'K': COUPLING * strength, 'offset': np.where(net >= 0, 0.0, np.pi), 'T': np.where(off, total / total[off].mean(), 0.0), 'share': True}
 
 
 def coupling_matrix(lab, mode):

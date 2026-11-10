@@ -91,6 +91,10 @@ async function report() {
       + Object.entries(d.group_pairs).map(([pair, v]) => `<tr><td>${pair}</td><td>${v.mean_offset_columns >= 0 ? '+' : ''}${v.mean_offset_columns}</td><td>${v.synapses.toLocaleString()}</td></tr>`).join('') + '</table>';
     const rotation = Object.entries(d.rotation_offsets_by_type);
     if (rotation.length) h += `<p class="note">Rotation cells onto the compass, by type and side: ${rotation.map(([k, v]) => `${k} ${v >= 0 ? '+' : ''}${v}`).join(', ')}. Opposite shifts by side: <b>${d.rotation_opposite_by_side ? 'yes' : 'no'}</b>, which is what the algorithm needs for a turn to move the bump the right way.</p>`;
+    if (d.bridge) {
+      const b = d.bridge;
+      h += `<p class="note"><b>Read per side of the bridge.</b> The table above treats the 16 bridge glomeruli as one ring of 16 columns. Anatomically each side of the bridge maps the whole ellipsoid body once, and the two sides are numbered as mirror images. Within a side, rotation cells reach heading cells ${Object.entries(b.step_in_glomeruli_by_type).map(([k, v]) => `${k}: ${v >= 0 ? '+' : ''}${v}`).join(', ')} glomeruli away (${Object.values(b.synapses).reduce((x, y) => x + y, 0).toLocaleString()} synapses). The same step on both sides, in mirrored numbering, is a shift in opposite directions around the ellipsoid body: opposite by side <b>${b.opposite_by_side ? 'yes' : 'no'}</b>, about ${b.rotation_gain} glomeruli each way (the published account: one). So the earlier "no" came from the column assignment, not from the wiring. Choose "Measured, each bridge side a full circle" above to run with it.</p><p class="hint">${b.note}</p>`;
+    }
     h += `<p class="hint">${d.note}</p>`;
     $('report').innerHTML = h;
   } catch (e) { $('report').innerHTML = `<p class="hint">${e.message}</p>`; }

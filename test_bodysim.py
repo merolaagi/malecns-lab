@@ -108,6 +108,27 @@ class CouplingTest(unittest.TestCase):
         self.assertGreater(K[1, 0], K[0, 1])                    # LM is pulled by LF more than the reverse
 
 
+class CoordinationRulesTest(unittest.TestCase):
+    def test_modes(self):
+        lab = bs.lab_for(False)
+        self.assertIsNone(bs.coordination_rules(lab, 'uniform')); self.assertIsNone(bs.coordination_rules(lab, 'measured'))
+        ind = bs.coordination_rules(lab, 'independent')
+        self.assertFalse(ind['share']); self.assertEqual(float(ind['K'].sum()), 0.0)
+        tri = bs.coordination_rules(lab, 'tripod_sync')
+        self.assertTrue(tri['share']); self.assertAlmostEqual(tri['offset'][0, 1], np.pi)
+        with self.assertRaises(ValueError): bs.coordination_rules(lab, 'nope')
+
+    def test_signed_rule_comes_from_the_links_and_shuffling_changes_it(self):
+        lab = bs.lab_for(False)
+        s = bs.coordination_rules(lab, 'signed'); sh = bs.coordination_rules(lab, 'signed_shuffled', seed=1)
+        off = ~np.eye(6, dtype=bool)
+        self.assertTrue(set(np.unique(s['offset'][off])) <= {0.0, np.pi})
+        self.assertAlmostEqual(float(s['T'][off].mean()), 1.0)
+        self.assertAlmostEqual(float(s['K'][off].mean()), bs.COUPLING)
+        self.assertFalse(np.allclose(s['T'], sh['T']))
+        self.assertAlmostEqual(float(sh['T'][off].mean()), 1.0)                # same links, different pairs
+
+
 @unittest.skipUnless(bs.available(), 'flygym not installed')
 class PhysicsTest(unittest.TestCase):
     def test_body_calibration_and_offsets(self):

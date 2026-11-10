@@ -559,6 +559,22 @@ The coordination circuit is built from the raw tables:
 .venv/bin/python coordination.py                          # both circuits, both couplings -> data/coordination.json
 ```
 
+## Frames, compass and walking (new)
+
+Three follow-ups to the scaffold and the body, each with its controls and its failures.
+
+**Frame discovery** (`frames.py`, Scaffold page). The arithmetic test was handed a number line. Here the frame is computed from triples (a, relation, b): each relation type is a movement, walking the relations places every symbol, every relation that closes a loop is a constraint, and diagonalising the constraints gives the frame (free directions are axes, repeating directions are loops, redundant directions vanish). It finds a line, a loop of 12, a grid, a cylinder, and reports that a tree has no frame of this kind. It fills in held-out relations (80–90%; a lookup table: 0%). Limits: movements must commute; every relation is trusted, so one wrong relation breaks it; where every relation is given, a lookup table answers multi-step questions just as well.
+
+    python3 frames.py            # data/frames-benchmark.json
+
+**The fly's compass as the location signal** (`compass.py`, Scaffold page). Objects are recognised by where their features are, with the location taken from the central-complex model integrating a walker's own turns and steps. With the published ring it equals being told the location (100% at four glimpses). The measured wiring, read with each side of the bridge as a full circle (`navigation.bridge_rotation`), shows the published mechanism: rotation cells one glomerulus over, opposite by side. The earlier negative result came from treating the 16 glomeruli as one ring. The gain (how far the bump moves per turn) is not anatomy and must be within about 5% of one; the measured step taken literally (1.2) fails.
+
+    python3 compass.py           # data/compass-benchmark.json
+
+**Walking** (`walking.py`, optogenetics page; needs flygym). The jump muscle is the main brake: its motor neurons fire at 147 Hz under the walking command, a fault of modelling all cells as identical. With it removed and two rules on an assumed tripod (stance legs share a speed; direction passes between linked legs), P9 walks forward 7.8 mm in 1.5 s in 3 of 3 seeds, against 0.0 mm with shuffled wiring and 0.7 mm with the light on random interneurons. The tripod itself is not in the measured leg links (15 of 30 pairs, chance). MDN does not walk backward.
+
+    .venv/bin/python walking.py  # data/walking.json
+
 ## Lab guide (new)
 
 Every page has a guide: press **Guide** (bottom right) or `?`.

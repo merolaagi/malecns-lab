@@ -79,9 +79,9 @@ class LocalModeTest(unittest.TestCase):
     def test_proposals_follow_the_goal(self):
         walk = helper.propose('make the fly walk with coordinated legs', '/optogenetics')
         self.assertEqual(walk['mode'], 'local')
-        self.assertIn(walk['proposals'][0]['id'], ('leg-coordination-rules', 'front-leg-route'))
+        self.assertIn(walk['proposals'][0]['id'], ('gait-from-wiring', 'jump-neuron-excitability', 'front-leg-route', 'mdn-hind-legs'))
         frame = helper.propose('learn the reference frame for numbers from data', '/scaffold')
-        self.assertEqual(frame['proposals'][0]['id'], 'frame-discovery')
+        self.assertIn(frame['proposals'][0]['id'], ('robust-frames', 'noncommutative-frames'))
         self.assertIn('Hypothesis', helper.build_request(frame['proposals'][0]))
 
     def test_empty_question_rejected(self):

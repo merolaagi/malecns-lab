@@ -208,4 +208,36 @@ async function coordination() {
     $('coord').innerHTML = h;
   } catch (e) { $('coord').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
 }
-loadMeta(); score(); bodyScore(); diagnosis(); coordination();
+async function walking() {
+  try {
+    const r = await fetch('/api/walking'); if (!r.ok) throw new Error('No walking results yet: .venv/bin/python walking.py');
+    const d = await r.json();
+    const find = (c, o) => d.rows.find(x => x.command === c && Object.entries(o).every(([k, v]) => x[k] === v));
+    const mm = x => x ? `${x.travel_mm >= 0 ? '+' : ''}${x.travel_mm.toFixed(1)} mm` : '–';
+    const row = (label, x) => x ? `<tr><td style="text-align:left">${label}</td><td>${mm(x)}</td><td>${x.turn_deg.toFixed(0)}°</td><td><span class="tag ${x.walks_all ? 'match' : x.walks.startsWith('0') ? 'opposite' : 'other'}">${esc(x.walks)}</span></td></tr>` : '';
+    const head = '<tr><th style="text-align:left">Condition</th><th>Travel during light</th><th>Turn</th><th>Walks straight</th></tr>';
+    const j = d.jump_neurons_hz, lb = d.link_balance;
+    let h = `<p class="note">Walks straight: more than ${d.thresholds.walk_mm} mm in the commanded direction while turning less than ${d.thresholds.straight_deg}°, in 1.5 s of light. Travel is signed: + forward, − backward.</p>`;
+    for (const [c, dir] of Object.entries(d.commands)) {
+      const lights = [...new Set(d.rows.filter(x => x.command === c).map(x => x.light))];
+      for (const light of lights) {
+        const f = o => find(c, { light, condition: 'intact', rhythm: 'circuit', jump_muscle: false, ...o });
+        h += `<h3 style="font-size:13px;margin:14px 0 6px">${esc(c)} (real flies walk ${esc(dir)}), light ${light}</h3><div class="tw"><table class="bench">${head}
+          ${row('<b>A.</b> Full model (jump muscle on, original tripod coupling)', f({ coupling: 'uniform', jump_muscle: true }))}
+          ${row('Jump muscle removed', f({ coupling: 'uniform' }))}
+          ${row('Reference: supplied rhythm (every leg full steps at 12 Hz, forward), jump muscle removed', f({ coupling: 'uniform', rhythm: 'supplied' }))}
+          ${['independent', 'uniform', 'measured', 'tripod_sync', 'signed', 'signed_shuffled'].map((m, i) => row(`${i ? '' : '<b>B.</b> '}${esc(d.modes[m])}`, f({ coupling: m, part: 'B' }))).join('')}
+          ${row('<b>C.</b> Tripod plus rules, circuit wiring shuffled', f({ coupling: 'tripod_sync', condition: 'shuffled' }))}
+          ${row('Tripod plus rules, light on the same number of random interneurons instead (sham)', f({ coupling: 'tripod_sync', condition: 'sham' }))}
+          ${row('Tripod plus rules, jump muscle back on', f({ coupling: 'tripod_sync', jump_muscle: true }))}</table></div>`;
+      }
+    }
+    const p = find('P9', { coupling: 'tripod_sync', condition: 'intact', jump_muscle: false }), ps = find('P9', { coupling: 'tripod_sync', condition: 'shuffled' }), ref = find('P9', { rhythm: 'supplied' });
+    const mdn = d.rows.filter(x => x.command === 'MDN' && x.condition === 'intact' && x.rhythm === 'circuit');
+    h += `<p class="note"><b>What stops it.</b> The jump muscle. Under the walking command the jump-muscle motor neurons fire at ${j.P9} Hz (P9) and ${j.MDN} Hz (MDN), against ${j['Giant fiber']} Hz for the giant fiber, the only command that should fire them. Every spike is a twitch on the middle legs, which wrecks the stride. The model treats all cells as identical; the real jump motor neuron is large and hard to drive. That is a fault in the model's physiology, and the walking tests here are run with the jump muscle removed, stated row by row.</p>
+      <p class="note"><b>What coordination buys.</b> With the tripod pattern and the two rules, P9 walks the fly forward ${p ? mm(p) : ''} (${p ? esc(p.walks) : ''}), about ${p && ref ? Math.round(100 * p.travel_mm / ref.travel_mm) : '?'}% of what this body does with a supplied rhythm. With the circuit's wiring shuffled it travels ${ps ? mm(ps) : ''}, and with the light on random interneurons instead it does not walk: forward walking depends on the measured wiring and on which cells are lit. The tripod pattern itself is assumed. Taking the phase relations from the measured links does not work better than shuffled links, and the balance of excitation and inhibition between the legs' premotor pools matches the tripod pattern in ${lb.pairs_matching_tripod} of ${lb.pairs} leg pairs (chance: ${lb.pairs / 2}). In this circuit extract the gait is not written in the links between legs.</p>
+      <p class="note"><b>Backward walking.</b> ${mdn.some(x => x.walks_all) ? 'MDN walks the fly backward in some settings (table above).' : (b => `MDN does not walk the fly backward reliably in any setting (best: ${mm(b)}, ${esc(b.walks)}${b.jump_muscle ? ', with the jump muscle on' : ''}).`)(mdn.reduce((a, b) => a.travel_mm < b.travel_mm ? a : b)) + ` Its legs get conflicting directions: front legs backward, hind legs forward.`}</p>`;
+    $('walk').innerHTML = h;
+  } catch (e) { $('walk').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
+}
+loadMeta(); score(); bodyScore(); diagnosis(); coordination(); walking();

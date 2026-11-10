@@ -2,6 +2,14 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Frame discovery, the fly's compass as a location signal, and walking coordination
+
+- `frames.py` (Scaffold page): the reference frame is computed from relations instead of being given. Relation types are movements; relations that close loops are constraints; diagonalising them (Smith normal form) gives the frame. Found from data, three seeds: line (numbers), loop of 12 (clock), grid (room, 30 of 40 relations), line (two redundant relations), cylinder of 7 (rota); a family tree is reported as having no such frame. Held-out relations 80–90% (lookup table and backprop network: 0%), multi-step questions 94–97% (lookup 55–68%, network 26–39%). Limits measured: with every relation given a lookup table does as well; one wrong relation breaks it.
+- `compass.py` (Scaffold page): objects recognised by feature location with the location taken from the central-complex model integrating a walker's own turns and steps. Published ring: 100% at 4 glimpses (true location: 100%; no locations: 34%).
+- `navigation.py`: `bridge_rotation()` reads the measured rotation offsets with each side of the bridge as a full circle. Rotation cells reach heading cells about one glomerulus away, the same step on both sides, which is opposite directions around the ellipsoid body: the published mechanism, present in the measured wiring. The earlier "not opposite by side" came from treating the 16 glomeruli as one ring. New connectivity option `measured_bridge` on the Navigation page. The gain is not anatomy: taking the measured step (1.2) literally fails (12%); recognition needs the gain within about 5% of one.
+- `bodysim.py`: coordination modes (`independent`, `tripod_sync`, `signed`, `signed_shuffled`) with two rules: feet on the ground share one speed, and a leg with drive but no direction takes it from linked legs. `walking.py` and a Walking section on the optogenetics page. Findings: the jump muscle is the main brake (its motor neurons fire at 147 Hz under P9, 19 Hz under the giant fiber); with it removed and the rules on a tripod, P9 walks forward 7.8 mm in 3 of 3 seeds (supplied rhythm: 22.6 mm; wiring shuffled: 0.0 mm; light on random interneurons: 0.7 mm). The tripod is assumed: measured leg links match it in 15 of 30 pairs and do no better than shuffled links. MDN does not walk backward.
+- Guide notes, open problems and proposals updated. Tests: `test_frames.py`, `test_compass.py`, `test_walking.py`, coordination rules in `test_bodysim.py`.
+
 ## Lab guide: choose the language model in the app
 
 - Gear (or the model badge) in the guide opens Settings. Pick a provider: Anthropic, OpenAI, Google Gemini, OpenRouter, Ollama (local, no key) or any OpenAI-compatible server (LM Studio, vLLM). Paste a key, load the provider's model list, test the connection, save.
