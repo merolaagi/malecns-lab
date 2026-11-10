@@ -7,6 +7,7 @@ Newest first. `tools/sync.sh` uses the top entry as the commit message.
 - Gear (or the model badge) in the guide opens Settings. Pick a provider: Anthropic, OpenAI, Google Gemini, OpenRouter, Ollama (local, no key) or any OpenAI-compatible server (LM Studio, vLLM). Paste a key, load the provider's model list, test the connection, save.
 - Lab settings are saved on the Mac in `~/.config/malecns-lab/llm.json` (mode 600), editable only from the Mac itself (or with `MALECNS_ADMIN_TOKEN`); the public site sees only which model is active. Keys are never sent back to a browser, only their last 4 characters.
 - Visitors can use their own key for hosted providers; it stays in their browser and is used only for their requests. Local and custom URLs cannot be used from the internet.
+- Dropdowns everywhere: the browser's arrow, which sat against the border, is replaced by a chevron inset 12px (`ink-skin.css`).
 - `llm.py` (providers, settings, wire formats), tests in `test_llm.py`; the old `anthropic-key` file and `*_API_KEY` environment variables still work.
 
 ## Lab guide: tours, explanations, questions and model proposals on every page
