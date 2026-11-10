@@ -1,0 +1,3528 @@
+{
+ "seeds": [
+  1,
+  2,
+  3
+ ],
+ "steps": 4,
+ "tasks": {
+  "aim": "Aim at the hotter of two objects (hit rate after 8,000 trials)",
+  "digits": "Digits from 50 examples per class (accuracy)",
+  "continual": "Digit classes learned in sequence (final accuracy)"
+ },
+ "rules": {
+  "readout": "Readout only",
+  "reward": "Scalar reward (trial and error)",
+  "teachers_random": "Teacher per output, random pathways",
+  "teachers_wiring": "Teacher per output, along the original wiring",
+  "backprop": "Backprop inside the wiring (upper bound)"
+ },
+ "wirings": {
+  "measured": "Measured wiring",
+  "shuffled": "Shuffled (same inputs and outputs per cell)",
+  "random": "Random (same density)"
+ },
+ "biology": {
+  "plain": "Plain unit",
+  "inhibition": "Winner-take-most inhibition (top 20%)",
+  "cell_size": "Excitability by cell size",
+  "dendrites": "Saturating dendritic branches",
+  "timescales": "Time constants by cell size",
+  "free_signs": "No fixed sign per cell"
+ },
+ "backbones": {
+  "central_complex": {
+   "label": "Central complex (1,247 cells)",
+   "cells": 1247,
+   "connections": 109637,
+   "inputs": 308,
+   "outputs": 50
+  },
+  "motor": {
+   "label": "Leg motor circuit (1,741 cells)",
+   "cells": 1741,
+   "connections": 83153,
+   "inputs": 109,
+   "outputs": 382
+  }
+ },
+ "rows": [
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "cell_size",
+   "final": 0.22722222222222221,
+   "final_sd": 0.12269605123089462,
+   "per_seed": [
+    0.355,
+    0.062,
+    0.265
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06277777777777778,
+     "error": 0.7589295871136527
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06222222222222223,
+     "error": 0.7443781878508728
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.065,
+     "error": 0.7075783099034862
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.22722222222222221,
+     "error": 0.36087157980166834
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "dendrites",
+   "final": 0.34944444444444445,
+   "final_sd": 0.2067801361140814,
+   "per_seed": [
+    0.538,
+    0.062,
+    0.448
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.059444444444444446,
+     "error": 0.7616105811318121
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06777777777777778,
+     "error": 0.7447666473675537
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.07055555555555555,
+     "error": 0.7166411666290041
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.34944444444444445,
+     "error": 0.27696116469881993
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "free_signs",
+   "final": 0.2388888888888889,
+   "final_sd": 0.25063007022056516,
+   "per_seed": [
+    0.062,
+    0.062,
+    0.593
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06499999999999999,
+     "error": 0.7491147049620537
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.061111111111111116,
+     "error": 0.745105456578007
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.07166666666666667,
+     "error": 0.745105456578007
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.2388888888888889,
+     "error": 0.745105456578007
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "inhibition",
+   "final": 0.21166666666666667,
+   "final_sd": 0.013123346456686355,
+   "per_seed": [
+    0.205,
+    0.23,
+    0.2
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05833333333333333,
+     "error": 0.7428624611711859
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.065,
+     "error": 0.7434099040276452
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.09833333333333334,
+     "error": 0.6729856336071951
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.21166666666666667,
+     "error": 0.4785990478617784
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.35777777777777775,
+   "final_sd": 0.21058267195663338,
+   "per_seed": [
+    0.478,
+    0.062,
+    0.533
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.0588888888888889,
+     "error": 0.7619795912630705
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06777777777777778,
+     "error": 0.7447652049906673
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.07111111111111111,
+     "error": 0.698418579210654
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.35777777777777775,
+     "error": 0.2990765413451749
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "timescales",
+   "final": 0.1877777777777778,
+   "final_sd": 0.015889277384527882,
+   "per_seed": [
+    0.205,
+    0.167,
+    0.192
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06277777777777778,
+     "error": 0.7575525767403377
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06333333333333334,
+     "error": 0.7443727632041276
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.06333333333333334,
+     "error": 0.7050990799524809
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.1877777777777778,
+     "error": 0.47390164719704464
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.056666666666666664,
+   "final_sd": 0.008498365855987972,
+   "per_seed": [
+    0.048,
+    0.053,
+    0.068
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05833333333333333,
+     "error": 0.7627878894628972
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06055555555555556,
+     "error": 0.7610289599636809
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.06,
+     "error": 0.7397293564872989
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.056666666666666664,
+     "error": 0.7286988272735634
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.08833333333333333,
+   "final_sd": 0.005443310539518175,
+   "per_seed": [
+    0.082,
+    0.095,
+    0.088
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05444444444444444,
+     "error": 0.7655181697041861
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06222222222222223,
+     "error": 0.7601927076658553
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.06611111111111112,
+     "error": 0.6817743955491258
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.08833333333333333,
+     "error": 0.6737721308606558
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.1872222222222222,
+   "final_sd": 0.05885218982258504,
+   "per_seed": [
+    0.27,
+    0.138,
+    0.153
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05611111111111111,
+     "error": 0.7644969386333451
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06166666666666667,
+     "error": 0.7438024417553819
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.0788888888888889,
+     "error": 0.7021529355161416
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.1872222222222222,
+     "error": 0.4404516464242969
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "cell_size",
+   "final": 0.15555555555555556,
+   "final_sd": 0.07491147038379188,
+   "per_seed": [
+    0.245,
+    0.062,
+    0.16
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06222222222222223,
+     "error": 0.758936261974523
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06444444444444446,
+     "error": 0.7442027283124344
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.06722222222222222,
+     "error": 0.7028147082892673
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.15555555555555556,
+     "error": 0.44970576662229916
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "dendrites",
+   "final": 0.2072222222222222,
+   "final_sd": 0.08139220698583305,
+   "per_seed": [
+    0.188,
+    0.118,
+    0.315
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.0588888888888889,
+     "error": 0.7618411831368671
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06444444444444446,
+     "error": 0.7441397539281037
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.07333333333333335,
+     "error": 0.6992914030596735
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.2072222222222222,
+     "error": 0.4894449797222283
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "free_signs",
+   "final": 0.09444444444444444,
+   "final_sd": 0.04635477787778478,
+   "per_seed": [
+    0.062,
+    0.062,
+    0.16
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06666666666666667,
+     "error": 0.7508937390131614
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.061111111111111116,
+     "error": 0.745105456578007
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.0661111111111111,
+     "error": 0.745105456578007
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.09444444444444444,
+     "error": 0.745105456578007
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "inhibition",
+   "final": 0.1488888888888889,
+   "final_sd": 0.009844469525927416,
+   "per_seed": [
+    0.155,
+    0.135,
+    0.157
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06166666666666667,
+     "error": 0.7445021394075662
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06833333333333333,
+     "error": 0.7094376928172134
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.09333333333333334,
+     "error": 0.6233078083586274
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.1488888888888889,
+     "error": 0.5460932749951403
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.2233333333333333,
+   "final_sd": 0.10832905974476649,
+   "per_seed": [
+    0.188,
+    0.112,
+    0.37
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05833333333333333,
+     "error": 0.7621958116803029
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.065,
+     "error": 0.7441993309775764
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.075,
+     "error": 0.7123463342870474
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.2233333333333333,
+     "error": 0.5042932464708852
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "timescales",
+   "final": 0.15944444444444444,
+   "final_sd": 0.03104158898821999,
+   "per_seed": [
+    0.203,
+    0.138,
+    0.137
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06277777777777778,
+     "error": 0.7576776735826961
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06333333333333334,
+     "error": 0.7442953289037433
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.06333333333333334,
+     "error": 0.709429704501764
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.15944444444444444,
+     "error": 0.4953192175271102
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.7227777777777779,
+   "final_sd": 0.09507631762347295,
+   "per_seed": [
+    0.702,
+    0.848,
+    0.618
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06444444444444444,
+     "error": 0.7442622186177703
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.08277777777777778,
+     "error": 0.664887910106732
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.16,
+     "error": 0.4807071515825238
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.7227777777777779,
+     "error": 0.21471036419189687
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.07777777777777778,
+   "final_sd": 0.0034246744460938753,
+   "per_seed": [
+    0.073,
+    0.082,
+    0.078
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05777777777777778,
+     "error": 0.7609171150751314
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06388888888888888,
+     "error": 0.7559216341026767
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.06333333333333334,
+     "error": 0.7211292386401726
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.07777777777777778,
+     "error": 0.6673277391975523
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.10166666666666667,
+   "final_sd": 0.011626916409142417,
+   "per_seed": [
+    0.117,
+    0.1,
+    0.088
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.059444444444444446,
+     "error": 0.7597573856575854
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06222222222222223,
+     "error": 0.7315936104264313
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.08777777777777777,
+     "error": 0.6204967019959029
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.10166666666666667,
+     "error": 0.5596980437891076
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.18888888888888888,
+   "final_sd": 0.02926043129391932,
+   "per_seed": [
+    0.18,
+    0.228,
+    0.158
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.0588888888888889,
+     "error": 0.7550157166265407
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.07166666666666667,
+     "error": 0.6950198907974895
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.13777777777777778,
+     "error": 0.5626619528268875
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.18888888888888888,
+     "error": 0.498534820157041
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.45,
+   "final_sd": 0.11152976682881072,
+   "per_seed": [
+    0.488,
+    0.563,
+    0.298
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06444444444444444,
+     "error": 0.7442007289653784
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.08222222222222221,
+     "error": 0.6767052859635078
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.14388888888888887,
+     "error": 0.5104599050497941
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.45,
+     "error": 0.30968255785578547
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "cell_size",
+   "final": 0.7794444444444445,
+   "final_sd": 0.07763081353352254,
+   "per_seed": [
+    0.687,
+    0.877,
+    0.775
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07611111111111112,
+     "error": 0.6663748553367174
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.10888888888888888,
+     "error": 0.5547957111405679
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.31722222222222224,
+     "error": 0.3972025067650757
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.7794444444444445,
+     "error": 0.2233072236780805
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "dendrites",
+   "final": 0.7661111111111111,
+   "final_sd": 0.09141210444742084,
+   "per_seed": [
+    0.73,
+    0.892,
+    0.677
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07888888888888888,
+     "error": 0.6620675187502093
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.11444444444444445,
+     "error": 0.550424113518226
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.32555555555555554,
+     "error": 0.393338436886976
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.7661111111111111,
+     "error": 0.20996711423500813
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "free_signs",
+   "final": 0.8227777777777777,
+   "final_sd": 0.06961977865698016,
+   "per_seed": [
+    0.815,
+    0.912,
+    0.742
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.08277777777777778,
+     "error": 0.6498068774026048
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.12055555555555557,
+     "error": 0.535040820466979
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.39833333333333326,
+     "error": 0.3469191500876155
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.8227777777777777,
+     "error": 0.18206830672582636
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "inhibition",
+   "final": 0.5399999999999999,
+   "final_sd": 0.0830439419602435,
+   "per_seed": [
+    0.47,
+    0.657,
+    0.493
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07611111111111112,
+     "error": 0.6833588068474605
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.1238888888888889,
+     "error": 0.5539305263772685
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.19611111111111112,
+     "error": 0.4791456289988946
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.5399999999999999,
+     "error": 0.31180350122165945
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.7866666666666667,
+   "final_sd": 0.08722045291906828,
+   "per_seed": [
+    0.727,
+    0.91,
+    0.723
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07944444444444444,
+     "error": 0.6587232535488254
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.11555555555555556,
+     "error": 0.5546852731009351
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.3288888888888889,
+     "error": 0.3870930280955495
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.7866666666666667,
+     "error": 0.21058791075189812
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "timescales",
+   "final": 0.6816666666666666,
+   "final_sd": 0.0500185150904328,
+   "per_seed": [
+    0.673,
+    0.747,
+    0.625
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07722222222222223,
+     "error": 0.6956457173929064
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.10166666666666667,
+     "error": 0.5614473368414546
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.17666666666666667,
+     "error": 0.4776874186682636
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.6816666666666666,
+     "error": 0.2315522963128105
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.12388888888888888,
+   "final_sd": 0.003424674446093875,
+   "per_seed": [
+    0.128,
+    0.12,
+    0.123
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07,
+     "error": 0.712254399721382
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.08666666666666667,
+     "error": 0.6323436314193325
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.10111111111111111,
+     "error": 0.5711488452579344
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.12388888888888888,
+     "error": 0.5408665083617302
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.11277777777777777,
+   "final_sd": 0.00392837100659193,
+   "per_seed": [
+    0.118,
+    0.11,
+    0.11
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06944444444444443,
+     "error": 0.7078625464098286
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.09555555555555556,
+     "error": 0.6207432235785404
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.10666666666666667,
+     "error": 0.5616125413188489
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.11277777777777777,
+     "error": 0.5498908778800149
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.5666666666666668,
+   "final_sd": 0.07357284120491042,
+   "per_seed": [
+    0.485,
+    0.663,
+    0.552
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07722222222222222,
+     "error": 0.6816656662253963
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.10777777777777776,
+     "error": 0.5602630038060455
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.15833333333333333,
+     "error": 0.5113303318051333
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.5666666666666668,
+     "error": 0.31042732043686894
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "cell_size",
+   "final": 0.5922222222222221,
+   "final_sd": 0.055549999722194425,
+   "per_seed": [
+    0.515,
+    0.643,
+    0.618
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07777777777777778,
+     "error": 0.6683873461990637
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.11944444444444445,
+     "error": 0.5527892038315806
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.22055555555555553,
+     "error": 0.44759724201725076
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.5922222222222221,
+     "error": 0.282981224106615
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "dendrites",
+   "final": 0.6016666666666667,
+   "final_sd": 0.0692151770982401,
+   "per_seed": [
+    0.512,
+    0.68,
+    0.613
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07944444444444444,
+     "error": 0.6631204432410699
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.11944444444444445,
+     "error": 0.568945877391724
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.20777777777777776,
+     "error": 0.45035708916625583
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.6016666666666667,
+     "error": 0.2885609482543923
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "free_signs",
+   "final": 0.6027777777777777,
+   "final_sd": 0.10070430986155142,
+   "per_seed": [
+    0.48,
+    0.727,
+    0.602
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.08055555555555555,
+     "error": 0.652600001327882
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.12888888888888891,
+     "error": 0.5599574161332889
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.22777777777777777,
+     "error": 0.4612095499631342
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.6027777777777777,
+     "error": 0.3057928142550079
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "inhibition",
+   "final": 0.47833333333333333,
+   "final_sd": 0.03208784239598587,
+   "per_seed": [
+    0.468,
+    0.522,
+    0.445
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07722222222222222,
+     "error": 0.6847796706277075
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.12944444444444445,
+     "error": 0.5741209402675249
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.1638888888888889,
+     "error": 0.5034467670170195
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.47833333333333333,
+     "error": 0.3248831682792684
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.6305555555555555,
+   "final_sd": 0.08832110327634396,
+   "per_seed": [
+    0.53,
+    0.745,
+    0.617
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07944444444444444,
+     "error": 0.6600302744558
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.12222222222222223,
+     "error": 0.575421840125638
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.22611111111111112,
+     "error": 0.44662571325117273
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.6305555555555555,
+     "error": 0.28949765471923
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "timescales",
+   "final": 0.52,
+   "final_sd": 0.10288432915262258,
+   "per_seed": [
+    0.47,
+    0.663,
+    0.427
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.07666666666666667,
+     "error": 0.695934624254327
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.10333333333333335,
+     "error": 0.5512498851672177
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.14833333333333334,
+     "error": 0.4975626177041089
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.52,
+     "error": 0.31736939208040005
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.12944444444444447,
+   "final_sd": 0.0077379934873245135,
+   "per_seed": [
+    0.14,
+    0.127,
+    0.122
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.06166666666666667,
+     "error": 0.8212234413978572
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06277777777777778,
+     "error": 0.7301170560964415
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.10333333333333333,
+     "error": 0.577452351672423
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.12944444444444447,
+     "error": 0.516076224301861
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.09777777777777778,
+   "final_sd": 0.011331154474650629,
+   "per_seed": [
+    0.093,
+    0.087,
+    0.113
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.059444444444444446,
+     "error": 0.7526086299632191
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06,
+     "error": 0.7733645695659805
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.075,
+     "error": 0.6839581622876858
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.09777777777777778,
+     "error": 0.6496343211402508
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.13555555555555554,
+   "final_sd": 0.005499719409228704,
+   "per_seed": [
+    0.142,
+    0.137,
+    0.128
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.059444444444444446,
+     "error": 0.8309830425508318
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06833333333333334,
+     "error": 0.7201869821546428
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.11888888888888889,
+     "error": 0.5761570130160453
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.13555555555555554,
+     "error": 0.5177638661454999
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.1988888888888889,
+   "final_sd": 0.06095434437975223,
+   "per_seed": [
+    0.283,
+    0.142,
+    0.172
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05333333333333334,
+     "error": 0.8327429231793236
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.07166666666666667,
+     "error": 0.6810579045973952
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.12333333333333334,
+     "error": 0.5450161236725066
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.1988888888888889,
+     "error": 0.40958998058647
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.1238888888888889,
+   "final_sd": 0.01157370369777759,
+   "per_seed": [
+    0.11,
+    0.138,
+    0.123
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.0588888888888889,
+     "error": 0.7587503636273382
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.07277777777777777,
+     "error": 0.7453405611210583
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.09277777777777778,
+     "error": 0.625831380489798
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.1238888888888889,
+     "error": 0.5835321230438547
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.17722222222222225,
+   "final_sd": 0.015947444549341473,
+   "per_seed": [
+    0.192,
+    0.155,
+    0.185
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05333333333333334,
+     "error": 0.8370893416461088
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.07277777777777777,
+     "error": 0.6777003717269643
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.12333333333333334,
+     "error": 0.5510664449496577
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.17722222222222225,
+     "error": 0.45748872662085033
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.145,
+   "final_sd": 0.005443310539518175,
+   "per_seed": [
+    0.152,
+    0.145,
+    0.138
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05444444444444444,
+     "error": 0.8236772398249712
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.07055555555555555,
+     "error": 0.6713074046679799
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.12777777777777777,
+     "error": 0.5624530422973898
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.145,
+     "error": 0.4988841156842643
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.09777777777777778,
+   "final_sd": 0.005152010275275388,
+   "per_seed": [
+    0.095,
+    0.105,
+    0.093
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05833333333333333,
+     "error": 0.7706080479362251
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.06888888888888889,
+     "error": 0.7252361414927685
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.09500000000000001,
+     "error": 0.6213832329018265
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.09777777777777778,
+     "error": 0.6090831421284465
+    }
+   ]
+  },
+  {
+   "task": "aim",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.13722222222222222,
+   "final_sd": 0.00515201027527539,
+   "per_seed": [
+    0.142,
+    0.14,
+    0.13
+   ],
+   "curve": [
+    {
+     "trials": 200,
+     "hit_rate": 0.05277777777777778,
+     "error": 0.835745987472952
+    },
+    {
+     "trials": 1000,
+     "hit_rate": 0.07277777777777777,
+     "error": 0.6609926460457258
+    },
+    {
+     "trials": 3000,
+     "hit_rate": 0.11888888888888889,
+     "error": 0.5711649163105816
+    },
+    {
+     "trials": 8000,
+     "hit_rate": 0.13722222222222222,
+     "error": 0.5011039717990539
+    }
+   ]
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "cell_size",
+   "final": 0.11933333333333333,
+   "final_sd": 0.03355923452974192,
+   "per_seed": [
+    0.116,
+    0.08,
+    0.162
+   ],
+   "forgetting": 0.8873751903939824
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "dendrites",
+   "final": 0.09533333333333333,
+   "final_sd": 0.01675974011996871,
+   "per_seed": [
+    0.09,
+    0.078,
+    0.118
+   ],
+   "forgetting": 0.5814880537641074
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "free_signs",
+   "final": 0.08533333333333333,
+   "final_sd": 0.005249338582674539,
+   "per_seed": [
+    0.09,
+    0.078,
+    0.088
+   ],
+   "forgetting": 0.5766463693838666
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "inhibition",
+   "final": 0.13133333333333333,
+   "final_sd": 0.018061622912192085,
+   "per_seed": [
+    0.108,
+    0.152,
+    0.134
+   ],
+   "forgetting": 0.7500955134067504
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.104,
+   "final_sd": 0.010198039027185574,
+   "per_seed": [
+    0.09,
+    0.108,
+    0.114
+   ],
+   "forgetting": 0.4660317176709845
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "timescales",
+   "final": 0.08466666666666667,
+   "final_sd": 0.004714045207910314,
+   "per_seed": [
+    0.088,
+    0.078,
+    0.088
+   ],
+   "forgetting": 0.711372836265443
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.10466666666666667,
+   "final_sd": 0.01820866704499689,
+   "per_seed": [
+    0.096,
+    0.13,
+    0.088
+   ],
+   "forgetting": 0.6211729307117128
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.1366666666666667,
+   "final_sd": 0.003399346342395193,
+   "per_seed": [
+    0.138,
+    0.14,
+    0.132
+   ],
+   "forgetting": 0.7471846122877076
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.09800000000000002,
+   "final_sd": 0.02160246899469287,
+   "per_seed": [
+    0.128,
+    0.078,
+    0.088
+   ],
+   "forgetting": 0.8119898936245787
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "cell_size",
+   "final": 0.08533333333333333,
+   "final_sd": 0.005249338582674539,
+   "per_seed": [
+    0.09,
+    0.078,
+    0.088
+   ],
+   "forgetting": 0.6337664573801445
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "dendrites",
+   "final": 0.09999999999999999,
+   "final_sd": 0.007483314773547883,
+   "per_seed": [
+    0.09,
+    0.108,
+    0.102
+   ],
+   "forgetting": 0.5323600341151729
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "free_signs",
+   "final": 0.10866666666666665,
+   "final_sd": 0.03522625283632775,
+   "per_seed": [
+    0.09,
+    0.078,
+    0.158
+   ],
+   "forgetting": 0.5747591003795721
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "inhibition",
+   "final": 0.08866666666666667,
+   "final_sd": 0.008993825042154697,
+   "per_seed": [
+    0.1,
+    0.078,
+    0.088
+   ],
+   "forgetting": 0.6402408744572505
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.14466666666666664,
+   "final_sd": 0.040077702307171024,
+   "per_seed": [
+    0.174,
+    0.172,
+    0.088
+   ],
+   "forgetting": 0.6060385638345833
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "timescales",
+   "final": 0.08533333333333333,
+   "final_sd": 0.005249338582674539,
+   "per_seed": [
+    0.09,
+    0.078,
+    0.088
+   ],
+   "forgetting": 0.6811435343854733
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.17866666666666667,
+   "final_sd": 0.004988876515698593,
+   "per_seed": [
+    0.18,
+    0.172,
+    0.184
+   ],
+   "forgetting": 0.9773107329435473
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.12,
+   "final_sd": 0.03334666400106614,
+   "per_seed": [
+    0.106,
+    0.166,
+    0.088
+   ],
+   "forgetting": 0.6545257412239979
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.16266666666666665,
+   "final_sd": 0.004714045207910321,
+   "per_seed": [
+    0.166,
+    0.156,
+    0.166
+   ],
+   "forgetting": 0.9679206344159427
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.16466666666666666,
+   "final_sd": 0.011813363431112897,
+   "per_seed": [
+    0.174,
+    0.172,
+    0.148
+   ],
+   "forgetting": 0.9754356243944375
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.17466666666666666,
+   "final_sd": 0.004109609335312644,
+   "per_seed": [
+    0.174,
+    0.17,
+    0.18
+   ],
+   "forgetting": 0.9840224701096963
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "cell_size",
+   "final": 0.152,
+   "final_sd": 0.03115552385479446,
+   "per_seed": [
+    0.108,
+    0.172,
+    0.176
+   ],
+   "forgetting": 0.9887936142853592
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "dendrites",
+   "final": 0.17466666666666666,
+   "final_sd": 0.0037712361663282566,
+   "per_seed": [
+    0.18,
+    0.172,
+    0.172
+   ],
+   "forgetting": 0.9872412196271901
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "free_signs",
+   "final": 0.15,
+   "final_sd": 0.03394112549695428,
+   "per_seed": [
+    0.102,
+    0.174,
+    0.174
+   ],
+   "forgetting": 0.9897663032857632
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "inhibition",
+   "final": 0.17066666666666666,
+   "final_sd": 0.00339934634239518,
+   "per_seed": [
+    0.174,
+    0.172,
+    0.166
+   ],
+   "forgetting": 0.9914107190845468
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.17533333333333334,
+   "final_sd": 0.003771236166328244,
+   "per_seed": [
+    0.178,
+    0.17,
+    0.178
+   ],
+   "forgetting": 0.9865884297756172
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "timescales",
+   "final": 0.11866666666666666,
+   "final_sd": 0.03395421754199159,
+   "per_seed": [
+    0.166,
+    0.102,
+    0.088
+   ],
+   "forgetting": 0.9741334113720121
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.17266666666666666,
+   "final_sd": 0.00837987005998435,
+   "per_seed": [
+    0.164,
+    0.184,
+    0.17
+   ],
+   "forgetting": 0.9575782876625191
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.156,
+   "final_sd": 0.00489897948556636,
+   "per_seed": [
+    0.156,
+    0.162,
+    0.15
+   ],
+   "forgetting": 0.9813159840285591
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.16666666666666666,
+   "final_sd": 0.004714045207910321,
+   "per_seed": [
+    0.17,
+    0.17,
+    0.16
+   ],
+   "forgetting": 0.9904854621988074
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "cell_size",
+   "final": 0.15066666666666664,
+   "final_sd": 0.01995550606279435,
+   "per_seed": [
+    0.172,
+    0.156,
+    0.124
+   ],
+   "forgetting": 0.9874508118718065
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "dendrites",
+   "final": 0.16933333333333334,
+   "final_sd": 0.009977753031397174,
+   "per_seed": [
+    0.18,
+    0.172,
+    0.156
+   ],
+   "forgetting": 0.9846723107978693
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "free_signs",
+   "final": 0.13933333333333334,
+   "final_sd": 0.03630733014450694,
+   "per_seed": [
+    0.164,
+    0.166,
+    0.088
+   ],
+   "forgetting": 0.9733539499207516
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "inhibition",
+   "final": 0.17266666666666666,
+   "final_sd": 0.0018856180831641153,
+   "per_seed": [
+    0.17,
+    0.174,
+    0.174
+   ],
+   "forgetting": 0.9882051419819109
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.17400000000000002,
+   "final_sd": 0.005656854249492372,
+   "per_seed": [
+    0.17,
+    0.17,
+    0.182
+   ],
+   "forgetting": 0.9887702716149577
+  },
+  {
+   "task": "continual",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "timescales",
+   "final": 0.12066666666666666,
+   "final_sd": 0.03426692606905706,
+   "per_seed": [
+    0.106,
+    0.168,
+    0.088
+   ],
+   "forgetting": 0.9590003496805033
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.16466666666666666,
+   "final_sd": 0.0077172246018601485,
+   "per_seed": [
+    0.172,
+    0.154,
+    0.168
+   ],
+   "forgetting": 0.9718295664569442
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.13933333333333334,
+   "final_sd": 0.004109609335312644,
+   "per_seed": [
+    0.144,
+    0.14,
+    0.134
+   ],
+   "forgetting": 0.8901827151578102
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.168,
+   "final_sd": 0.0016329931618554536,
+   "per_seed": [
+    0.168,
+    0.166,
+    0.17
+   ],
+   "forgetting": 0.9718440679550433
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.17600000000000002,
+   "final_sd": 0.00489897948556635,
+   "per_seed": [
+    0.176,
+    0.17,
+    0.182
+   ],
+   "forgetting": 0.9880342506616081
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.18000000000000002,
+   "final_sd": 0.007118052168020881,
+   "per_seed": [
+    0.19,
+    0.174,
+    0.176
+   ],
+   "forgetting": 0.9458410342573177
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.168,
+   "final_sd": 0.007118052168020868,
+   "per_seed": [
+    0.178,
+    0.162,
+    0.164
+   ],
+   "forgetting": 0.9910790943563704
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.16466666666666666,
+   "final_sd": 0.0077172246018601485,
+   "per_seed": [
+    0.168,
+    0.154,
+    0.172
+   ],
+   "forgetting": 0.9651833753052038
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.154,
+   "final_sd": 0.00748331477354789,
+   "per_seed": [
+    0.162,
+    0.144,
+    0.156
+   ],
+   "forgetting": 0.8977873928441085
+  },
+  {
+   "task": "continual",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.16333333333333333,
+   "final_sd": 0.003399346342395193,
+   "per_seed": [
+    0.16,
+    0.162,
+    0.168
+   ],
+   "forgetting": 0.9610564563150504
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "cell_size",
+   "final": 0.9266666666666667,
+   "final_sd": 0.008993825042154702,
+   "per_seed": [
+    0.914,
+    0.934,
+    0.932
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.21666666666666667
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.794
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9266666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "dendrites",
+   "final": 0.9306666666666668,
+   "final_sd": 0.0037712361663282566,
+   "per_seed": [
+    0.928,
+    0.936,
+    0.928
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.20133333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.8073333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9306666666666668
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "free_signs",
+   "final": 0.9406666666666667,
+   "final_sd": 0.0049888765156985435,
+   "per_seed": [
+    0.942,
+    0.934,
+    0.946
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.14800000000000002
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.6773333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9406666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "inhibition",
+   "final": 0.816,
+   "final_sd": 0.025350871122442036,
+   "per_seed": [
+    0.786,
+    0.848,
+    0.814
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.22866666666666668
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.606
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.816
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.9313333333333333,
+   "final_sd": 0.014079141387961881,
+   "per_seed": [
+    0.916,
+    0.95,
+    0.928
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.20466666666666666
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.7906666666666666
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9313333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "timescales",
+   "final": 0.9400000000000001,
+   "final_sd": 0.01766352173265566,
+   "per_seed": [
+    0.934,
+    0.964,
+    0.922
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.20933333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.7726666666666667
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9400000000000001
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.21399999999999997,
+   "final_sd": 0.052383203414835176,
+   "per_seed": [
+    0.18,
+    0.288,
+    0.174
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.1426666666666667
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.17066666666666666
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.21399999999999997
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.31133333333333335,
+   "final_sd": 0.054365021434333645,
+   "per_seed": [
+    0.238,
+    0.328,
+    0.368
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.15666666666666665
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.24533333333333332
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.31133333333333335
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.8953333333333333,
+   "final_sd": 0.006798692684790386,
+   "per_seed": [
+    0.886,
+    0.902,
+    0.898
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.21733333333333335
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.7346666666666666
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.8953333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "cell_size",
+   "final": 0.9006666666666666,
+   "final_sd": 0.012472191289246483,
+   "per_seed": [
+    0.914,
+    0.884,
+    0.904
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.206
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.6866666666666666
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9006666666666666
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "dendrites",
+   "final": 0.9233333333333333,
+   "final_sd": 0.01543444920372028,
+   "per_seed": [
+    0.902,
+    0.938,
+    0.93
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.18133333333333335
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.7193333333333335
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9233333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "free_signs",
+   "final": 0.8153333333333334,
+   "final_sd": 0.06042810236599819,
+   "per_seed": [
+    0.862,
+    0.73,
+    0.854
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.11399999999999999
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.3773333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.8153333333333334
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "inhibition",
+   "final": 0.6633333333333332,
+   "final_sd": 0.03710645346686864,
+   "per_seed": [
+    0.656,
+    0.712,
+    0.622
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.18533333333333332
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.3426666666666667
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.6633333333333332
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.9126666666666666,
+   "final_sd": 0.013695092389449437,
+   "per_seed": [
+    0.904,
+    0.932,
+    0.902
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.18599999999999997
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.7146666666666667
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9126666666666666
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "timescales",
+   "final": 0.9093333333333334,
+   "final_sd": 0.019482185594936627,
+   "per_seed": [
+    0.89,
+    0.936,
+    0.902
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.20733333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.6880000000000001
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9093333333333334
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.9646666666666667,
+   "final_sd": 0.0131993265821489,
+   "per_seed": [
+    0.946,
+    0.974,
+    0.974
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.7760000000000001
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.9286666666666666
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9646666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.57,
+   "final_sd": 0.08392059739221755,
+   "per_seed": [
+    0.48,
+    0.682,
+    0.548
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.18800000000000003
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.35933333333333334
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.57
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.6586666666666666,
+   "final_sd": 0.010498677165349092,
+   "per_seed": [
+    0.664,
+    0.668,
+    0.644
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.5326666666666667
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.58
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.6586666666666666
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.9546666666666667,
+   "final_sd": 0.008219218670625309,
+   "per_seed": [
+    0.944,
+    0.956,
+    0.964
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.726
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.9013333333333334
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9546666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "random",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.9613333333333333,
+   "final_sd": 0.011585431464655188,
+   "per_seed": [
+    0.946,
+    0.974,
+    0.964
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.7853333333333333
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.92
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9613333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "cell_size",
+   "final": 0.964,
+   "final_sd": 0.00979795897113272,
+   "per_seed": [
+    0.952,
+    0.976,
+    0.964
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8346666666666667
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.932
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.964
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "dendrites",
+   "final": 0.9653333333333333,
+   "final_sd": 0.011469767022723513,
+   "per_seed": [
+    0.952,
+    0.98,
+    0.964
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8213333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.922
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9653333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "free_signs",
+   "final": 0.9706666666666667,
+   "final_sd": 0.010624918300339495,
+   "per_seed": [
+    0.958,
+    0.984,
+    0.97
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8313333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.9293333333333335
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9706666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "inhibition",
+   "final": 0.9446666666666665,
+   "final_sd": 0.016110727964792727,
+   "per_seed": [
+    0.922,
+    0.954,
+    0.958
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.7159999999999999
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.8873333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9446666666666665
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.9653333333333333,
+   "final_sd": 0.011115554667022054,
+   "per_seed": [
+    0.95,
+    0.976,
+    0.97
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8173333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.9233333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9653333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "timescales",
+   "final": 0.9659999999999999,
+   "final_sd": 0.00979795897113272,
+   "per_seed": [
+    0.954,
+    0.978,
+    0.966
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8293333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.926
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9659999999999999
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.846,
+   "final_sd": 0.005887840577551903,
+   "per_seed": [
+    0.84,
+    0.854,
+    0.844
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.6753333333333332
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.8053333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.846
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "reward",
+   "biology": "plain",
+   "final": 0.7319999999999999,
+   "final_sd": 0.03409789827345177,
+   "per_seed": [
+    0.684,
+    0.752,
+    0.76
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.7106666666666666
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.654
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.7319999999999999
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_random",
+   "biology": "plain",
+   "final": 0.9613333333333333,
+   "final_sd": 0.012472191289246483,
+   "per_seed": [
+    0.948,
+    0.978,
+    0.958
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8133333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.916
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9613333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "cell_size",
+   "final": 0.9626666666666667,
+   "final_sd": 0.013597385369580772,
+   "per_seed": [
+    0.944,
+    0.976,
+    0.968
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.824
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.9233333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9626666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "dendrites",
+   "final": 0.9546666666666667,
+   "final_sd": 0.017987650084309404,
+   "per_seed": [
+    0.94,
+    0.98,
+    0.944
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8173333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.916
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9546666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "free_signs",
+   "final": 0.9633333333333333,
+   "final_sd": 0.01472714802291636,
+   "per_seed": [
+    0.946,
+    0.982,
+    0.962
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8253333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.9293333333333335
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9633333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "inhibition",
+   "final": 0.924,
+   "final_sd": 0.0016329931618554536,
+   "per_seed": [
+    0.924,
+    0.922,
+    0.926
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.7026666666666667
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.8773333333333334
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.924
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.9586666666666667,
+   "final_sd": 0.015520595635763768,
+   "per_seed": [
+    0.94,
+    0.978,
+    0.958
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8213333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.916
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9586666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "central_complex",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "timescales",
+   "final": 0.9579999999999999,
+   "final_sd": 0.014696938456699083,
+   "per_seed": [
+    0.94,
+    0.976,
+    0.958
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.8226666666666667
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.9146666666666667
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9579999999999999
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.8233333333333333,
+   "final_sd": 0.0041096093353126546,
+   "per_seed": [
+    0.828,
+    0.818,
+    0.824
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.2253333333333333
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.6233333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.8233333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.652,
+   "final_sd": 0.08574380444090406,
+   "per_seed": [
+    0.548,
+    0.758,
+    0.65
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.23733333333333337
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.426
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.652
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "measured",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.8493333333333334,
+   "final_sd": 0.008379870059984364,
+   "per_seed": [
+    0.838,
+    0.852,
+    0.858
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.3033333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.6653333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.8493333333333334
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.9273333333333333,
+   "final_sd": 0.0018856180831641283,
+   "per_seed": [
+    0.926,
+    0.93,
+    0.926
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.5146666666666667
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.8546666666666667
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9273333333333333
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.8373333333333334,
+   "final_sd": 0.006182412330330475,
+   "per_seed": [
+    0.834,
+    0.846,
+    0.832
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.43733333333333335
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.652
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.8373333333333334
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "random",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.9226666666666667,
+   "final_sd": 0.013695092389449385,
+   "per_seed": [
+    0.912,
+    0.942,
+    0.914
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.588
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.8553333333333333
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.9226666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "backprop",
+   "biology": "plain",
+   "final": 0.8526666666666666,
+   "final_sd": 0.015860503004493775,
+   "per_seed": [
+    0.848,
+    0.874,
+    0.836
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.41533333333333333
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.6779999999999999
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.8526666666666666
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "readout",
+   "biology": "plain",
+   "final": 0.6166666666666667,
+   "final_sd": 0.05902165327704364,
+   "per_seed": [
+    0.534,
+    0.648,
+    0.668
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.35200000000000004
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.5246666666666667
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.6166666666666667
+    }
+   ]
+  },
+  {
+   "task": "digits",
+   "backbone": "motor",
+   "wiring": "shuffled",
+   "rule": "teachers_wiring",
+   "biology": "plain",
+   "final": 0.872,
+   "final_sd": 0.024657656011875927,
+   "per_seed": [
+    0.844,
+    0.904,
+    0.868
+   ],
+   "curve": [
+    {
+     "per_class": 5,
+     "accuracy": 0.4793333333333334
+    },
+    {
+     "per_class": 20,
+     "accuracy": 0.7133333333333334
+    },
+    {
+     "per_class": 50,
+     "accuracy": 0.872
+    }
+   ]
+  }
+ ],
+ "minutes": 52.1
+}

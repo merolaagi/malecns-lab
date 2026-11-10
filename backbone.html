@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Connectome backbone</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block}.legend2{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;font-size:12px;color:var(--dim);margin-top:6px}.legend2 i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px}
+td.best{font-weight:600}td.up{color:#1f8a4c}td.down{color:#c0392b}.seg{margin:8px 0}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/ink-skin.css"><script src="/ink-skin.js"></script></head>
+<body>
+<header><div class="brand">MaleCNS <span class="muted">/ connectome backbone</span></div></header>
+<main class="wb">
+<h1>The connectome as the backbone of a learning network</h1>
+<p class="sub">Until now the lab froze the wiring and trained a readout on top, and shuffled wiring did as well as measured. Here learning happens inside the wiring: the network has exactly the connectome's connections, the strengths are learned, and each cell keeps the sign its transmitter predicts. Three things are varied, one at a time: the learning rule (from reward and punishment only, up to backpropagation), the wiring (measured, shuffled, random), and the biology of the units.</p>
+<div class="notice"><strong>Measured:</strong> which cells connect, synapse counts (starting strengths), transmitter predictions (signs), cell types, input counts (cell size), the dopamine neurons' inputs and targets. <strong>Assumed:</strong> the unit model, the number of update steps, how task inputs reach the input cells, every learning rule and rate, the tasks. Three seeds throughout. Backpropagation is the upper bound, not a claim about biology.</div>
+
+<div id="summary" class="wb-card" style="margin-top:20px"><p class="hint">Loading…</p></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Learning inside the wiring: rule against wiring</h2>
+<p class="note">Backbone: the central complex. Inputs enter at the ring neurons, outputs are read from the steering cells, activity runs through the measured connections for four steps. Each cell shows the score after training, mean of three seeds.</p>
+<div id="rules"></div></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Neuron biology, one ingredient at a time</h2>
+<p class="note">Each row changes one thing about the plain unit. Numbers are the score with the measured wiring, and the change from the plain unit in brackets.</p>
+<div id="biology"></div></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>A second backbone: the leg motor circuit</h2><div id="motor"></div></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Reward and punishment through the fly's own dopamine wiring</h2>
+<p class="note">A harder test on the mushroom body, wired as measured (projection neurons → 4,064 Kenyon cells → 97 output neurons). The network is told only whether its action was right. The synapses onto the output neurons learn, as in the fly, and dopamine decides how. The question: does the measured dopamine wiring (340 dopamine neurons, each hearing some output neurons and teaching others) deliver that signal to the right places?</p>
+<canvas id="dcurve" style="height:280px"></canvas><div class="legend2" id="dlegend"></div>
+<div id="dopamine"></div></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Dopamine-loop model: biology one at a time</h2><div id="dbiology"></div></div>
+</main>
+<script src="/backbone.js"></script>
+</body></html>

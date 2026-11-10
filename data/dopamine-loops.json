@@ -1,0 +1,2852 @@
+{
+ "seeds": [
+  7,
+  8,
+  9
+ ],
+ "tasks": {
+  "aim": "Aim at the target among decoys (8 directions)",
+  "digits": "Handwritten digits (10 classes)",
+  "continual": "Digits, two classes at a time"
+ },
+ "rules": {
+  "readout": "Frozen backbone, learned readout",
+  "global": "One dopamine signal for everything",
+  "per_cell": "Dopamine per output neuron (ideal routing)",
+  "loops": "Dopamine through the measured loops",
+  "loops_shuffled": "Dopamine through shuffled loops",
+  "backprop": "Backpropagation on the same synapses (told the answer)"
+ },
+ "wirings": {
+  "measured": "Measured",
+  "shuffled": "Shuffled, same connection counts",
+  "random": "Random, same density"
+ },
+ "checkpoints": [
+  50,
+  200,
+  1000,
+  4000
+ ],
+ "rates": {
+  "readout": 0.05,
+  "global": 0.2,
+  "per_cell": 0.5,
+  "loops": 1.0,
+  "loops_shuffled": 1.0,
+  "backprop": 1.0
+ },
+ "cells": {
+  "MBON": 97,
+  "PN": 314,
+  "DAN": 340,
+  "APL": 2,
+  "DPM": 2,
+  "KC": 4064,
+  "MBON_target": 200
+ },
+ "learned_synapses": 61210,
+ "kenyon_classes": [
+  "\u03b1'/\u03b2'",
+  "\u03b1/\u03b2",
+  "\u03b3"
+ ],
+ "by_rule": {
+  "aim": {
+   "readout": {
+    "measured": {
+     "task": "aim",
+     "rule": "readout",
+     "wiring": "measured",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.19666666666666666
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.24666666666666667
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.33944444444444444
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.49500000000000005
+      }
+     ],
+     "final": 0.49500000000000005,
+     "final_sd": 0.013123346456686337,
+     "reward_rate_last_500": 0.34400000000000003,
+     "reward_rate_last_500_sd": 0.02084866102814918
+    },
+    "shuffled": {
+     "task": "aim",
+     "rule": "readout",
+     "wiring": "shuffled",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.2805555555555555
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.4883333333333333
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.6411111111111111
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.6394444444444445
+      }
+     ],
+     "final": 0.6394444444444445,
+     "final_sd": 0.016405358955814908,
+     "reward_rate_last_500": 0.5266666666666666,
+     "reward_rate_last_500_sd": 0.042089850980438916
+    },
+    "random": {
+     "task": "aim",
+     "rule": "readout",
+     "wiring": "random",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.26
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.4572222222222222
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.6216666666666666
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.6350000000000001
+      }
+     ],
+     "final": 0.6350000000000001,
+     "final_sd": 0.01919683615907891,
+     "reward_rate_last_500": 0.518,
+     "reward_rate_last_500_sd": 0.03187475490101849
+    }
+   },
+   "global": {
+    "measured": {
+     "task": "aim",
+     "rule": "global",
+     "wiring": "measured",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.15555555555555556
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.14944444444444444
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.16444444444444448
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.21999999999999997
+      }
+     ],
+     "final": 0.21999999999999997,
+     "final_sd": 0.019051586888313616,
+     "reward_rate_last_500": 0.16133333333333333,
+     "reward_rate_last_500_sd": 0.031678944988044584
+    },
+    "shuffled": {
+     "task": "aim",
+     "rule": "global",
+     "wiring": "shuffled",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.11388888888888889
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.12166666666666666
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.13277777777777774
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.1527777777777778
+      }
+     ],
+     "final": 0.1527777777777778,
+     "final_sd": 0.033175552504074696,
+     "reward_rate_last_500": 0.12933333333333333,
+     "reward_rate_last_500_sd": 0.014817407180595241
+    },
+    "random": {
+     "task": "aim",
+     "rule": "global",
+     "wiring": "random",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.1611111111111111
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.16277777777777777
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.17944444444444443
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.20111111111111113
+      }
+     ],
+     "final": 0.20111111111111113,
+     "final_sd": 0.035101264442069596,
+     "reward_rate_last_500": 0.14666666666666667,
+     "reward_rate_last_500_sd": 0.019344824171395866
+    }
+   },
+   "per_cell": {
+    "measured": {
+     "task": "aim",
+     "rule": "per_cell",
+     "wiring": "measured",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.15666666666666665
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.22055555555555553
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.32611111111111113
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.38999999999999996
+      }
+     ],
+     "final": 0.38999999999999996,
+     "final_sd": 0.05678093054956105,
+     "reward_rate_last_500": 0.38466666666666666,
+     "reward_rate_last_500_sd": 0.04659995231280344
+    },
+    "shuffled": {
+     "task": "aim",
+     "rule": "per_cell",
+     "wiring": "shuffled",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.1361111111111111
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.15944444444444444
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.2688888888888889
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.3605555555555556
+      }
+     ],
+     "final": 0.3605555555555556,
+     "final_sd": 0.042477299674700625,
+     "reward_rate_last_500": 0.3513333333333333,
+     "reward_rate_last_500_sd": 0.03781827894315423
+    },
+    "random": {
+     "task": "aim",
+     "rule": "per_cell",
+     "wiring": "random",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.16111111111111112
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.18888888888888888
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.2711111111111111
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.3377777777777778
+      }
+     ],
+     "final": 0.3377777777777778,
+     "final_sd": 0.002078698548207744,
+     "reward_rate_last_500": 0.31066666666666665,
+     "reward_rate_last_500_sd": 0.023626726862225795
+    }
+   },
+   "loops": {
+    "measured": {
+     "task": "aim",
+     "rule": "loops",
+     "wiring": "measured",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.15055555555555555
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.15888888888888889
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.19333333333333336
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.16777777777777778
+      }
+     ],
+     "final": 0.16777777777777778,
+     "final_sd": 0.020652922550490123,
+     "reward_rate_last_500": 0.142,
+     "reward_rate_last_500_sd": 0.02262741699796952
+    },
+    "shuffled": {
+     "task": "aim",
+     "rule": "loops",
+     "wiring": "shuffled",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.11111111111111112
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.13
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.14777777777777776
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.14777777777777779
+      }
+     ],
+     "final": 0.14777777777777779,
+     "final_sd": 0.014550889837454218,
+     "reward_rate_last_500": 0.15466666666666667,
+     "reward_rate_last_500_sd": 0.019686430746977863
+    },
+    "random": {
+     "task": "aim",
+     "rule": "loops",
+     "wiring": "random",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.15333333333333332
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.14555555555555555
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.13888888888888887
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.14444444444444446
+      }
+     ],
+     "final": 0.14444444444444446,
+     "final_sd": 0.004779069592801456,
+     "reward_rate_last_500": 0.132,
+     "reward_rate_last_500_sd": 0.0170489491367259
+    }
+   },
+   "loops_shuffled": {
+    "measured": {
+     "task": "aim",
+     "rule": "loops_shuffled",
+     "wiring": "measured",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.1544444444444444
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.14277777777777778
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.13277777777777777
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.12833333333333333
+      }
+     ],
+     "final": 0.12833333333333333,
+     "final_sd": 0.004906533814626579,
+     "reward_rate_last_500": 0.12666666666666668,
+     "reward_rate_last_500_sd": 0.013097921802925662
+    },
+    "shuffled": {
+     "task": "aim",
+     "rule": "loops_shuffled",
+     "wiring": "shuffled",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.105
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.12555555555555556
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.15
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.14722222222222223
+      }
+     ],
+     "final": 0.14722222222222223,
+     "final_sd": 0.031426968052735454,
+     "reward_rate_last_500": 0.14533333333333334,
+     "reward_rate_last_500_sd": 0.03858612300930075
+    },
+    "random": {
+     "task": "aim",
+     "rule": "loops_shuffled",
+     "wiring": "random",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.15611111111111112
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.135
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.14277777777777778
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.14
+      }
+     ],
+     "final": 0.14,
+     "final_sd": 0.015693829879806147,
+     "reward_rate_last_500": 0.12933333333333333,
+     "reward_rate_last_500_sd": 0.00997775303139718
+    }
+   },
+   "backprop": {
+    "measured": {
+     "task": "aim",
+     "rule": "backprop",
+     "wiring": "measured",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.25166666666666665
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.4427777777777777
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.5955555555555555
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.6527777777777778
+      }
+     ],
+     "final": 0.6527777777777778,
+     "final_sd": 0.026399120823370446,
+     "reward_rate_last_500": 0.7239999999999999,
+     "reward_rate_last_500_sd": 0.016083117442419772
+    },
+    "shuffled": {
+     "task": "aim",
+     "rule": "backprop",
+     "wiring": "shuffled",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.2283333333333333
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.44166666666666665
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.6266666666666666
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.6505555555555556
+      }
+     ],
+     "final": 0.6505555555555556,
+     "final_sd": 0.024807903957517915,
+     "reward_rate_last_500": 0.7079999999999999,
+     "reward_rate_last_500_sd": 0.03115552385479444
+    },
+    "random": {
+     "task": "aim",
+     "rule": "backprop",
+     "wiring": "random",
+     "chance": 0.125,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.23722222222222222
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.42777777777777776
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.6127777777777778
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.6472222222222221
+      }
+     ],
+     "final": 0.6472222222222221,
+     "final_sd": 0.0020786985482077534,
+     "reward_rate_last_500": 0.7026666666666667,
+     "reward_rate_last_500_sd": 0.02311324776447959
+    }
+   }
+  },
+  "digits": {
+   "readout": {
+    "measured": {
+     "task": "digits",
+     "rule": "readout",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.165
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.335
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.5750000000000001
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.7450000000000001
+      }
+     ],
+     "final": 0.7450000000000001,
+     "final_sd": 0.007359800721939854,
+     "reward_rate_last_500": 0.6226666666666666,
+     "reward_rate_last_500_sd": 0.03347967874530595
+    },
+    "shuffled": {
+     "task": "digits",
+     "rule": "readout",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.33499999999999996
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.5366666666666667
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.8525
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.9125
+      }
+     ],
+     "final": 0.9125,
+     "final_sd": 0.004082482904638634,
+     "reward_rate_last_500": 0.8646666666666666,
+     "reward_rate_last_500_sd": 0.013888444437333117
+    },
+    "random": {
+     "task": "digits",
+     "rule": "readout",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.2866666666666667
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.5308333333333334
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.8525
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.9
+      }
+     ],
+     "final": 0.9,
+     "final_sd": 0.005400617248673239,
+     "reward_rate_last_500": 0.8553333333333333,
+     "reward_rate_last_500_sd": 0.02379542439676635
+    }
+   },
+   "global": {
+    "measured": {
+     "task": "digits",
+     "rule": "global",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.09000000000000001
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.09916666666666667
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.12583333333333332
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.1825
+      }
+     ],
+     "final": 0.1825,
+     "final_sd": 0.05365786677335083,
+     "reward_rate_last_500": 0.134,
+     "reward_rate_last_500_sd": 0.024385788210895838
+    },
+    "shuffled": {
+     "task": "digits",
+     "rule": "global",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.075
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.07583333333333332
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.10416666666666667
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.13999999999999999
+      }
+     ],
+     "final": 0.13999999999999999,
+     "final_sd": 0.025495097567963927,
+     "reward_rate_last_500": 0.12266666666666666,
+     "reward_rate_last_500_sd": 0.0138884444373331
+    },
+    "random": {
+     "task": "digits",
+     "rule": "global",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.12166666666666666
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.12583333333333335
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.14833333333333332
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.1875
+      }
+     ],
+     "final": 0.1875,
+     "final_sd": 0.03611324780003408,
+     "reward_rate_last_500": 0.12933333333333333,
+     "reward_rate_last_500_sd": 0.009428090415820637
+    }
+   },
+   "per_cell": {
+    "measured": {
+     "task": "digits",
+     "rule": "per_cell",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.11416666666666665
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.16333333333333336
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.39916666666666667
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.7166666666666667
+      }
+     ],
+     "final": 0.7166666666666667,
+     "final_sd": 0.05249338582674542,
+     "reward_rate_last_500": 0.6913333333333332,
+     "reward_rate_last_500_sd": 0.05870453323400351
+    },
+    "shuffled": {
+     "task": "digits",
+     "rule": "per_cell",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.09416666666666666
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.11916666666666668
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.3233333333333333
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.7316666666666668
+      }
+     ],
+     "final": 0.7316666666666668,
+     "final_sd": 0.029744280495957915,
+     "reward_rate_last_500": 0.682,
+     "reward_rate_last_500_sd": 0.04121488404286327
+    },
+    "random": {
+     "task": "digits",
+     "rule": "per_cell",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.14416666666666667
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.1775
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.3833333333333333
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.7191666666666667
+      }
+     ],
+     "final": 0.7191666666666667,
+     "final_sd": 0.04027681991198191,
+     "reward_rate_last_500": 0.7006666666666668,
+     "reward_rate_last_500_sd": 0.042153159892099286
+    }
+   },
+   "loops": {
+    "measured": {
+     "task": "digits",
+     "rule": "loops",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.08750000000000001
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.09999999999999999
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.17833333333333334
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.17333333333333334
+      }
+     ],
+     "final": 0.17333333333333334,
+     "final_sd": 0.03501983564908449,
+     "reward_rate_last_500": 0.17533333333333334,
+     "reward_rate_last_500_sd": 0.010873004286866723
+    },
+    "shuffled": {
+     "task": "digits",
+     "rule": "loops",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.07916666666666666
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.08416666666666667
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.10833333333333334
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.10416666666666667
+      }
+     ],
+     "final": 0.10416666666666667,
+     "final_sd": 0.03776756397874887,
+     "reward_rate_last_500": 0.122,
+     "reward_rate_last_500_sd": 0.024055491403558286
+    },
+    "random": {
+     "task": "digits",
+     "rule": "loops",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.12666666666666665
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.12166666666666666
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.08
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.09000000000000001
+      }
+     ],
+     "final": 0.09000000000000001,
+     "final_sd": 0.010606601717798208,
+     "reward_rate_last_500": 0.10466666666666667,
+     "reward_rate_last_500_sd": 0.028158282775923832
+    }
+   },
+   "loops_shuffled": {
+    "measured": {
+     "task": "digits",
+     "rule": "loops_shuffled",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.07333333333333333
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.12333333333333334
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.14416666666666667
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.14166666666666664
+      }
+     ],
+     "final": 0.14166666666666664,
+     "final_sd": 0.03595908168398569,
+     "reward_rate_last_500": 0.136,
+     "reward_rate_last_500_sd": 0.02550816862627865
+    },
+    "shuffled": {
+     "task": "digits",
+     "rule": "loops_shuffled",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.07250000000000001
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.08666666666666667
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.10666666666666665
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.10916666666666668
+      }
+     ],
+     "final": 0.10916666666666668,
+     "final_sd": 0.03229637062512684,
+     "reward_rate_last_500": 0.12933333333333333,
+     "reward_rate_last_500_sd": 0.034499597421161626
+    },
+    "random": {
+     "task": "digits",
+     "rule": "loops_shuffled",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.12583333333333332
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.105
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.11
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.11083333333333334
+      }
+     ],
+     "final": 0.11083333333333334,
+     "final_sd": 0.043652669512362643,
+     "reward_rate_last_500": 0.11333333333333334,
+     "reward_rate_last_500_sd": 0.02390722810272148
+    }
+   },
+   "backprop": {
+    "measured": {
+     "task": "digits",
+     "rule": "backprop",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.2825
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.5866666666666667
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.8583333333333334
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.9391666666666666
+      }
+     ],
+     "final": 0.9391666666666666,
+     "final_sd": 0.008249579113843036,
+     "reward_rate_last_500": 0.9786666666666667,
+     "reward_rate_last_500_sd": 0.0041096093353126546
+    },
+    "shuffled": {
+     "task": "digits",
+     "rule": "backprop",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.285
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.6166666666666667
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.8708333333333332
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.9416666666666668
+      }
+     ],
+     "final": 0.9416666666666668,
+     "final_sd": 0.004249182927993998,
+     "reward_rate_last_500": 0.9686666666666666,
+     "reward_rate_last_500_sd": 0.0033993463423951926
+    },
+    "random": {
+     "task": "digits",
+     "rule": "backprop",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 50,
+       "accuracy": 0.31750000000000006
+      },
+      {
+       "trials": 200,
+       "accuracy": 0.6308333333333334
+      },
+      {
+       "trials": 1000,
+       "accuracy": 0.8300000000000001
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.9291666666666667
+      }
+     ],
+     "final": 0.9291666666666667,
+     "final_sd": 0.011960583412006107,
+     "reward_rate_last_500": 0.9673333333333334,
+     "reward_rate_last_500_sd": 0.015434449203720314
+    }
+   }
+  },
+  "continual": {
+   "readout": {
+    "measured": {
+     "task": "continual",
+     "rule": "readout",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.9675848117024589,
+       "first_task_accuracy": 0.9675848117024589
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.7379733812574881,
+       "first_task_accuracy": 0.5809835045129162
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.5502416935001624,
+       "first_task_accuracy": 0.2704014939309057
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.5014743849367259,
+       "first_task_accuracy": 0.19341736694677872
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.4725,
+       "first_task_accuracy": 0.1377528789293495
+      }
+     ],
+     "final": 0.4725,
+     "final_sd": 0.012416387021459434,
+     "forgetting": 0.8298319327731093,
+     "forgetting_sd": 0.04438177717514368
+    },
+    "shuffled": {
+     "task": "continual",
+     "rule": "readout",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 1.0,
+       "first_task_accuracy": 1.0
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.9463392717612127,
+       "first_task_accuracy": 0.9034858387799565
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.91536360301663,
+       "first_task_accuracy": 0.78755057578587
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.8662938254929822,
+       "first_task_accuracy": 0.7032679738562092
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.7616666666666667,
+       "first_task_accuracy": 0.5357454092748211
+      }
+     ],
+     "final": 0.7616666666666667,
+     "final_sd": 0.03704351795148814,
+     "forgetting": 0.46425459072517894,
+     "forgetting_sd": 0.03313379669427966
+    },
+    "random": {
+     "task": "continual",
+     "rule": "readout",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.9950980392156863,
+       "first_task_accuracy": 0.9950980392156863
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.9135765260941069,
+       "first_task_accuracy": 0.852256458138811
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.8544400002855733,
+       "first_task_accuracy": 0.6652505446623094
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.8515274887691486,
+       "first_task_accuracy": 0.6485838779956428
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.765,
+       "first_task_accuracy": 0.5370837223778401
+      }
+     ],
+     "final": 0.765,
+     "final_sd": 0.024748737341529138,
+     "forgetting": 0.45801431683784627,
+     "forgetting_sd": 0.14243674441485518
+    }
+   },
+   "global": {
+    "measured": {
+     "task": "continual",
+     "rule": "global",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.5050420168067227,
+       "first_task_accuracy": 0.5050420168067227
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.32424244115524004,
+       "first_task_accuracy": 0.1368036103330221
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.18758655875250022,
+       "first_task_accuracy": 0.027248677248677248
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.1784753347770136,
+       "first_task_accuracy": 0.031216931216931216
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.1791666666666667,
+       "first_task_accuracy": 0.017475879240585124
+      }
+     ],
+     "final": 0.1791666666666667,
+     "final_sd": 0.04588633299312069,
+     "forgetting": 0.4875661375661376,
+     "forgetting_sd": 0.18556989517977468
+    },
+    "shuffled": {
+     "task": "continual",
+     "rule": "global",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.5951291627762215,
+       "first_task_accuracy": 0.5951291627762215
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.2667474084492369,
+       "first_task_accuracy": 0.28106131341425455
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.17364839115152997,
+       "first_task_accuracy": 0.1492530345471522
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.18221497014993815,
+       "first_task_accuracy": 0.10999066293183941
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.16,
+       "first_task_accuracy": 0.11518829754123872
+      }
+     ],
+     "final": 0.16,
+     "final_sd": 0.033603075256093254,
+     "forgetting": 0.4799408652349828,
+     "forgetting_sd": 0.07750844885901645
+    },
+    "random": {
+     "task": "continual",
+     "rule": "global",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.8176314970432617,
+       "first_task_accuracy": 0.8176314970432617
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.42728495523854165,
+       "first_task_accuracy": 0.5611733582321817
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.2823544586167716,
+       "first_task_accuracy": 0.3461562402738873
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.22237458308200406,
+       "first_task_accuracy": 0.3234827264239029
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.1758333333333333,
+       "first_task_accuracy": 0.24724556489262373
+      }
+     ],
+     "final": 0.1758333333333333,
+     "final_sd": 0.025522321385189256,
+     "forgetting": 0.570385932150638,
+     "forgetting_sd": 0.14804345982168468
+    }
+   },
+   "per_cell": {
+    "measured": {
+     "task": "continual",
+     "rule": "per_cell",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.9767195767195768,
+       "first_task_accuracy": 0.9767195767195768
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.5399039284411998,
+       "first_task_accuracy": 0.11017740429505135
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.3576395280775017,
+       "first_task_accuracy": 0.015873015873015872
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.26539237511059294,
+       "first_task_accuracy": 0.0
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.22666666666666668,
+       "first_task_accuracy": 0.003703703703703704
+      }
+     ],
+     "final": 0.22666666666666668,
+     "final_sd": 0.044032816045409685,
+     "forgetting": 0.9730158730158731,
+     "forgetting_sd": 0.019952071571391342
+    },
+    "shuffled": {
+     "task": "continual",
+     "rule": "per_cell",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.9876906318082789,
+       "first_task_accuracy": 0.9876906318082789
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.5605991263515877,
+       "first_task_accuracy": 0.15283224400871462
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.3475136508094872,
+       "first_task_accuracy": 0.007936507936507936
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.253936810608196,
+       "first_task_accuracy": 0.003968253968253968
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.22666666666666666,
+       "first_task_accuracy": 0.030718954248366015
+      }
+     ],
+     "final": 0.22666666666666666,
+     "final_sd": 0.02460803843372233,
+     "forgetting": 0.9569716775599129,
+     "forgetting_sd": 0.03129794749141315
+    },
+    "random": {
+     "task": "continual",
+     "rule": "per_cell",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.996031746031746,
+       "first_task_accuracy": 0.996031746031746
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.5895498924683172,
+       "first_task_accuracy": 0.2186585745409275
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.38161810429768805,
+       "first_task_accuracy": 0.028213507625272333
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.3028315790790141,
+       "first_task_accuracy": 0.07936507936507936
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.24666666666666667,
+       "first_task_accuracy": 0.056613756613756616
+      }
+     ],
+     "final": 0.24666666666666667,
+     "final_sd": 0.02044640691064217,
+     "forgetting": 0.9394179894179894,
+     "forgetting_sd": 0.04990262346707002
+    }
+   },
+   "loops": {
+    "measured": {
+     "task": "continual",
+     "rule": "loops",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.6111422346716464,
+       "first_task_accuracy": 0.6111422346716464
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.2627568295641432,
+       "first_task_accuracy": 0.19964207905384376
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.19174192110025964,
+       "first_task_accuracy": 0.054403983815748534
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.21941214442318369,
+       "first_task_accuracy": 0.08958916900093371
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.15,
+       "first_task_accuracy": 0.06817615935262994
+      }
+     ],
+     "final": 0.15,
+     "final_sd": 0.047478065110813726,
+     "forgetting": 0.5429660753190165,
+     "forgetting_sd": 0.14290234793164217
+    },
+    "shuffled": {
+     "task": "continual",
+     "rule": "loops",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.4925614690320573,
+       "first_task_accuracy": 0.4925614690320573
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.20785055700667518,
+       "first_task_accuracy": 0.3050887021475257
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.1567605271935801,
+       "first_task_accuracy": 0.18253968253968256
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.13786497260310432,
+       "first_task_accuracy": 0.0
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.11333333333333333,
+       "first_task_accuracy": 0.0
+      }
+     ],
+     "final": 0.11333333333333333,
+     "final_sd": 0.033932121785837224,
+     "forgetting": 0.4925614690320573,
+     "forgetting_sd": 0.04353252756978475
+    },
+    "random": {
+     "task": "continual",
+     "rule": "loops",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.6185496420790538,
+       "first_task_accuracy": 0.6185496420790538
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.22763694476071408,
+       "first_task_accuracy": 0.22248677248677248
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.1841200741659114,
+       "first_task_accuracy": 0.003703703703703704
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.13133057167750709,
+       "first_task_accuracy": 0.0
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.09666666666666668,
+       "first_task_accuracy": 0.0
+      }
+     ],
+     "final": 0.09666666666666668,
+     "final_sd": 0.04520017207440206,
+     "forgetting": 0.6185496420790538,
+     "forgetting_sd": 0.16553721002242822
+    }
+   },
+   "loops_shuffled": {
+    "measured": {
+     "task": "continual",
+     "rule": "loops_shuffled",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.5074385309679427,
+       "first_task_accuracy": 0.5074385309679427
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.25227342069817454,
+       "first_task_accuracy": 0.5074385309679427
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.19845531062826938,
+       "first_task_accuracy": 0.4444755680049797
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.1486689248622459,
+       "first_task_accuracy": 0.4407718643012761
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.1366666666666667,
+       "first_task_accuracy": 0.21349206349206348
+      }
+     ],
+     "final": 0.1366666666666667,
+     "final_sd": 0.018521758975744054,
+     "forgetting": 0.2939464674758792,
+     "forgetting_sd": 0.18781383728973228
+    },
+    "shuffled": {
+     "task": "continual",
+     "rule": "loops_shuffled",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.46081543728602553,
+       "first_task_accuracy": 0.46081543728602553
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.21033699461969504,
+       "first_task_accuracy": 0.14705882352941177
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.16640910848630708,
+       "first_task_accuracy": 0.14705882352941177
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.1382265340225287,
+       "first_task_accuracy": 0.0
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.11166666666666668,
+       "first_task_accuracy": 0.0
+      }
+     ],
+     "final": 0.11166666666666668,
+     "final_sd": 0.027182510717166822,
+     "forgetting": 0.46081543728602553,
+     "forgetting_sd": 0.020371125263217802
+    },
+    "random": {
+     "task": "continual",
+     "rule": "loops_shuffled",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.4682228446934329,
+       "first_task_accuracy": 0.4682228446934329
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.2453164184880078,
+       "first_task_accuracy": 0.31742919389978214
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.2088926299591133,
+       "first_task_accuracy": 0.24215686274509804
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.15347203983813593,
+       "first_task_accuracy": 0.1111111111111111
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.10833333333333334,
+       "first_task_accuracy": 0.09629629629629628
+      }
+     ],
+     "final": 0.10833333333333334,
+     "final_sd": 0.040121343724035745,
+     "forgetting": 0.3719265483971366,
+     "forgetting_sd": 0.1059557267908778
+    }
+   },
+   "backprop": {
+    "measured": {
+     "task": "continual",
+     "rule": "backprop",
+     "wiring": "measured",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.996031746031746,
+       "first_task_accuracy": 0.996031746031746
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.5292819190498514,
+       "first_task_accuracy": 0.07586367880485527
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.3474421445252032,
+       "first_task_accuracy": 0.003703703703703704
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.26626104445874654,
+       "first_task_accuracy": 0.0
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.20750000000000002,
+       "first_task_accuracy": 0.0
+      }
+     ],
+     "final": 0.20750000000000002,
+     "final_sd": 0.018708286933869712,
+     "forgetting": 0.996031746031746,
+     "forgetting_sd": 0.005611958580845596
+    },
+    "shuffled": {
+     "task": "continual",
+     "rule": "backprop",
+     "wiring": "shuffled",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.9925925925925926,
+       "first_task_accuracy": 0.9925925925925926
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.5704676697995966,
+       "first_task_accuracy": 0.13918456271397447
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.3763107113205677,
+       "first_task_accuracy": 0.011111111111111112
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.3060937689899914,
+       "first_task_accuracy": 0.023544973544973546
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.19999999999999998,
+       "first_task_accuracy": 0.013507625272331155
+      }
+     ],
+     "final": 0.19999999999999998,
+     "final_sd": 0.014288690166235206,
+     "forgetting": 0.9790849673202615,
+     "forgetting_sd": 0.014875564283321622
+    },
+    "random": {
+     "task": "continual",
+     "rule": "backprop",
+     "wiring": "random",
+     "chance": 0.1,
+     "curve": [
+      {
+       "trials": 800,
+       "accuracy": 0.996031746031746,
+       "first_task_accuracy": 0.996031746031746
+      },
+      {
+       "trials": 1600,
+       "accuracy": 0.5942074282439965,
+       "first_task_accuracy": 0.2007002801120448
+      },
+      {
+       "trials": 2400,
+       "accuracy": 0.3809635450344093,
+       "first_task_accuracy": 0.04063180827886711
+      },
+      {
+       "trials": 3200,
+       "accuracy": 0.27841692376810173,
+       "first_task_accuracy": 0.003703703703703704
+      },
+      {
+       "trials": 4000,
+       "accuracy": 0.19666666666666666,
+       "first_task_accuracy": 0.0
+      }
+     ],
+     "final": 0.19666666666666666,
+     "final_sd": 0.020446406910642166,
+     "forgetting": 0.996031746031746,
+     "forgetting_sd": 0.005611958580845596
+    }
+   }
+  }
+ },
+ "standard_network": {
+  "aim": {
+   "curve": [
+    {
+     "trials": 50,
+     "accuracy": 0.23277777777777778
+    },
+    {
+     "trials": 200,
+     "accuracy": 0.5588888888888889
+    },
+    {
+     "trials": 1000,
+     "accuracy": 0.685
+    },
+    {
+     "trials": 4000,
+     "accuracy": 0.7088888888888888
+    }
+   ],
+   "final": 0.7088888888888888,
+   "final_sd": 0.008202679477907449
+  },
+  "digits": {
+   "curve": [
+    {
+     "trials": 50,
+     "accuracy": 0.44416666666666665
+    },
+    {
+     "trials": 200,
+     "accuracy": 0.805
+    },
+    {
+     "trials": 1000,
+     "accuracy": 0.9066666666666666
+    },
+    {
+     "trials": 4000,
+     "accuracy": 0.9566666666666667
+    }
+   ],
+   "final": 0.9566666666666667,
+   "final_sd": 0.025193694096384972
+  },
+  "continual": {
+   "curve": [
+    {
+     "trials": 800,
+     "accuracy": 1.0,
+     "first_task_accuracy": 1.0
+    },
+    {
+     "trials": 1600,
+     "accuracy": 0.5751614835651404,
+     "first_task_accuracy": 0.13888888888888887
+    },
+    {
+     "trials": 2400,
+     "accuracy": 0.3665964075062033,
+     "first_task_accuracy": 0.0
+    },
+    {
+     "trials": 3200,
+     "accuracy": 0.2526364321151199,
+     "first_task_accuracy": 0.0
+    },
+    {
+     "trials": 4000,
+     "accuracy": 0.19499999999999998,
+     "first_task_accuracy": 0.0
+    }
+   ],
+   "final": 0.19499999999999998,
+   "final_sd": 0.014719601443879746,
+   "forgetting": 1.0,
+   "forgetting_sd": 0.0
+  }
+ },
+ "biology": {
+  "aim": {
+   "plain": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.15666666666666665
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.22055555555555553
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.32611111111111113
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.38999999999999996
+     }
+    ],
+    "final": 0.38999999999999996,
+    "final_sd": 0.05678093054956105,
+    "reward_rate_last_500": 0.38466666666666666,
+    "reward_rate_last_500_sd": 0.04659995231280344
+   },
+   "no_sparse": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.15388888888888888
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.17499999999999996
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.19777777777777775
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.33166666666666667
+     }
+    ],
+    "final": 0.33166666666666667,
+    "final_sd": 0.06816374620204128,
+    "reward_rate_last_500": 0.23399999999999999,
+    "reward_rate_last_500_sd": 0.03536476589299959
+   },
+   "no_size": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.15277777777777776
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.21444444444444444
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.3311111111111111
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.44222222222222224
+     }
+    ],
+    "final": 0.44222222222222224,
+    "final_sd": 0.06176918405455453,
+    "reward_rate_last_500": 0.41533333333333333,
+    "reward_rate_last_500_sd": 0.06773149603807341
+   },
+   "no_prediction_error": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.17388888888888887
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.23555555555555555
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.39888888888888885
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.5605555555555556
+     }
+    ],
+    "final": 0.5605555555555556,
+    "final_sd": 0.03752365509059614,
+    "reward_rate_last_500": 0.5846666666666667,
+    "reward_rate_last_500_sd": 0.03844765561412322
+   },
+   "depression_only": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.14777777777777779
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.13833333333333334
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.13555555555555554
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.13055555555555556
+     }
+    ],
+    "final": 0.13055555555555556,
+    "final_sd": 0.010570165328022466,
+    "reward_rate_last_500": 0.13133333333333333,
+    "reward_rate_last_500_sd": 0.019482185594936606
+   },
+   "lateral": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.16611111111111113
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.22777777777777777
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.34500000000000003
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.39944444444444444
+     }
+    ],
+    "final": 0.39944444444444444,
+    "final_sd": 0.04910935140135459,
+    "reward_rate_last_500": 0.37799999999999995,
+    "reward_rate_last_500_sd": 0.032124756808418004
+   },
+   "dendrites": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.15888888888888889
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.17444444444444443
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.255
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.3611111111111111
+     }
+    ],
+    "final": 0.3611111111111111,
+    "final_sd": 0.051376124540875076,
+    "reward_rate_last_500": 0.336,
+    "reward_rate_last_500_sd": 0.039021361671098403
+   },
+   "compartment_votes": {
+    "task": "aim",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.17166666666666666
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.2111111111111111
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.3427777777777778
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.47000000000000003
+     }
+    ],
+    "final": 0.47000000000000003,
+    "final_sd": 0.019767163194063554,
+    "reward_rate_last_500": 0.4146666666666667,
+    "reward_rate_last_500_sd": 0.011469767022723489
+   }
+  },
+  "digits": {
+   "plain": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.11416666666666665
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.16333333333333336
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.39916666666666667
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.7166666666666667
+     }
+    ],
+    "final": 0.7166666666666667,
+    "final_sd": 0.05249338582674542,
+    "reward_rate_last_500": 0.6913333333333332,
+    "reward_rate_last_500_sd": 0.05870453323400351
+   },
+   "no_sparse": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.08083333333333333
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.09000000000000001
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.15416666666666667
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.29833333333333334
+     }
+    ],
+    "final": 0.29833333333333334,
+    "final_sd": 0.0896598510420851,
+    "reward_rate_last_500": 0.238,
+    "reward_rate_last_500_sd": 0.06805879810869422
+   },
+   "no_size": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.10583333333333333
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.16749999999999998
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.3358333333333334
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.6241666666666666
+     }
+    ],
+    "final": 0.6241666666666666,
+    "final_sd": 0.060288657492286395,
+    "reward_rate_last_500": 0.5640000000000001,
+    "reward_rate_last_500_sd": 0.03766519171153474
+   },
+   "no_prediction_error": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.09999999999999999
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.1425
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.42583333333333334
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.58
+     }
+    ],
+    "final": 0.58,
+    "final_sd": 0.046948553403344244,
+    "reward_rate_last_500": 0.5886666666666667,
+    "reward_rate_last_500_sd": 0.044191502451137454
+   },
+   "depression_only": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.08916666666666666
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.12666666666666668
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.13499999999999998
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.14916666666666667
+     }
+    ],
+    "final": 0.14916666666666667,
+    "final_sd": 0.027182510717166816,
+    "reward_rate_last_500": 0.15333333333333335,
+    "reward_rate_last_500_sd": 0.033038697848970316
+   },
+   "lateral": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.11083333333333333
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.1525
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.41916666666666663
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.7375000000000002
+     }
+    ],
+    "final": 0.7375000000000002,
+    "final_sd": 0.08838834764831845,
+    "reward_rate_last_500": 0.7113333333333333,
+    "reward_rate_last_500_sd": 0.08448010942753853
+   },
+   "dendrites": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.09916666666666667
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.12083333333333333
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.24250000000000002
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.5508333333333334
+     }
+    ],
+    "final": 0.5508333333333334,
+    "final_sd": 0.12437063783528474,
+    "reward_rate_last_500": 0.48733333333333323,
+    "reward_rate_last_500_sd": 0.09229421554042387
+   },
+   "compartment_votes": {
+    "task": "digits",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.09416666666666666
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.14916666666666667
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.3633333333333333
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.6483333333333333
+     }
+    ],
+    "final": 0.6483333333333333,
+    "final_sd": 0.1107988668213213,
+    "reward_rate_last_500": 0.634,
+    "reward_rate_last_500_sd": 0.09848180881090003
+   }
+  },
+  "continual": {
+   "plain": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.9767195767195768,
+      "first_task_accuracy": 0.9767195767195768
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.5399039284411998,
+      "first_task_accuracy": 0.11017740429505135
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.3576395280775017,
+      "first_task_accuracy": 0.015873015873015872
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.26539237511059294,
+      "first_task_accuracy": 0.0
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.22666666666666668,
+      "first_task_accuracy": 0.003703703703703704
+     }
+    ],
+    "final": 0.22666666666666668,
+    "final_sd": 0.044032816045409685,
+    "forgetting": 0.9730158730158731,
+    "forgetting_sd": 0.019952071571391342
+   },
+   "no_sparse": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.8162620603797075,
+      "first_task_accuracy": 0.8162620603797075
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.37474233325147527,
+      "first_task_accuracy": 0.333348895113601
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.24616669834180427,
+      "first_task_accuracy": 0.13095238095238096
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.18999511451155215,
+      "first_task_accuracy": 0.0
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.15416666666666667,
+      "first_task_accuracy": 0.007936507936507936
+     }
+    ],
+    "final": 0.15416666666666667,
+    "final_sd": 0.04360491817317043,
+    "forgetting": 0.8083255524431995,
+    "forgetting_sd": 0.21143428288123273
+   },
+   "no_size": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.6860099595393713,
+      "first_task_accuracy": 0.6860099595393713
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.534771057977809,
+      "first_task_accuracy": 0.23624338624338623
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.416016716339247,
+      "first_task_accuracy": 0.10177404295051355
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.2682316343634386,
+      "first_task_accuracy": 0.015873015873015872
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.27666666666666667,
+      "first_task_accuracy": 0.10052910052910052
+     }
+    ],
+    "final": 0.27666666666666667,
+    "final_sd": 0.02917856900001933,
+    "forgetting": 0.5854808590102708,
+    "forgetting_sd": 0.16341804607276836
+   },
+   "no_prediction_error": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.8392779333955804,
+      "first_task_accuracy": 0.8392779333955804
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.6296026536884484,
+      "first_task_accuracy": 0.6379551820728292
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.31541830927785114,
+      "first_task_accuracy": 0.18557422969187676
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.22597825212070602,
+      "first_task_accuracy": 0.0
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.3016666666666667,
+      "first_task_accuracy": 0.18951136009959538
+     }
+    ],
+    "final": 0.3016666666666667,
+    "final_sd": 0.03368563821901288,
+    "forgetting": 0.6497665732959851,
+    "forgetting_sd": 0.14700596325916643
+   },
+   "depression_only": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.5000311235605354,
+      "first_task_accuracy": 0.5000311235605354
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.36035671496290345,
+      "first_task_accuracy": 0.24139433551198256
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.20337403927409803,
+      "first_task_accuracy": 0.1608309990662932
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.16155534262714535,
+      "first_task_accuracy": 0.12041705571117338
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.1425,
+      "first_task_accuracy": 0.09351073762838469
+     }
+    ],
+    "final": 0.1425,
+    "final_sd": 0.02943920288775949,
+    "forgetting": 0.4065203859321507,
+    "forgetting_sd": 0.05900549781020581
+   },
+   "lateral": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.9693121693121695,
+      "first_task_accuracy": 0.9693121693121695
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.5185557267132513,
+      "first_task_accuracy": 0.05438842203548086
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.36743100897468256,
+      "first_task_accuracy": 0.011904761904761904
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.26229489205908507,
+      "first_task_accuracy": 0.0
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.2275,
+      "first_task_accuracy": 0.0
+     }
+    ],
+    "final": 0.2275,
+    "final_sd": 0.04276875806785447,
+    "forgetting": 0.9693121693121695,
+    "forgetting_sd": 0.021738241888014962
+   },
+   "dendrites": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.8574074074074073,
+      "first_task_accuracy": 0.8574074074074073
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.5645497064273436,
+      "first_task_accuracy": 0.22549019607843138
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.3996889962379335,
+      "first_task_accuracy": 0.049361967009025835
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.2826105151360353,
+      "first_task_accuracy": 0.0
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.255,
+      "first_task_accuracy": 0.04934640522875817
+     }
+    ],
+    "final": 0.255,
+    "final_sd": 0.050785496617308634,
+    "forgetting": 0.8080610021786492,
+    "forgetting_sd": 0.20405111753716773
+   },
+   "compartment_votes": {
+    "task": "continual",
+    "rule": "per_cell",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.9950980392156863,
+      "first_task_accuracy": 0.9950980392156863
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.6566185936790719,
+      "first_task_accuracy": 0.3354652972300031
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.38070038383398574,
+      "first_task_accuracy": 0.08518518518518518
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.26789288097590475,
+      "first_task_accuracy": 0.04074074074074074
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.26416666666666666,
+      "first_task_accuracy": 0.1796296296296296
+     }
+    ],
+    "final": 0.26416666666666666,
+    "final_sd": 0.026325948331552187,
+    "forgetting": 0.8154684095860567,
+    "forgetting_sd": 0.19368001792962172
+   }
+  }
+ },
+ "biology_rule": "per_cell",
+ "loops_with_compartment_votes": {
+  "aim": {
+   "loops": {
+    "task": "aim",
+    "rule": "loops",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.14944444444444444
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.155
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.18833333333333332
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.15833333333333333
+     }
+    ],
+    "final": 0.15833333333333333,
+    "final_sd": 0.030912061651652344,
+    "reward_rate_last_500": 0.17866666666666667,
+    "reward_rate_last_500_sd": 0.01635712552851373
+   },
+   "loops_shuffled": {
+    "task": "aim",
+    "rule": "loops_shuffled",
+    "wiring": "measured",
+    "chance": 0.125,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.165
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.16666666666666666
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.16555555555555557
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.14666666666666667
+     }
+    ],
+    "final": 0.14666666666666667,
+    "final_sd": 0.018308063392537866,
+    "reward_rate_last_500": 0.16066666666666668,
+    "reward_rate_last_500_sd": 0.03172100600898752
+   }
+  },
+  "digits": {
+   "loops": {
+    "task": "digits",
+    "rule": "loops",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.06166666666666667
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.12833333333333333
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.2041666666666667
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.21750000000000003
+     }
+    ],
+    "final": 0.21750000000000003,
+    "final_sd": 0.07884584115009914,
+    "reward_rate_last_500": 0.22733333333333336,
+    "reward_rate_last_500_sd": 0.07363574011458174
+   },
+   "loops_shuffled": {
+    "task": "digits",
+    "rule": "loops_shuffled",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 50,
+      "accuracy": 0.11166666666666668
+     },
+     {
+      "trials": 200,
+      "accuracy": 0.1475
+     },
+     {
+      "trials": 1000,
+      "accuracy": 0.15333333333333332
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.1366666666666667
+     }
+    ],
+    "final": 0.1366666666666667,
+    "final_sd": 0.030092450142112984,
+    "reward_rate_last_500": 0.14066666666666666,
+    "reward_rate_last_500_sd": 0.004714045207910308
+   }
+  },
+  "continual": {
+   "loops": {
+    "task": "continual",
+    "rule": "loops",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.6421879863056333,
+      "first_task_accuracy": 0.6421879863056333
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.5644399422528817,
+      "first_task_accuracy": 0.3237317149081855
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.30482722319476796,
+      "first_task_accuracy": 0.14466230936819172
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.211594000036557,
+      "first_task_accuracy": 0.05882352941176471
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.18333333333333335,
+      "first_task_accuracy": 0.06372549019607843
+     }
+    ],
+    "final": 0.18333333333333335,
+    "final_sd": 0.06558497456650335,
+    "forgetting": 0.5784624961095549,
+    "forgetting_sd": 0.15321785243073724
+   },
+   "loops_shuffled": {
+    "task": "continual",
+    "rule": "loops_shuffled",
+    "wiring": "measured",
+    "chance": 0.1,
+    "curve": [
+     {
+      "trials": 800,
+      "accuracy": 0.5000311235605354,
+      "first_task_accuracy": 0.5000311235605354
+     },
+     {
+      "trials": 1600,
+      "accuracy": 0.24610058119200173,
+      "first_task_accuracy": 0.5000311235605354
+     },
+     {
+      "trials": 2400,
+      "accuracy": 0.1670948684379259,
+      "first_task_accuracy": 0.16296296296296295
+     },
+     {
+      "trials": 3200,
+      "accuracy": 0.14483120292686774,
+      "first_task_accuracy": 0.037037037037037035
+     },
+     {
+      "trials": 4000,
+      "accuracy": 0.13916666666666666,
+      "first_task_accuracy": 0.022222222222222223
+     }
+    ],
+    "final": 0.13916666666666666,
+    "final_sd": 0.03324989557210001,
+    "forgetting": 0.4778089013383131,
+    "forgetting_sd": 0.05859416764267325
+   }
+  }
+ },
+ "biology_text": {
+  "plain": "Reference: sparse code, size-scaled cells, prediction-error dopamine",
+  "no_sparse": "Without sparse coding (all Kenyon cells respond)",
+  "no_size": "Without size-scaled excitability (identical cells)",
+  "no_prediction_error": "Dopamine signals raw reward and punishment, not surprise",
+  "depression_only": "Synapses excitatory only, dopamine can only weaken them (as in the fly)",
+  "lateral": "With the measured connections between output neurons",
+  "dendrites": "With dendritic branches, one per Kenyon-cell class",
+  "compartment_votes": "Output neurons of one compartment vote together (as valence is organised in the fly)"
+ },
+ "loop_structure": {
+  "measured": {
+   "loops": {
+    "output_neurons_taught": 97,
+    "of": 97,
+    "from_itself": 0.04211629139051656,
+    "from_own_compartment": 0.2569688941028886
+   },
+   "loops_shuffled": {
+    "output_neurons_taught": 97,
+    "of": 97,
+    "from_itself": 0.009341493614192495,
+    "from_own_compartment": 0.11927849841234131
+   }
+  },
+  "shuffled": {
+   "loops": {
+    "output_neurons_taught": 97,
+    "of": 97,
+    "from_itself": 0.01047208972118343,
+    "from_own_compartment": null
+   },
+   "loops_shuffled": {
+    "output_neurons_taught": 97,
+    "of": 97,
+    "from_itself": 0.016290007886887864,
+    "from_own_compartment": null
+   }
+  },
+  "random": {
+   "loops": {
+    "output_neurons_taught": 97,
+    "of": 97,
+    "from_itself": 0.01423560716224254,
+    "from_own_compartment": null
+   },
+   "loops_shuffled": {
+    "output_neurons_taught": 97,
+    "of": 97,
+    "from_itself": 0.009702457256911722,
+    "from_own_compartment": null
+   }
+  }
+ }
+}
