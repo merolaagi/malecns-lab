@@ -517,6 +517,21 @@ Caveats, plainly:
 .venv/bin/python bodysim.py                      # closed-loop scorecard -> data/body-benchmark.json
 ```
 
+### Why the fly doesn't walk: a diagnosis (new)
+
+On the left-right complete circuit (1,741 neurons, 600 added for balance), the closed-loop body failed all the walking tests: lighting P9 on both sides silenced every leg, MDN reversed only the front legs, and the front legs got no hip-muscle drive under P9. `diagnose.py` tests the suspected assumptions against each other, without changing the model's defaults. Results are in `data/diagnosis.json` and on `/optogenetics`.
+
+1. **Light strength matters, and the two sides inhibit each other.** P9 on one side makes the legs step from light 2.0 (right) or 2.5 (left). On both sides the legs stay silent up to 3.5 and step only at 5.0. So bilateral P9 at the default light wasn't broken wiring; it was below the threshold that cross-midline inhibition sets.
+2. **Glutamate as excitatory everywhere makes things worse.** Every leg saturates at full amplitude with no direction, for P9, MDN and even DNa02 alone. That rules out "all glutamate excites" as the fix; the inhibitory assumption stays, though the truth is probably mixed.
+3. **The front legs aren't mis-ruled; they're unreached.** The front legs have hip motor neurons in the circuit (promotors, rotators, remotors), but P9 drives none of them: front-leg direction is 0 at every light. MDN drives the front legs strongly backward (−0.9) while the middle and hind legs step forward. With front legs following the others' direction, DNa02 turns toward the lit side (right −32°, left +72°), but only 1 of 3 seeds agree and shuffled wiring turns too, so it isn't reliable.
+4. **New bottleneck: coordination.** Even when the circuit makes every leg step forward (P9 on both sides at 5.0, front legs following), the body travels under 3 mm in 1.5 s, against 22 mm for the same body with one shared rhythm. The circuit drives the legs at different speeds (4–11 Hz) and amplitudes (0.5–0.98), so they never lock into a tripod. Stronger coupling or one shared frequency helps a little (1.3–1.6 mm) but not enough; removing the posture offsets doesn't help.
+
+What this points to: the circuit extract reaches the legs unevenly (P9 misses the front legs entirely), and nothing in it coordinates the legs. In real flies the VNC's own interneurons and leg sense organs do that. Next: extract the VNC interneurons that link the six leg neuropils (and the premotor cells P9 uses for the front legs), rather than adding more assumed coupling.
+
+```sh
+.venv/bin/python diagnose.py      # about 10 minutes with 8 cores; needs flygym for stages 2 and 3
+```
+
 ## Object memory: seeing, remembering, recognising a variant (new)
 
 Open `/objects`. The question: can the measured circuit take a sensation (a cup under some light), store it, and use the memory to recognise a slightly different sensation (another cup, other light, another distance)? This is the fly's version of what tbp.monty attempts, and the page says plainly where it differs.

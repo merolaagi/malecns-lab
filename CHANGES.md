@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Diagnose why the fly doesn't walk
+
+- `diagnose.py`: light-strength sweep, glutamate inhibitory versus excitatory, and front-leg direction rules, first on the circuit alone, then in the body with shuffled and sham controls, then a coordination test. Results in `data/diagnosis.json` and a new section on `/optogenetics`.
+- Findings: bilateral P9 needs light 5.0 (vs 2.0–2.5 one-sided) because the two sides inhibit each other; excitatory glutamate saturates every leg with no direction; P9 never reaches the front legs' hip motor neurons; and even with all legs stepping forward the body walks under 3 mm against 22 mm for a shared rhythm, because the legs run at different speeds and never lock into a tripod.
+- `bodysim.py` gains switches used only by the diagnosis (`FRONT_RULE`, `SHARED_FREQ`, `OFFSET_SCALE`); defaults unchanged.
+
 ## Close the loop: circuit rhythm, leg feedback, jump muscle, left-right complete circuit
 
 - `bodysim.py` rewritten as a closed-loop co-simulation: `model.Stepper` advances the network each millisecond, each leg's stepping oscillator takes its amplitude, frequency and direction from the circuit (coxa retractors against protractors set forward or backward), foot load and joint speed feed the legs' sensory neurons, and the jump-muscle motor neurons drive a twitching middle-leg muscle.

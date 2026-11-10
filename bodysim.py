@@ -65,6 +65,7 @@ A_SCALE = 10.0                   # Hz of leg motor drive for near-full step ampl
 F_MAX, F_SCALE = 12.0, 15.0      # step frequency rises to F_MAX with leg drive
 SUPPLIED_HZ = 12.0               # the fixed rhythm used when the rhythm is supplied (ablation)
 COUPLING = 10.0                  # tripod coupling strength (1/s)
+SHARED_FREQ = False              # True: all legs step at the mean frequency (diagnose.py)
 # feedback
 LOAD_GAIN, CHO_GAIN, V_REF = 0.6, 0.6, 20.0   # threshold units at one third of body weight / at 20 rad/s
 # jump muscle
@@ -72,6 +73,8 @@ JUMP_G, LEVER_MM, TAU_ACT, TWITCH = 10.0, 1.0, 0.005, 0.8   # each motor spike r
 # verdicts, relative to the comparison run
 TURN_DEG, WALK_MM, STRAIGHT_DEG, RISE_MM = 10.0, 2.0, 45.0, 0.05
 
+OFFSET_SCALE = 1.0              # scales the posture offsets (diagnose.py tests 0: rhythm only)
+FRONT_RULE = 'own'               # 'follow': front legs take the mean direction of the middle and hind legs (diagnose.py)
 FULL = dict(matched=False, rhythm='circuit', feedback=True, muscle=True, physiology='both')
 ABLATIONS = {
     'full': ('Everything on', {}),
@@ -249,15 +252,18 @@ def run_once(experiment, side='both', seed=1, condition='intact', config=None, b
         net.drive = rest + bg + (lit if t >= og.LIGHT_ON else 0.0)
         spikes = net.step(injected if cfg['feedback'] else None)
         rates = {k: mean(idx) for k, idx in grp_idx.items()}
-        offsets = b.offsets(rates)
+        offsets = b.offsets(rates) * OFFSET_SCALE
         if cfg['rhythm'] == 'supplied':
             amp, freq, direction = np.ones(6), np.full(6, SUPPLIED_HZ), np.ones(6)
         else:
             drive = np.array([mean(p) for p in pools])
             amp = np.tanh(drive / A_SCALE)
             freq = F_MAX * np.tanh(drive / F_SCALE)
+            if SHARED_FREQ: freq = np.full(6, freq[amp > 0.1].mean() if (amp > 0.1).any() else 0.0)
             r_, p_ = np.array([mean(i) for i in ret]), np.array([mean(i) for i in pro])
             direction = (r_ - p_) / (r_ + p_ + 1.0)
+            if FRONT_RULE == 'follow':
+                direction[[0, 3]] = direction[[1, 2, 4, 5]].mean()
         # tripod-coupled phase oscillators
         diff = phases[None, :] - phases[:, None] - (TRIPOD[None, :] - TRIPOD[:, None])
         dphi = 2 * np.pi * freq * direction + COUPLING * (amp[None, :] * np.sin(diff)).sum(1) / 6

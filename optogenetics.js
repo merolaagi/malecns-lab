@@ -151,4 +151,34 @@ $('brun').addEventListener('click', async () => {
   } catch (e) { $('bstatus').textContent = e.message; $('bstatus').className = 'wb-status err'; }
   $('brun').disabled = false;
 });
-loadMeta(); score(); bodyScore();
+async function diagnosis() {
+  try {
+    const r = await fetch('/api/diagnosis'); if (!r.ok) throw new Error('No diagnosis yet: .venv/bin/python diagnose.py');
+    const d = await r.json();
+    const cell = x => x.mean_amp < 0.05 ? '<span class="muted">silent</span>' : `${x.mean_amp.toFixed(2)} <span class="muted" style="font-size:11px">${x.rear_dir >= 0 ? 'fwd' : 'back'} ${Math.abs(x.rear_dir).toFixed(2)} / front ${x.front_dir >= 0 ? '+' : ''}${x.front_dir.toFixed(2)}</span>`;
+    let h = `<h3 style="font-size:13px;margin:6px 0">1. The circuit alone: how strongly the legs would step, and which way, by light strength</h3>
+      <div class="tw"><table class="bench"><tr><th>Glutamate</th><th>Cell type, side</th>${d.lights.map(l => `<th>light ${l}</th>`).join('')}</tr>`;
+    for (const glu of Object.keys(d.glutamate)) for (const [e, side] of d.cases) {
+      const row = d.stage1.filter(x => x.glutamate === glu && x.experiment === e && x.side === side);
+      if (row.length) h += `<tr><td>${esc(glu)}</td><td>${esc(e)}, ${esc(side)}</td>${row.map(x => `<td>${cell(x)}</td>`).join('')}</tr>`;
+    }
+    h += '</table></div><p class="hint">Mean step amplitude over the six legs (0 to 1), the middle and hind legs\' direction (fwd or back) and the front legs\' direction (−1 backward to +1 forward), in the second half of the light.</p>';
+    if (d.stage2) {
+      h += `<h3 style="font-size:13px;margin:14px 0 6px">2. In the body, at the light where bilateral P9 first makes the legs step (${Object.entries(d.chosen_light).map(([g, l]) => `${esc(g)} glutamate: ${l}`).join('; ')})</h3>
+        <div class="tw"><table class="bench"><tr><th>Front legs</th><th>Cell type</th><th>Measured wiring</th><th>Shuffled</th><th>Sham</th></tr>`;
+      const by = {}; d.stage2.forEach(x => { (by[`${x.front}|${x.experiment}`] ||= {})[x.condition] = x; });
+      for (const [k, c] of Object.entries(by)) {
+        const [front, e] = k.split('|');
+        h += `<tr><td>${esc(front === 'own' ? 'own direction' : 'follow the others')}</td><td>${esc(e)}</td>${['intact', 'shuffled', 'sham'].map(cn => c[cn] ? `<td><span class="tag ${tagClass(c[cn].result)}">${esc(c[cn].result)}</span></td>` : '<td>–</td>').join('')}</tr>`;
+        h += `<tr><td></td><td colspan="4" class="muted" style="text-align:left">${esc(c.intact.detail)}</td></tr>`;
+      }
+      h += '</table></div>';
+    }
+    if (d.stage3) {
+      h += `<h3 style="font-size:13px;margin:14px 0 6px">3. Coordination: bilateral P9, front legs following, how far the body walks in 1.5 s</h3>
+        <table class="bench"><tr><th>Rhythm</th><th></th><th>Forward travel</th><th>Turn</th></tr>${d.stage3.map(x => `<tr><td>${esc(x.text)}</td><td></td><td>${x.forward_mm.toFixed(2)} mm</td><td>${x.yaw_deg >= 0 ? '+' : ''}${x.yaw_deg.toFixed(0)}°</td></tr>`).join('')}</table>`;
+    }
+    $('diag').innerHTML = h;
+  } catch (e) { $('diag').innerHTML = `<p class="hint">${esc(e.message)}</p>`; }
+}
+loadMeta(); score(); bodyScore(); diagnosis();

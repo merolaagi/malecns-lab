@@ -1,0 +1,4988 @@
+{
+ "glutamate": {
+  "inhibitory": "Glutamate inhibitory everywhere (current model)",
+  "excitatory": "Glutamate excitatory everywhere"
+ },
+ "front": {
+  "own": "Each leg takes its direction from its own coxa muscles (current model)",
+  "follow": "Front legs take the mean direction of the middle and hind legs"
+ },
+ "lights": [
+  1.0,
+  1.5,
+  2.0,
+  2.5,
+  3.5,
+  5.0
+ ],
+ "cases": [
+  [
+   "P9",
+   "both"
+  ],
+  [
+   "P9",
+   "right"
+  ],
+  [
+   "P9",
+   "left"
+  ],
+  [
+   "MDN",
+   "both"
+  ],
+  [
+   "DNa02",
+   "right"
+  ],
+  [
+   "DNa02",
+   "left"
+  ]
+ ],
+ "stage1": [
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.575,
+     "amp": 0.506,
+     "freq_hz": 4.265000000000001,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.299999999999997,
+     "amp": 0.9724999999999999,
+     "freq_hz": 10.675,
+     "dir": 0.984,
+     "retract_hz": 60.394999999999996,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 8.395,
+     "amp": 0.686,
+     "freq_hz": 6.09,
+     "dir": 0.9515,
+     "retract_hz": 19.59,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.645,
+     "amp": 0.852,
+     "freq_hz": 8.25,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 22.07,
+     "amp": 0.976,
+     "freq_hz": 10.8,
+     "dir": 0.984,
+     "retract_hz": 61.885000000000005,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 12.245000000000001,
+     "amp": 0.841,
+     "freq_hz": 8.075,
+     "dir": 0.97,
+     "retract_hz": 31.96,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.806,
+   "rear_dir": 0.972,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    35.3,
+    47.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.33,
+     "amp": 0.4875,
+     "freq_hz": 4.095,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.06,
+     "amp": 0.9704999999999999,
+     "freq_hz": 10.629999999999999,
+     "dir": 0.984,
+     "retract_hz": 60.239999999999995,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 7.52,
+     "amp": 0.636,
+     "freq_hz": 5.555,
+     "dir": 0.951,
+     "retract_hz": 19.42,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.715,
+     "amp": 0.854,
+     "freq_hz": 8.274999999999999,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 21.68,
+     "amp": 0.9744999999999999,
+     "freq_hz": 10.735,
+     "dir": 0.984,
+     "retract_hz": 60.855000000000004,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.995000000000001,
+     "amp": 0.8334999999999999,
+     "freq_hz": 7.970000000000001,
+     "dir": 0.97,
+     "retract_hz": 31.945,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.793,
+   "rear_dir": 0.972,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    33.9,
+    46.4
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.42,
+     "amp": 0.494,
+     "freq_hz": 4.155,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.08,
+     "amp": 0.971,
+     "freq_hz": 10.64,
+     "dir": 0.984,
+     "retract_hz": 60.175,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 7.665,
+     "amp": 0.645,
+     "freq_hz": 5.65,
+     "dir": 0.952,
+     "retract_hz": 19.835,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.615,
+     "amp": 0.8514999999999999,
+     "freq_hz": 8.235,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 21.87,
+     "amp": 0.975,
+     "freq_hz": 10.77,
+     "dir": 0.984,
+     "retract_hz": 62.394999999999996,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.885,
+     "amp": 0.83,
+     "freq_hz": 7.915,
+     "dir": 0.97,
+     "retract_hz": 31.945,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.794,
+   "rear_dir": 0.972,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    34.2,
+    46.4
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.455,
+     "amp": 0.497,
+     "freq_hz": 4.18,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.435000000000002,
+     "amp": 0.973,
+     "freq_hz": 10.7,
+     "dir": 0.984,
+     "retract_hz": 60.370000000000005,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 7.7,
+     "amp": 0.647,
+     "freq_hz": 5.67,
+     "dir": 0.952,
+     "retract_hz": 19.855,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.7,
+     "amp": 0.854,
+     "freq_hz": 8.27,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 21.93,
+     "amp": 0.975,
+     "freq_hz": 10.774999999999999,
+     "dir": 0.984,
+     "retract_hz": 62.42,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.94,
+     "amp": 0.832,
+     "freq_hz": 7.94,
+     "dir": 0.97,
+     "retract_hz": 32.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.796,
+   "rear_dir": 0.972,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    34.6,
+    46.6
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.535,
+     "amp": 0.503,
+     "freq_hz": 4.235,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 21.295,
+     "amp": 0.972,
+     "freq_hz": 10.675,
+     "dir": 0.984,
+     "retract_hz": 60.555,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 8.129999999999999,
+     "amp": 0.671,
+     "freq_hz": 5.93,
+     "dir": 0.9535,
+     "retract_hz": 20.48,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.77,
+     "amp": 0.8554999999999999,
+     "freq_hz": 8.3,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 22.4,
+     "amp": 0.9775,
+     "freq_hz": 10.85,
+     "dir": 0.985,
+     "retract_hz": 65.505,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 12.16,
+     "amp": 0.8385,
+     "freq_hz": 8.04,
+     "dir": 0.97,
+     "retract_hz": 32.125,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.803,
+   "rear_dir": 0.973,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    35.0,
+    47.3
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.86,
+     "amp": 0.085,
+     "freq_hz": 0.685,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 3.41,
+     "amp": 0.2965,
+     "freq_hz": 2.555,
+     "dir": 0.475,
+     "retract_hz": 9.42,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 1.215,
+     "amp": 0.119,
+     "freq_hz": 0.965,
+     "dir": 0.421,
+     "retract_hz": 2.665,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 2.1799999999999997,
+     "amp": 0.20650000000000002,
+     "freq_hz": 1.705,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 3.14,
+     "amp": 0.2785,
+     "freq_hz": 2.375,
+     "dir": 0.4715,
+     "retract_hz": 8.285,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 1.855,
+     "amp": 0.1775,
+     "freq_hz": 1.46,
+     "dir": 0.448,
+     "retract_hz": 4.325,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.194,
+   "rear_dir": 0.454,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    5.5,
+    7.2
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.359999999999999,
+     "amp": 0.4895,
+     "freq_hz": 4.115,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 20.98,
+     "amp": 0.9704999999999999,
+     "freq_hz": 10.620000000000001,
+     "dir": 0.984,
+     "retract_hz": 59.8,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 7.99,
+     "amp": 0.6635,
+     "freq_hz": 5.85,
+     "dir": 0.948,
+     "retract_hz": 18.145,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.58,
+     "amp": 0.8505,
+     "freq_hz": 8.219999999999999,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 19.97,
+     "amp": 0.9635,
+     "freq_hz": 10.434999999999999,
+     "dir": 0.981,
+     "retract_hz": 52.379999999999995,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.735,
+     "amp": 0.8254999999999999,
+     "freq_hz": 7.85,
+     "dir": 0.9644999999999999,
+     "retract_hz": 27.104999999999997,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.794,
+   "rear_dir": 0.969,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    34.3,
+    44.3
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.27,
+     "amp": 0.483,
+     "freq_hz": 4.050000000000001,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 20.705,
+     "amp": 0.969,
+     "freq_hz": 10.57,
+     "dir": 0.9835,
+     "retract_hz": 59.575,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 8.105,
+     "amp": 0.6695,
+     "freq_hz": 5.92,
+     "dir": 0.947,
+     "retract_hz": 17.915,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.555,
+     "amp": 0.85,
+     "freq_hz": 8.21,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 19.805,
+     "amp": 0.963,
+     "freq_hz": 10.399999999999999,
+     "dir": 0.981,
+     "retract_hz": 50.980000000000004,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.835,
+     "amp": 0.8285,
+     "freq_hz": 7.895,
+     "dir": 0.9644999999999999,
+     "retract_hz": 27.17,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.794,
+   "rear_dir": 0.969,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    34.1,
+    44.2
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.26,
+     "amp": 0.482,
+     "freq_hz": 4.045,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 20.705,
+     "amp": 0.969,
+     "freq_hz": 10.57,
+     "dir": 0.984,
+     "retract_hz": 59.87,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 8.434999999999999,
+     "amp": 0.6875,
+     "freq_hz": 6.115,
+     "dir": 0.947,
+     "retract_hz": 17.935000000000002,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 12.335,
+     "amp": 0.8434999999999999,
+     "freq_hz": 8.115,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 19.66,
+     "amp": 0.962,
+     "freq_hz": 10.37,
+     "dir": 0.981,
+     "retract_hz": 50.67,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 11.780000000000001,
+     "amp": 0.827,
+     "freq_hz": 7.87,
+     "dir": 0.964,
+     "retract_hz": 26.7,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.795,
+   "rear_dir": 0.969,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    34.4,
+    43.8
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 25.525,
+     "amp": 0.988,
+     "freq_hz": 11.23,
+     "dir": -0.95,
+     "retract_hz": 0.0,
+     "protract_hz": 19.04
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.4,
+     "amp": 0.039999999999999994,
+     "freq_hz": 0.31999999999999995,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.171,
+   "rear_dir": 0.0,
+   "front_dir": -0.475,
+   "left_right_drive": [
+    25.5,
+    0.4
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 51.28,
+     "amp": 1.0,
+     "freq_hz": 11.975000000000001,
+     "dir": -0.8414999999999999,
+     "retract_hz": 3.345,
+     "protract_hz": 44.29
+    },
+    "LM": {
+     "drive_hz": 22.11,
+     "amp": 0.976,
+     "freq_hz": 10.805,
+     "dir": 0.3395,
+     "retract_hz": 46.45,
+     "protract_hz": 22.630000000000003
+    },
+    "LH": {
+     "drive_hz": 14.17,
+     "amp": 0.889,
+     "freq_hz": 8.85,
+     "dir": 0.9165000000000001,
+     "retract_hz": 16.055,
+     "protract_hz": 0.22000000000000003
+    },
+    "RF": {
+     "drive_hz": 31.92,
+     "amp": 0.997,
+     "freq_hz": 11.665,
+     "dir": -0.962,
+     "retract_hz": 0.0,
+     "protract_hz": 25.185000000000002
+    },
+    "RM": {
+     "drive_hz": 17.375,
+     "amp": 0.94,
+     "freq_hz": 9.844999999999999,
+     "dir": 0.21300000000000002,
+     "retract_hz": 24.28,
+     "protract_hz": 15.585
+    },
+    "RH": {
+     "drive_hz": 84.0,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.99,
+     "retract_hz": 95.12,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.967,
+   "rear_dir": 0.615,
+   "front_dir": -0.902,
+   "left_right_drive": [
+    87.6,
+    133.3
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 57.364999999999995,
+     "amp": 1.0,
+     "freq_hz": 11.99,
+     "dir": -0.868,
+     "retract_hz": 3.55,
+     "protract_hz": 56.675
+    },
+    "LM": {
+     "drive_hz": 22.955,
+     "amp": 0.9795,
+     "freq_hz": 10.925,
+     "dir": 0.308,
+     "retract_hz": 46.565,
+     "protract_hz": 24.41
+    },
+    "LH": {
+     "drive_hz": 15.614999999999998,
+     "amp": 0.916,
+     "freq_hz": 9.34,
+     "dir": 0.943,
+     "retract_hz": 17.85,
+     "protract_hz": 0.035
+    },
+    "RF": {
+     "drive_hz": 32.565,
+     "amp": 0.997,
+     "freq_hz": 11.69,
+     "dir": -0.96,
+     "retract_hz": 0.0,
+     "protract_hz": 24.045
+    },
+    "RM": {
+     "drive_hz": 18.03,
+     "amp": 0.947,
+     "freq_hz": 10.01,
+     "dir": 0.0555,
+     "retract_hz": 23.465,
+     "protract_hz": 20.94
+    },
+    "RH": {
+     "drive_hz": 83.98500000000001,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.989,
+     "retract_hz": 92.43,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.973,
+   "rear_dir": 0.574,
+   "front_dir": -0.914,
+   "left_right_drive": [
+    95.9,
+    134.6
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 60.22,
+     "amp": 1.0,
+     "freq_hz": 11.99,
+     "dir": -0.8614999999999999,
+     "retract_hz": 4.13,
+     "protract_hz": 61.665
+    },
+    "LM": {
+     "drive_hz": 24.6,
+     "amp": 0.9855,
+     "freq_hz": 11.13,
+     "dir": 0.1555,
+     "retract_hz": 45.32,
+     "protract_hz": 33.004999999999995
+    },
+    "LH": {
+     "drive_hz": 17.695,
+     "amp": 0.9435,
+     "freq_hz": 9.93,
+     "dir": 0.946,
+     "retract_hz": 19.36,
+     "protract_hz": 0.05
+    },
+    "RF": {
+     "drive_hz": 35.465,
+     "amp": 0.998,
+     "freq_hz": 11.79,
+     "dir": -0.9624999999999999,
+     "retract_hz": 0.0,
+     "protract_hz": 25.58
+    },
+    "RM": {
+     "drive_hz": 20.6,
+     "amp": 0.968,
+     "freq_hz": 10.555,
+     "dir": -0.11699999999999999,
+     "retract_hz": 22.515,
+     "protract_hz": 28.625
+    },
+    "RH": {
+     "drive_hz": 84.42,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.989,
+     "retract_hz": 88.255,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.983,
+   "rear_dir": 0.493,
+   "front_dir": -0.912,
+   "left_right_drive": [
+    102.5,
+    140.5
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 62.67,
+     "amp": 1.0,
+     "freq_hz": 11.99,
+     "dir": -0.8634999999999999,
+     "retract_hz": 4.23,
+     "protract_hz": 64.075
+    },
+    "LM": {
+     "drive_hz": 27.335,
+     "amp": 0.992,
+     "freq_hz": 11.39,
+     "dir": -0.0755,
+     "retract_hz": 41.239999999999995,
+     "protract_hz": 48.084999999999994
+    },
+    "LH": {
+     "drive_hz": 20.185000000000002,
+     "amp": 0.965,
+     "freq_hz": 10.475000000000001,
+     "dir": 0.923,
+     "retract_hz": 18.295,
+     "protract_hz": 0.255
+    },
+    "RF": {
+     "drive_hz": 40.835,
+     "amp": 0.999,
+     "freq_hz": 11.9,
+     "dir": -0.966,
+     "retract_hz": 0.0,
+     "protract_hz": 28.31
+    },
+    "RM": {
+     "drive_hz": 21.424999999999997,
+     "amp": 0.9724999999999999,
+     "freq_hz": 10.695,
+     "dir": -0.356,
+     "retract_hz": 17.425,
+     "protract_hz": 37.22
+    },
+    "RH": {
+     "drive_hz": 82.44999999999999,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.987,
+     "retract_hz": 78.465,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.988,
+   "rear_dir": 0.37,
+   "front_dir": -0.915,
+   "left_right_drive": [
+    110.2,
+    144.7
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 68.425,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.8665,
+     "retract_hz": 4.48,
+     "protract_hz": 68.825
+    },
+    "LM": {
+     "drive_hz": 55.935,
+     "amp": 0.998,
+     "freq_hz": 11.805,
+     "dir": 0.2585,
+     "retract_hz": 90.94999999999999,
+     "protract_hz": 42.865
+    },
+    "LH": {
+     "drive_hz": 32.45,
+     "amp": 0.993,
+     "freq_hz": 11.54,
+     "dir": 0.6174999999999999,
+     "retract_hz": 39.215,
+     "protract_hz": 6.215
+    },
+    "RF": {
+     "drive_hz": 47.97,
+     "amp": 1.0,
+     "freq_hz": 11.96,
+     "dir": -0.9735,
+     "retract_hz": 0.0,
+     "protract_hz": 37.115
+    },
+    "RM": {
+     "drive_hz": 23.975,
+     "amp": 0.984,
+     "freq_hz": 11.055,
+     "dir": -0.34850000000000003,
+     "retract_hz": 20.425,
+     "protract_hz": 42.870000000000005
+    },
+    "RH": {
+     "drive_hz": 83.17500000000001,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.9575,
+     "retract_hz": 81.805,
+     "protract_hz": 1.3900000000000001
+    }
+   },
+   "mean_amp": 0.996,
+   "rear_dir": 0.371,
+   "front_dir": -0.92,
+   "left_right_drive": [
+    156.8,
+    155.1
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.815,
+     "amp": 0.0815,
+     "freq_hz": 0.65,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.014,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.8
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 12.07,
+     "amp": 0.4975,
+     "freq_hz": 5.575,
+     "dir": -0.4755,
+     "retract_hz": 0.0,
+     "protract_hz": 9.78
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 2.27,
+     "amp": 0.223,
+     "freq_hz": 1.805,
+     "dir": 0.061,
+     "retract_hz": 0.07,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.055,
+     "amp": 0.0055,
+     "freq_hz": 0.045000000000000005,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.121,
+   "rear_dir": 0.0,
+   "front_dir": -0.207,
+   "left_right_drive": [
+    12.1,
+    2.3
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 26.965,
+     "amp": 0.991,
+     "freq_hz": 11.36,
+     "dir": -0.958,
+     "retract_hz": 0.0,
+     "protract_hz": 22.98
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 3.63,
+     "amp": 0.3475,
+     "freq_hz": 2.85,
+     "dir": 0.802,
+     "retract_hz": 4.05,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.37,
+     "amp": 0.037,
+     "freq_hz": 0.295,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.229,
+   "rear_dir": 0.0,
+   "front_dir": -0.078,
+   "left_right_drive": [
+    27.0,
+    4.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 27.165,
+     "amp": 0.991,
+     "freq_hz": 11.375,
+     "dir": -0.9595,
+     "retract_hz": 0.0,
+     "protract_hz": 23.87
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 4.6850000000000005,
+     "amp": 0.437,
+     "freq_hz": 3.63,
+     "dir": 0.8594999999999999,
+     "retract_hz": 6.109999999999999,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.55,
+     "amp": 0.055,
+     "freq_hz": 0.435,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.247,
+   "rear_dir": 0.0,
+   "front_dir": -0.05,
+   "left_right_drive": [
+    27.2,
+    5.2
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 27.625,
+     "amp": 0.992,
+     "freq_hz": 11.41,
+     "dir": -0.962,
+     "retract_hz": 0.0,
+     "protract_hz": 25.28
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 6.845000000000001,
+     "amp": 0.5945,
+     "freq_hz": 5.125,
+     "dir": 0.925,
+     "retract_hz": 12.305,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.705,
+     "amp": 0.07050000000000001,
+     "freq_hz": 0.565,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.276,
+   "rear_dir": 0.0,
+   "front_dir": -0.018,
+   "left_right_drive": [
+    27.6,
+    7.6
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 27.945,
+     "amp": 0.9924999999999999,
+     "freq_hz": 11.434999999999999,
+     "dir": -0.963,
+     "retract_hz": 0.0,
+     "protract_hz": 26.275
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 8.65,
+     "amp": 0.699,
+     "freq_hz": 6.245,
+     "dir": 0.9415,
+     "retract_hz": 16.005,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.18,
+     "amp": 0.018,
+     "freq_hz": 0.14500000000000002,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.75,
+     "amp": 0.075,
+     "freq_hz": 0.6,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.297,
+   "rear_dir": 0.0,
+   "front_dir": -0.011,
+   "left_right_drive": [
+    27.9,
+    9.6
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 1.74,
+     "amp": 0.172,
+     "freq_hz": 1.3849999999999998,
+     "dir": 0.938,
+     "retract_hz": 15.225,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.029,
+   "rear_dir": 0.0,
+   "front_dir": 0.469,
+   "left_right_drive": [
+    1.7,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 4.8149999999999995,
+     "amp": 0.448,
+     "freq_hz": 3.73,
+     "dir": 0.97,
+     "retract_hz": 32.2,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.075,
+   "rear_dir": 0.0,
+   "front_dir": 0.485,
+   "left_right_drive": [
+    4.8,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 7.175000000000001,
+     "amp": 0.6154999999999999,
+     "freq_hz": 5.34,
+     "dir": 0.977,
+     "retract_hz": 42.715,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.103,
+   "rear_dir": 0.0,
+   "front_dir": 0.488,
+   "left_right_drive": [
+    7.2,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 8.92,
+     "amp": 0.7124999999999999,
+     "freq_hz": 6.4,
+     "dir": 0.9804999999999999,
+     "retract_hz": 50.265,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.45,
+     "amp": 0.045,
+     "freq_hz": 0.36,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.126,
+   "rear_dir": 0.0,
+   "front_dir": 0.49,
+   "left_right_drive": [
+    8.9,
+    0.5
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 11.985,
+     "amp": 0.8334999999999999,
+     "freq_hz": 7.965,
+     "dir": 0.984,
+     "retract_hz": 62.489999999999995,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.215,
+     "amp": 0.0215,
+     "freq_hz": 0.17,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.135,
+     "amp": 0.0135,
+     "freq_hz": 0.10500000000000001,
+     "dir": -0.812,
+     "retract_hz": 0.0,
+     "protract_hz": 4.324999999999999
+    },
+    "RF": {
+     "drive_hz": 1.7349999999999999,
+     "amp": 0.1725,
+     "freq_hz": 1.3849999999999998,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.025,
+     "amp": 0.0025,
+     "freq_hz": 0.02,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.174,
+   "rear_dir": -0.203,
+   "front_dir": 0.492,
+   "left_right_drive": [
+    12.3,
+    1.8
+   ]
+  },
+  {
+   "glutamate": "inhibitory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 14.33,
+     "amp": 0.8915,
+     "freq_hz": 8.895,
+     "dir": 0.9704999999999999,
+     "retract_hz": 66.195,
+     "protract_hz": 0.485
+    },
+    "LM": {
+     "drive_hz": 0.535,
+     "amp": 0.0535,
+     "freq_hz": 0.43,
+     "dir": -0.1145,
+     "retract_hz": 0.42,
+     "protract_hz": 0.82
+    },
+    "LH": {
+     "drive_hz": 0.51,
+     "amp": 0.051,
+     "freq_hz": 0.40499999999999997,
+     "dir": -0.8975,
+     "retract_hz": 0.025,
+     "protract_hz": 9.260000000000002
+    },
+    "RF": {
+     "drive_hz": 3.235,
+     "amp": 0.311,
+     "freq_hz": 2.54,
+     "dir": -0.2175,
+     "retract_hz": 0.0,
+     "protract_hz": 0.385
+    },
+    "RM": {
+     "drive_hz": 0.245,
+     "amp": 0.0245,
+     "freq_hz": 0.195,
+     "dir": -0.1465,
+     "retract_hz": 0.17,
+     "protract_hz": 0.515
+    },
+    "RH": {
+     "drive_hz": 0.48,
+     "amp": 0.048,
+     "freq_hz": 0.385,
+     "dir": 0.044,
+     "retract_hz": 0.05,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.23,
+   "rear_dir": -0.279,
+   "front_dir": 0.376,
+   "left_right_drive": [
+    15.4,
+    4.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.14500000000000002,
+     "amp": 0.014499999999999999,
+     "freq_hz": 0.11499999999999999,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.002,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.1
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 320.53499999999997,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.175,
+     "retract_hz": 196.685,
+     "protract_hz": 280.335
+    },
+    "LM": {
+     "drive_hz": 364.07,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.105,
+     "retract_hz": 338.39,
+     "protract_hz": 418.15
+    },
+    "LH": {
+     "drive_hz": 371.03,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.001,
+     "retract_hz": 335.67999999999995,
+     "protract_hz": 336.505
+    },
+    "RF": {
+     "drive_hz": 320.13,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0975,
+     "retract_hz": 246.29000000000002,
+     "protract_hz": 299.45500000000004
+    },
+    "RM": {
+     "drive_hz": 334.385,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.003,
+     "retract_hz": 338.745,
+     "protract_hz": 336.53499999999997
+    },
+    "RH": {
+     "drive_hz": 364.725,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.005,
+     "retract_hz": 339.73,
+     "protract_hz": 336.40999999999997
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.024,
+   "front_dir": -0.136,
+   "left_right_drive": [
+    1055.6,
+    1019.2
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "both",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.03,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1765,
+     "retract_hz": 196.21499999999997,
+     "protract_hz": 280.515
+    },
+    "LM": {
+     "drive_hz": 368.9,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.073,
+     "retract_hz": 361.39,
+     "protract_hz": 418.265
+    },
+    "LH": {
+     "drive_hz": 374.42,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.008,
+     "retract_hz": 331.45,
+     "protract_hz": 336.72
+    },
+    "RF": {
+     "drive_hz": 319.52,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.097,
+     "retract_hz": 246.71,
+     "protract_hz": 299.86
+    },
+    "RM": {
+     "drive_hz": 336.04,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.005,
+     "retract_hz": 339.795,
+     "protract_hz": 336.625
+    },
+    "RH": {
+     "drive_hz": 364.81,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0055,
+     "retract_hz": 340.34000000000003,
+     "protract_hz": 336.65
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.018,
+   "front_dir": -0.137,
+   "left_right_drive": [
+    1065.3,
+    1020.4
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 38.56,
+     "amp": 0.5,
+     "freq_hz": 6.0,
+     "dir": -0.085,
+     "retract_hz": 23.62,
+     "protract_hz": 33.395
+    },
+    "LM": {
+     "drive_hz": 49.54,
+     "amp": 0.5,
+     "freq_hz": 6.0,
+     "dir": -0.0445,
+     "retract_hz": 48.56,
+     "protract_hz": 58.04
+    },
+    "LH": {
+     "drive_hz": 47.615,
+     "amp": 0.5,
+     "freq_hz": 6.0,
+     "dir": -0.001,
+     "retract_hz": 42.745,
+     "protract_hz": 42.945
+    },
+    "RF": {
+     "drive_hz": 38.645,
+     "amp": 0.5375,
+     "freq_hz": 6.3,
+     "dir": -0.0605,
+     "retract_hz": 28.165,
+     "protract_hz": 36.0
+    },
+    "RM": {
+     "drive_hz": 41.12,
+     "amp": 0.5,
+     "freq_hz": 6.0,
+     "dir": -0.0075,
+     "retract_hz": 41.44,
+     "protract_hz": 42.735
+    },
+    "RH": {
+     "drive_hz": 44.12,
+     "amp": 0.5,
+     "freq_hz": 6.0,
+     "dir": -0.001,
+     "retract_hz": 41.345,
+     "protract_hz": 41.555
+    }
+   },
+   "mean_amp": 0.506,
+   "rear_dir": -0.013,
+   "front_dir": -0.073,
+   "left_right_drive": [
+    135.7,
+    123.9
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 320.945,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1775,
+     "retract_hz": 195.72500000000002,
+     "protract_hz": 280.48
+    },
+    "LM": {
+     "drive_hz": 363.625,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0985,
+     "retract_hz": 345.15999999999997,
+     "protract_hz": 420.765
+    },
+    "LH": {
+     "drive_hz": 371.45500000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.61,
+     "protract_hz": 336.67
+    },
+    "RF": {
+     "drive_hz": 320.28499999999997,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1095,
+     "retract_hz": 240.97,
+     "protract_hz": 300.28
+    },
+    "RM": {
+     "drive_hz": 335.19,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.015,
+     "retract_hz": 346.705,
+     "protract_hz": 336.625
+    },
+    "RH": {
+     "drive_hz": 364.255,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.004,
+     "retract_hz": 339.47,
+     "protract_hz": 336.565
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.02,
+   "front_dir": -0.143,
+   "left_right_drive": [
+    1056.0,
+    1019.7
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.265,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1795,
+     "retract_hz": 194.905,
+     "protract_hz": 280.515
+    },
+    "LM": {
+     "drive_hz": 370.35,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0775,
+     "retract_hz": 358.69,
+     "protract_hz": 418.265
+    },
+    "LH": {
+     "drive_hz": 374.32,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0035,
+     "retract_hz": 334.35,
+     "protract_hz": 336.69
+    },
+    "RF": {
+     "drive_hz": 320.245,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.10550000000000001,
+     "retract_hz": 242.93,
+     "protract_hz": 300.20000000000005
+    },
+    "RM": {
+     "drive_hz": 335.56,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.005,
+     "retract_hz": 340.14,
+     "protract_hz": 336.725
+    },
+    "RH": {
+     "drive_hz": 364.77,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0055,
+     "retract_hz": 340.38,
+     "protract_hz": 336.685
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.018,
+   "front_dir": -0.143,
+   "left_right_drive": [
+    1066.9,
+    1020.6
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 321.77,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.16849999999999998,
+     "retract_hz": 199.535,
+     "protract_hz": 280.57
+    },
+    "LM": {
+     "drive_hz": 365.53999999999996,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.098,
+     "retract_hz": 345.41499999999996,
+     "protract_hz": 420.83500000000004
+    },
+    "LH": {
+     "drive_hz": 374.635,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0015,
+     "retract_hz": 335.605,
+     "protract_hz": 336.6
+    },
+    "RF": {
+     "drive_hz": 320.36,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.107,
+     "retract_hz": 241.91,
+     "protract_hz": 299.835
+    },
+    "RM": {
+     "drive_hz": 335.44500000000005,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.002,
+     "retract_hz": 338.105,
+     "protract_hz": 336.67
+    },
+    "RH": {
+     "drive_hz": 364.20500000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0015,
+     "retract_hz": 337.65999999999997,
+     "protract_hz": 336.63
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.024,
+   "front_dir": -0.138,
+   "left_right_drive": [
+    1061.9,
+    1020.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "right",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 323.20500000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.173,
+     "retract_hz": 197.535,
+     "protract_hz": 280.53999999999996
+    },
+    "LM": {
+     "drive_hz": 364.23,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1075,
+     "retract_hz": 340.875,
+     "protract_hz": 423.43
+    },
+    "LH": {
+     "drive_hz": 369.235,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0005,
+     "retract_hz": 336.33000000000004,
+     "protract_hz": 336.70500000000004
+    },
+    "RF": {
+     "drive_hz": 320.415,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.11,
+     "retract_hz": 240.32999999999998,
+     "protract_hz": 300.025
+    },
+    "RM": {
+     "drive_hz": 335.685,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.009000000000000001,
+     "retract_hz": 342.96500000000003,
+     "protract_hz": 336.67
+    },
+    "RH": {
+     "drive_hz": 364.075,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0005,
+     "retract_hz": 337.23,
+     "protract_hz": 336.665
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.025,
+   "front_dir": -0.141,
+   "left_right_drive": [
+    1056.7,
+    1020.2
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.0,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 321.525,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.18,
+     "retract_hz": 194.94,
+     "protract_hz": 280.45000000000005
+    },
+    "LM": {
+     "drive_hz": 362.635,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1085,
+     "retract_hz": 340.405,
+     "protract_hz": 423.41999999999996
+    },
+    "LH": {
+     "drive_hz": 372.49,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.001,
+     "retract_hz": 335.75,
+     "protract_hz": 336.64
+    },
+    "RF": {
+     "drive_hz": 318.77,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.109,
+     "retract_hz": 240.73000000000002,
+     "protract_hz": 299.73
+    },
+    "RM": {
+     "drive_hz": 334.945,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0065,
+     "retract_hz": 340.865,
+     "protract_hz": 336.56
+    },
+    "RH": {
+     "drive_hz": 363.925,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0005,
+     "retract_hz": 336.885,
+     "protract_hz": 336.665
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.026,
+   "front_dir": -0.144,
+   "left_right_drive": [
+    1056.7,
+    1017.6
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 321.94000000000005,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1765,
+     "retract_hz": 196.35,
+     "protract_hz": 280.51
+    },
+    "LM": {
+     "drive_hz": 361.91499999999996,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0985,
+     "retract_hz": 345.54999999999995,
+     "protract_hz": 421.21500000000003
+    },
+    "LH": {
+     "drive_hz": 374.635,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0005,
+     "retract_hz": 336.45,
+     "protract_hz": 336.69500000000005
+    },
+    "RF": {
+     "drive_hz": 322.5,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.08299999999999999,
+     "retract_hz": 253.42499999999998,
+     "protract_hz": 299.54999999999995
+    },
+    "RM": {
+     "drive_hz": 333.525,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0055,
+     "retract_hz": 332.865,
+     "protract_hz": 336.625
+    },
+    "RH": {
+     "drive_hz": 364.255,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.006500000000000001,
+     "retract_hz": 340.975,
+     "protract_hz": 336.69500000000005
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.025,
+   "front_dir": -0.13,
+   "left_right_drive": [
+    1058.5,
+    1020.3
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "P9",
+   "side": "left",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 319.645,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1815,
+     "retract_hz": 194.065,
+     "protract_hz": 280.56
+    },
+    "LM": {
+     "drive_hz": 367.41499999999996,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0965,
+     "retract_hz": 346.745,
+     "protract_hz": 420.96000000000004
+    },
+    "LH": {
+     "drive_hz": 373.02,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0015,
+     "retract_hz": 335.70500000000004,
+     "protract_hz": 336.635
+    },
+    "RF": {
+     "drive_hz": 322.725,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0905,
+     "retract_hz": 249.82999999999998,
+     "protract_hz": 299.62
+    },
+    "RM": {
+     "drive_hz": 334.25,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.006,
+     "retract_hz": 340.815,
+     "protract_hz": 336.665
+    },
+    "RH": {
+     "drive_hz": 363.53499999999997,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.001,
+     "retract_hz": 337.345,
+     "protract_hz": 336.665
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.023,
+   "front_dir": -0.136,
+   "left_right_drive": [
+    1060.1,
+    1020.5
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 321.54499999999996,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1805,
+     "retract_hz": 194.615,
+     "protract_hz": 280.32
+    },
+    "LM": {
+     "drive_hz": 368.49,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.086,
+     "retract_hz": 353.435,
+     "protract_hz": 420.155
+    },
+    "LH": {
+     "drive_hz": 373.4,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.15999999999997,
+     "protract_hz": 336.25
+    },
+    "RF": {
+     "drive_hz": 319.63,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.113,
+     "retract_hz": 238.81,
+     "protract_hz": 299.805
+    },
+    "RM": {
+     "drive_hz": 334.33000000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.010499999999999999,
+     "retract_hz": 343.435,
+     "protract_hz": 336.26
+    },
+    "RH": {
+     "drive_hz": 364.54,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0175,
+     "retract_hz": 347.955,
+     "protract_hz": 336.18
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.014,
+   "front_dir": -0.147,
+   "left_right_drive": [
+    1063.4,
+    1018.5
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.865,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1795,
+     "retract_hz": 195.05,
+     "protract_hz": 280.535
+    },
+    "LM": {
+     "drive_hz": 364.35,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.106,
+     "retract_hz": 339.855,
+     "protract_hz": 420.83500000000004
+    },
+    "LH": {
+     "drive_hz": 372.78999999999996,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0055,
+     "retract_hz": 332.94500000000005,
+     "protract_hz": 336.605
+    },
+    "RF": {
+     "drive_hz": 318.52,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1075,
+     "retract_hz": 241.61,
+     "protract_hz": 299.94
+    },
+    "RM": {
+     "drive_hz": 335.195,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.010499999999999999,
+     "retract_hz": 343.53999999999996,
+     "protract_hz": 336.6
+    },
+    "RH": {
+     "drive_hz": 365.695,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.018000000000000002,
+     "retract_hz": 349.19,
+     "protract_hz": 336.57000000000005
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.021,
+   "front_dir": -0.143,
+   "left_right_drive": [
+    1060.0,
+    1019.4
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.12,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.178,
+     "retract_hz": 195.55,
+     "protract_hz": 280.615
+    },
+    "LM": {
+     "drive_hz": 368.805,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.067,
+     "retract_hz": 368.0,
+     "protract_hz": 420.81
+    },
+    "LH": {
+     "drive_hz": 372.845,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0055,
+     "retract_hz": 333.02,
+     "protract_hz": 336.64
+    },
+    "RF": {
+     "drive_hz": 321.51,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1015,
+     "retract_hz": 244.45499999999998,
+     "protract_hz": 299.88
+    },
+    "RM": {
+     "drive_hz": 336.045,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.012,
+     "retract_hz": 344.805,
+     "protract_hz": 336.61
+    },
+    "RH": {
+     "drive_hz": 365.975,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.019,
+     "retract_hz": 349.58000000000004,
+     "protract_hz": 336.74
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.01,
+   "front_dir": -0.14,
+   "left_right_drive": [
+    1063.8,
+    1023.5
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 323.56,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.16849999999999998,
+     "retract_hz": 199.58499999999998,
+     "protract_hz": 280.63
+    },
+    "LM": {
+     "drive_hz": 368.79999999999995,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.06899999999999999,
+     "retract_hz": 364.66,
+     "protract_hz": 418.25
+    },
+    "LH": {
+     "drive_hz": 376.65,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.625,
+     "protract_hz": 336.675
+    },
+    "RF": {
+     "drive_hz": 319.275,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.11,
+     "retract_hz": 240.935,
+     "protract_hz": 300.47
+    },
+    "RM": {
+     "drive_hz": 334.645,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0055,
+     "retract_hz": 340.355,
+     "protract_hz": 336.74
+    },
+    "RH": {
+     "drive_hz": 363.58000000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0025,
+     "retract_hz": 338.565,
+     "protract_hz": 336.605
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.015,
+   "front_dir": -0.139,
+   "left_right_drive": [
+    1069.0,
+    1017.5
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.805,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1765,
+     "retract_hz": 196.21499999999997,
+     "protract_hz": 280.54
+    },
+    "LM": {
+     "drive_hz": 367.62,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.069,
+     "retract_hz": 366.515,
+     "protract_hz": 420.845
+    },
+    "LH": {
+     "drive_hz": 378.105,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.53999999999996,
+     "protract_hz": 336.67
+    },
+    "RF": {
+     "drive_hz": 321.04,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.107,
+     "retract_hz": 241.66,
+     "protract_hz": 299.61
+    },
+    "RM": {
+     "drive_hz": 335.19,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0065,
+     "retract_hz": 340.995,
+     "protract_hz": 336.64
+    },
+    "RH": {
+     "drive_hz": 364.24,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0095,
+     "retract_hz": 343.195,
+     "protract_hz": 336.71000000000004
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.013,
+   "front_dir": -0.142,
+   "left_right_drive": [
+    1068.5,
+    1020.5
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "MDN",
+   "side": "both",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 321.01,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1805,
+     "retract_hz": 194.60500000000002,
+     "protract_hz": 280.605
+    },
+    "LM": {
+     "drive_hz": 363.82,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.109,
+     "retract_hz": 340.245,
+     "protract_hz": 423.37
+    },
+    "LH": {
+     "drive_hz": 374.055,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.70500000000004,
+     "protract_hz": 336.645
+    },
+    "RF": {
+     "drive_hz": 322.095,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1095,
+     "retract_hz": 240.82,
+     "protract_hz": 300.095
+    },
+    "RM": {
+     "drive_hz": 334.21000000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0035,
+     "retract_hz": 339.195,
+     "protract_hz": 336.61
+    },
+    "RH": {
+     "drive_hz": 365.765,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.008,
+     "retract_hz": 342.245,
+     "protract_hz": 336.81
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.024,
+   "front_dir": -0.145,
+   "left_right_drive": [
+    1058.9,
+    1022.1
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 1.125,
+     "amp": 0.112,
+     "freq_hz": 0.9,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.019,
+   "rear_dir": 0.0,
+   "front_dir": 0.0,
+   "left_right_drive": [
+    0.0,
+    1.1
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 321.3,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.16949999999999998,
+     "retract_hz": 198.5,
+     "protract_hz": 279.935
+    },
+    "LM": {
+     "drive_hz": 365.275,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1045,
+     "retract_hz": 341.91999999999996,
+     "protract_hz": 422.015
+    },
+    "LH": {
+     "drive_hz": 372.405,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.003,
+     "retract_hz": 333.455,
+     "protract_hz": 335.65
+    },
+    "RF": {
+     "drive_hz": 320.21500000000003,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.103,
+     "retract_hz": 242.02999999999997,
+     "protract_hz": 297.58000000000004
+    },
+    "RM": {
+     "drive_hz": 332.755,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0005,
+     "retract_hz": 335.55,
+     "protract_hz": 335.795
+    },
+    "RH": {
+     "drive_hz": 362.48,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.004,
+     "retract_hz": 338.71000000000004,
+     "protract_hz": 335.79499999999996
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.026,
+   "front_dir": -0.136,
+   "left_right_drive": [
+    1059.0,
+    1015.5
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.44,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1745,
+     "retract_hz": 197.19,
+     "protract_hz": 280.58
+    },
+    "LM": {
+     "drive_hz": 369.945,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.091,
+     "retract_hz": 353.055,
+     "protract_hz": 423.355
+    },
+    "LH": {
+     "drive_hz": 374.36,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.63,
+     "protract_hz": 336.67999999999995
+    },
+    "RF": {
+     "drive_hz": 323.385,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0795,
+     "retract_hz": 254.43,
+     "protract_hz": 298.26
+    },
+    "RM": {
+     "drive_hz": 333.09000000000003,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0035,
+     "retract_hz": 334.53999999999996,
+     "protract_hz": 336.68499999999995
+    },
+    "RH": {
+     "drive_hz": 363.655,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0025,
+     "retract_hz": 338.31,
+     "protract_hz": 336.67999999999995
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.023,
+   "front_dir": -0.127,
+   "left_right_drive": [
+    1066.7,
+    1020.1
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.095,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.18,
+     "retract_hz": 194.72500000000002,
+     "protract_hz": 280.55
+    },
+    "LM": {
+     "drive_hz": 368.575,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0975,
+     "retract_hz": 348.355,
+     "protract_hz": 423.395
+    },
+    "LH": {
+     "drive_hz": 374.205,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0015,
+     "retract_hz": 335.735,
+     "protract_hz": 336.685
+    },
+    "RF": {
+     "drive_hz": 320.76,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.07350000000000001,
+     "retract_hz": 258.12,
+     "protract_hz": 298.915
+    },
+    "RM": {
+     "drive_hz": 333.59000000000003,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0005,
+     "retract_hz": 336.155,
+     "protract_hz": 336.66
+    },
+    "RH": {
+     "drive_hz": 363.81,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.003,
+     "retract_hz": 338.95000000000005,
+     "protract_hz": 336.685
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.024,
+   "front_dir": -0.127,
+   "left_right_drive": [
+    1064.9,
+    1018.2
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 322.525,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1705,
+     "retract_hz": 198.62,
+     "protract_hz": 280.57
+    },
+    "LM": {
+     "drive_hz": 367.33,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0935,
+     "retract_hz": 351.105,
+     "protract_hz": 423.32000000000005
+    },
+    "LH": {
+     "drive_hz": 371.13,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.64,
+     "protract_hz": 336.63
+    },
+    "RF": {
+     "drive_hz": 324.19500000000005,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.063,
+     "retract_hz": 263.2,
+     "protract_hz": 298.875
+    },
+    "RM": {
+     "drive_hz": 332.245,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0085,
+     "retract_hz": 330.875,
+     "protract_hz": 336.635
+    },
+    "RH": {
+     "drive_hz": 365.165,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.004999999999999999,
+     "retract_hz": 340.135,
+     "protract_hz": 336.69500000000005
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.024,
+   "front_dir": -0.117,
+   "left_right_drive": [
+    1061.0,
+    1021.6
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "right",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 321.67,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1745,
+     "retract_hz": 197.10000000000002,
+     "protract_hz": 280.555
+    },
+    "LM": {
+     "drive_hz": 370.655,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0755,
+     "retract_hz": 363.63,
+     "protract_hz": 423.39
+    },
+    "LH": {
+     "drive_hz": 374.305,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.64,
+     "protract_hz": 336.6
+    },
+    "RF": {
+     "drive_hz": 325.635,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.061,
+     "retract_hz": 264.01,
+     "protract_hz": 298.33000000000004
+    },
+    "RM": {
+     "drive_hz": 334.195,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.006999999999999999,
+     "retract_hz": 341.37,
+     "protract_hz": 336.71500000000003
+    },
+    "RH": {
+     "drive_hz": 365.275,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.011,
+     "retract_hz": 344.13,
+     "protract_hz": 336.635
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.014,
+   "front_dir": -0.118,
+   "left_right_drive": [
+    1066.6,
+    1025.1
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 1.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 5.115,
+     "amp": 0.471,
+     "freq_hz": 3.9399999999999995,
+     "dir": 0.9695,
+     "retract_hz": 31.68,
+     "protract_hz": 0.0
+    },
+    "LM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "LH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RF": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RM": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    },
+    "RH": {
+     "drive_hz": 0.0,
+     "amp": 0.0,
+     "freq_hz": 0.0,
+     "dir": 0.0,
+     "retract_hz": 0.0,
+     "protract_hz": 0.0
+    }
+   },
+   "mean_amp": 0.079,
+   "rear_dir": 0.0,
+   "front_dir": 0.485,
+   "left_right_drive": [
+    5.1,
+    0.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 1.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 279.365,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1425,
+     "retract_hz": 179.095,
+     "protract_hz": 241.17499999999998
+    },
+    "LM": {
+     "drive_hz": 312.92,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.093,
+     "retract_hz": 299.695,
+     "protract_hz": 361.645
+    },
+    "LH": {
+     "drive_hz": 319.755,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.001,
+     "retract_hz": 288.94,
+     "protract_hz": 289.3
+    },
+    "RF": {
+     "drive_hz": 274.21000000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.11049999999999999,
+     "retract_hz": 206.15499999999997,
+     "protract_hz": 258.28499999999997
+    },
+    "RM": {
+     "drive_hz": 288.545,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.006500000000000001,
+     "retract_hz": 294.895,
+     "protract_hz": 290.995
+    },
+    "RH": {
+     "drive_hz": 311.175,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0025,
+     "retract_hz": 288.15999999999997,
+     "protract_hz": 289.22499999999997
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.022,
+   "front_dir": -0.127,
+   "left_right_drive": [
+    912.0,
+    873.9
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 2.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 324.79999999999995,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.14450000000000002,
+     "retract_hz": 209.51,
+     "protract_hz": 280.475
+    },
+    "LM": {
+     "drive_hz": 367.74,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0945,
+     "retract_hz": 348.27,
+     "protract_hz": 421.095
+    },
+    "LH": {
+     "drive_hz": 379.68,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0015,
+     "retract_hz": 337.64,
+     "protract_hz": 336.555
+    },
+    "RF": {
+     "drive_hz": 320.88,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1085,
+     "retract_hz": 241.17000000000002,
+     "protract_hz": 299.925
+    },
+    "RM": {
+     "drive_hz": 336.065,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0115,
+     "retract_hz": 344.70500000000004,
+     "protract_hz": 336.66999999999996
+    },
+    "RH": {
+     "drive_hz": 366.69000000000005,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.021500000000000002,
+     "retract_hz": 351.45500000000004,
+     "protract_hz": 336.56
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.015,
+   "front_dir": -0.127,
+   "left_right_drive": [
+    1072.2,
+    1023.6
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 2.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 325.69,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1315,
+     "retract_hz": 215.28,
+     "protract_hz": 280.53499999999997
+    },
+    "LM": {
+     "drive_hz": 366.625,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.089,
+     "retract_hz": 353.1,
+     "protract_hz": 421.9
+    },
+    "LH": {
+     "drive_hz": 373.71500000000003,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.71000000000004,
+     "protract_hz": 336.69500000000005
+    },
+    "RF": {
+     "drive_hz": 318.32,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.108,
+     "retract_hz": 241.51999999999998,
+     "protract_hz": 300.22
+    },
+    "RM": {
+     "drive_hz": 335.46500000000003,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0125,
+     "retract_hz": 345.355,
+     "protract_hz": 336.66
+    },
+    "RH": {
+     "drive_hz": 365.195,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.015,
+     "retract_hz": 347.025,
+     "protract_hz": 336.625
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.015,
+   "front_dir": -0.12,
+   "left_right_drive": [
+    1066.0,
+    1019.0
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 3.5,
+   "legs": {
+    "LF": {
+     "drive_hz": 325.70500000000004,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.1165,
+     "retract_hz": 221.97,
+     "protract_hz": 280.55499999999995
+    },
+    "LM": {
+     "drive_hz": 370.26,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0625,
+     "retract_hz": 374.505,
+     "protract_hz": 424.445
+    },
+    "LH": {
+     "drive_hz": 376.725,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0075,
+     "retract_hz": 341.765,
+     "protract_hz": 336.67
+    },
+    "RF": {
+     "drive_hz": 321.71500000000003,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0945,
+     "retract_hz": 248.35500000000002,
+     "protract_hz": 300.075
+    },
+    "RM": {
+     "drive_hz": 334.74,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.007000000000000001,
+     "retract_hz": 341.32000000000005,
+     "protract_hz": 336.635
+    },
+    "RH": {
+     "drive_hz": 366.275,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.015,
+     "retract_hz": 346.74,
+     "protract_hz": 336.53
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.008,
+   "front_dir": -0.106,
+   "left_right_drive": [
+    1072.7,
+    1022.7
+   ]
+  },
+  {
+   "glutamate": "excitatory",
+   "experiment": "DNa02",
+   "side": "left",
+   "light": 5.0,
+   "legs": {
+    "LF": {
+     "drive_hz": 330.09000000000003,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.093,
+     "retract_hz": 232.875,
+     "protract_hz": 280.56
+    },
+    "LM": {
+     "drive_hz": 370.51,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.0925,
+     "retract_hz": 363.91999999999996,
+     "protract_hz": 437.765
+    },
+    "LH": {
+     "drive_hz": 376.15999999999997,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0,
+     "retract_hz": 336.66999999999996,
+     "protract_hz": 336.775
+    },
+    "RF": {
+     "drive_hz": 319.51,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": -0.108,
+     "retract_hz": 241.9,
+     "protract_hz": 300.53
+    },
+    "RM": {
+     "drive_hz": 335.26,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.001,
+     "retract_hz": 337.3,
+     "protract_hz": 336.67
+    },
+    "RH": {
+     "drive_hz": 366.745,
+     "amp": 1.0,
+     "freq_hz": 12.0,
+     "dir": 0.0175,
+     "retract_hz": 348.855,
+     "protract_hz": 336.635
+    }
+   },
+   "mean_amp": 1.0,
+   "rear_dir": -0.018,
+   "front_dir": -0.101,
+   "left_right_drive": [
+    1076.8,
+    1021.5
+   ]
+  }
+ ],
+ "chosen_light": {
+  "inhibitory": 5.0
+ },
+ "stage2": [
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "intact",
+   "result": "mismatch",
+   "detail": "both sides: travels -0.18 mm, turns +8\u00b0 (no straight forward walking); one side: turns away from the lit side (right +99\u00b0, left -65\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.17861590366011804,
+    "right": -0.2542471999620667,
+    "left": -1.510547372200639
+   },
+   "yaw_deg": {
+    "both": 7.845506892477523,
+    "right": 99.31490049456625,
+    "left": -64.70639279301595
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.02 mm, turns +1\u00b0 (no straight forward walking); one side: turns away from the lit side, below \u00b110\u00b0 (right +0\u00b0, left -0\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.018464321200520332,
+    "right": 0.03308217010204306,
+    "left": 0.0012910363372510153
+   },
+   "yaw_deg": {
+    "both": 0.9884331017524414,
+    "right": 0.23062042194049834,
+    "left": -0.14094129677681588
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "sham",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.57 mm, turns +6\u00b0 (no straight forward walking); one side: right +12\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.5701428122342599,
+    "right": 0.7897714109739518,
+    "left": -1.6283962644997104e-12
+   },
+   "yaw_deg": {
+    "both": 6.006699310938384,
+    "right": 12.047660685769076,
+    "left": 0.0
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "intact",
+   "result": "partial",
+   "detail": "travels -0.84 mm during light (backward walking: below \u22122.0 mm); 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.8427334253552213,
+    "right": 0.2824526398391985,
+    "left": -1.1070445920125007
+   },
+   "yaw_deg": {
+    "both": 21.005490569708503,
+    "right": -224.6639332320707,
+    "left": -15.360126537793988
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "travels +1.52 mm during light (backward walking: below \u22122.0 mm); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.516138353131946,
+    "right": 0.3896329523160529,
+    "left": -0.28460411170632777
+   },
+   "yaw_deg": {
+    "both": -29.718827687064884,
+    "right": 36.95090727591525,
+    "left": 50.54096017526111
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "sham",
+   "result": "match",
+   "detail": "travels -2.41 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -2.4083014537825544,
+    "right": 1.3690391612553743,
+    "left": -0.5463281216666607
+   },
+   "yaw_deg": {
+    "both": -100.95711452403116,
+    "right": -6.140342443454954,
+    "left": 36.92723565029944
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "intact",
+   "result": "match",
+   "detail": "right side lit turns right (-10\u00b0), left side lit turns left (+10\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.6416839085603783,
+    "right": -1.8986664435562994,
+    "left": -1.6767969349111393
+   },
+   "yaw_deg": {
+    "both": 97.06845192785174,
+    "right": -10.26163574319068,
+    "left": 10.316808758942244
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "shuffled",
+   "result": "no clear turn",
+   "detail": "right -11\u00b0, left -80\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.0030896863186671,
+    "right": -0.42402379511838334,
+    "left": 2.3706082772408457
+   },
+   "yaw_deg": {
+    "both": -27.19525017660976,
+    "right": -10.516728630657797,
+    "left": -80.21174788682777
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "own",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "sham",
+   "result": "no clear turn",
+   "detail": "right -8\u00b0, left -15\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.1088578130560347,
+    "right": -1.6554767913115616,
+    "left": -1.7963016416117046
+   },
+   "yaw_deg": {
+    "both": 62.24696731793163,
+    "right": -7.543678431525772,
+    "left": -15.460418541264366
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "intact",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.05 mm, turns -8\u00b0 (no straight forward walking); one side: right -25\u00b0, left -68\u00b0 (threshold \u00b110\u00b0); 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.04606936281835764,
+    "right": -0.7085365983773392,
+    "left": -1.776787206476276
+   },
+   "yaw_deg": {
+    "both": -7.6390005907465595,
+    "right": -25.242845544382533,
+    "left": -67.88171023861678
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "both sides: travels +0.02 mm, turns +1\u00b0 (no straight forward walking); one side: turns away from the lit side, below \u00b110\u00b0 (right +0\u00b0, left -0\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.02036810689443091,
+    "right": 0.03308217010204306,
+    "left": 0.004526553324611616
+   },
+   "yaw_deg": {
+    "both": 1.0659350500850682,
+    "right": 0.23062042194049834,
+    "left": -0.1505974964334096
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "P9",
+   "condition": "sham",
+   "result": "mismatch",
+   "detail": "both sides: travels -1.48 mm, turns +63\u00b0 (no straight forward walking); one side: right -1\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.4760322639151429,
+    "right": -0.7797871139611537,
+    "left": -1.6283962644997104e-12
+   },
+   "yaw_deg": {
+    "both": 63.09471885197696,
+    "right": -1.2330505317388887,
+    "left": 0.0
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "intact",
+   "result": "partial",
+   "detail": "travels -0.26 mm during light (backward walking: below \u22122.0 mm); 0 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.2568125670449893,
+    "right": 2.860097559443553,
+    "left": -0.6166506548569083
+   },
+   "yaw_deg": {
+    "both": 63.25590311056999,
+    "right": -165.12686748498177,
+    "left": -35.337574926170696
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "shuffled",
+   "result": "mismatch",
+   "detail": "travels +1.84 mm during light (backward walking: below \u22122.0 mm); 3 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.8366261636911545,
+    "right": 0.19248709051997828,
+    "left": 1.2428871216301975
+   },
+   "yaw_deg": {
+    "both": -5.2721011740306265,
+    "right": 16.59575278065064,
+    "left": -54.05121207182563
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "MDN",
+   "condition": "sham",
+   "result": "mismatch",
+   "detail": "travels +0.20 mm during light (backward walking: below \u22122.0 mm); 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 0.20066942537909863,
+    "right": 0.8360902742524107,
+    "left": -0.08234454987509641
+   },
+   "yaw_deg": {
+    "both": -26.1946748692619,
+    "right": -23.3390391374129,
+    "left": 50.9318106652631
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "intact",
+   "result": "match",
+   "detail": "right side lit turns right (-32\u00b0), left side lit turns left (+72\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.2658551198146997,
+    "right": -0.6230170665221323,
+    "left": -0.8080205457305305
+   },
+   "yaw_deg": {
+    "both": -2.548599671252267,
+    "right": -31.946560751210956,
+    "left": 71.80238033109627
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "shuffled",
+   "result": "opposite",
+   "detail": "turns away from the lit side (right +21\u00b0, left -29\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 3.1788340831179114,
+    "right": 1.4397952637885378,
+    "left": 2.3274276738233515
+   },
+   "yaw_deg": {
+    "both": -1.344334649835839,
+    "right": 21.179029036705877,
+    "left": -28.92614208517792
+   }
+  },
+  {
+   "glutamate": "inhibitory",
+   "front": "follow",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "sham",
+   "result": "weak, wrong direction",
+   "detail": "turns away from the lit side, below \u00b110\u00b0 (right +4\u00b0, left -7\u00b0) while walking under P9, compared with P9 alone; 0 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -0.23656559357612147,
+    "right": -0.8885279088647645,
+    "left": -0.20638773929534773
+   },
+   "yaw_deg": {
+    "both": -31.82234853947327,
+    "right": 3.8978811858625213,
+    "left": -6.624395029927267
+   }
+  }
+ ],
+ "stage3": [
+  {
+   "variant": "circuit",
+   "text": "Circuit rhythm as in the model",
+   "forward_mm": 0.84,
+   "yaw_deg": -3.0,
+   "per_seed_forward_mm": [
+    0.57,
+    1.11
+   ]
+  },
+  {
+   "variant": "no_posture",
+   "text": "Circuit rhythm, posture offsets removed",
+   "forward_mm": -0.61,
+   "yaw_deg": 20.1,
+   "per_seed_forward_mm": [
+    -0.55,
+    -0.67
+   ]
+  },
+  {
+   "variant": "strong_coupling",
+   "text": "Circuit rhythm, leg coupling 6\u00d7 stronger",
+   "forward_mm": 1.61,
+   "yaw_deg": 66.3,
+   "per_seed_forward_mm": [
+    2.76,
+    0.46
+   ]
+  },
+  {
+   "variant": "shared_frequency",
+   "text": "Circuit rhythm, all legs at one shared frequency",
+   "forward_mm": 1.34,
+   "yaw_deg": 9.1,
+   "per_seed_forward_mm": [
+    2.23,
+    0.45
+   ]
+  },
+  {
+   "variant": "supplied",
+   "text": "Reference: supplied rhythm, every leg at full amplitude and 12 Hz",
+   "forward_mm": 22.39,
+   "yaw_deg": 1.1,
+   "per_seed_forward_mm": [
+    22.39,
+    22.39
+   ]
+  }
+ ],
+ "coordination": {
+  "circuit": "Circuit rhythm as in the model",
+  "no_posture": "Circuit rhythm, posture offsets removed",
+  "strong_coupling": "Circuit rhythm, leg coupling 6\u00d7 stronger",
+  "shared_frequency": "Circuit rhythm, all legs at one shared frequency",
+  "supplied": "Reference: supplied rhythm, every leg at full amplitude and 12 Hz"
+ }
+}
