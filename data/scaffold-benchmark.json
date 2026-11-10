@@ -1,0 +1,398 @@
+{
+ "seeds": [
+  7,
+  8,
+  9
+ ],
+ "wirings": {
+  "fly_measured": "Measured PN\u2192KC",
+  "fly_shuffled": "Shuffled PN\u2192KC",
+  "random_sparse": "Random sparse"
+ },
+ "sparsity": 0.05,
+ "beta": 1.0,
+ "few_shot": [
+  {
+   "shots": 1,
+   "fly_measured": 0.5720470006184292,
+   "fly_measured_shifted": 0.27705627705627706,
+   "glimpses_plain": 0.5027829313543599,
+   "glimpses_assisted": 0.5306122448979592,
+   "fly_shuffled": 0.5670995670995671,
+   "fly_shuffled_shifted": 0.2857142857142857,
+   "random_sparse": 0.6017316017316018,
+   "random_sparse_shifted": 0.29622758194186766,
+   "pixels_nearest": 0.6184291898577613,
+   "pixels_softmax": 0.6190476190476191,
+   "mlp_backprop": 0.5974025974025974,
+   "mlp_backprop_shifted": 0.3172541743970316,
+   "fly_measured_sd": 0.026599645228950572,
+   "fly_measured_shifted_sd": 0.033337865113032904,
+   "glimpses_plain_sd": 0.043139591902523894,
+   "glimpses_assisted_sd": 0.040900570844246024,
+   "fly_shuffled_sd": 0.02165385454546885,
+   "fly_shuffled_shifted_sd": 0.025029197705439796,
+   "random_sparse_sd": 0.01722744375656665,
+   "random_sparse_shifted_sd": 0.028675381866096777,
+   "pixels_nearest_sd": 0.03337226360725303,
+   "pixels_softmax_sd": 0.027490551355464254,
+   "mlp_backprop_sd": 0.03685754959987966,
+   "mlp_backprop_shifted_sd": 0.03865058748794
+  },
+  {
+   "shots": 2,
+   "fly_measured": 0.6957328385899815,
+   "fly_measured_shifted": 0.30921459492888065,
+   "glimpses_plain": 0.6295609152752011,
+   "glimpses_assisted": 0.6728509585652441,
+   "fly_shuffled": 0.712430426716141,
+   "fly_shuffled_shifted": 0.3203463203463203,
+   "random_sparse": 0.7421150278293136,
+   "random_sparse_shifted": 0.33518862090290663,
+   "pixels_nearest": 0.75139146567718,
+   "pixels_softmax": 0.7557204700061843,
+   "mlp_backprop": 0.7470624613481757,
+   "mlp_backprop_shifted": 0.3525046382189239,
+   "fly_measured_sd": 0.027560024681703404,
+   "fly_measured_shifted_sd": 0.05217578260357317,
+   "glimpses_plain_sd": 0.02175956967935582,
+   "glimpses_assisted_sd": 0.022688851364062037,
+   "fly_shuffled_sd": 0.03383887203538519,
+   "fly_shuffled_shifted_sd": 0.01722744375656662,
+   "random_sparse_sd": 0.011831247043728501,
+   "random_sparse_shifted_sd": 0.03980109563315792,
+   "pixels_nearest_sd": 0.02628142159663051,
+   "pixels_softmax_sd": 0.011470152746438731,
+   "mlp_backprop_sd": 0.017752257383311487,
+   "mlp_backprop_shifted_sd": 0.06186765120791492
+  },
+  {
+   "shots": 5,
+   "fly_measured": 0.8206555349412493,
+   "fly_measured_shifted": 0.34570191713048853,
+   "glimpses_plain": 0.7353123067408781,
+   "glimpses_assisted": 0.7835497835497836,
+   "fly_shuffled": 0.8089053803339518,
+   "fly_shuffled_shifted": 0.3661100803957947,
+   "random_sparse": 0.8280766852195424,
+   "random_sparse_shifted": 0.3753865182436611,
+   "pixels_nearest": 0.8645640074211504,
+   "pixels_softmax": 0.8726035868893011,
+   "mlp_backprop": 0.8744588744588745,
+   "mlp_backprop_shifted": 0.3896103896103896,
+   "fly_measured_sd": 0.021440860634953273,
+   "fly_measured_shifted_sd": 0.05168973084469232,
+   "glimpses_plain_sd": 0.02328778031386852,
+   "glimpses_assisted_sd": 0.017026468643087423,
+   "fly_shuffled_sd": 0.027643162199909734,
+   "fly_shuffled_shifted_sd": 0.03034717166700136,
+   "random_sparse_sd": 0.04296191572778829,
+   "random_sparse_shifted_sd": 0.027281069882637943,
+   "pixels_nearest_sd": 0.009933443663703766,
+   "pixels_softmax_sd": 0.01881895368547056,
+   "mlp_backprop_sd": 0.01524901423121581,
+   "mlp_backprop_shifted_sd": 0.04400852659160716
+  },
+  {
+   "shots": 10,
+   "fly_measured": 0.8633271490414348,
+   "fly_measured_shifted": 0.3593073593073593,
+   "glimpses_plain": 0.7649969078540507,
+   "glimpses_assisted": 0.8101422387136673,
+   "fly_shuffled": 0.8571428571428572,
+   "fly_shuffled_shifted": 0.3784786641929499,
+   "random_sparse": 0.8719851576994434,
+   "random_sparse_shifted": 0.4013605442176871,
+   "pixels_nearest": 0.91713048855906,
+   "pixels_softmax": 0.8991960420531848,
+   "mlp_backprop": 0.9029066171923316,
+   "mlp_backprop_shifted": 0.4025974025974026,
+   "fly_measured_sd": 0.003153382506860106,
+   "fly_measured_shifted_sd": 0.05208774691217209,
+   "glimpses_plain_sd": 0.020678111932344482,
+   "glimpses_assisted_sd": 0.018940498245038448,
+   "fly_shuffled_sd": 0.0030296719143886016,
+   "fly_shuffled_shifted_sd": 0.026800183896129197,
+   "random_sparse_sd": 0.006603016853451626,
+   "random_sparse_shifted_sd": 0.02186477369160628,
+   "pixels_nearest_sd": 0.013745275677732139,
+   "pixels_softmax_sd": 0.007773534378464188,
+   "mlp_backprop_sd": 0.007773534378464149,
+   "mlp_backprop_shifted_sd": 0.02292362769678496
+  },
+  {
+   "shots": 50,
+   "fly_measured": 0.8818800247371676,
+   "fly_measured_shifted": 0.367965367965368,
+   "glimpses_plain": 0.7909709338280767,
+   "glimpses_assisted": 0.8447742733457019,
+   "fly_shuffled": 0.8942486085343228,
+   "fly_shuffled_shifted": 0.38651824366110077,
+   "random_sparse": 0.9053803339517627,
+   "random_sparse_shifted": 0.4137291280148423,
+   "pixels_nearest": 0.9771181199752629,
+   "pixels_softmax": 0.9319727891156462,
+   "mlp_backprop": 0.9517625231910946,
+   "mlp_backprop_shifted": 0.4335188620902907,
+   "fly_measured_sd": 0.004869516310458739,
+   "fly_measured_shifted_sd": 0.05411873805110496,
+   "glimpses_plain_sd": 0.01668613180362654,
+   "glimpses_assisted_sd": 0.007472508332464202,
+   "fly_shuffled_sd": 0.0030296719143886016,
+   "fly_shuffled_shifted_sd": 0.036555390738730126,
+   "random_sparse_sd": 0.010603851700360108,
+   "random_sparse_shifted_sd": 0.02200426329580358,
+   "pixels_nearest_sd": 0.002313950146427908,
+   "pixels_softmax_sd": 0.01224427326729951,
+   "mlp_backprop_sd": 0.008015758439589193,
+   "mlp_backprop_shifted_sd": 0.027781171855554985
+  }
+ ],
+ "sequences": {
+  "exposures": [
+   1,
+   2,
+   3,
+   5
+  ],
+  "betas": [
+   0.0,
+   0.5,
+   1.0,
+   2.0
+  ],
+  "sequences": [
+   [
+    5,
+    1,
+    2,
+    3,
+    4,
+    11
+   ],
+   [
+    6,
+    1,
+    2,
+    3,
+    4,
+    12
+   ],
+   [
+    7,
+    1,
+    2,
+    3,
+    4,
+    13
+   ],
+   [
+    8,
+    1,
+    2,
+    3,
+    4,
+    14
+   ],
+   [
+    9,
+    1,
+    2,
+    3,
+    4,
+    15
+   ]
+  ],
+  "fly_measured|0.0": [
+   0.2,
+   0.2,
+   0.2,
+   0.2
+  ],
+  "fly_measured|0.5": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "fly_measured|1.0": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "fly_measured|2.0": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "fly_shuffled|0.0": [
+   0.2,
+   0.2,
+   0.2,
+   0.2
+  ],
+  "fly_shuffled|0.5": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "fly_shuffled|1.0": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "fly_shuffled|2.0": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "random_sparse|0.0": [
+   0.2,
+   0.2,
+   0.2,
+   0.2
+  ],
+  "random_sparse|0.5": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "random_sparse|1.0": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "random_sparse|2.0": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "markov_order_1": 0.20000000000000004,
+  "markov_order_2": 0.20000000000000004,
+  "markov_order_5": 1.0,
+  "chance": 0.20000000000000004
+ },
+ "objects": {
+  "reference_frame": [
+   0.062,
+   0.205,
+   0.515,
+   0.742,
+   0.855,
+   0.922,
+   0.948,
+   0.97
+  ],
+  "voting_3_modules": [
+   0.062,
+   0.753,
+   0.967,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "bag_of_features": [
+   0.11,
+   0.155,
+   0.147,
+   0.182,
+   0.193,
+   0.22,
+   0.223,
+   0.243
+  ],
+  "glimpses": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "chance": 0.05,
+  "objects": 20,
+  "features": 6
+ },
+ "arithmetic": {
+  "symbols": 20,
+  "successor_pairs_seen": 19,
+  "placed": 20,
+  "addition": 1.0,
+  "subtraction": 1.0,
+  "comparison": 1.0,
+  "mlp_addition_curve": [
+   {
+    "train_examples": 19,
+    "held_out_accuracy": 0.005235602094240839
+   },
+   {
+    "train_examples": 50,
+    "held_out_accuracy": 0.0
+   },
+   {
+    "train_examples": 100,
+    "held_out_accuracy": 0.0
+   },
+   {
+    "train_examples": 150,
+    "held_out_accuracy": 0.0
+   }
+  ],
+  "tests": 210,
+  "chance": 0.05
+ },
+ "continual": {
+  "fly_measured": {
+   "final_accuracy": {
+    "mean": 0.8883116883116884,
+    "sd": 0.007640541848598895
+   },
+   "forgetting": {
+    "mean": 0.04847944274549779,
+    "sd": 0.01023687966485693
+   }
+  },
+  "fly_shuffled": {
+   "final_accuracy": {
+    "mean": 0.8846011131725418,
+    "sd": 0.01781076066790352
+   },
+   "forgetting": {
+    "mean": 0.054463982330954806,
+    "sd": 0.011444589094353325
+   }
+  },
+  "random_sparse": {
+   "final_accuracy": {
+    "mean": 0.909090909090909,
+    "sd": 0.01547803607763579
+   },
+   "forgetting": {
+    "mean": 0.03922867821950389,
+    "sd": 0.00546709510305292
+   }
+  },
+  "mlp_backprop": {
+   "final_accuracy": {
+    "mean": 0.18738404452690166,
+    "sd": 0.004390411712875413
+   },
+   "forgetting": {
+    "mean": 0.9958375806999659,
+    "sd": 0.00172544531940504
+   }
+  }
+ }
+}

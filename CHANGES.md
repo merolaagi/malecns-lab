@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Scaffold learner: fly design, sparse codes and reference frames
+
+- `scaffold.py` and `/scaffold` (Theory): sparse expansion with prediction-assisted top-k (Byrne's HTM variant), one-shot memory on active cells, Monty-style feature-at-location reference frames with voting, and a one-dimensional frame for numbers. Five tests against standard learners, three seeds, measured vs shuffled vs random wiring.
+- Results: no data-efficiency gain on plain digits (behind nearest neighbour and a backprop MLP); large gains where structure matches the task: objects by feature location (100% with 3 voting modules vs 18% bag of features, from one exploration), arithmetic from 19 successor pairs (100% vs 0% for a backprop network on 150 sums, with the frame's line given), long-context sequences from one exposure, and continual learning (89% vs 19%). Wiring specifics don't matter.
+- Nav: Theory section gains "Scaffold learner". Tests in `test_scaffold.py`.
+
 ## Add the interneurons that coordinate the legs
 
 - `build_coordination.py` (probe and build): the optogenetics circuit plus each leg's premotor interneurons, interneurons reaching two or more leg segments, and P9's route to the front legs, with mirror completion and a measured 6 × 6 leg-link matrix (excitatory and inhibitory). Writes `data/coordination-circuit.json`.

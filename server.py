@@ -97,7 +97,10 @@ class Handler(BaseHTTPRequestHandler):
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
         if path == '/api/optogenetics-summary': return self.send(200, optogenetics.summary(OPTO) | {'physics_body': bodysim.available()})
-        files = {'/optogenetics': ('optogenetics.html', 'text/html; charset=utf-8'),
+        files = {'/scaffold': ('scaffold.html', 'text/html; charset=utf-8'),
+                 '/scaffold.js': ('scaffold.js', 'text/javascript; charset=utf-8'),
+                 '/api/scaffold-benchmark': ('data/scaffold-benchmark.json', 'application/json; charset=utf-8'),
+                 '/optogenetics': ('optogenetics.html', 'text/html; charset=utf-8'),
                  '/optogenetics.js': ('optogenetics.js', 'text/javascript; charset=utf-8'),
                  '/api/optogenetics-benchmark': ('data/optogenetics-benchmark.json', 'application/json; charset=utf-8'),
                  '/api/body-benchmark': ('data/body-benchmark.json', 'application/json; charset=utf-8'),

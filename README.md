@@ -559,6 +559,36 @@ The coordination circuit is built from the raw tables:
 .venv/bin/python coordination.py                          # both circuits, both couplings -> data/coordination.json
 ```
 
+## Scaffold learner: fly design, sparse codes and reference frames (new)
+
+Open `/scaffold` (Theory). The question: does a learner built from the fly's design principles, sparse distributed representations (HTM, with Byrne's prediction-assisted pooling, arXiv:1509.08255) and Monty-style reference frames need less data than standard learners? `scaffold.py` combines:
+
+- **sparse expansion** (measured projection-neuron → Kenyon-cell wiring, 5% active), giving sparse distributed codes;
+- **prediction-assisted pooling**: cells predicted by the previous step get a head start in the top-k competition;
+- **one-shot memory** written only on active cells;
+- **reference frames**: features stored at locations, recognised by moving a sensor, with modules voting; and a one-dimensional frame for numbers.
+
+Results, three seeds, each against baselines trained on the same data:
+
+| Test | Scaffold | Standard learners | Verdict |
+|---|---|---|---|
+| Digits, 1 example per class | 57% | 60–62% (nearest neighbour, softmax, backprop MLP) | no advantage |
+| Digits, 50 per class | 88% | 93–98% | behind |
+| 20 objects made of 6 shared features, one exploration, 4 glimpses | 100% (3 modules voting); 74% (1 module) | 18% (bag of features) | large advantage |
+| Addition, subtraction, comparison on unseen pairs, after 19 successor pairs | 100% | backprop MLP: 0–1% even with 150 addition examples (it memorises the training sums perfectly) | large advantage, frame given |
+| Long-context sequences, 1 exposure | 100% with any head start; 20% without | first-order Markov 20%; fifth-order 100% | matches a model told the order |
+| Learning classes in sequence | 89% final, 5% forgetting | backprop MLP: 19% final, 100% forgetting | large advantage |
+
+- **Data efficiency appears where structure matches the task:** locations (objects), order (numbers), context (sequences), and no-overwrite memory (continual learning).
+- **On plain perception there is no gain.** On 8×8 digits the scaffold is no more data-efficient than nearest neighbour, and falls behind with more data. Shifting digits by one pixel breaks every learner.
+- **Prediction-assisted pooling helps a little** when evidence is summed over glimpses (84% against 79% at 50 per class).
+- **Measured, shuffled and random wiring perform alike everywhere.** The gains come from the design, not the exact wiring.
+- **The arithmetic result depends on giving the frame a line.** What is learned is only which symbol sits where. Discovering the right frame from data is the open problem, and the next thing to test.
+
+```sh
+python3 scaffold.py     # about 2.5 minutes; writes data/scaffold-benchmark.json
+```
+
 ## Object memory: seeing, remembering, recognising a variant (new)
 
 Open `/objects`. The question: can the measured circuit take a sensation (a cup under some light), store it, and use the memory to recognise a slightly different sensation (another cup, other light, another distance)? This is the fly's version of what tbp.monty attempts, and the page says plainly where it differs.

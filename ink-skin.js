@@ -71,7 +71,7 @@
       ['/vision', 'Vision network', 'eye'], ['/navigation', 'Navigation', 'compass']]],
     ['Theory', [
       ['/expansion', 'Sparse expansion', 'fan'], ['/theory', 'Theory', 'idea'], ['/spectrum', 'Spectra', 'wave'],
-      ['/inhibition', 'Inhibition', 'minus']]],
+      ['/inhibition', 'Inhibition', 'minus'], ['/scaffold', 'Scaffold learner', 'layers']]],
   ];
   const ICONS = {
     walk: '<circle cx="13" cy="4.5" r="1.8"/><path d="m9 21 2.5-6.5L14 17v4M8 11l3-3.5 3 1 2.5 3M11 7.5 11.5 14.5"/>',

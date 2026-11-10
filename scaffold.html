@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MaleCNS · Scaffold learner</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/workbench.css">
+<style>main canvas{width:100%;display:block}.legend2{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;font-size:12px;color:var(--dim);margin-top:6px}.legend2 i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/ink-skin.css"><script src="/ink-skin.js"></script></head>
+<body>
+<header><div class="brand">MaleCNS <span class="muted">/ scaffold learner</span></div></header>
+<main class="wb">
+<h1>A learner built from the fly's design, sparse codes and reference frames</h1>
+<p class="sub">Fly connectome: a sparse expansion (measured projection-neuron → Kenyon-cell wiring), one-shot memory written only on active cells, and a reference frame that adds up movements. HTM: codes are sparse distributed representations, and cells predicted by the previous step get a head start (Byrne's prediction-assisted pooling). Monty: features stored at locations, recognised by moving a sensor, with modules voting. The question is how little data it needs, against standard learners trained on the same data.</p>
+<div class="notice"><strong>Measured:</strong> the projection-neuron → Kenyon-cell wiring. <strong>Assumed:</strong> everything else (pixel-to-input assignment, 5% sparsity, the learning rules, the tasks, the reference-frame geometry). In the arithmetic test the frame is given a line; what is learned is which symbol sits where. Three seeds throughout.</div>
+<div id="summary" class="wb-card" style="margin-top:20px"><p class="hint">Loading…</p></div>
+
+<div class="wb-card" style="margin-top:20px"><h2>Few-shot recognition: 8×8 digits</h2>
+<canvas id="fewshot" style="height:300px"></canvas><div class="legend2" id="fewlegend"></div>
+<p class="hint" id="fewnote"></p></div>
+
+<div class="num-grid" style="margin-top:20px">
+<div class="wb-card"><h2>Objects told apart only by where their features are</h2>
+<canvas id="objects" style="height:260px"></canvas><div class="legend2" id="objlegend"></div>
+<p class="hint" id="objnote"></p></div>
+<div class="wb-card"><h2>Arithmetic as movement in a reference frame</h2><div id="arith"></div></div>
+</div>
+
+<div class="num-grid" style="margin-top:20px">
+<div class="wb-card"><h2>Sequences that need context from four steps back</h2><div id="seq"></div></div>
+<div class="wb-card"><h2>Learning classes in sequence without forgetting</h2><div id="cont"></div></div>
+</div>
+</main>
+<script src="/scaffold.js"></script>
+</body></html>
