@@ -23,6 +23,7 @@ import memory
 import objects
 import optogenetics
 import bodysim
+import helper
 from neuron_inputs import NeuronIndex
 from urllib.parse import urlparse, parse_qs
 import gcs
@@ -97,7 +98,11 @@ class Handler(BaseHTTPRequestHandler):
         if path == '/api/circuit':
             return self.send(200, CIRCUIT.data)
         if path == '/api/optogenetics-summary': return self.send(200, optogenetics.summary(OPTO) | {'physics_body': bodysim.available()})
-        files = {'/scaffold': ('scaffold.html', 'text/html; charset=utf-8'),
+        if path == '/api/helper/guide': return self.send(200, helper.guide(parse_qs(url.query).get('path', ['/'])[0]))
+        if path == '/api/helper/glossary': return self.send(200, helper.glossary())
+        files = {'/helper.js': ('helper.js', 'text/javascript; charset=utf-8'),
+                 '/helper.css': ('helper.css', 'text/css; charset=utf-8'),
+                 '/scaffold': ('scaffold.html', 'text/html; charset=utf-8'),
                  '/scaffold.js': ('scaffold.js', 'text/javascript; charset=utf-8'),
                  '/api/scaffold-benchmark': ('data/scaffold-benchmark.json', 'application/json; charset=utf-8'),
                  '/optogenetics': ('optogenetics.html', 'text/html; charset=utf-8'),
@@ -183,6 +188,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send(200, file.read_bytes(), mime)
 
     def do_POST(self):
+        if self.path.startswith('/api/helper/'): return self.helper_post()
         if self.path not in ['/api/run', '/api/learn', '/api/numerosity', '/api/math', '/api/membrane', '/api/sdr', '/api/vision', '/api/expansion', '/api/theory', '/api/arena', '/api/synapse', '/api/synapse-shunting', '/api/navigation', '/api/spectral', '/api/inhibition', '/api/memory', '/api/objects', '/api/objects-view', '/api/optogenetics', '/api/body-run']: return self.send(404, {'error': 'Not found'})
         # The app is same-origin. Reject browser requests originating elsewhere.
         # Behind an HTTPS proxy such as a Cloudflare tunnel the page origin is https://<host>,
@@ -237,6 +243,26 @@ class Handler(BaseHTTPRequestHandler):
             self.send(400, {'error': str(e)})
         finally:
             LOCK.release()
+
+    def helper_post(self):
+        # The guide answers questions alongside experiments, so it does not take the experiment lock.
+        origin = self.headers.get('Origin'); host = self.headers.get('Host', '')
+        if origin and origin not in ('http://' + host, 'https://' + host): return self.send(403, {'error': 'Origin not allowed'})
+        who = self.headers.get('CF-Connecting-IP') or self.client_address[0]
+        try:
+            size = int(self.headers.get('Content-Length', 0))
+            if not 0 < size <= 32768: raise ValueError('Invalid request size')
+            o = json.loads(self.rfile.read(size))
+            if not isinstance(o, dict): raise ValueError('Expected JSON object')
+            if self.path == '/api/helper/ask':
+                return self.send(200, helper.ask(o.get('question', ''), o.get('path', '/'), o.get('history'), o.get('selection'), who))
+            if self.path == '/api/helper/propose':
+                return self.send(200, helper.propose(o.get('goal', ''), o.get('path', '/'), who))
+            if self.path == '/api/helper/build-request':
+                if not isinstance(o.get('proposal'), dict): raise ValueError('Expected a proposal')
+                return self.send(200, {'text': helper.build_request(o['proposal'])})
+            return self.send(404, {'error': 'Not found'})
+        except (ValueError, TypeError) as e: return self.send(400, {'error': str(e)})
 
 if __name__ == '__main__':
     runtime = BASE / '.runtime.json'

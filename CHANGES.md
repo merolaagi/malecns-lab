@@ -2,6 +2,12 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## Lab guide: tours, explanations, questions and model proposals on every page
+
+- `helper.js`/`helper.css` (loaded by `ink-skin.js`, so every page has it): a floating, draggable guide window, opened with the Guide button or `?`. Tour steps through the page and rings each part. Explain shows what the page measures and assumes, what it found, its open problems, a glossary, terms marked on the page with definitions on hover, and "point at something" to explain any chart, number or control. Ask answers questions; Propose ranks model proposals for a goal, each with hypothesis, test, controls and success criterion, and copies a build request.
+- `helper.py`, `helper_kb.py`: notes for all 23 pages, ~100 glossary terms, open problems and 14 proposals; answers from those notes and the saved benchmarks. With an Anthropic API key (`ANTHROPIC_API_KEY` or `~/.config/malecns-lab/anthropic-key`, never the repo) Claude answers free-form and drafts new proposals, grounded in the same notes and the page's live numbers; rate-limited per visitor and per day because the lab is public.
+- Routes `/api/helper/guide`, `/api/helper/glossary`, `/api/helper/ask`, `/api/helper/propose`, `/api/helper/build-request`; they don't take the experiment lock. Tests in `test_helper.py`, including that every tour selector exists on its page.
+
 ## Scaffold learner: fly design, sparse codes and reference frames
 
 - `scaffold.py` and `/scaffold` (Theory): sparse expansion with prediction-assisted top-k (Byrne's HTM variant), one-shot memory on active cells, Monty-style feature-at-location reference frames with voting, and a one-dimensional frame for numbers. Five tests against standard learners, three seeds, measured vs shuffled vs random wiring.

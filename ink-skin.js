@@ -184,4 +184,11 @@
     mo.observe(document.documentElement, { childList: true });
   }
   document.addEventListener('DOMContentLoaded', () => { build(); buildToc(); });
+
+  // The lab guide (tour, explain, ask, propose) on every page.
+  if (!document.querySelector('link[href="/helper.css"]')) {
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/helper.css';
+    const js = document.createElement('script'); js.src = '/helper.js'; js.defer = true;
+    document.head.append(css, js);
+  }
 })();

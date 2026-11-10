@@ -4,16 +4,6 @@
    "neurons": 1741,
    "added": null,
    "leg_links_measured_in_build": false
-  },
-  "coordination": {
-   "neurons": 2470,
-   "added": {
-    "premotor": 234,
-    "linking": 131,
-    "p9_route": 136,
-    "mirror": 300
-   },
-   "leg_links_measured_in_build": true
   }
  },
  "couplings": {
@@ -574,560 +564,10 @@
    "front_dir": -0.92,
    "rear_dir": 0.371,
    "frequency_spread": 0.029
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "P9",
-   "side": "both",
-   "light": 2.5,
-   "legs": {
-    "LF": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RF": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    }
-   },
-   "front_amp": 0.0,
-   "rear_amp": 0.0,
-   "front_dir": 0.0,
-   "rear_dir": 0.0,
-   "frequency_spread": null
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "P9",
-   "side": "both",
-   "light": 3.5,
-   "legs": {
-    "LF": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 0.005,
-     "amp": 0.0005,
-     "freq_hz": 0.005,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RF": {
-     "drive_hz": 0.095,
-     "amp": 0.0095,
-     "freq_hz": 0.075,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    }
-   },
-   "front_amp": 0.005,
-   "rear_amp": 0.0,
-   "front_dir": 0.0,
-   "rear_dir": 0.0,
-   "frequency_spread": null
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "P9",
-   "side": "both",
-   "light": 5.0,
-   "legs": {
-    "LF": {
-     "drive_hz": 2.8200000000000003,
-     "amp": 0.275,
-     "freq_hz": 2.23,
-     "dir": 0.919,
-     "retract_hz": 11.344999999999999,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 5.91,
-     "amp": 0.5305,
-     "freq_hz": 4.495,
-     "dir": 0.197,
-     "retract_hz": 19.595,
-     "protract_hz": 12.985
-    },
-    "LH": {
-     "drive_hz": 13.29,
-     "amp": 0.8694999999999999,
-     "freq_hz": 8.515,
-     "dir": -0.985,
-     "retract_hz": 0.0,
-     "protract_hz": 66.945
-    },
-    "RF": {
-     "drive_hz": 7.52,
-     "amp": 0.636,
-     "freq_hz": 5.555,
-     "dir": -0.095,
-     "retract_hz": 9.655000000000001,
-     "protract_hz": 11.785
-    },
-    "RM": {
-     "drive_hz": 6.220000000000001,
-     "amp": 0.553,
-     "freq_hz": 4.71,
-     "dir": 0.966,
-     "retract_hz": 28.509999999999998,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 8.510000000000002,
-     "amp": 0.6915,
-     "freq_hz": 6.16,
-     "dir": -0.938,
-     "retract_hz": 0.0,
-     "protract_hz": 15.04
-    }
-   },
-   "front_amp": 0.456,
-   "rear_amp": 0.661,
-   "front_dir": 0.412,
-   "rear_dir": -0.19,
-   "frequency_spread": 0.359
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "P9",
-   "side": "right",
-   "light": 2.5,
-   "legs": {
-    "LF": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RF": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    }
-   },
-   "front_amp": 0.0,
-   "rear_amp": 0.0,
-   "front_dir": 0.0,
-   "rear_dir": 0.0,
-   "frequency_spread": null
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "P9",
-   "side": "right",
-   "light": 3.5,
-   "legs": {
-    "LF": {
-     "drive_hz": 1.4,
-     "amp": 0.139,
-     "freq_hz": 1.12,
-     "dir": 0.886,
-     "retract_hz": 7.765000000000001,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 5.145,
-     "amp": 0.473,
-     "freq_hz": 3.965,
-     "dir": 0.9495,
-     "retract_hz": 21.795,
-     "protract_hz": 0.07
-    },
-    "LH": {
-     "drive_hz": 11.185,
-     "amp": 0.8069999999999999,
-     "freq_hz": 7.59,
-     "dir": -0.975,
-     "retract_hz": 0.20500000000000002,
-     "protract_hz": 55.825
-    },
-    "RF": {
-     "drive_hz": 5.765000000000001,
-     "amp": 0.52,
-     "freq_hz": 4.395,
-     "dir": -0.06,
-     "retract_hz": 7.705,
-     "protract_hz": 8.760000000000002
-    },
-    "RM": {
-     "drive_hz": 4.65,
-     "amp": 0.434,
-     "freq_hz": 3.605,
-     "dir": 0.963,
-     "retract_hz": 25.86,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 6.84,
-     "amp": 0.594,
-     "freq_hz": 5.125,
-     "dir": -0.94,
-     "retract_hz": 0.0,
-     "protract_hz": 15.8
-    }
-   },
-   "front_amp": 0.33,
-   "rear_amp": 0.577,
-   "front_dir": 0.413,
-   "rear_dir": -0.001,
-   "frequency_spread": 0.448
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "P9",
-   "side": "right",
-   "light": 5.0,
-   "legs": {
-    "LF": {
-     "drive_hz": 1.34,
-     "amp": 0.133,
-     "freq_hz": 1.07,
-     "dir": 0.8895,
-     "retract_hz": 8.05,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 5.175000000000001,
-     "amp": 0.476,
-     "freq_hz": 3.98,
-     "dir": 0.956,
-     "retract_hz": 21.744999999999997,
-     "protract_hz": 0.0
-    },
-    "LH": {
-     "drive_hz": 11.41,
-     "amp": 0.8145,
-     "freq_hz": 7.695,
-     "dir": -0.983,
-     "retract_hz": 0.0,
-     "protract_hz": 57.565
-    },
-    "RF": {
-     "drive_hz": 5.890000000000001,
-     "amp": 0.5295000000000001,
-     "freq_hz": 4.485,
-     "dir": -0.055999999999999994,
-     "retract_hz": 7.875,
-     "protract_hz": 8.870000000000001
-    },
-    "RM": {
-     "drive_hz": 4.84,
-     "amp": 0.4495,
-     "freq_hz": 3.745,
-     "dir": 0.964,
-     "retract_hz": 26.700000000000003,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 7.055,
-     "amp": 0.6074999999999999,
-     "freq_hz": 5.26,
-     "dir": -0.942,
-     "retract_hz": 0.0,
-     "protract_hz": 16.34
-    }
-   },
-   "front_amp": 0.331,
-   "rear_amp": 0.587,
-   "front_dir": 0.417,
-   "rear_dir": -0.001,
-   "frequency_spread": 0.451
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "MDN",
-   "side": "both",
-   "light": 2.5,
-   "legs": {
-    "LF": {
-     "drive_hz": 1.145,
-     "amp": 0.1135,
-     "freq_hz": 0.91,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RF": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    }
-   },
-   "front_amp": 0.057,
-   "rear_amp": 0.0,
-   "front_dir": 0.0,
-   "rear_dir": 0.0,
-   "frequency_spread": null
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "MDN",
-   "side": "both",
-   "light": 3.5,
-   "legs": {
-    "LF": {
-     "drive_hz": 1.705,
-     "amp": 0.1685,
-     "freq_hz": 1.3599999999999999,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "LH": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RF": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RM": {
-     "drive_hz": 0.0,
-     "amp": 0.0,
-     "freq_hz": 0.0,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 0.215,
-     "amp": 0.0215,
-     "freq_hz": 0.175,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    }
-   },
-   "front_amp": 0.084,
-   "rear_amp": 0.005,
-   "front_dir": 0.0,
-   "rear_dir": 0.0,
-   "frequency_spread": null
-  },
-  {
-   "circuit": "coordination",
-   "experiment": "MDN",
-   "side": "both",
-   "light": 5.0,
-   "legs": {
-    "LF": {
-     "drive_hz": 7.765000000000001,
-     "amp": 0.651,
-     "freq_hz": 5.715,
-     "dir": 0.6825,
-     "retract_hz": 13.975,
-     "protract_hz": 2.23
-    },
-    "LM": {
-     "drive_hz": 2.9400000000000004,
-     "amp": 0.2855,
-     "freq_hz": 2.32,
-     "dir": -0.9595,
-     "retract_hz": 0.0,
-     "protract_hz": 23.53
-    },
-    "LH": {
-     "drive_hz": 15.835,
-     "amp": 0.919,
-     "freq_hz": 9.405000000000001,
-     "dir": -0.987,
-     "retract_hz": 0.0,
-     "protract_hz": 73.47999999999999
-    },
-    "RF": {
-     "drive_hz": 8.035,
-     "amp": 0.666,
-     "freq_hz": 5.875,
-     "dir": -0.11499999999999999,
-     "retract_hz": 12.01,
-     "protract_hz": 15.265
-    },
-    "RM": {
-     "drive_hz": 1.1,
-     "amp": 0.109,
-     "freq_hz": 0.875,
-     "dir": 0.0,
-     "retract_hz": 0.0,
-     "protract_hz": 0.0
-    },
-    "RH": {
-     "drive_hz": 35.370000000000005,
-     "amp": 0.998,
-     "freq_hz": 11.79,
-     "dir": -0.0085,
-     "retract_hz": 29.315,
-     "protract_hz": 29.83
-    }
-   },
-   "front_amp": 0.659,
-   "rear_amp": 0.578,
-   "front_dir": 0.284,
-   "rear_dir": -0.489,
-   "frequency_spread": 0.628
   }
  ],
  "chosen_light": {
-  "optogenetics": 5.0,
-  "coordination": 5.0
+  "optogenetics": 5.0
  },
  "coupling_matrices": {
   "optogenetics": [
@@ -1179,56 +619,6 @@
     18.88,
     0.0
    ]
-  ],
-  "coordination": [
-   [
-    0.0,
-    22.12,
-    2.75,
-    4.27,
-    1.68,
-    1.35
-   ],
-   [
-    22.79,
-    0.0,
-    24.2,
-    2.65,
-    4.35,
-    3.76
-   ],
-   [
-    4.13,
-    30.29,
-    0.0,
-    1.78,
-    3.1,
-    28.4
-   ],
-   [
-    5.58,
-    1.27,
-    0.62,
-    0.0,
-    15.89,
-    1.98
-   ],
-   [
-    5.24,
-    5.71,
-    2.75,
-    17.71,
-    0.0,
-    21.24
-   ],
-   [
-    3.03,
-    5.34,
-    26.13,
-    5.13,
-    24.78,
-    0.0
-   ]
   ]
  },
  "stage_b": [
@@ -1239,16 +629,16 @@
    "experiment": "P9",
    "condition": "intact",
    "result": "mismatch",
-   "detail": "both sides: travels -1.12 mm, turns +18\u00b0 (no straight forward walking); one side: turns away from the lit side (right +152\u00b0, left -68\u00b0); 3 of 3 seeds agree",
+   "detail": "both sides: travels -0.76 mm, turns +13\u00b0 (no straight forward walking); one side: turns away from the lit side (right +131\u00b0, left -54\u00b0); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": -1.1172707253182395,
-    "right": -0.5858244393884068,
-    "left": -1.5847815900821793
+    "both": -0.7582238317041865,
+    "right": -0.38975843329195986,
+    "left": -1.3572286583074475
    },
    "yaw_deg": {
-    "both": 18.453836027813637,
-    "right": 151.62772192132326,
-    "left": -67.96534208936428
+    "both": 13.154285318490642,
+    "right": 130.9273457559522,
+    "left": -53.540428907803765
    },
    "agreement": "3 of 3 seeds"
   },
@@ -1261,14 +651,14 @@
    "result": "mismatch",
    "detail": "both sides: travels +0.02 mm, turns +1\u00b0 (no straight forward walking); one side: turns away from the lit side, below \u00b110\u00b0 (right +0\u00b0, left -0\u00b0); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 0.01846432120052818,
-    "right": 0.03308217010204814,
-    "left": 0.0012910363372516092
+    "both": 0.018464321200518927,
+    "right": 0.03308217010204306,
+    "left": 0.001291036337249794
    },
    "yaw_deg": {
-    "both": 0.9884331017525136,
-    "right": 0.23062042194034546,
-    "left": -0.14094129677675057
+    "both": 0.9884331017523967,
+    "right": 0.23062042194049834,
+    "left": -0.14094129677677628
    },
    "agreement": "3 of 3 seeds"
   },
@@ -1279,15 +669,15 @@
    "experiment": "P9",
    "condition": "sham",
    "result": "mismatch",
-   "detail": "both sides: travels +0.38 mm, turns -22\u00b0 (no straight forward walking); one side: right +13\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
+   "detail": "both sides: travels +0.48 mm, turns +17\u00b0 (no straight forward walking); one side: right +4\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 0.38054325808923545,
-    "right": 0.7847712912961636,
-    "left": -1.6325037523601009e-12
+    "both": 0.4837365101636439,
+    "right": 0.8259896041188942,
+    "left": -1.6283962644997104e-12
    },
    "yaw_deg": {
-    "both": -21.952747904742072,
-    "right": 13.117044081514331,
+    "both": 17.45607542329402,
+    "right": 4.464891697820989,
     "left": 0.0
    },
    "agreement": "3 of 3 seeds"
@@ -1298,19 +688,19 @@
    "light": 5.0,
    "experiment": "MDN",
    "condition": "intact",
-   "result": "mismatch",
-   "detail": "travels +0.23 mm during light (backward walking: below \u22122.0 mm); 1 of 3 seeds agree",
+   "result": "partial",
+   "detail": "travels -0.15 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 0.23393316516265486,
-    "right": -0.07860120405769806,
-    "left": -1.1727854540398683
+    "both": -0.1516011097717155,
+    "right": 0.9138806210751239,
+    "left": -1.0144183467742
    },
    "yaw_deg": {
-    "both": -52.93489126854681,
-    "right": -129.5701801544897,
-    "left": -36.05029847042108
+    "both": -6.311476326642513,
+    "right": -180.62189350763708,
+    "left": 1.2458535376110689
    },
-   "agreement": "1 of 3 seeds"
+   "agreement": "2 of 3 seeds"
   },
   {
    "circuit": "optogenetics",
@@ -1321,14 +711,14 @@
    "result": "mismatch",
    "detail": "travels +1.52 mm during light (backward walking: below \u22122.0 mm); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 1.5197134928517944,
-    "right": 0.3896329523160804,
-    "left": -0.14531544666988155
+    "both": 1.5170486620255106,
+    "right": 0.38963295231598144,
+    "left": -0.13653906759510553
    },
    "yaw_deg": {
-    "both": -29.764885478549576,
-    "right": 36.950907275914524,
-    "left": 35.583138423443934
+    "both": -29.5575410758571,
+    "right": 36.950907275917935,
+    "left": 37.65801255420296
    },
    "agreement": "3 of 3 seeds"
   },
@@ -1338,37 +728,17 @@
    "light": 5.0,
    "experiment": "MDN",
    "condition": "sham",
-   "result": "match",
-   "detail": "travels -2.61 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
+   "result": "partial",
+   "detail": "travels -1.22 mm during light (backward walking: below \u22122.0 mm); 1 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": -2.611490900757316,
-    "right": 1.0807140927524665,
-    "left": -0.24234997397483563
+    "both": -1.2185528400426697,
+    "right": 1.3660036652012373,
+    "left": -0.0975902837814253
    },
    "yaw_deg": {
-    "both": -121.71627067763045,
-    "right": 7.327213443706905,
-    "left": 16.19341065987473
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "optogenetics",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "DNa02",
-   "condition": "intact",
-   "result": "no clear turn",
-   "detail": "right +9\u00b0, left +3\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": -1.4066871723408951,
-    "right": -1.8250123935483276,
-    "left": -1.9696565422492858
-   },
-   "yaw_deg": {
-    "both": 75.67278023623086,
-    "right": 9.071798165425728,
-    "left": 2.7023106008900064
+    "both": -51.98301703797633,
+    "right": -3.385909312819145,
+    "left": 11.382743457039211
    },
    "agreement": "1 of 3 seeds"
   },
@@ -1377,18 +747,38 @@
    "coupling": "uniform",
    "light": 5.0,
    "experiment": "DNa02",
-   "condition": "shuffled",
+   "condition": "intact",
    "result": "no clear turn",
-   "detail": "right -22\u00b0, left -54\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
+   "detail": "right +71\u00b0, left +21\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 1.0030896862182865,
-    "right": -0.5127227892113472,
-    "left": 2.5939801106361493
+    "both": -1.5792097005964667,
+    "right": -1.659056451394301,
+    "left": -1.6609588021975759
    },
    "yaw_deg": {
-    "both": -27.19525017707252,
-    "right": -21.773613772699395,
-    "left": -54.17447595585963
+    "both": 15.871774029979088,
+    "right": 71.41868464653648,
+    "left": 21.230267580303742
+   },
+   "agreement": "3 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "uniform",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "shuffled",
+   "result": "no clear turn",
+   "detail": "right -24\u00b0, left -78\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": 1.003089686290098,
+    "right": -0.5174458707686108,
+    "left": 2.42081207349197
+   },
+   "yaw_deg": {
+    "both": -27.19525017699944,
+    "right": -23.867374409807514,
+    "left": -77.52815976425995
    },
    "agreement": "2 of 3 seeds"
   },
@@ -1398,19 +788,19 @@
    "light": 5.0,
    "experiment": "DNa02",
    "condition": "sham",
-   "result": "match",
-   "detail": "right side lit turns right (-37\u00b0), left side lit turns left (+87\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "result": "no clear turn",
+   "detail": "right -9\u00b0, left -22\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": -1.7222198950209442,
-    "right": -1.3430070982636122,
-    "left": -1.680388670049064
+    "both": -1.3168919690619256,
+    "right": -1.5027319686508316,
+    "left": -1.6635543596973157
    },
    "yaw_deg": {
-    "both": -12.51209536436655,
-    "right": -37.42858290936888,
-    "left": 87.17667345597143
+    "both": 2.9356007549677705,
+    "right": -9.485312494573881,
+    "left": -21.566861609823988
    },
-   "agreement": "1 of 3 seeds"
+   "agreement": "2 of 3 seeds"
   },
   {
    "circuit": "optogenetics",
@@ -1419,16 +809,16 @@
    "experiment": "P9",
    "condition": "intact",
    "result": "mismatch",
-   "detail": "both sides: travels -0.47 mm, turns -39\u00b0 (no straight forward walking); one side: turns away from the lit side (right +53\u00b0, left -101\u00b0); 3 of 3 seeds agree",
+   "detail": "both sides: travels -0.75 mm, turns -5\u00b0 (no straight forward walking); one side: turns away from the lit side (right +43\u00b0, left -113\u00b0); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": -0.46911167438338347,
-    "right": 0.1837723372782314,
-    "left": -2.352635085181795
+    "both": -0.7543652844127857,
+    "right": -0.4572147061477751,
+    "left": -2.496681982549726
    },
    "yaw_deg": {
-    "both": -38.67146119014152,
-    "right": 52.64570227504405,
-    "left": -101.10767897425312
+    "both": -4.642639042161098,
+    "right": 42.719616033058095,
+    "left": -113.1964218668221
    },
    "agreement": "3 of 3 seeds"
   },
@@ -1441,14 +831,14 @@
    "result": "mismatch",
    "detail": "both sides: travels +0.02 mm, turns +1\u00b0 (no straight forward walking); one side: turns away from the lit side, below \u00b110\u00b0 (right +0\u00b0, left -0\u00b0); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 0.018594988433343076,
-    "right": 0.03308217010204814,
-    "left": 0.004666983049034931
+    "both": 0.018594988433337862,
+    "right": 0.03308217010204306,
+    "left": 0.004666983049026603
    },
    "yaw_deg": {
-    "both": 0.9626002847227099,
-    "right": 0.23062042194034546,
-    "left": -0.15468135445654616
+    "both": 0.9626002847227143,
+    "right": 0.23062042194049834,
+    "left": -0.154681354456746
    },
    "agreement": "3 of 3 seeds"
   },
@@ -1459,15 +849,15 @@
    "experiment": "P9",
    "condition": "sham",
    "result": "mismatch",
-   "detail": "both sides: travels +0.23 mm, turns -29\u00b0 (no straight forward walking); one side: right -31\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
+   "detail": "both sides: travels +0.35 mm, turns -21\u00b0 (no straight forward walking); one side: right -33\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 0.22815110738993535,
-    "right": 0.5405427693854185,
-    "left": -1.6325037523601009e-12
+    "both": 0.3491122645426792,
+    "right": 0.49956619065208474,
+    "left": -1.6283962644997104e-12
    },
    "yaw_deg": {
-    "both": -29.39349756986036,
-    "right": -30.62396571710427,
+    "both": -21.211952105937183,
+    "right": -33.2550062907395,
     "left": 0.0
    },
    "agreement": "3 of 3 seeds"
@@ -1479,16 +869,16 @@
    "experiment": "MDN",
    "condition": "intact",
    "result": "partial",
-   "detail": "travels -0.43 mm during light (backward walking: below \u22122.0 mm); 3 of 3 seeds agree",
+   "detail": "travels -0.63 mm during light (backward walking: below \u22122.0 mm); 3 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": -0.42910164423485914,
-    "right": -2.4018895662116067,
-    "left": -4.70380516821523
+    "both": -0.6316955158538201,
+    "right": -1.2094634216058613,
+    "left": -4.539701661191274
    },
    "yaw_deg": {
-    "both": -65.1897942574986,
-    "right": -155.97766312850615,
-    "left": 38.46429748516986
+    "both": -14.945713548539368,
+    "right": -153.65000073076575,
+    "left": 63.26752549230813
    },
    "agreement": "3 of 3 seeds"
   },
@@ -1499,16 +889,16 @@
    "experiment": "MDN",
    "condition": "shuffled",
    "result": "mismatch",
-   "detail": "travels +0.92 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
+   "detail": "travels +0.98 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 0.9163029187316173,
-    "right": 0.5161064869688989,
-    "left": 1.4660975585629938
+    "both": 0.9828294128554235,
+    "right": 0.5161064869690423,
+    "left": 1.3292059138911763
    },
    "yaw_deg": {
-    "both": -70.26901396117435,
-    "right": 24.299949532549387,
-    "left": -2.26072316814275
+    "both": -66.01677599996081,
+    "right": 24.299949532539227,
+    "left": -14.62015933422677
    },
    "agreement": "2 of 3 seeds"
   },
@@ -1519,16 +909,36 @@
    "experiment": "MDN",
    "condition": "sham",
    "result": "mismatch",
-   "detail": "travels +0.49 mm during light (backward walking: below \u22122.0 mm); 1 of 3 seeds agree",
+   "detail": "travels +1.08 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 0.4860261633116844,
-    "right": 0.8878735500085574,
-    "left": -0.18927321260473254
+    "both": 1.0846646662487256,
+    "right": 0.8293338263021516,
+    "left": -0.20164615693694524
    },
    "yaw_deg": {
-    "both": -44.56449375058975,
-    "right": -21.851265433856423,
-    "left": 63.89224365250761
+    "both": -21.409289221583915,
+    "right": -18.50927911750472,
+    "left": 69.98456357004339
+   },
+   "agreement": "2 of 3 seeds"
+  },
+  {
+   "circuit": "optogenetics",
+   "coupling": "measured",
+   "light": 5.0,
+   "experiment": "DNa02",
+   "condition": "intact",
+   "result": "no clear turn",
+   "detail": "right +35\u00b0, left +45\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "forward_mm_lit": {
+    "both": -1.3997106169596358,
+    "right": -1.125953269827351,
+    "left": -1.5386733959319399
+   },
+   "yaw_deg": {
+    "both": 9.931191176728873,
+    "right": 34.55731982874079,
+    "left": 44.73245942744486
    },
    "agreement": "1 of 3 seeds"
   },
@@ -1537,40 +947,20 @@
    "coupling": "measured",
    "light": 5.0,
    "experiment": "DNa02",
-   "condition": "intact",
-   "result": "weak, right direction",
-   "detail": "turns toward the lit side, below \u00b110\u00b0 (right -1\u00b0, left +22\u00b0) while walking under P9, compared with P9 alone; 0 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": -1.1900299142106354,
-    "right": -1.4625494104363195,
-    "left": -0.551868041646364
-   },
-   "yaw_deg": {
-    "both": -26.570900057116244,
-    "right": -1.1139693310211574,
-    "left": 21.527858265681605
-   },
-   "agreement": "0 of 3 seeds"
-  },
-  {
-   "circuit": "optogenetics",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "DNa02",
    "condition": "shuffled",
    "result": "no clear turn",
-   "detail": "right -4\u00b0, left -23\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 3 of 3 seeds agree",
+   "detail": "right -19\u00b0, left -23\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": 1.470601468813731,
-    "right": 0.7353862418157496,
-    "left": 3.287418959073667
+    "both": 1.4706014688473645,
+    "right": 0.7494184621944978,
+    "left": 3.2874189595492407
    },
    "yaw_deg": {
-    "both": -11.994378770823632,
-    "right": -3.9103164473795857,
-    "left": -22.906205732428656
+    "both": -11.994378769362314,
+    "right": -19.391220012732443,
+    "left": -22.906205739088715
    },
-   "agreement": "3 of 3 seeds"
+   "agreement": "2 of 3 seeds"
   },
   {
    "circuit": "optogenetics",
@@ -1579,376 +969,16 @@
    "experiment": "DNa02",
    "condition": "sham",
    "result": "no clear turn",
-   "detail": "right -1\u00b0, left -31\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
+   "detail": "right +33\u00b0, left +36\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
    "forward_mm_lit": {
-    "both": -0.5935124659772277,
-    "right": -1.367974690999952,
-    "left": -1.204118966232949
+    "both": -1.4009797259835697,
+    "right": -1.5914171794090883,
+    "left": -0.8765708794195123
    },
    "yaw_deg": {
-    "both": 50.24032653430161,
-    "right": -1.1169698952177878,
-    "left": -30.60076934298088
-   },
-   "agreement": "1 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "P9",
-   "condition": "intact",
-   "result": "partial",
-   "detail": "both sides: travels +1.02 mm, turns +85\u00b0 (no straight forward walking); one side: turns toward the lit side, below \u00b110\u00b0 (right -3\u00b0, left +63\u00b0); 3 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 1.0190999225453725,
-    "right": 0.7531274219589026,
-    "left": -0.1230300444109063
-   },
-   "yaw_deg": {
-    "both": 85.17305088499126,
-    "right": -3.2373956936147237,
-    "left": 63.0753835388824
-   },
-   "agreement": "3 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "P9",
-   "condition": "shuffled",
-   "result": "partial",
-   "detail": "both sides: travels +0.00 mm, turns -0\u00b0 (no straight forward walking); one side: turns toward the lit side, below \u00b110\u00b0 (right -0\u00b0, left +0\u00b0); 1 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.0008959608563918574,
-    "right": 0.002262244775739889,
-    "left": -0.001236020723301255
-   },
-   "yaw_deg": {
-    "both": -0.09246115265313766,
-    "right": -0.21227295317269965,
-    "left": 0.021237090912613953
-   },
-   "agreement": "1 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "P9",
-   "condition": "sham",
-   "result": "mismatch",
-   "detail": "both sides: travels -0.00 mm, turns +0\u00b0 (no straight forward walking); one side: right -0\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": -1.6325037523601009e-12,
-    "right": -0.0004860567795785124,
-    "left": -1.6325037523601009e-12
-   },
-   "yaw_deg": {
-    "both": 0.0,
-    "right": -0.008900255402181976,
-    "left": 0.0
-   },
-   "agreement": "3 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "MDN",
-   "condition": "intact",
-   "result": "mismatch",
-   "detail": "travels +0.09 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.0941847638978021,
-    "right": -0.1113499589708986,
-    "left": 0.20905444236801882
-   },
-   "yaw_deg": {
-    "both": 2.521733363160302,
-    "right": 13.309569616242952,
-    "left": 21.475226328160094
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "MDN",
-   "condition": "shuffled",
-   "result": "mismatch",
-   "detail": "travels +0.01 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.00612648287523155,
-    "right": 0.024974017908889142,
-    "left": 0.03356031485227436
-   },
-   "yaw_deg": {
-    "both": -0.0011568051495036702,
-    "right": 0.1894989634116484,
-    "left": 0.2250132269667148
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "MDN",
-   "condition": "sham",
-   "result": "mismatch",
-   "detail": "travels +0.01 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.008897725756394692,
-    "right": 0.0010456029671526168,
-    "left": -0.2992977734447883
-   },
-   "yaw_deg": {
-    "both": -0.13417717760912795,
-    "right": -0.058942333419239386,
-    "left": -8.546003570026626
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "DNa02",
-   "condition": "intact",
-   "result": "no clear turn",
-   "detail": "right +82\u00b0, left +21\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 1.8283133803763574,
-    "right": -0.6296818420853686,
-    "left": 1.2020194856425908
-   },
-   "yaw_deg": {
-    "both": 132.25618960807762,
-    "right": 82.15260413897312,
-    "left": 20.95454167236187
-   },
-   "agreement": "1 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "DNa02",
-   "condition": "shuffled",
-   "result": "weak, right direction",
-   "detail": "turns toward the lit side, below \u00b110\u00b0 (right -0\u00b0, left +0\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.014755934999190526,
-    "right": 0.01184564443944947,
-    "left": 0.009352423939299371
-   },
-   "yaw_deg": {
-    "both": -0.2186718671317407,
-    "right": -0.18622037079237283,
-    "left": 0.214924821292281
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "uniform",
-   "light": 5.0,
-   "experiment": "DNa02",
-   "condition": "sham",
-   "result": "weak, right direction",
-   "detail": "turns toward the lit side, below \u00b110\u00b0 (right -7\u00b0, left +32\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 1.3562521323221652,
-    "right": 2.998537499178082,
-    "left": 0.6334280433635879
-   },
-   "yaw_deg": {
-    "both": 10.30293739491085,
-    "right": -6.893274030455912,
-    "left": 31.694955463872706
-   },
-   "agreement": "1 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "P9",
-   "condition": "intact",
-   "result": "match",
-   "detail": "both sides: travels +2.47 mm, turns +28\u00b0 (walks forward); one side: right side lit turns right (-14\u00b0), left side lit turns left (+60\u00b0); 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 2.4749526629881635,
-    "right": 1.3043433769832353,
-    "left": 0.3265274042673292
-   },
-   "yaw_deg": {
-    "both": 28.410894818903984,
-    "right": -13.875675962413197,
-    "left": 59.82622576738225
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "P9",
-   "condition": "shuffled",
-   "result": "partial",
-   "detail": "both sides: travels +0.00 mm, turns -0\u00b0 (no straight forward walking); one side: turns toward the lit side, below \u00b110\u00b0 (right -0\u00b0, left +0\u00b0); 1 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.0008959608563918574,
-    "right": 0.002262244775739889,
-    "left": -0.001236020723301255
-   },
-   "yaw_deg": {
-    "both": -0.09246115265313766,
-    "right": -0.21227295317269965,
-    "left": 0.021237090912613953
-   },
-   "agreement": "1 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "P9",
-   "condition": "sham",
-   "result": "mismatch",
-   "detail": "both sides: travels -0.00 mm, turns +0\u00b0 (no straight forward walking); one side: right -0\u00b0, left +0\u00b0 (threshold \u00b110\u00b0); 3 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": -1.6325037523601009e-12,
-    "right": -0.0004860567795785124,
-    "left": -1.6325037523601009e-12
-   },
-   "yaw_deg": {
-    "both": 0.0,
-    "right": -0.008900255402181976,
-    "left": 0.0
-   },
-   "agreement": "3 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "MDN",
-   "condition": "intact",
-   "result": "mismatch",
-   "detail": "travels +0.02 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.015595014021179484,
-    "right": -0.35866281235910374,
-    "left": 0.13656074706455748
-   },
-   "yaw_deg": {
-    "both": 7.190311307136722,
-    "right": 1.3886475658940496,
-    "left": 7.712471748441246
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "MDN",
-   "condition": "shuffled",
-   "result": "mismatch",
-   "detail": "travels +0.01 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.00612648287523155,
-    "right": 0.025459013797584643,
-    "left": 0.03331401906829878
-   },
-   "yaw_deg": {
-    "both": -0.0011568051495036702,
-    "right": 0.15644029735566314,
-    "left": 0.23101041162927152
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "MDN",
-   "condition": "sham",
-   "result": "mismatch",
-   "detail": "travels +0.01 mm during light (backward walking: below \u22122.0 mm); 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.008897725756394692,
-    "right": 0.0010456029671526168,
-    "left": -0.28740823283537315
-   },
-   "yaw_deg": {
-    "both": -0.13417717760912795,
-    "right": -0.058942333419239386,
-    "left": 3.0578923429879334
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "DNa02",
-   "condition": "intact",
-   "result": "no clear turn",
-   "detail": "right +34\u00b0, left +35\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 3 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.5531787464654879,
-    "right": -0.5542476035317877,
-    "left": 1.2107478384234485
-   },
-   "yaw_deg": {
-    "both": -22.81560099399677,
-    "right": 33.9042320821477,
-    "left": 34.95995376127605
-   },
-   "agreement": "3 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "DNa02",
-   "condition": "shuffled",
-   "result": "weak, right direction",
-   "detail": "turns toward the lit side, below \u00b110\u00b0 (right -0\u00b0, left +0\u00b0) while walking under P9, compared with P9 alone; 2 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.014755934999190526,
-    "right": 0.01184564443944947,
-    "left": 0.00946578738436473
-   },
-   "yaw_deg": {
-    "both": -0.2186718671317407,
-    "right": -0.18622037079237283,
-    "left": 0.21509823207495368
-   },
-   "agreement": "2 of 3 seeds"
-  },
-  {
-   "circuit": "coordination",
-   "coupling": "measured",
-   "light": 5.0,
-   "experiment": "DNa02",
-   "condition": "sham",
-   "result": "no clear turn",
-   "detail": "right +68\u00b0, left +27\u00b0 (threshold \u00b110\u00b0) while walking under P9, compared with P9 alone; 1 of 3 seeds agree",
-   "forward_mm_lit": {
-    "both": 0.7040634661180548,
-    "right": 0.5419483519315533,
-    "left": 0.9467473431427408
-   },
-   "yaw_deg": {
-    "both": 23.630905345205363,
-    "right": 68.34800168680421,
-    "left": 27.415020773974778
+    "both": 51.87197637037216,
+    "right": 32.75051540133128,
+    "left": 36.09841678225252
    },
    "agreement": "1 of 3 seeds"
   }

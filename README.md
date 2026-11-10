@@ -559,6 +559,17 @@ The coordination circuit is built from the raw tables:
 .venv/bin/python coordination.py                          # both circuits, both couplings -> data/coordination.json
 ```
 
+## Lab guide (new)
+
+Every page has a guide: press **Guide** (bottom right) or `?`.
+
+- **Tour** walks through the page and rings each control or chart.
+- **Explain** gives what the page measures and assumes, what it found and its open problems; marks glossary terms on the page (hover for the definition); and **Point at something** explains whatever you click.
+- **Ask** answers questions about the page, a term or a result.
+- **Propose** ranks new models for a goal ("make the fly walk", "learn from less data"…), each with a hypothesis, test, controls and success criterion, and copies a build request to paste into a build session.
+
+Without a key the guide answers from its own notes (`helper_kb.py`) and the saved benchmarks. To let Claude answer free-form and draft new proposals, put an Anthropic API key in `~/.config/malecns-lab/anthropic-key` (or `ANTHROPIC_API_KEY`) and restart. Never commit the key. Because the lab is public through the tunnel, Claude calls are limited to `MALECNS_HELPER_PER_HOUR` (40) per visitor and `MALECNS_HELPER_PER_DAY` (300) in total; `MALECNS_HELPER_MODEL` picks the model.
+
 ## Scaffold learner: fly design, sparse codes and reference frames (new)
 
 Open `/scaffold` (Theory). The question: does a learner built from the fly's design principles, sparse distributed representations (HTM, with Byrne's prediction-assisted pooling, arXiv:1509.08255) and Monty-style reference frames need less data than standard learners? `scaffold.py` combines:
