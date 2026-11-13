@@ -576,6 +576,23 @@ What came out, three seeds:
     python3 dopamine_loops.py    # data/dopamine-loops.json
     python3 backbone.py          # data/backbone-benchmark.json (about 50 minutes on two cores; resumes if interrupted)
 
+### Trained on its own job (new)
+
+`compass_trained.py` asks the opposite question from `backbone.py`: not "is the fly's wiring a good general-purpose network?" but "does the wiring carry the answer for the job it evolved for?", the approach of Lappalainen et al. (Nature 2024) for the visual system. The compass core (152 cells, six types) keeps its measured connections and signs; 52 numbers are learned (one strength per pair of cell types, a time constant and resting drive per type, input gains); the task is tracking heading in the dark.
+
+| Network | Numbers learned | Off after 4 s | Off after 20 s | Works |
+|---|---|---|---|---|
+| Measured wiring | 52 | 7° | 15° | 4 of 5 |
+| Shuffled within cell types | 52 | 87° | 90° | 0 of 5 |
+| Random within cell types | 52 | 76° | 87° | 0 of 5 |
+| Measured, every synapse free | 9,176 | 3.5° | 7° | 5 of 5 |
+| Shuffled, every synapse free | 7,153 | 7° | 18° | 3 of 5 |
+| Standard recurrent network | 24,016 | 5° | 11° | 4 of 5 |
+
+Guessing is 90°. The shuffle keeps every cell's outgoing synapses and each type pair's total; only who connects to whom inside a type changes. Training is backpropagation through time (a stand-in for evolution and development, not something the fly does). No comparison with recordings is made here. As the location signal for object recognition the trained compass reaches 51% (published ring 100%, no locations 34%).
+
+    python3 compass_trained.py   # data/compass-trained.json, about 40 minutes on two cores; resumes if interrupted
+
 ## Frames, compass and walking (new)
 
 Three follow-ups to the scaffold and the body, each with its controls and its failures.

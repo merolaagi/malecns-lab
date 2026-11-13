@@ -7,6 +7,9 @@ Written by hand from the pages and their saved benchmarks. The guide reads the l
 # Each page: purpose, what is measured, what is assumed, what came out, and a tour.
 # A tour step is (CSS selector or None, title, text). Selectors that are missing on the page are skipped.
 FINDINGS_BACKBONE = [
+    'Trained on its own job, the measured wiring matters. The compass core (152 cells) with its measured connections and only 52 learned numbers learns to track heading in the dark: 7° off after 4 s and 15° after 20 s, in 4 of 5 starting points. With partners swapped within each cell type, or random, the same training fails in all 10 (about 87° off; guessing is 90°).',
+    'Learning every synapse separately rescues shuffled wiring only partly (3 of 5 starting points, 7° off) while measured wiring reaches 3.5° in 5 of 5; a standard recurrent network with 24,016 free numbers reaches 5° in 4 of 5. The measured wiring gets there with about 460 times fewer learned numbers.',
+    'As a location signal for recognising objects the trained compass is partway there: 51% against 100% with the published ring, 34% with no locations and 10% with trained shuffled wiring.',
     'Learning inside the wiring beats a frozen backbone: on the central complex, digits from 50 examples per class go from 21% (readout only) to 91% with one teacher signal per output and local updates, against 93% for backpropagation in the same wiring. A single scalar reward reaches 31%.',
     'The measured wiring is a worse backbone than the same wiring shuffled, at every learning rule: digits 91% against 96%, aiming 22% against 63%. Its connections are organised for the fly\'s own job (a compass), not as a general-purpose network.',
     'No unit-level biology helped on these tasks: dendritic branches, cell-size excitability and time constants changed little, removing fixed signs cost about 9 points and winner-take-most inhibition about 13.',

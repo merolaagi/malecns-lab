@@ -107,6 +107,7 @@ class Handler(BaseHTTPRequestHandler):
                  '/backbone.js': ('backbone.js', 'text/javascript; charset=utf-8'),
                  '/api/backbone-benchmark': ('data/backbone-benchmark.json', 'application/json; charset=utf-8'),
                  '/api/dopamine-loops': ('data/dopamine-loops.json', 'application/json; charset=utf-8'),
+                 '/api/compass-trained': ('data/compass-trained.json', 'application/json; charset=utf-8'),
                  '/helper.css': ('helper.css', 'text/css; charset=utf-8'),
                  '/scaffold': ('scaffold.html', 'text/html; charset=utf-8'),
                  '/scaffold.js': ('scaffold.js', 'text/javascript; charset=utf-8'),

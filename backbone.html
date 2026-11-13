@@ -12,6 +12,12 @@ td.best{font-weight:600}td.up{color:#1f8a4c}td.down{color:#c0392b}.seg{margin:8p
 
 <div id="summary" class="wb-card" style="margin-top:20px"><p class="hint">Loading…</p></div>
 
+<div class="wb-card" style="margin-top:20px"><h2>The compass circuit, trained on its own job</h2>
+<p class="note">The experiments below use the fly's circuits as general-purpose networks, and the measured wiring loses to shuffled wiring. This one follows the approach of Lappalainen and colleagues (Nature, 2024) for the fly's visual system: keep the measured wiring, learn only the few numbers the connectome does not give, and train on the job the circuit evolved for. Here that is keeping track of heading in the dark from the fly's own turning.</p>
+<div id="trained"><p class="hint">Loading…</p></div>
+<canvas id="tcurve" style="height:240px;margin-top:10px"></canvas><div class="legend2" id="tlegend"></div>
+<div id="trained2"></div></div>
+
 <div class="wb-card" style="margin-top:20px"><h2>Learning inside the wiring: rule against wiring</h2>
 <p class="note">Backbone: the central complex. Inputs enter at the ring neurons, outputs are read from the steering cells, activity runs through the measured connections for four steps. Each cell shows the score after training, mean of three seeds.</p>
 <div id="rules"></div></div>

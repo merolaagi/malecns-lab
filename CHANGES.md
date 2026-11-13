@@ -2,6 +2,13 @@
 
 Newest first. `tools/sync.sh` uses the top entry as the commit message.
 
+## The compass circuit, trained on its own job
+
+- `compass_trained.py`: the compass core as measured (152 cells of six types, 9,160 connections, signs from transmitters), following Lappalainen et al. (Nature 2024): keep the wiring, learn one strength per pair of cell types plus a time constant and resting drive per type (52 numbers), train on tracking heading in the dark from turning. Backpropagation through time written by hand in numpy and checked against finite differences. Resumable; five starting points per condition.
+- Results (median). Measured wiring, 52 numbers: 7° off after 4 s, 15° after 20 s, works in 4 of 5. Shuffled within cell types: 87°, 0 of 5. Random within types: 76°, 0 of 5. Every synapse free: measured 3.5° (5 of 5), shuffled 7° (3 of 5), random 6° (3 of 5). Standard recurrent network, 24,016 numbers, best of three learning rates: 5° (4 of 5).
+- The trained compass as the scaffold's location signal (`compass.py` sources `compass_trained_measured`, `compass_trained_shuffled`): 51% at four glimpses, against 100% for the published ring, 34% with no locations, 10% for trained shuffled wiring.
+- `/backbone` gains "The compass circuit, trained on its own job" (table, training curves, strongest pathways, location test). Tests in `test_compass_trained.py`.
+
 ## The connectome as the backbone of a learning network
 
 - `backbone.py` and `/backbone` (Theory): a network with exactly the connectome's connections (central complex, 1,247 cells; leg motor circuit, 1,741), signs from transmitters, strengths learned. Compared: learning rule (readout only, scalar reward, one teacher per output along random or original pathways, backprop inside the wiring), wiring (measured, shuffled keeping each cell's inputs and outputs, random), and unit biology one at a time (inhibition, cell size, dendritic branches, time constants, free signs). Tasks: aiming with a decoy, digits from 50 per class, classes in sequence. Three seeds, 396 runs, resumable.

@@ -40,6 +40,18 @@ NAV = {'compass_idealised': ('idealised', 'intact'), 'compass_measured': ('measu
        'compass_shuffled': ('idealised', 'shuffled_columns'), 'compass_no_rotation': ('idealised', 'no_rotation')}
 
 
+TRAINED = {'compass_trained_measured': 'Compass circuit, measured wiring, trained on heading',
+           'compass_trained_shuffled': 'Compass circuit, shuffled wiring, trained on heading'}
+_models = {}
+
+
+def trained_model(wiring):
+    if wiring not in _models:
+        import compass_trained as ct
+        _models[wiring] = ct.load_trained(wiring)
+    return _models[wiring]
+
+
 class Walker:
     """Walks between neighbouring features and reports where the compass thinks it is, in feature spacings."""
     def __init__(self, source, rng, compass_noise, offsets=None, gain=None):
@@ -56,6 +68,12 @@ class Walker:
             # the ring starts aligned with the body (as if set by a visual landmark)
             bump = np.exp(np.cos(self.nav.theta[self.nav.map] - self.heading) * 2.0)
             self.nav.heading_cells = bump / bump.sum()
+        elif source.startswith('compass_trained_'):
+            # the compass circuit with its measured (or shuffled) wiring, trained on tracking heading (compass_trained.py)
+            import compass_trained as ct
+            model = trained_model(source[len('compass_trained_'):])
+            if model is None: raise ValueError('No trained compass yet: python3 compass_trained.py')
+            self.nav = ct.TrainedCompass(model, self.heading)
         else:
             self.nav = None
 
